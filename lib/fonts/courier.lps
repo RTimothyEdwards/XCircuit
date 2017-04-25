@@ -1,0 +1,1825 @@
+%! PostScript set of library objects for XCircuit
+%  Library name is: Cr
+%  Version: 2.0
+%
+%
+
+% XCircuitLib library built-in objects
+/Cr::nullchar {
+% 0 0 24 32 bbox
+begingate
+0  1.00 0 0 0 32 24 32 24 0 4 polygon
+endgate
+} def
+
+/Cr::space {
+% 0 0 24 26 bbox
+begingate
+endgate
+} def
+
+/Cr::exclam {
+% 10 1 14 22 bbox
+begingate
+241  1.00 12 3 2 0.00 360.00 xcarc
+0  1.00 13 23 12 8 11 23 3 polygon
+endgate
+} def
+
+/Cr::quote {
+% 9 21 15 7 bbox
+begingate
+0  1.00 16 28 15 21 14 28 3 polygon
+0  1.00 11 28 10 21 9 28 3 polygon
+endgate
+} def
+
+/Cr::pound {
+% 2 0 22 26 bbox
+begingate
+1  1.00 4 17 21 17 2 polygon
+1  1.00 12 0 19 26 2 polygon
+1  1.00 4 0 11 26 2 polygon
+1  1.00 2 9 19 9 2 polygon
+endgate
+} def
+
+/Cr::dollar {
+% 5 0 19 30 bbox
+begingate
+1  1.00 5 8 7 6 11 4 15 4 19 6 21 8 21 10 19 12 7 18 5 20 5 22 7 24 11 26 15 26 
+19 24 21 22 16 polygon
+1  1.00 13 0 13 4 2 polygon
+1  1.00 5 9 5 6 2 polygon
+1  1.00 21 25 21 21 2 polygon
+1  1.00 13 26 13 30 2 polygon
+endgate
+} def
+
+/Cr::percent {
+% 4 4 20 18 bbox
+begingate
+1  1.00 14 7 3 0.00 360.00 xcarc
+1  1.00 7 19 3 0.00 360.00 xcarc
+1  1.00 4 8 17 18 2 polygon
+endgate
+} def
+
+/Cr::ampersand {
+% 8 0 16 26 bbox
+% hidden
+begingate
+1  1.00 24 0 10 20 10 24 12 26 16 26 18 24 6 polygon
+1  1.00 24 10 22 6 19 1 16 0 13 0 10 2 8 5 8 10 10 13 13 15 10 polygon
+endgate
+} def
+
+/Cr::apostrophe {
+% 12 20 12 8 bbox
+begingate
+0  1.00 12 20 16 28 14 28 3 polygon
+endgate
+} def
+
+/Cr::lparen {
+% 14 -4 10 32 bbox
+% hidden
+begingate
+1  1.00 20 -4 16 1 14 7 14 17 16 23 20 28 6 polygon
+endgate
+} def
+
+/Cr::rparen {
+% 8 -5 16 32 bbox
+begingate
+1  1.00 8 -5 12 0 14 6 14 16 12 22 8 27 6 polygon
+endgate
+} def
+
+/Cr::asterisk {
+% 8 13 16 7 bbox
+begingate
+1  1.00 12 16 12 20 2 polygon
+1  1.00 12 16 16 18 2 polygon
+1  1.00 12 16 8 18 2 polygon
+1  1.00 12 16 15 13 2 polygon
+1  1.00 12 16 9 13 2 polygon
+endgate
+} def
+
+/Cr::plus {
+% 4 8 20 16 bbox
+begingate
+1  1.00 12 8 12 24 2 polygon
+1  1.00 4 16 20 16 2 polygon
+endgate
+} def
+
+/Cr::comma {
+% 10 -4 14 8 bbox
+begingate
+0  1.00 12 4 10 -4 14 4 3 polygon
+endgate
+} def
+
+/Cr::minus {
+% 4 16 20 0 bbox
+begingate
+1  1.00 4 16 20 16 2 polygon
+endgate
+} def
+
+/Cr::period {
+% 10 1 14 4 bbox
+begingate
+241  1.00 12 3 2 0.00 360.00 xcarc
+endgate
+} def
+
+/Cr::slash {
+% 4 0 20 26 bbox
+begingate
+1  1.00 4 0 20 26 2 polygon
+endgate
+} def
+
+/Cr::zero {
+% 6 0 18 26 bbox
+% hidden
+begingate
+1  1.00 12 0 8 4 6 10 6 16 8 22 12 26 18 26 22 22 24 16 24 10 22 4 18 0 12 0 
+13 polygon
+endgate
+} def
+
+/Cr::one {
+% 8 0 16 26 bbox
+begingate
+1  1.00 8 0 16 0 2 polygon
+1  1.00 12 0 12 26 8 24 3 polygon
+endgate
+} def
+
+/Cr::two {
+% 4 0 20 26 bbox
+begingate
+1  1.00 22 4 22 0 4 0 12 6 20 12 22 16 22 20 20 24 16 26 12 26 8 24 6 22 
+12 polygon
+endgate
+} def
+
+/Cr::three {
+% 4 0 20 26 bbox
+begingate
+1  1.00 4 4 6 2 10 0 14 0 18 2 20 6 20 10 16 14 14 14 9 polygon
+1  1.00 16 14 20 18 20 20 18 24 14 26 10 26 6 24 6 24 8 polygon
+endgate
+} def
+
+/Cr::four {
+% 4 0 20 26 bbox
+begingate
+1  1.00 16 0 16 26 8 16 4 8 20 8 5 polygon
+1  1.00 12 0 20 0 2 polygon
+endgate
+} def
+
+/Cr::five {
+% 4 0 20 26 bbox
+begingate
+1  1.00 4 2 8 0 14 0 18 2 20 6 20 10 18 14 14 16 10 16 6 14 6 26 20 26 
+12 polygon
+endgate
+} def
+
+/Cr::six {
+% 3 0 21 28 bbox
+begingate
+1  1.00 19 28 13 26 9 24 5 20 3 14 3 8 5 2 9 0 15 0 19 2 21 6 21 10 19 14 15 16 
+9 16 5 14 3 8 17 polygon
+endgate
+} def
+
+/Cr::seven {
+% 6 0 18 26 bbox
+begingate
+1  1.00 10 0 20 26 6 26 6 24 4 polygon
+endgate
+} def
+
+/Cr::eight {
+% 5 0 19 26 bbox
+begingate
+1  1.00 9 0 7 2 5 4 5 8 7 10 17 16 19 18 19 22 15 26 9 26 5 22 5 18 7 16 17 10 
+19 8 19 4 17 2 15 0 9 0 19 polygon
+endgate
+} def
+
+/Cr::nine {
+% 4 0 20 26 bbox
+begingate
+1  1.00 6 0 10 0 14 2 18 6 20 12 20 18 18 24 14 26 10 26 6 24 4 20 4 16 6 12 
+10 10 14 10 18 12 20 16 17 polygon
+endgate
+} def
+
+/Cr::colon {
+% 10 6 14 14 bbox
+begingate
+241  1.00 12 8 2 0.00 360.00 xcarc
+241  1.00 12 18 2 0.00 360.00 xcarc
+endgate
+} def
+
+/Cr::semi {
+% 8 -4 16 20 bbox
+begingate
+241  1.00 12 14 2 0.00 360.00 xcarc
+0  1.00 12 2 8 -4 10 2 3 polygon
+endgate
+} def
+
+/Cr::less {
+% 4 6 20 12 bbox
+begingate
+1  1.00 16 6 4 12 16 18 3 polygon
+endgate
+} def
+
+/Cr::equal {
+% 4 12 20 6 bbox
+begingate
+1  1.00 4 12 20 12 2 polygon
+1  1.00 4 18 20 18 2 polygon
+endgate
+} def
+
+/Cr::more {
+% 6 6 18 12 bbox
+begingate
+1  1.00 6 6 18 12 6 18 3 polygon
+endgate
+} def
+
+/Cr::question {
+% 5 1 19 25 bbox
+begingate
+241  1.00 11 3 2 0.00 360.00 xcarc
+1  1.00 5 20 5 22 9 26 15 26 19 22 19 18 17 14 11 12 11 10 9 polygon
+endgate
+} def
+
+/Cr::at {
+% 4 0 20 26 bbox
+begingate
+1  1.00 20 6 18 2 14 0 10 0 6 4 4 12 6 22 10 26 14 26 18 24 20 20 20 10 
+12 polygon
+1  1.00 20 12 16 8 12 8 10 10 10 14 12 18 14 20 19 22 8 polygon
+endgate
+} def
+
+/Cr::V {
+% 2 0 22 26 bbox
+begingate
+1  1.00 4 26 12 0 20 26 3 polygon
+1  1.00 2 26 8 26 2 polygon
+1  1.00 22 26 16 26 2 polygon
+endgate
+} def
+
+/Cr::A {
+% 4 0 20 26 bbox
+begingate
+1  1.00 10 10 18 10 2 polygon
+1  1.00 14 26 10 26 2 polygon
+1.00 180 26 26 Cr::V
+endgate
+} def
+
+/Cr::B {
+% 4 0 20 26 bbox
+begingate
+1  1.00 4 26 14 26 19 25 21 22 21 18 17 14 6 14 7 polygon
+1  1.00 4 0 17 0 21 2 23 6 23 8 21 12 17 14 7 polygon
+1  1.00 6 26 6 0 2 polygon
+endgate
+} def
+
+/Cr::C {
+% 2 0 22 26 bbox
+begingate
+1  1.00 18 0 10 0 4 4 2 10 2 16 4 22 10 26 16 26 22 22 9 polygon
+1  1.00 18 0 22 4 2 polygon
+1  1.00 22 26 22 22 2 polygon
+endgate
+} def
+
+/Cr::D {
+% 3 0 21 26 bbox
+begingate
+1  1.00 3 0 14 0 20 4 22 10 22 16 20 22 14 26 3 26 8 polygon
+1  1.00 6 26 6 0 2 polygon
+endgate
+} def
+
+/Cr::F {
+% 4 0 20 26 bbox
+begingate
+1  1.00 6 0 6 26 2 polygon
+1  1.00 6 14 14 14 2 polygon
+1  1.00 14 17 14 11 2 polygon
+1  1.00 4 26 20 26 20 22 3 polygon
+1  1.00 4 0 10 0 2 polygon
+endgate
+} def
+
+/Cr::E {
+% 4 0 20 26 bbox
+begingate
+1  1.00 20 4 20 0 10 0 3 polygon
+1.00 0 0 0 Cr::F
+endgate
+} def
+
+/Cr::G {
+% 2 0 22 26 bbox
+begingate
+1  1.00 14 0 8 0 4 4 2 10 2 16 4 22 8 26 14 26 20 22 9 polygon
+1  1.00 14 0 18 2 20 4 3 polygon
+1  1.00 20 26 20 22 2 polygon
+1  1.00 20 12 20 2 2 polygon
+1  1.00 22 12 14 12 2 polygon
+endgate
+} def
+
+/Cr::H {
+% 4 0 20 26 bbox
+begingate
+1  1.00 6 0 6 26 2 polygon
+1  1.00 20 0 20 26 2 polygon
+1  1.00 6 14 20 14 2 polygon
+1  1.00 4 26 10 26 2 polygon
+1  1.00 16 26 22 26 2 polygon
+1  1.00 4 0 10 0 2 polygon
+1  1.00 16 0 22 0 2 polygon
+endgate
+} def
+
+/Cr::I {
+% 6 0 18 26 bbox
+begingate
+1  1.00 6 0 20 0 2 polygon
+1  1.00 13 0 13 26 2 polygon
+1  1.00 6 26 19 26 2 polygon
+endgate
+} def
+
+/Cr::J {
+% 4 0 20 26 bbox
+begingate
+1  1.00 4 4 6 2 10 0 12 0 16 2 18 6 18 26 7 polygon
+1  1.00 4 8 4 4 2 polygon
+1  1.00 10 26 22 26 2 polygon
+endgate
+} def
+
+/Cr::K {
+% 4 0 20 26 bbox
+begingate
+1  1.00 6 0 6 26 2 polygon
+1  1.00 20 26 6 10 2 polygon
+1  1.00 4 0 10 0 2 polygon
+1  1.00 4 26 10 26 2 polygon
+1  1.00 22 26 16 26 2 polygon
+1  1.00 10 14 12 12 18 2 20 0 22 0 5 polygon
+endgate
+} def
+
+/Cr::L {
+% 4 0 20 26 bbox
+begingate
+1  1.00 8 26 8 0 2 polygon
+1  1.00 4 26 12 26 2 polygon
+1  1.00 4 0 20 0 20 6 3 polygon
+endgate
+} def
+
+/Cr::M {
+% 2 0 22 26 bbox
+begingate
+1  1.00 4 0 6 26 12 8 18 26 20 0 5 polygon
+1  1.00 2 0 8 0 2 polygon
+1  1.00 16 0 22 0 2 polygon
+1  1.00 2 26 6 26 2 polygon
+1  1.00 18 26 22 26 2 polygon
+endgate
+} def
+
+/Cr::N {
+% 2 0 22 26 bbox
+begingate
+1  1.00 4 0 4 26 20 0 20 26 4 polygon
+1  1.00 2 0 8 0 2 polygon
+1  1.00 22 26 16 26 2 polygon
+1  1.00 4 26 2 26 2 polygon
+endgate
+} def
+
+/Cr::O {
+% 2 0 22 26 bbox
+begingate
+1  1.00 15 0 9 0 4 4 2 10 2 16 4 22 9 26 15 26 20 22 22 16 22 10 20 4 15 0 
+13 polygon
+endgate
+} def
+
+/Cr::P {
+% 4 0 20 26 bbox
+begingate
+1  1.00 8 0 8 26 2 polygon
+1  1.00 4 0 12 0 2 polygon
+1  1.00 8 12 17 12 21 14 23 17 23 20 21 24 17 26 4 26 8 polygon
+endgate
+} def
+
+/Cr::Q {
+% 3 -2 21 28 bbox
+begingate
+1.00 0 0 0 Cr::O
+1  1.00 8 -2 12 0 14 0 18 -2 20 -2 22 0 6 polygon
+endgate
+} def
+
+/Cr::R {
+% 2 0 22 26 bbox
+begingate
+1.00 0 -2 0 Cr::P
+1  1.00 14 12 16 10 20 0 22 0 4 polygon
+endgate
+} def
+
+/Cr::S {
+% 4 0 20 26 bbox
+begingate
+1  1.00 4 4 6 2 10 0 16 0 20 2 22 6 22 8 18 12 6 14 4 18 4 20 6 24 10 26 14 26 
+18 24 20 22 16 polygon
+1  1.00 20 26 20 22 2 polygon
+1  1.00 4 4 4 0 2 polygon
+endgate
+} def
+
+/Cr::T {
+% 2 0 22 26 bbox
+begingate
+1  1.00 12 0 12 26 2 polygon
+1  1.00 2 20 2 26 22 26 22 20 4 polygon
+1  1.00 8 0 16 0 2 polygon
+endgate
+} def
+
+/Cr::U {
+% 2 0 22 26 bbox
+begingate
+1  1.00 4 26 4 7 5 4 7 1 10 0 14 0 17 1 19 4 20 7 20 26 10 polygon
+1  1.00 2 26 8 26 2 polygon
+1  1.00 22 26 16 26 2 polygon
+endgate
+} def
+
+/Cr::W {
+% 3 0 21 26 bbox
+begingate
+1  1.00 5 26 8 0 13 18 18 0 21 26 5 polygon
+1  1.00 17 26 23 26 2 polygon
+1  1.00 3 26 9 26 2 polygon
+endgate
+} def
+
+/Cr::X {
+% 3 0 21 26 bbox
+begingate
+1  1.00 5 0 21 26 2 polygon
+1  1.00 5 26 21 0 2 polygon
+1  1.00 3 0 9 0 2 polygon
+1  1.00 23 0 17 0 2 polygon
+1  1.00 23 26 17 26 2 polygon
+1  1.00 3 26 9 26 2 polygon
+endgate
+} def
+
+/Cr::Y {
+% 3 0 21 26 bbox
+begingate
+1  1.00 5 26 13 12 13 0 3 polygon
+1  1.00 21 26 13 12 2 polygon
+1  1.00 3 26 9 26 2 polygon
+1  1.00 23 26 17 26 2 polygon
+1  1.00 9 0 17 0 2 polygon
+endgate
+} def
+
+/Cr::Z {
+% 4 0 20 26 bbox
+begingate
+1  1.00 4 20 4 26 20 26 4 0 20 0 20 6 6 polygon
+endgate
+} def
+
+/Cr::lbracket {
+% 12 -2 12 30 bbox
+begingate
+1  1.00 18 -2 12 -2 12 28 18 28 4 polygon
+endgate
+} def
+
+/Cr::backslash {
+% 4 0 20 26 bbox
+begingate
+1  1.00 20 0 4 26 2 polygon
+endgate
+} def
+
+/Cr::rbracket {
+% 10 -2 14 30 bbox
+begingate
+1  1.00 10 -2 16 -2 16 28 10 28 4 polygon
+endgate
+} def
+
+/Cr::caret {
+% 7 24 17 6 bbox
+begingate
+1  1.00 7 24 12 30 17 24 3 polygon
+endgate
+} def
+
+/Cr::underscore {
+% 2 0 22 0 bbox
+begingate
+1  1.00 2 0 22 0 2 polygon
+endgate
+} def
+
+/Cr::a {
+% 3 0 21 18 bbox
+begingate
+1  1.00 21 0 17 0 17 14 13 18 7 18 5 16 6 polygon
+1  1.00 17 2 13 0 7 0 3 2 3 8 7 10 13 10 17 8 8 polygon
+endgate
+} def
+
+/Cr::b {
+% 2 0 22 26 bbox
+begingate
+1  1.00 6 0 6 26 2 polygon
+1  1.00 6 2 10 0 16 0 20 2 22 6 22 12 20 16 16 18 10 18 6 14 10 polygon
+1  1.00 2 26 6 26 2 polygon
+1  1.00 6 0 2 0 2 polygon
+endgate
+} def
+
+/Cr::c {
+% 2 0 22 18 bbox
+begingate
+1  1.00 18 2 14 0 8 0 4 2 2 6 2 12 4 16 8 18 14 18 18 14 10 polygon
+1  1.00 18 18 18 14 2 polygon
+endgate
+} def
+
+/Cr::d {
+% 2 0 22 26 bbox
+begingate
+1  1.00 18 2 14 0 8 0 4 2 2 6 2 12 4 16 8 18 14 18 18 14 10 polygon
+1  1.00 18 0 18 26 2 polygon
+1  1.00 18 0 22 0 2 polygon
+1  1.00 18 26 14 26 2 polygon
+endgate
+} def
+
+/Cr::e {
+% 4 0 20 18 bbox
+begingate
+1  1.00 20 4 18 2 14 0 10 0 6 2 4 6 4 12 6 16 10 18 14 18 18 16 20 12 20 10 
+4 10 14 polygon
+endgate
+} def
+
+/Cr::f {
+% 4 0 20 26 bbox
+begingate
+1  1.00 4 0 18 0 2 polygon
+1  1.00 8 0 8 24 11 26 16 26 20 24 5 polygon
+1  1.00 4 16 18 16 2 polygon
+endgate
+} def
+
+/Cr::g {
+% 3 -7 21 25 bbox
+begingate
+1  1.00 19 4 15 0 9 0 5 2 3 6 3 12 5 16 9 18 15 18 19 14 10 polygon
+1  1.00 8 -6 11 -7 15 -7 19 -3 19 18 5 polygon
+1  1.00 19 18 23 18 2 polygon
+endgate
+} def
+
+/Cr::h {
+% 2 0 22 26 bbox
+begingate
+1  1.00 6 0 6 26 2 polygon
+1  1.00 6 14 10 18 16 18 20 14 20 0 5 polygon
+1  1.00 22 0 16 0 2 polygon
+1  1.00 2 26 6 26 2 polygon
+1  1.00 2 0 8 0 2 polygon
+endgate
+} def
+
+/Cr::i {
+% 6 0 18 24 bbox
+begingate
+1  1.00 6 0 18 0 2 polygon
+1  1.00 12 24 12 23 2 polygon
+1  1.00 12 0 12 18 8 18 3 polygon
+endgate
+} def
+
+/Cr::j {
+% 8 -6 14 30 bbox
+begingate
+1  1.00 8 -6 11 -6 15 -4 16 0 16 16 8 16 6 polygon
+1  1.00 16 24 16 23 2 polygon
+endgate
+} def
+
+/Cr::k {
+% 2 0 22 26 bbox
+begingate
+1  1.00 6 8 18 18 2 polygon
+1  1.00 20 0 10 10 2 polygon
+1  1.00 2 0 6 0 6 26 2 26 4 polygon
+1  1.00 14 18 20 18 2 polygon
+1  1.00 16 0 22 0 2 polygon
+endgate
+} def
+
+/Cr::l {
+% 4 0 20 26 bbox
+begingate
+1  1.00 4 0 18 0 2 polygon
+1  1.00 12 0 12 26 6 26 3 polygon
+endgate
+} def
+
+/Cr::m {
+% 2 0 22 18 bbox
+begingate
+1  1.00 2 0 6 0 2 polygon
+1  1.00 4 16 6 18 10 18 12 16 12 0 14 0 6 polygon
+1  1.00 12 16 14 18 17 18 20 15 20 0 22 0 6 polygon
+1  1.00 2 18 4 18 4 0 3 polygon
+endgate
+} def
+
+/Cr::n {
+% 4 0 20 18 bbox
+begingate
+1  1.00 6 0 6 18 2 polygon
+1  1.00 6 16 10 18 14 18 18 14 18 0 5 polygon
+1  1.00 4 18 6 18 2 polygon
+1  1.00 4 0 8 0 2 polygon
+1  1.00 16 0 20 0 2 polygon
+endgate
+} def
+
+/Cr::o {
+% 4 0 20 18 bbox
+begingate
+1  1.00 10 0 6 2 4 6 4 12 6 16 10 18 14 18 18 16 20 12 20 6 18 2 14 0 10 0 
+13 polygon
+endgate
+} def
+
+/Cr::p {
+% 4 -6 20 24 bbox
+begingate
+1  1.00 6 2 10 0 14 0 18 2 20 6 20 12 18 16 14 18 10 18 6 16 10 polygon
+1  1.00 6 18 6 -6 2 polygon
+1  1.00 6 18 4 18 2 polygon
+1  1.00 4 -6 10 -6 2 polygon
+endgate
+} def
+
+/Cr::q {
+% 4 -6 20 24 bbox
+begingate
+1.00 -1 24 0 Cr::p
+endgate
+} def
+
+/Cr::r {
+% 3 0 21 18 bbox
+begingate
+1  1.00 4 0 16 0 2 polygon
+1  1.00 8 0 8 18 3 18 3 polygon
+1  1.00 8 14 14 18 18 18 3 polygon
+1  1.00 18 18 20 16 2 polygon
+endgate
+} def
+
+/Cr::s {
+% 6 0 18 18 bbox
+begingate
+1  1.00 6 4 10 0 16 0 20 2 20 6 18 8 8 10 6 12 6 16 10 18 16 18 20 14 
+12 polygon
+1  1.00 20 18 20 14 2 polygon
+1  1.00 6 4 6 0 2 polygon
+endgate
+} def
+
+/Cr::t {
+% 4 0 20 26 bbox
+begingate
+1  1.00 4 18 20 18 2 polygon
+1  1.00 10 26 10 2 13 0 16 0 22 3 5 polygon
+endgate
+} def
+
+/Cr::u {
+% 4 0 20 18 bbox
+begingate
+1  1.00 20 0 20 0 20 18 16 18 4 polygon
+1  1.00 4 18 6 18 6 4 10 0 16 0 20 2 6 polygon
+endgate
+} def
+
+/Cr::v {
+% 2 0 22 18 bbox
+begingate
+1  1.00 4 18 12 0 20 18 3 polygon
+1  1.00 2 18 8 18 2 polygon
+1  1.00 16 18 22 18 2 polygon
+endgate
+} def
+
+/Cr::w {
+% 2 0 22 16 bbox
+begingate
+1  1.00 4 18 8 0 12 12 16 0 20 18 5 polygon
+1  1.00 2 18 8 18 2 polygon
+1  1.00 16 18 22 18 2 polygon
+endgate
+} def
+
+/Cr::x {
+% 4 0 20 18 bbox
+begingate
+1  1.00 6 0 20 18 2 polygon
+1  1.00 6 18 20 0 2 polygon
+1  1.00 4 18 10 18 2 polygon
+1  1.00 16 18 22 18 2 polygon
+1  1.00 4 0 10 0 2 polygon
+1  1.00 16 0 22 0 2 polygon
+endgate
+} def
+
+/Cr::y {
+% 2 -6 22 24 bbox
+begingate
+1  1.00 4 18 12 2 2 polygon
+1  1.00 20 18 8 -6 2 polygon
+1  1.00 2 18 8 18 2 polygon
+1  1.00 16 18 22 18 2 polygon
+1  1.00 4 -6 12 -6 2 polygon
+endgate
+} def
+
+/Cr::z {
+% 4 0 20 18 bbox
+begingate
+1  1.00 4 14 4 18 20 18 4 0 20 0 20 4 6 polygon
+endgate
+} def
+
+/Cr::lbrace {
+% 6 -4 18 32 bbox
+begingate
+1  1.00 14 -4 12 -4 10 -2 10 10 6 12 10 14 10 26 12 28 14 28 9 polygon
+endgate
+} def
+
+/Cr::vbar {
+% 12 -2 12 30 bbox
+begingate
+1  1.00 12 -2 12 28 2 polygon
+endgate
+} def
+
+/Cr::rbrace {
+% 8 -4 16 32 bbox
+begingate
+1  1.00 8 -4 10 -4 12 -2 12 10 16 12 12 14 12 26 10 28 8 28 9 polygon
+endgate
+} def
+
+/Cr::tilde {
+% 6 14 18 2 bbox
+begingate
+1  1.00 6 14 8 16 10 16 14 14 16 14 18 16 6 polygon
+endgate
+} def
+
+/Cr::upexclam {
+% 10 1 14 22 bbox
+begingate
+1.00 -181 0 24 Cr::exclam
+endgate
+} def
+
+/Cr::cent {
+% 4 -6 20 30 bbox
+begingate
+1  1.00 12 18 12 24 2 polygon
+1  1.00 12 0 12 -6 2 polygon
+1.00 0 2 0 Cr::c
+endgate
+} def
+
+/Cr::lb {
+% 4 0 20 26 bbox
+begingate
+1  1.00 20 2 18 0 16 0 10 2 8 2 5 polygon
+1  1.00 6 14 18 14 2 polygon
+1  1.00 4 0 8 2 10 6 10 12 8 18 8 22 12 26 16 26 20 24 9 polygon
+endgate
+} def
+
+/Cr::aslash {
+% 4 0 20 26 bbox
+begingate
+1  1.00 4 0 18 26 2 polygon
+endgate
+} def
+
+/Cr::yen {
+% 3 0 21 26 bbox
+begingate
+1  1.00 5 17 10 17 2 polygon
+1  1.00 5 12 21 12 2 polygon
+1  1.00 16 17 21 17 2 polygon
+1.00 0 0 0 Cr::Y
+endgate
+} def
+
+/Cr::itf {
+% 0 -6 24 32 bbox
+begingate
+1  1.00 6 18 16 18 2 polygon
+1  1.00 0 -4 2 -6 6 -6 8 -4 12 24 14 26 18 26 20 24 8 polygon
+endgate
+} def
+
+/Cr::sy1 {
+% 4 -6 20 32 bbox
+begingate
+1  1.00 18 0 20 2 20 6 8 16 6 20 8 24 12 26 18 26 18 22 9 polygon
+1  1.00 6 20 4 18 4 14 16 4 18 0 16 -4 12 -6 6 -6 6 -2 9 polygon
+endgate
+} def
+
+/Cr::sy2 {
+% 2 2 22 16 bbox
+begingate
+1  1.00 10 10 6 0.00 360.00 xcarc
+1  1.00 2 18 5 15 2 polygon
+1  1.00 18 18 15 15 2 polygon
+1  1.00 18 2 15 5 2 polygon
+1  1.00 2 2 5 5 2 polygon
+endgate
+} def
+
+/Cr::apos2 {
+% 10 24 14 8 bbox
+begingate
+0  1.00 12 32 11 24 10 32 3 polygon
+endgate
+} def
+
+/Cr::lqt {
+% 6 24 18 8 bbox
+begingate
+1.00 180 22 52 Cr::apostrophe
+1.00 180 28 52 Cr::apostrophe
+endgate
+} def
+
+/Cr::lgqt {
+% 4 4 20 14 bbox
+begingate
+1  1.00 10 4 4 11 10 18 3 polygon
+1  1.00 16 4 10 11 16 18 3 polygon
+endgate
+} def
+
+/Cr::lsang {
+% 8 4 16 14 bbox
+begingate
+1  1.00 14 4 8 11 14 18 3 polygon
+endgate
+} def
+
+/Cr::rsang {
+% 10 4 14 14 bbox
+begingate
+1  1.00 10 4 16 11 10 18 3 polygon
+endgate
+} def
+
+/Cr::fi {
+% 2 0 22 26 bbox
+begingate
+1  1.00 6 0 6 24 8 26 12 26 4 polygon
+1  1.00 13 18 16 18 16 0 3 polygon
+1  1.00 16 22 16 23 2 polygon
+1  1.00 10 18 2 18 2 polygon
+1  1.00 2 0 10 0 2 polygon
+1  1.00 12 0 20 0 2 polygon
+endgate
+} def
+
+/Cr::fl {
+% 4 0 20 26 bbox
+begingate
+1  1.00 8 0 8 24 10 26 18 26 4 polygon
+1  1.00 18 26 18 0 2 polygon
+1  1.00 4 18 12 18 2 polygon
+1  1.00 4 0 12 0 2 polygon
+1  1.00 14 0 22 0 2 polygon
+endgate
+} def
+
+/Cr::dag {
+% 6 2 18 22 bbox
+begingate
+1  1.00 12 2 12 24 2 polygon
+1  1.00 6 18 18 18 2 polygon
+endgate
+} def
+
+/Cr::ddag {
+% 6 0 18 24 bbox
+begingate
+1  1.00 12 0 12 24 2 polygon
+1  1.00 6 18 18 18 2 polygon
+1  1.00 6 6 18 6 2 polygon
+endgate
+} def
+
+/Cr::dot {
+% 10 22 14 4 bbox
+begingate
+241  1.00 12 24 2 0.00 360.00 xcarc
+endgate
+} def
+
+/Cr::para {
+% 5 2 19 24 bbox
+begingate
+1  1.00 13 2 13 26 2 polygon
+1  1.00 17 2 17 26 2 polygon
+1  1.00 20 26 12 26 2 polygon
+240  1.00 12 19 7 90.00 270.00 xcarc
+endgate
+} def
+
+/Cr::bullet {
+% 10 15 14 4 bbox
+begingate
+1.00 0 0 -7 Cr::dot
+endgate
+} def
+
+/Cr::comma2 {
+% 10 -6 14 8 bbox
+begingate
+1.00 0 0 -2 Cr::comma
+endgate
+} def
+
+/Cr::rqt2 {
+% 7 -7 17 8 bbox
+begingate
+1.00 180 23 25 Cr::lqt
+endgate
+} def
+
+/Cr::rqt {
+% 6 22 18 8 bbox
+begingate
+1.00 180 22 54 Cr::lqt
+endgate
+} def
+
+/Cr::rgqt {
+% 8 6 16 14 bbox
+begingate
+1.00 -1 24 2 Cr::lgqt
+endgate
+} def
+
+/Cr::dots {
+% 2 1 22 4 bbox
+begingate
+1.00 0 -8 0 Cr::period
+1.00 0 0 0 Cr::period
+1.00 0 8 0 Cr::period
+endgate
+} def
+
+/Cr::perzer {
+% 3 4 21 18 bbox
+begingate
+1.00 0 -1 0 Cr::percent
+1  1.00 22 7 3 0.00 360.00 xcarc
+endgate
+} def
+
+/Cr::uqest {
+% 6 3 18 25 bbox
+begingate
+1.00 180 25 29 Cr::question
+endgate
+} def
+
+/Cr::grave {
+% 9 28 13 4 bbox
+begingate
+0  1.00 9 32 19 28 9 30 3 polygon
+endgate
+} def
+
+/Cr::acute {
+% 6 28 18 4 bbox
+begingate
+1.00 -1 25 0 Cr::grave
+endgate
+} def
+
+/Cr::hat {
+% 8 28 16 4 bbox
+begingate
+1  1.00 8 28 12 32 16 28 3 polygon
+endgate
+} def
+
+/Cr::tilchar {
+% 6 29 18 2 bbox
+begingate
+1.00 0 0 15 Cr::tilde
+endgate
+} def
+
+/Cr::bar {
+% 8 31 16 0 bbox
+begingate
+1  1.00 8 31 16 31 2 polygon
+endgate
+} def
+
+/Cr::uu {
+% 6 29 18 3 bbox
+begingate
+1  1.00 6 32 7 30 9 29 13 29 15 30 16 32 6 polygon
+endgate
+} def
+
+/Cr::umlaut {
+% 7 29 19 2 bbox
+begingate
+1  1.00 8 30 1 0.00 360.00 xcarc
+1  1.00 15 30 1 0.00 360.00 xcarc
+endgate
+} def
+
+/Cr::circ {
+% 9 25 15 6 bbox
+begingate
+1  1.00 12 28 3 0.00 360.00 xcarc
+endgate
+} def
+
+/Cr::cedilla {
+% 10 -6 14 6 bbox
+begingate
+1  1.00 12 0 10 -2 14 -4 12 -6 4 polygon
+endgate
+} def
+
+/Cr::uml2 {
+% 5 26 19 6 bbox
+begingate
+0  1.00 11 32 5 26 9 32 3 polygon
+0  1.00 17 32 11 26 15 32 3 polygon
+endgate
+} def
+
+/Cr::ced2 {
+% 8 -4 16 4 bbox
+begingate
+1  1.00 12 0 8 -2 10 -4 12 -3 4 polygon
+endgate
+} def
+
+/Cr::vee {
+% 7 28 17 4 bbox
+begingate
+1  1.00 7 32 11 28 15 32 3 polygon
+endgate
+} def
+
+/Cr::Oslash {
+% 1 0 23 26 bbox
+begingate
+1  1.00 1 0 21 26 2 polygon
+1.00 0 0 0 Cr::O
+endgate
+} def
+
+/Cr::osl {
+% 4 0 20 18 bbox
+begingate
+1  1.00 5 0 20 17 2 polygon
+1.00 0 0 0 Cr::o
+endgate
+} def
+
+/Cr::sset {
+% 4 0 20 26 bbox
+begingate
+1  1.00 14 16 19 14 22 10 22 4 18 0 14 0 11 1 7 polygon
+1  1.00 4 0 8 0 8 20 10 24 13 26 17 26 20 24 20 20 18 17 14 16 12 16 11 polygon
+endgate
+} def
+
+/Cr::Agrave {
+% 4 0 20 34 bbox
+begingate
+1.00 0 0 0 Cr::A
+1.00 0 -2 2 Cr::grave
+endgate
+} def
+
+/Cr::Aacute {
+% 4 0 20 34 bbox
+begingate
+1.00 0 0 0 Cr::A
+1.00 0 2 2 Cr::acute
+endgate
+} def
+
+/Cr::Acircum {
+% 4 0 20 34 bbox
+begingate
+1.00 0 0 0 Cr::A
+1.00 0 2 2 Cr::hat
+endgate
+} def
+
+/Cr::Atilde {
+% 4 0 20 31 bbox
+begingate
+1.00 0 0 0 Cr::A
+1.00 0 2 0 Cr::tilchar
+endgate
+} def
+
+/Cr::Adier {
+% 4 0 20 33 bbox
+begingate
+1.00 0 0 0 Cr::A
+1.00 0 2 2 Cr::umlaut
+endgate
+} def
+
+/Cr::Aring {
+% 4 0 20 35 bbox
+begingate
+1.00 0 0 0 Cr::A
+1.00 0 2 4 Cr::circ
+endgate
+} def
+
+/Cr::Egrave {
+% 4 0 20 34 bbox
+begingate
+1.00 0 0 0 Cr::E
+1.00 0 -2 2 Cr::grave
+endgate
+} def
+
+/Cr::Eacute {
+% 0 0 24 28 bbox
+begingate
+1.00 0 0 0 Cr::E
+1.00 0 0 2 Cr::acute
+endgate
+} def
+
+/Cr::Ecircum {
+% 0 0 24 28 bbox
+begingate
+1.00 0 0 0 Cr::E
+1.00 0 0 2 Cr::hat
+endgate
+} def
+
+/Cr::Edier {
+% 6 0 18 31 bbox
+begingate
+1.00 0 0 0 Cr::E
+1.00 0 0 0 Cr::umlaut
+endgate
+} def
+
+/Cr::Ccedil {
+% 0 0 24 26 bbox
+begingate
+1.00 0 0 0 Cr::C
+1.00 0 3 0 Cr::cedilla
+endgate
+} def
+
+/Cr::Igrave {
+% 6 0 18 33 bbox
+begingate
+1.00 0 0 0 Cr::I
+1.00 0 -2 1 Cr::grave
+endgate
+} def
+
+/Cr::Iacute {
+% 10 0 14 33 bbox
+begingate
+1.00 0 0 0 Cr::I
+1.00 0 1 1 Cr::acute
+endgate
+} def
+
+/Cr::Icircum {
+% 10 0 14 34 bbox
+begingate
+1.00 0 0 0 Cr::I
+1.00 0 0 2 Cr::hat
+endgate
+} def
+
+/Cr::Idier {
+% 10 0 14 32 bbox
+begingate
+1.00 0 0 0 Cr::I
+1.00 0 1 1 Cr::umlaut
+endgate
+} def
+
+/Cr::Otilde {
+% 2 0 22 31 bbox
+begingate
+1.00 0 0 0 Cr::O
+1.00 0 0 0 Cr::tilchar
+endgate
+} def
+
+/Cr::Ugrave {
+% 2 0 22 34 bbox
+begingate
+1.00 0 0 0 Cr::U
+1.00 0 -2 2 Cr::grave
+endgate
+} def
+
+/Cr::Uacute {
+% 2 0 22 34 bbox
+begingate
+1.00 0 0 0 Cr::U
+1.00 0 2 2 Cr::acute
+endgate
+} def
+
+/Cr::Ucircum {
+% 2 0 22 34 bbox
+begingate
+1.00 0 0 0 Cr::U
+1.00 0 0 2 Cr::hat
+endgate
+} def
+
+/Cr::Udier {
+% 2 0 22 33 bbox
+begingate
+1.00 0 0 0 Cr::U
+1.00 0 0 2 Cr::umlaut
+endgate
+} def
+
+/Cr::Ograve {
+% 2 0 22 34 bbox
+begingate
+1.00 0 0 0 Cr::O
+1.00 0 -2 2 Cr::grave
+endgate
+} def
+
+/Cr::Oacute {
+% 2 0 22 34 bbox
+begingate
+1.00 0 0 0 Cr::O
+1.00 0 0 2 Cr::acute
+endgate
+} def
+
+/Cr::Ocircum {
+% 2 0 22 34 bbox
+begingate
+1.00 0 0 0 Cr::O
+1.00 0 0 2 Cr::hat
+endgate
+} def
+
+/Cr::Odier {
+% 2 0 22 33 bbox
+begingate
+1.00 0 0 0 Cr::O
+1.00 0 0 2 Cr::umlaut
+endgate
+} def
+
+/Cr::Ntilde {
+% 2 0 22 31 bbox
+begingate
+1.00 0 0 0 Cr::N
+1.00 0 0 0 Cr::tilchar
+endgate
+} def
+
+/Cr::AE {
+% 4 0 20 26 bbox
+begingate
+1  1.00 16 26 6 0 2 polygon
+1  1.00 16 10 10 10 2 polygon
+1  1.00 16 26 16 0 2 polygon
+1  1.00 12 26 24 26 24 22 3 polygon
+1  1.00 13 0 24 0 24 6 3 polygon
+1  1.00 16 13 22 13 2 polygon
+1  1.00 22 16 22 10 2 polygon
+1  1.00 4 0 9 0 2 polygon
+endgate
+} def
+
+/Cr::Eth {
+% 3 0 21 26 bbox
+begingate
+1.00 0 0 0 Cr::D
+1  1.00 11 13 3 13 2 polygon
+endgate
+} def
+
+/Cr::Yacute {
+% 3 0 21 34 bbox
+begingate
+1.00 0 0 0 Cr::Y
+1.00 0 2 2 Cr::acute
+endgate
+} def
+
+/Cr::agrave {
+% 3 0 21 25 bbox
+begingate
+1.00 0 0 0 Cr::a
+1.00 0 -3 -7 Cr::grave
+endgate
+} def
+
+/Cr::aacute {
+% 3 0 21 25 bbox
+begingate
+1.00 0 0 0 Cr::a
+1.00 0 0 -7 Cr::acute
+endgate
+} def
+
+/Cr::acircum {
+% 3 0 21 25 bbox
+begingate
+1.00 0 0 0 Cr::a
+1.00 0 -1 -7 Cr::hat
+endgate
+} def
+
+/Cr::atilde {
+% 3 0 21 23 bbox
+begingate
+1.00 0 0 0 Cr::a
+1.00 0 -2 -8 Cr::tilchar
+endgate
+} def
+
+/Cr::adier {
+% 3 0 21 24 bbox
+begingate
+1.00 0 0 0 Cr::a
+1.00 0 -1 -7 Cr::umlaut
+endgate
+} def
+
+/Cr::aring {
+% 3 0 21 29 bbox
+begingate
+1.00 0 0 0 Cr::a
+1.00 0 0 -2 Cr::circ
+endgate
+} def
+
+/Cr::ntilde {
+% 4 0 20 24 bbox
+begingate
+1.00 0 0 0 Cr::n
+1.00 0 -1 -7 Cr::tilchar
+endgate
+} def
+
+/Cr::egrave {
+% 4 0 20 25 bbox
+begingate
+1.00 0 0 0 Cr::e
+1.00 0 -2 -7 Cr::grave
+endgate
+} def
+
+/Cr::eacute {
+% 4 0 20 25 bbox
+begingate
+1.00 0 0 0 Cr::e
+1.00 0 1 -7 Cr::acute
+endgate
+} def
+
+/Cr::ecircum {
+% 4 0 20 25 bbox
+begingate
+1.00 0 0 0 Cr::e
+1.00 0 0 -7 Cr::hat
+endgate
+} def
+
+/Cr::edier {
+% 4 0 20 24 bbox
+begingate
+1.00 0 0 0 Cr::e
+1.00 0 1 -7 Cr::umlaut
+endgate
+} def
+
+/Cr::ae {
+% 3 0 21 17 bbox
+begingate
+1  1.00 12 2 9 0 6 0 3 2 3 6 6 9 12 9 7 polygon
+1  1.00 4 15 6 17 10 17 12 15 4 polygon
+1  1.00 12 13 12 5 13 2 15 0 18 0 21 2 6 polygon
+1  1.00 12 13 13 16 15 17 18 17 20 16 21 13 21 9 12 9 8 polygon
+endgate
+} def
+
+/Cr::igrave {
+% 5 0 19 26 bbox
+begingate
+1.00 0 -4 -6 Cr::grave
+1  1.00 6 0 20 0 2 polygon
+1  1.00 8 18 13 18 13 0 3 polygon
+endgate
+} def
+
+/Cr::iacute {
+% 6 0 18 26 bbox
+begingate
+1.00 0 0 -6 Cr::acute
+1  1.00 6 0 18 0 2 polygon
+1  1.00 8 18 12 18 12 0 3 polygon
+endgate
+} def
+
+/Cr::icircum {
+% 6 0 18 26 bbox
+begingate
+1.00 0 -2 -6 Cr::hat
+1  1.00 6 0 18 0 2 polygon
+1  1.00 8 18 12 18 12 0 3 polygon
+endgate
+} def
+
+/Cr::idier {
+% 4 0 20 25 bbox
+begingate
+1.00 0 -2 -6 Cr::umlaut
+1  1.00 6 18 10 18 10 0 3 polygon
+1  1.00 4 0 16 0 2 polygon
+endgate
+} def
+
+/Cr::ydier {
+% 2 -6 22 31 bbox
+begingate
+1.00 0 0 0 Cr::y
+1.00 0 0 -6 Cr::umlaut
+endgate
+} def
+
+/Cr::yacute {
+% 2 -6 22 31 bbox
+begingate
+1.00 0 0 0 Cr::y
+1.00 0 0 -7 Cr::acute
+endgate
+} def
+
+/Cr::ograve {
+% 4 0 20 25 bbox
+begingate
+1.00 0 0 0 Cr::o
+1.00 0 -2 -7 Cr::grave
+endgate
+} def
+
+/Cr::oacute {
+% 4 0 20 25 bbox
+begingate
+1.00 0 0 0 Cr::o
+1.00 0 0 -7 Cr::acute
+endgate
+} def
+
+/Cr::ocircum {
+% 4 0 20 26 bbox
+begingate
+1.00 0 0 0 Cr::o
+1.00 0 0 -6 Cr::hat
+endgate
+} def
+
+/Cr::otilde {
+% 4 0 20 24 bbox
+begingate
+1.00 0 0 0 Cr::o
+1.00 0 0 -7 Cr::tilchar
+endgate
+} def
+
+/Cr::odier {
+% 4 0 20 25 bbox
+begingate
+1.00 0 0 0 Cr::o
+1.00 0 0 -6 Cr::umlaut
+endgate
+} def
+
+/Cr::eth {
+% 4 0 20 26 bbox
+begingate
+1.00 0 0 0 Cr::o
+1  1.00 18 16 12 24 6 26 3 polygon
+1  1.00 14 26 8 22 2 polygon
+endgate
+} def
+
+/Cr::ugrave {
+% 4 0 20 26 bbox
+begingate
+1.00 0 0 0 Cr::u
+1.00 0 -2 -6 Cr::grave
+endgate
+} def
+
+/Cr::uacute {
+% 4 0 20 26 bbox
+begingate
+1.00 0 0 0 Cr::u
+1.00 0 0 -6 Cr::acute
+endgate
+} def
+
+/Cr::ucircum {
+% 4 0 20 26 bbox
+begingate
+1.00 0 0 0 Cr::u
+1.00 0 0 -6 Cr::hat
+endgate
+} def
+
+/Cr::udier {
+% 4 0 20 25 bbox
+begingate
+1.00 0 0 0 Cr::u
+1.00 0 0 -6 Cr::umlaut
+endgate
+} def
+
+/Cr::ccedil {
+% 4 -6 20 24 bbox
+begingate
+1.00 0 2 0 Cr::cedilla
+1.00 0 2 0 Cr::c
+endgate
+} def
+
+/Cr::ordfem {
+% 5 20 19 10 bbox
+begingate
+0.60 0 4 20 Cr::a
+endgate
+} def
+
+/Cr::Lslash {
+% 6 0 18 26 bbox
+begingate
+1.00 0 4 0 Cr::L
+1  1.00 18 19 6 11 2 polygon
+endgate
+} def
+
+/Cr::ordmasc {
+% 4 18 20 9 bbox
+begingate
+0.60 0 2 18 Cr::o
+endgate
+} def
+
+/Cr::lslash {
+% 10 0 14 26 bbox
+begingate
+1.00 0 6 0 Cr::l
+1  1.00 21 16 15 12 2 polygon
+endgate
+} def
+
+/Cr::OE {
+% 4 0 20 26 bbox
+begingate
+1  1.00 24 0 14 0 14 26 24 26 4 polygon
+1  1.00 20 14 14 14 2 polygon
+1  1.00 14 26 10 26 6 22 4 16 4 10 6 4 10 0 14 0 8 polygon
+1  1.00 20 18 20 10 2 polygon
+1  1.00 24 6 24 0 2 polygon
+1  1.00 24 20 24 26 2 polygon
+endgate
+} def
+
+/Cr::oe {
+% 3 0 21 18 bbox
+begingate
+1  1.00 24 4 23 2 21 0 17 0 15 2 14 6 14 12 15 16 17 18 21 18 23 16 24 12 24 10 
+14 10 14 polygon
+1  1.00 14 12 13 16 11 18 7 18 5 16 3 12 3 6 5 2 7 0 11 0 13 2 14 6 12 polygon
+endgate
+} def
+
+/Cr::emdash {
+% 2 10 22 0 bbox
+begingate
+1  1.00 2 10 22 10 2 polygon
+endgate
+} def
+
+/Cr::pm {
+% 4 10 20 17 bbox
+begingate
+1.00 0 0 3 Cr::plus
+1.00 0 0 -6 Cr::minus
+endgate
+} def
+
+/Cr::onesup {
+% 8 18 16 15 bbox
+begingate
+0.60 0 4 18 Cr::one
+endgate
+} def
+
+/Cr::twosup {
+% 4 18 20 15 bbox
+begingate
+0.60 0 2 18 Cr::two
+endgate
+} def
+
+/Cr::threesup {
+% 4 18 20 15 bbox
+begingate
+0.60 0 2 18 Cr::three
+endgate
+} def
+
+/Cr::quarter {
+% 4 0 20 27 bbox
+begingate
+0.60 0 10 0 Cr::four
+0.60 0 0 12 Cr::one
+1  1.00 4 0 20 24 2 polygon
+endgate
+} def
+
+/Cr::half {
+% 2 0 22 27 bbox
+begingate
+0.60 0 -2 12 Cr::one
+0.60 0 10 0 Cr::two
+1  1.00 2 0 18 24 2 polygon
+endgate
+} def
+
+/Cr::threeq {
+% 2 0 22 27 bbox
+begingate
+0.60 0 0 12 Cr::three
+0.60 0 10 0 Cr::four
+1  1.00 5 0 21 24 2 polygon
+endgate
+} def
+
+/Cr::copy {
+% 2 4 22 20 bbox
+begingate
+0.50 0 5 7 Cr::C
+1  1.00 12 14 10 0.00 360.00 xcarc
+endgate
+} def
+
+/Cr::regis {
+% 4 4 20 20 bbox
+begingate
+0.48 0 8 8 Cr::R
+1  1.00 14 14 10 0.00 360.00 xcarc
+endgate
+} def
+
+/Cr::mu {
+% 4 -8 20 26 bbox
+begingate
+1.00 0 0 0 Cr::u
+1  1.00 6 -8 6 4 2 polygon
+endgate
+} def
+
+/Cr::lognot {
+% 3 8 21 8 bbox
+begingate
+1  1.00 3 16 19 16 19 8 3 polygon
+endgate
+} def
+
+/Cr::times {
+% 5 6 19 12 bbox
+begingate
+1  1.00 5 6 17 18 2 polygon
+1  1.00 5 18 17 6 2 polygon
+endgate
+} def
+
+/Cr::divide {
+% 5 4 19 16 bbox
+begingate
+1  1.00 5 12 21 12 2 polygon
+1.00 0 1 15 Cr::period
+1.00 0 1 3 Cr::period
+endgate
+} def
+
+/Cr::thorn {
+% 2 -6 22 30 bbox
+begingate
+1.00 0 -2 0 Cr::p
+1  1.00 4 16 4 24 2 24 3 polygon
+endgate
+} def
+
+/Cr::Thorn {
+% 3 0 21 26 bbox
+begingate
+1  1.00 6 7 14 7 18 9 19 13 18 17 14 19 6 19 7 polygon
+1  1.00 3 0 10 0 2 polygon
+1  1.00 6 0 6 26 2 polygon
+1  1.00 3 26 10 26 2 polygon
+endgate
+} def
+
+/Cr::onesmall {
+% 9 4 15 19 bbox
+begingate
+0.75 0 3 4 Cr::one
+endgate
+} def
+
+/Cr::dash {
+% 8 12 16 0 bbox
+begingate
+1  1.00 8 12 16 12 2 polygon
+endgate
+} def
+
+% EndLib

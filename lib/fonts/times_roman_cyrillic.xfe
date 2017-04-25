@@ -1,0 +1,51 @@
+% XCircuit Font encoding (XFE) file
+% (Note that there are no vector font Cyrillic characters here,
+%  but it can be used with the Cairo graphics interface.)
+name:     Times-Roman-Cyrillic
+file:     times_roman.lps
+family:	  Times-Roman
+weight:	  normal
+shape:	  normal
+type:     PostScript
+encoding: ISO8859-5
+TR::nullchar TR::nullchar TR::nullchar TR::nullchar TR::nullchar TR::nullchar
+TR::nullchar TR::nullchar TR::nullchar TR::nullchar TR::nullchar TR::nullchar
+TR::nullchar TR::nullchar TR::nullchar TR::nullchar TR::nullchar TR::nullchar
+TR::nullchar TR::nullchar TR::nullchar TR::nullchar TR::nullchar TR::nullchar 
+TR::nullchar TR::nullchar TR::nullchar TR::nullchar TR::nullchar TR::nullchar
+TR::nullchar TR::nullchar 
+TR::space TR::exclam TR::quote TR::pound TR::dollar TR::percent TR::ampersand
+TR::apostrophe TR::lparen TR::rparen TR::asterisk TR::plus TR::comma TR::minus
+TR::period TR::slash TR::zero TR::one TR::two TR::three TR::four TR::five
+TR::six TR::seven TR::eight TR::nine TR::colon TR::semi TR::less TR::equal
+TR::more TR::question TR::at TR::A TR::B TR::C TR::D TR::E TR::F TR::G TR::H
+TR::I TR::J TR::K TR::L TR::M TR::N TR::O TR::P TR::Q TR::R TR::S TR::T TR::U
+TR::V TR::W TR::X TR::Y TR::Z TR::lbracket TR::backslash TR::rbracket
+TR::caret TR::underscore TR::apostrophe TR::a TR::b TR::c TR::d TR::e 
+TR::f TR::g TR::h TR::i TR::j TR::k TR::l TR::m TR::n TR::o TR::p TR::q
+TR::r TR::s TR::t TR::u TR::v TR::w TR::x TR::y TR::z TR::lbrace TR::vbar
+TR::rbrace TR::tilde
+TR::nullchar TR::nullchar TR::nullchar TR::nullchar TR::nullchar TR::nullchar
+TR::nullchar TR::nullchar TR::nullchar TR::nullchar TR::nullchar TR::nullchar 
+TR::nullchar TR::nullchar TR::nullchar TR::nullchar TR::nullchar TR::nullchar
+TR::nullchar TR::nullchar TR::nullchar TR::nullchar TR::nullchar TR::nullchar
+TR::nullchar TR::nullchar TR::nullchar TR::nullchar 
+TR::nullchar TR::nullchar TR::nullchar TR::nullchar TR::nullchar TR::nullchar
+TR::upexclam TR::cent TR::lb TR::aslash TR::yen TR::itf TR::sy1 TR::sy2
+TR::apos2 TR::lqt TR::lgqt TR::lsang TR::rsang TR::fi TR::fl TR::x
+TR::minus TR::dag TR::ddag TR::dot TR::x TR::para TR::bullet TR::comma2 
+TR::rqt2 TR::rqt TR::rgqt TR::dots TR::perzer TR::x TR::uqest TR::x
+TR::grave TR::acute TR::hat TR::tilchar TR::bar TR::uu TR::dot TR::umlaut
+TR::x TR::circ TR::cedilla TR::x TR::uml2 TR::ced2 TR::vee TR::emdash
+TR::x TR::x TR::x TR::x TR::x 
+TR::x TR::x TR::x TR::x TR::x TR::x
+TR::x TR::x TR::x TR::x TR::x TR::AE
+TR::x TR::ordfem TR::x TR::x TR::x TR::x
+TR::Lslash TR::Oslash TR::OE TR::ordmasc TR::x TR::x 
+TR::x TR::x TR::x TR::ae TR::x TR::x
+TR::x TR::onesup TR::x TR::x TR::lslash TR::osl TR::oe
+TR::sset TR::x TR::x TR::x TR::x
+
+derived:   Times-Bold-Cyrillic         bold     normal	  PostScript
+derived:   Times-Italic-Cyrillic       normal   italic	  PostScript
+derived:   Times-BoldItalic-Cyrillic   bold     italic	  PostScript

@@ -1,0 +1,56 @@
+%! PostScript set of library objects for XCircuit
+%  Library name is: TR
+%  Version: 2.0
+%
+%
+
+% XCircuitLib library built-in objects
+/TR::Guu {
+% 4 0 26 34 bbox
+begingate
+1.00 0 0 0 TR::G
+1.00 0 4 2 TR::uu
+endgate
+} def
+
+/TR::Idot {
+% 4 0 7 37 bbox
+begingate
+1.00 0 0 0 TR::I
+1.00 0 -3 12 TR::dot
+endgate
+} def
+
+/TR::Scedil {
+% 4 -6 22 32 bbox
+begingate
+1.00 0 0 0 TR::S
+1.00 0 4 0 TR::cedilla
+endgate
+} def
+
+/TR::scedil {
+% 4 -6 16 22 bbox
+begingate
+1.00 0 0 0 TR::s
+1.00 0 2 0 TR::cedilla
+endgate
+} def
+
+/TR::guu {
+% 4 -6 19 30 bbox
+begingate
+1.00 0 0 0 TR::g
+1.00 0 -2 -8 TR::uu
+endgate
+} def
+
+/TR::dotlessi {
+% 3 0 7 22 bbox
+begingate
+1  1.00 5 0 5 16 3 14 3 polygon
+1  1.00 3 0 7 0 2 polygon
+endgate
+} def
+
+% EndLib

@@ -1,0 +1,35 @@
+!
+! Normal X defaults for xcircuit, black-on-white version
+!
+xcircuit*foreground	 : Brown4
+xcircuit*background	 : Beige
+xcircuit.foreground	 : Black
+xcircuit.background	 : White
+xcircuit*gridcolor       : Gray95
+xcircuit*snapcolor       : Red
+xcircuit*selectcolor     : Gold3
+xcircuit*querycolor      : Turquoise
+xcircuit*axescolor       : Antique White
+xcircuit*offbuttoncolor  : Gray85
+xcircuit*auxiliarycolor  : Green3
+xcircuit*barcolor	 : Tan
+xcircuit*ratsnestcolor	 : Tan4
+!
+xcircuit*borderWidth	: 2
+xcircuit*borderColor	: Red
+!
+xcircuit.width          : 950
+xcircuit.height         : 760
+!
+! Inverse color scheme (white-on-black)
+!
+xcircuit*foreground2     : White
+xcircuit*background2     : DarkSlateGray
+xcircuit*gridcolor2      : Gray40
+xcircuit*snapcolor2      : Red
+xcircuit*selectcolor2    : Gold
+xcircuit*querycolor2     : Turquoise
+xcircuit*axescolor2      : NavajoWhite4
+xcircuit*offbuttoncolor2 : Gray50
+xcircuit*auxiliarycolor2 : Green
+xcircuit*barcolor2	 : Tan

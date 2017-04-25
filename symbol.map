@@ -1,0 +1,4 @@
+XCIRCUIT_3.8 {
+   global: Xcircuit_Init;
+   local: *;
+};

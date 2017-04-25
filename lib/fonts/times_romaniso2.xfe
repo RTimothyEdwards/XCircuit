@@ -1,0 +1,47 @@
+% XCircuit Font encoding (XFE) file
+name:     Times-RomanISO2
+file:	  times_romaniso2.lps
+family:	  Times-Roman
+weight:	  normal
+shape:    normal
+type:     PostScript
+encoding: ISOLatin2
+TR::nullchar TR::nullchar TR::nullchar TR::nullchar TR::nullchar TR::nullchar
+TR::nullchar TR::nullchar TR::nullchar TR::nullchar TR::nullchar TR::nullchar
+TR::nullchar TR::nullchar TR::nullchar TR::nullchar TR::nullchar TR::nullchar
+TR::nullchar TR::nullchar TR::nullchar TR::nullchar TR::nullchar TR::nullchar 
+TR::nullchar TR::nullchar TR::nullchar TR::nullchar TR::nullchar TR::nullchar
+TR::nullchar TR::nullchar 
+TR::space TR::exclam TR::quote TR::pound TR::dollar TR::percent TR::ampersand
+TR::apostrophe TR::lparen TR::rparen TR::asterisk TR::plus TR::comma TR::minus
+TR::period TR::slash TR::zero TR::one TR::two TR::three TR::four TR::five
+TR::six TR::seven TR::eight TR::nine TR::colon TR::semi TR::less TR::equal
+TR::more TR::question TR::at TR::A TR::B TR::C TR::D TR::E TR::F TR::G TR::H
+TR::I TR::J TR::K TR::L TR::M TR::N TR::O TR::P TR::Q TR::R TR::S TR::T TR::U
+TR::V TR::W TR::X TR::Y TR::Z TR::lbracket TR::backslash TR::rbracket
+TR::caret TR::underscore TR::apostrophe TR::a TR::b TR::c TR::d TR::e 
+TR::f TR::g TR::h TR::i TR::j TR::k TR::l TR::m TR::n TR::o TR::p TR::q TR::r
+TR::s TR::t TR::u TR::v TR::w TR::x TR::y TR::z TR::lbrace TR::vbar TR::rbrace
+TR::tilde TR::nullchar TR::nullchar TR::nullchar TR::nullchar 
+TR::nullchar TR::nullchar TR::nullchar TR::nullchar TR::nullchar TR::nullchar
+TR::nullchar TR::nullchar TR::nullchar TR::nullchar TR::nullchar TR::nullchar
+TR::nullchar TR::nullchar TR::nullchar TR::nullchar TR::nullchar TR::nullchar
+TR::nullchar TR::nullchar TR::nullchar TR::nullchar TR::nullchar TR::nullchar
+TR::nullchar TR::nullchar TR::nullchar TR::nullchar TR::nullchar TR::nullchar
+TR::Aogonek TR::uu TR::Lslash TR::sy2 TR::Lcaron TR::Sacute TR::sy1
+TR::umlaut TR::Scaron TR::Scedil TR::Tcaron TR::Zacute TR::dash TR::Zcaron
+TR::Zdot TR::circ
+TR::aogonek TR::ced2 TR::lslash TR::acute TR::lcaron TR::sacute TR::vee TR::cedilla
+TR::scaron TR::scedil TR::tcaron TR::zacute TR::uml2 TR::zcaron TR::zdot
+TR::Racute TR::Aacute TR::Acircum TR::Abreve TR::Adier TR::Lacute TR::Cacute TR::Ccedil
+TR::Ccaron TR::Eacute TR::Eogonek TR::Edier TR::Ecaron TR::Iacute TR::Icircum TR::Dcaron
+TR::Eth TR::Nacute TR::Ncaron TR::Oacute TR::Ocircum TR::Ouml2 TR::Odier TR::times
+TR::Rcaron TR::Ucirc TR::Uacute TR::Uuml2 TR::Udier TR::Yacute TR::Tcedil TR::sset
+TR::racute TR::aacute TR::acircum TR::abreve TR::adier TR::lacute TR::cacute TR::ccedil
+TR::ecaron TR::eacute TR::eogonek TR::edier TR::ecaron TR::iacute TR::icircum TR::dcaron
+TR::dbar TR::nacute TR::ncaron TR::oacute TR::ocircum TR::ouml2 TR::odier TR::divide
+TR::rcaron TR::ucirc TR::uacute TR::uuml2 TR::udier TR::yacute TR::tcedil TR::dotacc
+
+derived:   Times-BoldISO2       bold     normal     PostScript
+derived:   Times-ItalicISO2     normal   italic     PostScript
+derived:   Times-BoldItalicISO2 bold     italic     PostScript

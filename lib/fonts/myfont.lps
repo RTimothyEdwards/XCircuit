@@ -1,0 +1,614 @@
+%! PostScript set of library objects for XCircuit
+%  Library name is: my
+%  Version: 2.0
+%
+%
+
+% XCircuitLib library built-in objects
+/my::nullchar {
+% 0 0 256 320 bbox
+begingate
+0  1.00 0 0 0 320 256 320 256 0 4 polygon
+endgate
+} def
+
+/my::space {
+% 0 0 256 320 bbox
+begingate
+endgate
+} def
+
+/my::A {
+% 32 0 256 320 bbox
+begingate
+240  1.00 32 0 144 320 176 320 64 0 4 polygon
+240  1.00 288 0 176 320 144 320 256 0 4 polygon
+240  1.00 80 80 80 112 240 112 240 80 4 polygon
+endgate
+} def
+
+/my::B {
+% 32 0 192 320 bbox
+begingate
+240  1.00 32 0 32 320 64 320 64 0 4 polygon
+112 160 beginpath
+112 240 80 270.00 450.00 arc
+112 288 1 polyc
+112 240 48 450.00 270.00 arcn
+112 160 1 polyc
+241  1.00 endpath
+128 0 beginpath
+128 96 96 270.00 450.00 arc
+128 160 1 polyc
+128 96 65 450.00 270.00 arcn
+128 0 1 polyc
+241  1.00 endpath
+240  1.00 64 160 64 192 128 192 128 160 4 polygon
+240  1.00 64 288 64 320 112 320 112 288 4 polygon
+240  1.00 64 0 64 32 128 32 128 0 4 polygon
+endgate
+} def
+
+/my::C {
+% 32 0 259 320 bbox
+begingate
+273 61 beginpath
+192 160 128 309.81 50.19 arcn
+291 284 1 polyc
+192 160 160 51.34 308.66 arc
+240  1.00 endpath
+endgate
+} def
+
+/my::D {
+% 32 0 256 320 bbox
+begingate
+128 0 beginpath
+128 160 160 270.00 450.00 arc
+128 288 1 polyc
+128 160 128 450.00 270.00 arcn
+128 0 1 polyc
+241  1.00 endpath
+240  1.00 32 0 32 320 64 320 64 0 4 polygon
+240  1.00 64 288 64 320 128 320 128 288 4 polygon
+240  1.00 64 0 64 32 128 32 128 0 4 polygon
+endgate
+} def
+
+/my::E {
+% 32 0 192 320 bbox
+begingate
+240  1.00 32 0 32 320 64 320 64 0 4 polygon
+240  1.00 64 288 64 320 224 320 224 288 4 polygon
+240  1.00 64 0 64 32 224 32 224 0 4 polygon
+240  1.00 64 144 64 176 192 176 192 144 4 polygon
+endgate
+} def
+
+/my::F {
+% 32 0 192 320 bbox
+begingate
+240  1.00 32 0 32 320 64 320 64 0 4 polygon
+240  1.00 64 288 64 320 224 320 224 288 4 polygon
+240  1.00 64 144 64 176 192 176 192 144 4 polygon
+endgate
+} def
+
+/my::G {
+% 32 0 274 320 bbox
+begingate
+240  1.00 194 144 194 176 306 176 306 144 4 polygon
+240  1.00 272 48 272 144 306 144 306 48 4 polygon
+273 61 beginpath
+192 160 128 309.81 50.19 arcn
+291 284 1 polyc
+192 160 160 51.34 315.00 arc
+240  1.00 endpath
+endgate
+} def
+
+/my::H {
+% 32 0 224 320 bbox
+begingate
+240  1.00 32 0 32 320 64 320 64 0 4 polygon
+240  1.00 224 0 224 320 256 320 256 0 4 polygon
+240  1.00 64 144 64 176 224 176 224 144 4 polygon
+endgate
+} def
+
+/my::I {
+% 64 0 32 320 bbox
+begingate
+240  1.00 64 0 64 320 96 320 96 0 4 polygon
+endgate
+} def
+
+/my::J {
+% 43 0 133 320 bbox
+begingate
+240  1.00 144 80 144 320 176 320 176 80 4 polygon
+176 80 beginpath
+96 80 80 360.00 229.40 arcn
+62 47 1 polyc
+96 80 48 225.00 360.00 arc
+240  1.00 endpath
+endgate
+} def
+
+/my::K {
+% 32 0 224 320 bbox
+begingate
+240  1.00 32 0 32 320 64 320 64 0 4 polygon
+240  1.00 40 176 192 320 232 320 80 176 4 polygon
+240  1.00 216 0 40 176 80 176 256 0 4 polygon
+endgate
+} def
+
+/my::L {
+% 32 0 160 320 bbox
+begingate
+240  1.00 32 0 32 320 64 320 64 0 4 polygon
+240  1.00 64 0 64 32 192 32 192 0 4 polygon
+endgate
+} def
+
+/my::M {
+% 32 0 320 320 bbox
+begingate
+240  1.00 176 0 320 320 352 320 208 0 4 polygon
+240  1.00 208 0 64 320 32 320 176 0 4 polygon
+240  1.00 32 0 32 320 64 320 64 0 4 polygon
+240  1.00 320 0 320 320 352 320 352 0 4 polygon
+endgate
+} def
+
+/my::N {
+% 32 0 224 320 bbox
+begingate
+240  1.00 256 0 64 320 32 320 224 0 4 polygon
+240  1.00 32 0 32 320 64 320 64 0 4 polygon
+240  1.00 224 0 224 320 256 320 256 0 4 polygon
+endgate
+} def
+
+/my::O {
+% 32 0 320 320 bbox
+begingate
+320 160 beginpath
+192 160 128 0.00 360.00 arc
+352 160 1 polyc
+192 160 160 0.00 360.00 arc
+241  1.00 endpath
+endgate
+} def
+
+/my::P {
+% 32 0 192 320 bbox
+begingate
+240  1.00 32 0 32 320 64 320 64 0 4 polygon
+128 128 beginpath
+128 224 96 270.00 450.00 arc
+128 288 1 polyc
+128 224 65 450.00 270.00 arcn
+128 128 1 polyc
+241  1.00 endpath
+240  1.00 64 128 64 160 128 160 128 128 4 polygon
+240  1.00 64 288 64 320 128 320 128 288 4 polygon
+endgate
+} def
+
+/my::Q {
+% 32 0 320 320 bbox
+begingate
+320 160 beginpath
+192 160 128 0.00 360.00 arc
+352 160 1 polyc
+192 160 160 0.00 360.00 arc
+241  1.00 endpath
+240  1.00 312 0 216 96 256 96 352 0 4 polygon
+endgate
+} def
+
+/my::R {
+% 32 0 208 320 bbox
+begingate
+240  1.00 32 0 32 320 64 320 64 0 4 polygon
+128 128 beginpath
+128 224 96 270.00 450.00 arc
+128 288 1 polyc
+128 224 65 450.00 270.00 arcn
+128 128 1 polyc
+241  1.00 endpath
+240  1.00 64 128 64 160 128 160 128 128 4 polygon
+240  1.00 64 288 64 320 128 320 128 288 4 polygon
+240  1.00 200 0 112 144 152 144 240 0 4 polygon
+endgate
+} def
+
+/my::S {
+% 31 -1 169 320 bbox
+begingate
+45 29 beginpath
+112 87 88 -139.33 65.80 arc
+87 197 1 polyc
+112 239 49 239.81 36.45 arcn
+174 290 1 polyc
+112 239 80 40.16 240.45 arc
+134 139 1 polyc
+112 87 56 66.80 -138.37 arcn
+54 66 1 polyc
+31 44 1 polyc
+47 28 1 polyc
+241  1.00 endpath
+endgate
+} def
+
+/my::T {
+% 32 0 192 320 bbox
+begingate
+240  1.00 32 288 32 320 224 320 224 288 4 polygon
+240  1.00 112 0 112 320 144 320 144 0 4 polygon
+endgate
+} def
+
+/my::U {
+% 32 0 256 320 bbox
+begingate
+240  1.00 32 128 32 320 64 320 64 128 4 polygon
+240  1.00 256 128 256 320 288 320 288 128 4 polygon
+64 127 beginpath
+160 128 96 180.00 360.00 arc
+288 128 1 polyc
+160 128 128 360.00 180.00 arcn
+240  1.00 endpath
+endgate
+} def
+
+/my::V {
+% 32 0 256 320 bbox
+begingate
+240  1.00 144 0 256 320 288 320 176 0 4 polygon
+240  1.00 176 0 64 320 32 320 144 0 4 polygon
+endgate
+} def
+
+/my::W {
+% 32 0 352 320 bbox
+begingate
+240  1.00 112 0 192 320 224 320 144 0 4 polygon
+240  1.00 144 0 64 320 32 320 112 0 4 polygon
+240  1.00 272 0 352 320 384 320 304 0 4 polygon
+240  1.00 304 0 224 320 192 320 272 0 4 polygon
+endgate
+} def
+
+/my::X {
+% 32 0 232 320 bbox
+begingate
+240  1.00 32 0 224 320 264 320 72 0 4 polygon
+240  1.00 224 0 32 320 72 320 264 0 4 polygon
+endgate
+} def
+
+/my::Y {
+% 32 0 256 320 bbox
+begingate
+240  1.00 144 0 144 176 176 176 176 0 4 polygon
+240  1.00 160 136 32 320 72 320 160 192 4 polygon
+240  1.00 160 136 288 320 248 320 160 192 4 polygon
+endgate
+} def
+
+/my::Z {
+% 32 0 192 320 bbox
+begingate
+240  1.00 32 288 32 320 224 320 224 288 4 polygon
+240  1.00 32 0 32 32 224 32 224 0 4 polygon
+240  1.00 32 32 184 288 224 288 72 32 4 polygon
+endgate
+} def
+
+/my::a {
+% 32 0 176 192 bbox
+begingate
+240  1.00 176 0 176 192 208 192 208 0 4 polygon
+185 67 beginpath
+128 96 64 333.43 26.57 arcn
+196 164 1 polyc
+128 96 96 45.00 308.66 arc
+240  1.00 endpath
+endgate
+} def
+
+/my::b {
+% 32 0 176 320 bbox
+begingate
+240  1.00 32 0 32 320 64 320 64 0 4 polygon
+54 67 beginpath
+112 96 64 -153.43 153.43 arc
+44 164 1 polyc
+112 96 96 135.00 -128.66 arcn
+240  1.00 endpath
+endgate
+} def
+
+/my::c {
+% 32 0 156 192 bbox
+begingate
+168 46 beginpath
+128 96 64 309.81 50.19 arcn
+188 171 1 polyc
+128 96 96 51.34 308.66 arc
+240  1.00 endpath
+endgate
+} def
+
+/my::d {
+% 32 0 176 320 bbox
+begingate
+240  1.00 176 0 176 320 208 320 208 0 4 polygon
+185 67 beginpath
+128 96 64 333.43 26.57 arcn
+196 164 1 polyc
+128 96 96 45.00 308.66 arc
+240  1.00 endpath
+endgate
+} def
+
+/my::e {
+% 32 0 192 192 bbox
+begingate
+240  1.00 48 80 48 112 192 112 224 96 224 80 5 polygon
+179 57 beginpath
+128 96 64 323.13 0.00 arcn
+224 96 1 polyc
+128 96 96 0.00 324.46 arc
+240  1.00 endpath
+endgate
+} def
+
+/my::f {
+% 32 0 164 320 bbox
+begingate
+240  1.00 112 256 112 0 80 0 80 256 4 polygon
+240  1.00 32 176 32 208 160 208 160 176 4 polygon
+170 273 beginpath
+144 256 32 33.69 180.00 arc
+80 256 1 polyc
+144 256 64 180.00 35.54 arcn
+240  1.00 endpath
+endgate
+} def
+
+/my::g {
+% 32 -112 176 304 bbox
+begingate
+185 67 beginpath
+128 96 64 333.43 26.57 arcn
+196 164 1 polyc
+128 96 96 45.00 308.66 arc
+240  1.00 endpath
+240  1.00 176 -16 176 192 208 192 208 -16 4 polygon
+68 -63 beginpath
+112 -16 64 227.73 360.00 arc
+208 -16 1 polyc
+112 -16 96 360.00 225.00 arcn
+240  1.00 endpath
+endgate
+} def
+
+/my::h {
+% 32 0 160 320 bbox
+begingate
+240  1.00 32 0 32 320 64 320 64 0 4 polygon
+240  1.00 160 0 160 112 192 112 192 0 4 polygon
+35 133 beginpath
+112 112 80 164.05 0.00 arcn
+160 112 1 polyc
+112 112 48 0.00 165.96 arc
+240  1.00 endpath
+endgate
+} def
+
+/my::i {
+% 64 0 32 256 bbox
+begingate
+240  1.00 64 0 64 192 96 192 96 0 4 polygon
+240  1.00 80 240 16 0.00 360.00 xcarc
+endgate
+} def
+
+/my::j {
+% -4 -112 116 368 bbox
+begingate
+240  1.00 80 -48 80 192 112 192 112 -48 4 polygon
+21 -65 beginpath
+48 -48 32 213.69 360.00 arc
+112 -48 1 polyc
+48 -48 64 360.00 215.54 arcn
+240  1.00 endpath
+240  1.00 96 240 16 0.00 360.00 xcarc
+endgate
+} def
+
+/my::k {
+% 32 0 160 320 bbox
+begingate
+240  1.00 32 0 32 320 64 320 64 0 4 polygon
+240  1.00 48 96 136 192 176 192 88 96 4 polygon
+240  1.00 192 0 80 112 40 112 152 0 4 polygon
+endgate
+} def
+
+/my::l {
+% 64 0 32 320 bbox
+begingate
+240  1.00 64 0 64 320 96 320 96 0 4 polygon
+endgate
+} def
+
+/my::m {
+% 32 0 288 192 bbox
+begingate
+240  1.00 288 0 288 112 320 112 320 0 4 polygon
+240  1.00 160 0 160 112 192 112 192 0 4 polygon
+240  1.00 32 0 32 192 64 192 64 0 4 polygon
+35 133 beginpath
+112 112 80 164.05 0.00 arcn
+160 112 1 polyc
+112 112 48 0.00 165.96 arc
+240  1.00 endpath
+163 133 beginpath
+240 112 80 164.05 0.00 arcn
+288 112 1 polyc
+240 112 48 0.00 165.96 arc
+240  1.00 endpath
+endgate
+} def
+
+/my::n {
+% 32 0 160 192 bbox
+begingate
+240  1.00 32 0 32 192 64 192 64 0 4 polygon
+35 133 beginpath
+112 112 80 164.05 0.00 arcn
+160 112 1 polyc
+112 112 48 0.00 165.96 arc
+240  1.00 endpath
+240  1.00 160 0 160 112 192 112 192 0 4 polygon
+endgate
+} def
+
+/my::o {
+% 32 0 192 192 bbox
+begingate
+224 96 beginpath
+128 96 96 0.00 360.00 arc
+192 96 1 polyc
+128 96 64 0.00 360.00 arc
+241  1.00 endpath
+endgate
+} def
+
+/my::p {
+% 32 -112 176 304 bbox
+begingate
+54 67 beginpath
+112 96 64 -153.43 153.43 arc
+44 164 1 polyc
+112 96 96 135.00 -128.66 arcn
+240  1.00 endpath
+240  1.00 32 -112 32 192 64 192 64 -112 4 polygon
+endgate
+} def
+
+/my::q {
+% 32 -112 176 304 bbox
+begingate
+185 67 beginpath
+128 96 64 333.43 26.57 arcn
+196 164 1 polyc
+128 96 96 45.00 308.66 arc
+240  1.00 endpath
+240  1.00 176 -112 176 192 208 192 208 -112 4 polygon
+endgate
+} def
+
+/my::r {
+% 32 0 136 192 bbox
+begingate
+168 168 beginpath
+112 112 80 45.00 180.00 arc
+64 112 1 polyc
+112 112 48 180.00 26.57 arcn
+240  1.00 endpath
+240  1.00 32 0 32 192 64 192 64 0 4 polygon
+endgate
+} def
+
+/my::s {
+% 32 -1 113 193 bbox
+begingate
+138 161 beginpath
+88 136 56 26.57 253.30 arc
+94 79 1 polyc
+88 56 24 433.30 198.43 arcn
+36 34 1 polyc
+88 56 57 -155.56 73.30 arc
+81 114 1 polyc
+88 136 24 253.30 18.43 arcn
+240  1.00 endpath
+endgate
+} def
+
+/my::t {
+% 32 0 164 320 bbox
+begingate
+240  1.00 112 64 112 320 80 320 80 64 4 polygon
+240  1.00 32 240 32 208 160 208 160 240 4 polygon
+170 46 beginpath
+144 64 32 326.31 180.00 arcn
+80 64 1 polyc
+144 64 64 180.00 324.46 arc
+240  1.00 endpath
+endgate
+} def
+
+/my::u {
+% 32 0 160 192 bbox
+begingate
+240  1.00 192 192 192 0 160 0 160 192 4 polygon
+188 58 beginpath
+112 80 80 344.05 180.00 arcn
+64 80 1 polyc
+112 80 48 180.00 345.96 arc
+240  1.00 endpath
+240  1.00 64 192 64 80 32 80 32 192 4 polygon
+endgate
+} def
+
+/my::v {
+% 32 0 192 192 bbox
+begingate
+240  1.00 64 192 144 0 112 0 32 192 4 polygon
+240  1.00 192 192 112 0 144 0 224 192 4 polygon
+endgate
+} def
+
+/my::w {
+% 32 0 288 192 bbox
+begingate
+240  1.00 64 192 128 0 96 0 32 192 4 polygon
+240  1.00 160 192 96 0 128 0 192 192 4 polygon
+240  1.00 192 192 256 0 224 0 160 192 4 polygon
+240  1.00 288 192 224 0 256 0 320 192 4 polygon
+endgate
+} def
+
+/my::x {
+% 32 0 200 192 bbox
+begingate
+240  1.00 232 0 72 192 32 192 192 0 4 polygon
+240  1.00 32 0 192 192 232 192 72 0 4 polygon
+endgate
+} def
+
+/my::y {
+% 32 -112 192 304 bbox
+begingate
+240  1.00 64 192 144 0 112 0 32 192 4 polygon
+240  1.00 192 192 64 -112 96 -112 224 192 4 polygon
+endgate
+} def
+
+/my::z {
+% 32 0 160 192 bbox
+begingate
+240  1.00 32 32 152 160 192 160 72 32 4 polygon
+240  1.00 32 192 32 160 192 160 192 192 4 polygon
+240  1.00 32 32 32 0 192 0 192 32 4 polygon
+endgate
+} def
+
+
+% EndLib

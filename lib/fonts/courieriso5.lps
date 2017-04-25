@@ -1,0 +1,56 @@
+%! PostScript set of library objects for XCircuit
+%  Library name is: Cr
+%  Version: 2.0
+%
+%
+
+% XCircuitLib library built-in objects
+/Cr::Guu {
+% 4 0 20 34 bbox
+begingate
+1.00 0 0 0 Cr::G
+1.00 0 0 2 Cr::uu
+endgate
+} def
+
+/Cr::Idot {
+% 4 0 20 37 bbox
+begingate
+1.00 0 0 0 Cr::I
+1.00 0 1 12 Cr::dot
+endgate
+} def
+
+/Cr::Scedil {
+% 4 -6 20 32 bbox
+begingate
+1.00 0 0 0 Cr::S
+1.00 0 1 0 Cr::cedilla
+endgate
+} def
+
+/Cr::scedil {
+% 4 -6 20 22 bbox
+begingate
+1.00 0 0 0 Cr::s
+1.00 0 4 0 Cr::cedilla
+endgate
+} def
+
+/Cr::guu {
+% 4 -6 20 30 bbox
+begingate
+1.00 0 0 0 Cr::g
+1.00 0 2 -8 Cr::uu
+endgate
+} def
+
+/Cr::dotlessi {
+% 6 0 18 24 bbox
+begingate
+1  1.00 6 0 18 0 2 polygon
+1  1.00 12 0 12 18 8 18 3 polygon
+endgate
+} def
+
+% EndLib

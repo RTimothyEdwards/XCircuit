@@ -1,0 +1,535 @@
+%!PS-Adobe-3.0
+%%Title: src/xcircuit-3.1.26/examples/diffamp_test2
+%%Creator: Xcircuit v3.1
+%%CreationDate: Tue Nov 11 12:51:34 2003
+%%Pages: 2
+%%BoundingBox: 178 218 434 574
+%%DocumentNeededResources: font Helvetica font Times-Roman font Symbol 
+%%EndComments
+%%BeginProlog
+%
+%  PostScript prolog for output from xcircuit
+%  Version: 2.4
+%
+%  Electrical circuit (and otherwise general) drawing program
+%
+%  Written by Tim Edwards 8/5/93--1/15/03  (tim@bach.ece.jhu.edu)
+%  The Johns Hopkins University
+%
+%%BeginResource: procset XCIRCproc 2.4 3
+% supporting definitions --- these are the primary xcircuit types.
+
+/XCIRCsave save def
+/topmat matrix currentmatrix def
+
+/fontslant { /slant exch def [1 0 slant 1 0 0] 
+    exch findfont exch makefont dup length dict /ndict exch def
+    { 1 index /FID ne { ndict 3 1 roll put } { pop pop } ifelse } forall
+    ndict definefont pop} def
+/ul { dup type /stringtype eq showflag 1 eq and { gsave 
+   currentpoint topmat setmatrix 0 0 moveto 2 index stringwidth pop (_)
+   false charpath flattenpath pathbbox grestore exch pop 1 index
+   sub setlinewidth exch pop currentpoint 3 -1 roll add moveto 0
+   rlineto stroke moveto } if } def
+/ol { dup type /stringtype eq showflag 1 eq and { gsave gsave
+   currentpoint topmat setmatrix 2 index stringwidth pop 3 index
+   true charpath flattenpath pathbbox grestore exch pop
+   exch pop topmat setmatrix (_) true charpath pathbbox grestore
+   exch pop 1 index sub setlinewidth exch pop currentpoint
+   exch 4 1 roll exch sub add moveto pop 0 rlineto stroke
+   moveto } if } def
+/stW { gsave currentpoint newpath moveto true charpath flattenpath
+	pathbbox pop exch pop sub grestore } def
+/Ts {mark Tabs aload pop counttomark 1 add array astore /Tabs exch def Tabs
+	0 currentpoint pop put} def
+/Tbn {mark Tabs aload pop counttomark dup 2 add 1 roll cleartomark 1 sub} def
+/Tb { 0 1 Tbn {Tabs exch get dup currentpoint pop lt
+	{currentpoint exch pop moveto exit} {pop} ifelse } for } def
+/Tf { Tbn -1 0 {Tabs exch get dup currentpoint pop gt
+	{currentpoint exch pop moveto exit} {pop} ifelse } for } def
+/qS { (aa) stW (a a) stW sub 4 div 0 Kn } def
+/hS { qS qS } def
+/pspc 0 def
+/cf0 { scalefont setfont } bind def
+/Kn { dup kY add /kY exch def rmoveto } bind def
+/ss { /fscale fscale 0.67 mul def currentfont 0.67 cf0 0 fscale0 fscale mul
+	0.33 mul neg Kn} def
+/Ss { /fscale fscale 0.67 mul def currentfont 0.67 cf0 0 fscale0 fscale mul
+	0.67 mul Kn } def
+/ns { 0 kY neg Kn /kY 0 def /fscale 1.0 def xfont0 1.0 cf0 } def
+/CR { ns 0 /Bline Bline fscale0 neg add def Bline moveto } def
+/cf { dup type /realtype ne {1.0} if exch findfont exch kY 0 eq
+	{ 40 mul dup /fscale0 exch def cf0 /xfont0 currentfont def}
+	{fscale0 mul fscale mul cf0} ifelse } def
+/ctmk { counttomark dup 2 add -1 roll pop } bind def
+/label { gsave translate 0 0 moveto dup scale neg /rotval exch def
+	/just exch def just 16 and 0 gt {gsave rotval rotate 0 1 dtransform
+	gsave pagemat setmatrix idtransform exch grestore 1 0 dtransform
+	gsave pagemat setmatrix idtransform exch grestore dup abs 1e-9 lt
+	{pop mul 0 gt} {3 1 roll pop pop 0 lt} ifelse grestore {-1 /rotval
+	rotval neg def /just just dup 3 and 1 ne {3 xor} if def} {1} ifelse
+	exch -1e-9 lt {-1 /rotval rotval neg def /just just dup 12 and
+	4 ne {12 xor} if def} {1} ifelse scale } if /showflag 0 def
+	/fspc pspc def /Bline 0 def /Tabs 0 array def /fscale 1.0 def
+	/kY 0 def gsave dup 1 add copy 0 exch 1 0 dtransform exch atan rotate
+	{exch dup type /stringtype eq {true charpath flattenpath} {dup type
+	/arraytype eq {exec} {12 string cvs true charpath flattenpath} ifelse}
+	ifelse} repeat pop pathbbox grestore 3 -1 roll pop 3 1 roll just
+	1 and 0 gt {just 2 and 0 gt {exch pop neg fspc sub} {exch sub 0.5
+	mul neg} ifelse} {pop neg fspc add} ifelse exch Bline exch just 4
+	and 0 gt {just 8 and 0 gt {exch pop neg fspc sub} {add 0.5 mul neg}
+	ifelse} {pop neg fspc add} ifelse rotval rotate Kn currentpoint
+	translate /showflag 1 def /Bline 0 def /Tabs 0 array def /fscale
+	1.0 def /kY 0 def {dup type /stringtype eq {show} {
+	dup type /arraytype eq {exec} {12 string cvs show} ifelse} ifelse}
+	repeat grestore } def
+/pinlabel { 4 index 32 and 0 ne hlevel 0 eq or { /pspc 10 def label
+	/pspc 0 def } { pop pop pop pop pop {pop} repeat } ifelse } def
+/pinglobal { pinlabel } def
+/infolabel { pinlabel } def
+
+/scb { setrgbcolor } bind def  /sce { defColor aload pop scb } bind def
+/cRedef {/defColor currentcolor 3 array astore def} def
+/setdefaults { aload length 2 idiv {currentdict 2 index known
+	{pop pop} {def} ifelse} repeat } bind def
+/begingate {dup type /dicttype ne {1 dict} if begin	% default params
+	dup type /dicttype ne {1 dict} if begin		% instanced params
+	/hlevel hlevel 1 add def /defColor currentcolor sce 3 array
+	astore def gsave sce translate 0 0 moveto neg rotate dup abs scale
+	} bind def
+/endgate { /hlevel hlevel 1 sub def grestore defColor aload pop cRedef
+	scb end end} bind def
+
+/hlevel 0 def
+/tmpa [1 0 0 1 0 0] def
+/gar {8 8 true tmpa {<c0 c0 00 00 0c 0c 00 00>} imagemask} bind
+{8 8 true tmpa {<30 70 60 02 03 07 06 20>} imagemask} bind
+{8 8 true tmpa {<0c 1e 1e 0c c0 e1 e1 c0>} imagemask} bind
+{8 8 true tmpa {<0f 0f 0f 0f f0 f0 f0 f0>} imagemask} bind
+{8 8 true tmpa {<3f f3 e1 e1 f3 3f 1e 1e>} imagemask} bind
+{8 8 true tmpa {<df cf 8f 9f fd fc f8 f9>} imagemask} bind
+{8 8 true tmpa {<ff 3f 3f ff ff f3 f3 ff>} imagemask} bind 7 array astore def
+/ppaint { gsave clip tmpa dup setmatrix pathbbox neg exch neg 4 2 roll
+  neg 4 -1 roll 2 copy gt {exch} if 8 div ceiling 8 mul 4 2 roll neg 2 copy
+  gt {exch} if 8 div ceiling 8 mul 3 -1 roll -8 5 -1 roll
+  { 3 index exch 5 exch put dup -8 3 index { 3 index
+  exch 4 exch put 3 index exec } for } for pop pop pop pop grestore } bind def
+/setstyles {
+  currentlinewidth mul setlinewidth /style exch def
+  style 1 and 0 gt not {closepath} if
+  style 2 and 0 gt {currentlinewidth 4 mul dup 2 array astore 0 setdash} if
+  style 4 and 0 gt {0.5 currentlinewidth 4 mul 2 array astore 0 setdash} if
+  gsave style 16 and 0 gt { style 224 and -5 bitshift style 256 and 0 gt {
+  7 exch sub 8 div dup 1 exch sub currentrgbcolor 3 array astore
+  {3 copy mul add 4 1 roll pop} forall pop pop setrgbcolor eofill}
+  {dup 7 lt {gar exch get ppaint} {pop eofill} ifelse} ifelse}
+  {style 256 and 0 gt {1 setgray eofill} if} ifelse grestore style 8 and 0 gt 
+  style 512 eq or {newpath} {stroke} ifelse grestore} def     
+
+/polygon { gsave /num exch def moveto num 1 sub {lineto} repeat setstyles } def
+/xcarc   { gsave newpath arc setstyles } def
+/elb { matrix currentmatrix 7 -1 roll 7 -1 roll translate 5 1 roll 4 -1 roll
+	3 index div 1 scale } def
+/ele { 0 4 1 roll 0 4 1 roll } bind def
+/ellipse { gsave elb newpath ele arc setmatrix setstyles } def
+/pellip  { elb ele arc setmatrix } def
+/nellip  { elb ele arcn setmatrix } def
+/spline  { gsave moveto curveto setstyles } def
+/polyc   { {lineto} repeat } bind def
+/beginpath { gsave moveto } bind def
+/endpath { setstyles } bind def
+/bop	 { 1 setlinecap 0 setlinejoin 6 setmiterlimit 0 0 0 scb cRedef } def
+/psinsertion {/PSobj save def /showpage {} def bop rotate translate dup scale} def
+/end_insert {PSobj restore} def
+/setpagemat {/pagemat matrix currentmatrix def} def
+/inchscale  {setpagemat 0.375 mul dup scale} def
+/cmscale    {setpagemat 0.35433071 mul dup scale} def
+
+%%EndResource
+%%EndProlog
+
+% XCircuit output starts here.
+
+/ampl_test {
+% ampl_test is_schematic
+begingate
+1.000 0.000 0.000 scb
+(Vinn) {/Helvetica cf} 2 23 0 1.00 -224 192 pinlabel
+(Vinp) {/Helvetica cf} 2 23 0 1.00 -224 96 pinlabel
+(Voutn) {/Helvetica cf} 2 20 0 1.00 -32 96 pinlabel
+(Voutp) {/Helvetica cf} 2 20 0 1.00 -32 192 pinlabel
+(Vcmref) {/Helvetica cf} 2 25 0 1.00 -160 256 pinlabel
+(Vbias) {/Helvetica cf} 2 29 0 1.00 -160 32 pinlabel
+sce
+1 1.00 -224 96 -192 96 2 polygon
+1 1.00 -224 192 -192 192 2 polygon
+1 1.00 -128 192 -32 192 2 polygon
+1 1.00 -128 96 -32 96 2 polygon
+(-) {/Symbol cf} 2 5 0 1.00 -141 106 label
+(+) {/Symbol cf} 2 5 0 1.00 -141 186 label
+1 1.00 -32 144 -192 224 -192 64 -32 144 4 polygon
+(-) {/Symbol cf} 2 5 0 1.00 -173 186 label
+(+) {/Symbol cf} 2 5 0 1.00 -173 106 label
+1 1.00 -160 80 -160 32 2 polygon
+1 1.00 -160 208 -160 256 2 polygon
+endgate
+} def
+
+/gnd {
+% trivial
+begingate
+1 1.00 0 0 0 -32 2 polygon
+1 1.00 -32 -32 32 -32 2 polygon
+1 1.00 -18 -46 18 -46 2 polygon
+1 1.00 -4 -60 4 -60 2 polygon
+1.000 0.000 0.000 scb
+(GND) {/Times-Roman cf} 2 1 0 1.00 0 0 pinglobal
+endgate
+} def
+
+/source {
+% hidden
+begingate
+1 1.00 0 0 32 0.00 360.00 xcarc
+1 1.00 0 32 0 64 2 polygon
+1 1.00 0 -32 0 -64 2 polygon
+endgate
+} def
+
+/Vsource {
+<</value (5)  >> begingate
+1.00 0 0 0 source
+(+) {/Symbol cf} 2 5 0 1.00 0 18 label
+(-) {/Symbol cf} 2 5 0 1.00 0 -18 label
+1.000 0.000 0.000 scb
+(v.p) {/Times-Roman cf} 2 9 0 1.00 0 64 pinlabel
+(v.m) {/Times-Roman cf} 2 13 0 1.00 0 -64 pinlabel
+0.180 0.545 0.341 scb
+mark value (spice:V%i %pv.p %pv.m ) {/Times-Roman cf} ctmk 20 0 1.00 -96 -160 
+infolabel
+sce
+mark (V) {hS} value {/Times-Roman cf} ctmk 20 0 1.00 48 0 label
+endgate
+} def
+
+/dot {
+% trivial
+begingate
+248 1.00 0 0 6 0.00 360.00 xcarc
+1.000 0.000 0.000 scb
+(x) {/Times-Roman cf} 2 29 0 1.00 0 0 pinlabel
+endgate
+} def
+
+/jumper {
+% trivial
+begingate
+1 1.00 0 0 10 -90.00 90.00 xcarc
+1 1.00 0 10 0 16 2 polygon
+1 1.00 0 -10 0 -16 2 polygon
+1.000 0.000 0.000 scb
+(a) {/Times-Roman cf} 2 1 0 1.00 0 16 pinlabel
+(a) {/Times-Roman cf} 2 13 0 1.00 0 -16 pinlabel
+endgate
+} def
+
+/circle {
+% trivial
+begingate
+1 1.00 16 0 6 0.00 360.00 xcarc
+1 1.00 0 0 10 0 2 polygon
+1.000 0.000 0.000 scb
+(out) {/Times-Roman cf} 2 4 0 1.00 16 0 pinlabel
+(out) {/Times-Roman cf} 2 7 0 1.00 0 0 pinlabel
+endgate
+} def
+
+%%Page: diffamp_test 1
+%%PageOrientation: Landscape
+/pgsave save def bop
+% 1203 848 offsets
+90 rotate 40 -652 translate
+1.0000 inchscale
+2.6000 setlinewidth
+
+1.00 0 1027 832 ampl_test
+1.00 0 867 736 gnd
+1.00 0 867 800 Vsource
+1.00 0 1059 800 <</value (2.5) >> Vsource
+1 1.00 1059 864 1059 1088 867 1088 3 polygon
+1.00 0 1059 736 gnd
+1 1.00 803 928 755 928 755 864 851 864 4 polygon
+1 1.00 883 864 1059 864 2 polygon
+1.00 0 1059 864 dot
+1.00 270 867 864 jumper
+1 1.00 803 1024 723 1024 2 polygon
+-1.00 0 723 1024 circle
+1 1.00 995 928 1043 928 2 polygon
+1 1.00 995 1024 1043 1024 2 polygon
+1.00 270 1059 1024 jumper
+1.00 270 1059 928 jumper
+1 1.00 1075 1024 1139 1024 2 polygon
+1 1.00 1075 928 1139 928 2 polygon
+1.00 0 1139 1024 circle
+1.00 0 1139 928 circle
+1.000 0.000 0.000 scb
+(Vinse) {/Helvetica cf} 2 23 0 1.00 707 1024 pinlabel
+(Voutp) {/Helvetica cf} 2 20 0 1.00 1155 1024 pinlabel
+(Voutm) {/Helvetica cf} 2 20 0 1.00 1155 928 pinlabel
+sce
+1411 624 beginpath
+1411 1168 1 polyc
+1379 1168 32 0.00 90.00  arc
+515 1200 1 polyc
+
+515 1168 32 90.00 180.00  arc
+483 624 1 polyc
+515 624 32 180.00 270.00  arc
+1379 592 
+1 polyc
+1379 624 32 270.00 360.00  arc
+1 1.00 endpath
+(Differential amplifier:  test) {/Helvetica cf} 2 25 0 1.00 947 1232 label
+pgsave restore showpage
+
+/pMOS {
+<</p_yps1 -32 /p_xps1 16 /p_rot1 0 /p_yps 32 /p_xps 16 /p_rot 0 /width 
+(3)  /length (2)  >> begingate
+1 1.00 -44 -28 -44 28 2 polygon
+1 1.00 -60 0 -64 0 2 polygon
+1 1.00 0 -64 0 -28 -32 -28 -32 28 0 28 0 64 6 polygon
+1 1.00 -52 0 8 0.00 360.00 xcarc
+1.000 0.000 0.000 scb
+(S) {/Times-Roman cf} 2 9 0 1.00 0 64 pinlabel
+(D) {/Times-Roman cf} 2 13 0 1.00 0 -64 pinlabel
+(G) {/Times-Roman cf} 2 7 0 1.00 -64 0 pinlabel
+0.180 0.545 0.341 scb
+(spice:M%i %pD %pG %pS Vdd pmos W=%v"3" L=%v"2") {/Times-Roman cf} 2 4 0 1.00 
+-196 -139 infolabel
+(sim:p %pG %pS %pD) {/Times-Roman cf} 2 4 0 1.00 -196 -187 infolabel
+sce
+mark width (W=) {/Times-Roman cf} ctmk 20 p_rot 1.00 p_xps p_yps label
+mark length (L=) {/Times-Roman cf} ctmk 20 p_rot1 1.00 p_xps1 p_yps1 label
+endgate
+} def
+
+/Resistor {
+<</p_rot 0 /p_jst 20 /value (1.0)  /units (k)  >> begingate
+1 1.00 0 64 0 36 2 polygon
+1 1.00 0 -64 0 -36 2 polygon
+1 1.00 0 -36 14 -30 -14 -18 14 -6 -14 6 14 18 -14 30 0 36 8 polygon
+1.000 0.000 0.000 scb
+(r.1) {/Times-Roman cf} 2 9 0 1.00 0 64 pinlabel
+(r.2) {/Times-Roman cf} 2 13 0 1.00 0 -64 pinlabel
+0.180 0.545 0.341 scb
+mark units value (spice:R%i %pr.1 %pr.2 ) {/Times-Roman cf} ctmk 4 0 1.00 -208 
+-160 infolabel
+(sim:R %pr.1 %pr.2) {/Times-Roman cf} 2 4 0 1.00 -208 -208 infolabel
+sce
+mark (W) {/Symbol cf} units {hS} value {/Times-Roman cf} ctmk p_jst p_rot 1.00 
+32 0 label
+endgate
+} def
+
+/nMOS {
+<</p_rot1 0 /p_yps1 -32 /p_xps1 16 /p_rot 0 /p_yps 32 /p_xps 16 /width 
+3  /length 2 >> begingate
+1 1.00 0 -64 0 -28 -32 -28 -32 28 0 28 0 64 6 polygon
+1 1.00 -44 -28 -44 28 2 polygon
+1 1.00 -44 0 -64 0 2 polygon
+1.000 0.000 0.000 scb
+(G) {/Times-Roman cf} 2 7 0 1.00 -64 0 pinlabel
+(S) {/Times-Roman cf} 2 13 0 1.00 0 -64 pinlabel
+(D) {/Times-Roman cf} 2 9 0 1.00 0 64 pinlabel
+0.180 0.545 0.341 scb
+(spice:M%i %pD %pG %pS GND nmos W=%v"3" L=%v"2") {/Times-Roman cf} 2 4 0 1.00 
+-244 -139 infolabel
+(sim:n %pG %pS %pD) {/Times-Roman cf} 2 4 0 1.00 -244 -187 infolabel
+sce
+mark width (W=) {/Times-Roman cf} ctmk 20 p_rot 1.00 p_xps p_yps label
+mark length (L=) {/Times-Roman cf} ctmk 20 p_rot1 1.00 p_xps1 p_yps1 label
+endgate
+} def
+
+/pmos4 {
+<</p_rot1 0 /p_yps1 -32 /p_xps1 16 /p_rot 0 /p_yps 32 /p_xps 16 /width 
+(3)  /length (2)  >> begingate
+1 1.00 -44 -28 -44 28 2 polygon
+1 1.00 -60 0 -64 0 2 polygon
+1 1.00 0 -64 0 -28 -32 -28 -32 28 0 28 0 64 6 polygon
+1 1.00 -52 0 8 0.00 360.00 xcarc
+1.000 0.000 0.000 scb
+(S) {/Times-Roman cf} 2 9 0 1.00 0 64 pinlabel
+(D) {/Times-Roman cf} 2 13 0 1.00 0 -64 pinlabel
+(G) {/Times-Roman cf} 2 7 0 1.00 -64 0 pinlabel
+0.180 0.545 0.341 scb
+mark length ( L=) width (spice:M%i %pD %pG %pS %pB pmos W=) {/Times-Roman cf} 
+ctmk 4 0 1.00 -324 -139 infolabel
+(sim:p %pG %pS %pD) {/Times-Roman cf} 2 4 0 1.00 -196 -187 infolabel
+sce
+mark width (W=) {/Times-Roman cf} ctmk 20 p_rot 1.00 p_xps p_yps label
+mark length (L=) {/Times-Roman cf} ctmk 20 p_rot1 1.00 p_xps1 p_yps1 label
+1 1.00 -32 0 16 0 2 polygon
+1.000 0.000 0.000 scb
+(B) {/Times-Roman cf} 2 20 0 1.00 16 0 pinlabel
+endgate
+} def
+
+/vdd {
+% trivial
+begingate
+1 1.00 0 0 0 32 2 polygon
+1 1.00 -32 32 32 32 2 polygon
+(Vdd) {/Times-Roman cf} 2 17 0 0.90 0 38 label
+1.000 0.000 0.000 scb
+(Vdd) {/Times-Roman cf} 2 13 0 1.00 0 0 pinglobal
+endgate
+} def
+
+/halfamp {
+begingate
+1.00 0 128 320 <</p_yps1 32 /p_yps 64 /width (525.6) /length (1.8) >> pMOS
+-1.00 0 -16 320 <</p_xps1 48 /p_yps1 32 /p_xps 48 /p_yps 64 /width (294) /length 
+(2.4) >> pMOS
+1 1.00 64 320 -544 320 2 polygon
+1.00 0 128 384 vdd
+1.00 0 -16 384 vdd
+1.00 0 128 -96 <</p_yps -32 /p_yps1 -64 /width 387 /length 1.2 >> nMOS
+1 1.00 128 -32 128 256 2 polygon
+1 1.00 48 0 128 0 2 polygon
+1.00 0 128 0 dot
+1 1.00 -16 -112 -16 -160 2 polygon
+1.00 0 -16 -160 gnd
+1.00 0 128 -160 gnd
+1 1.00 64 -96 -448 -96 2 polygon
+1 1.00 -16 -64 -16 -80 2 polygon
+1.00 0 -16 -96 jumper
+-1.00 270 -224 16 <</p_yps -160 /p_xps1 -80 /p_yps1 -160 /p_rot1 270 /p_rot 270 /p_xps 
+-112 /width (73.2) /length (35.2) >> pmos4
+1 1.00 -224 0 -224 -96 2 polygon
+1 1.00 -288 16 -288 -96 2 polygon
+1 1.00 -160 16 -160 -96 2 polygon
+1 1.00 -224 80 -224 160 -16 160 3 polygon
+1.00 0 -16 160 dot
+1.00 0 -160 -96 dot
+1.00 0 -224 -96 dot
+1.00 0 -288 -96 dot
+1.00 0 -448 -96 dot
+1 1.00 -448 32 -448 -192 2 polygon
+-1.00 0 -448 96 <</p_xps1 -160 /p_yps1 48 /p_xps -160 /p_yps 80 /width (294) /length 
+(3) >> pmos4
+1 1.00 -384 96 -352 96 2 polygon
+1.00 0 -352 96 circle
+1.00 0 -448 -256 <</p_xps1 32 /p_xps 32 /p_yps1 32 /p_yps 64 /width 21 /length 
+3 >> nMOS
+1.00 0 -448 -320 gnd
+1 1.00 -464 96 -560 96 2 polygon
+1 1.00 -448 160 -560 160 2 polygon
+1 1.00 -16 64 -16 256 2 polygon
+-1.00 0 -16 0 <</p_yps1 0 /width (588) /length (1.2) >> pMOS
+endgate
+} def
+
+%%Page: ampl_test 2
+%%PageOrientation: Landscape
+/pgsave save def bop
+% ampl_test is_symbol
+% 2295 762 offsets
+90 rotate -107 -503 translate
+0.6472 inchscale
+2.6000 setlinewidth
+
+1.00 0 2039 1146 <</p_yps1 32 /p_yps 64 /width (336) /length (1.8) >> pMOS
+1.00 270 2423 1290 <</p_jst 17 /p_rot 90 /value (300) >> Resistor
+-1.00 0 3159 410 <</p_yps 0 /width 21 /length 3 >> nMOS
+1.00 0 2935 410 <</p_yps1 16 /p_yps 48 /width 21 /length 3 >> nMOS
+1 1.00 3223 410 3223 474 3159 474 3159 698 4 polygon
+1.00 0 2935 762 <</p_xps1 -144 /p_yps1 -96 /p_xps -144 /p_yps -64 /width (126) /length 
+(1.2) >> pmos4
+1 1.00 2935 474 2935 698 2 polygon
+-1.00 0 3159 762 <</p_xps1 -144 /p_yps1 -80 /p_xps -144 /p_yps -48 /width (126) /length 
+(1.2) >> pmos4
+1 1.00 2951 762 3143 762 2 polygon
+1 1.00 2935 826 3159 826 2 polygon
+1.00 0 3047 826 dot
+1 1.00 3047 762 3047 1082 2 polygon
+1.00 0 3047 1146 <</p_yps1 0 /width (336) /length (1.8) >> pMOS
+1.00 0 3047 1210 vdd
+1.00 0 2935 346 gnd
+1.00 0 3159 346 gnd
+1 1.00 2935 474 2855 474 2855 410 3 polygon
+1 1.00 2871 410 1991 410 2 polygon
+1.00 0 2039 826 dot
+1 1.00 2039 762 2039 1082 2 polygon
+1 1.00 2871 762 2839 762 2 polygon
+1 1.00 3223 762 3255 762 2 polygon
+1.00 0 3255 762 circle
+1.00 180 2839 762 circle
+1.00 0 2039 1210 vdd
+1 1.00 2983 1146 1975 1146 2 polygon
+1.00 0 2935 474 dot
+1.00 0 2855 410 dot
+1.00 0 3047 762 dot
+1.00 0 2039 762 dot
+1.00 0 3159 474 dot
+1.00 270 2039 986 jumper
+1.00 270 2615 1290 <</p_jst 17 /p_rot 90 /value (300) >> Resistor
+1 1.00 2487 1290 2551 1290 2 polygon
+1 1.00 2519 1290 2519 1258 2 polygon
+1 1.00 2359 1290 2327 1290 2327 1258 3 polygon
+1 1.00 2679 1290 2711 1290 2711 1258 3 polygon
+1.00 0 2519 1290 dot
+1.00 90 2327 1258 circle
+1.00 90 2519 1258 circle
+1.00 90 2711 1258 circle
+1.00 0 2599 666 halfamp
+1 1.00 1415 986 1207 986 2 polygon
+-1.00 0 1143 986 <</p_yps1 0 /width (42) /length (1.8) >> pMOS
+1 1.00 1223 986 1223 922 1143 922 3 polygon
+1.00 0 1143 1050 vdd
+1.00 0 1223 986 dot
+1 1.00 1143 922 1143 634 2 polygon
+-1.00 0 967 1146 <</p_yps1 0 /width (84) /length (1.8) >> pMOS
+1 1.00 1031 1146 1975 1146 2 polygon
+1 1.00 1047 1146 1047 1082 967 1082 967 634 4 polygon
+1.00 0 967 1210 vdd
+1.00 0 1143 506 gnd
+1.00 0 967 506 gnd
+1.000 0.000 0.000 scb
+(Vinn) {/Helvetica cf} 2 20 0 1.00 2263 762 pinlabel
+(Vinp) {/Helvetica cf} 2 23 0 1.00 1815 762 pinlabel
+sce
+1 1.00 2727 858 2775 858 2 polygon
+1.00 0 2775 858 circle
+1.00 0 2727 858 dot
+1.000 0.000 0.000 scb
+(Voutn) {/Helvetica cf} 2 20 0 1.00 2791 858 pinlabel
+sce
+1 1.00 1351 858 1303 858 2 polygon
+-1.00 0 1303 858 circle
+1.000 0.000 0.000 scb
+(Voutp) {/Helvetica cf} 2 23 0 1.00 1287 858 pinlabel
+sce
+1.00 0 1351 858 dot
+1.00 0 967 1082 dot
+1.00 0 1047 1146 dot
+1.00 0 1143 922 dot
+1.000 0.000 0.000 scb
+(Voutp) {/Helvetica cf} 2 29 0 1.00 2327 1242 pinlabel
+(Voutn) {/Helvetica cf} 2 29 0 1.00 2711 1242 pinlabel
+(Vcmin) {/Helvetica cf} 2 29 0 1.00 2519 1242 pinlabel
+(Vcmin) {/Helvetica cf} 2 29 0 1.00 2823 762 pinlabel
+(Vcmref) {/Helvetica cf} 2 20 0 1.00 3271 762 pinlabel
+sce
+-1.00 0 1479 666 halfamp
+1.00 0 1143 570 <</p_yps1 16 /p_yps 48 /width 21 /length 16.5 >> nMOS
+1.00 0 967 570 <</p_yps1 32 /p_yps 64 /width 21 /length 16.5 >> nMOS
+1 1.00 1079 570 855 570 2 polygon
+-1.00 0 855 570 circle
+1.000 0.000 0.000 scb
+(Vbias) {/Helvetica cf} 2 23 0 1.00 839 570 pinlabel
+pgsave restore showpage
+
+%%Trailer
+XCIRCsave restore
+%%EOF

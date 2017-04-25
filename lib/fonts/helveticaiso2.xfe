@@ -1,0 +1,48 @@
+% XCircuit Font encoding (XFE) file
+name:     HelveticaISO2
+% file:     helvetica.lps
+file:	  helveticaiso2.lps
+family:	  Helvetica
+weight:	  normal
+shape:    normal
+type:     PostScript
+encoding: ISOLatin2
+Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar
+Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar
+Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar
+Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar 
+Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar
+Hv::nullchar Hv::nullchar 
+Hv::space Hv::exclam Hv::quote Hv::pound Hv::dollar Hv::percent Hv::ampersand
+Hv::apostrophe Hv::lparen Hv::rparen Hv::asterisk Hv::plus Hv::comma Hv::minus
+Hv::period Hv::slash Hv::zero Hv::one Hv::two Hv::three Hv::four Hv::five
+Hv::six Hv::seven Hv::eight Hv::nine Hv::colon Hv::semi Hv::less Hv::equal
+Hv::more Hv::question Hv::at Hv::A Hv::B Hv::C Hv::D Hv::E Hv::F Hv::G Hv::H
+Hv::I Hv::J Hv::K Hv::L Hv::M Hv::N Hv::O Hv::P Hv::Q Hv::R Hv::S Hv::T Hv::U
+Hv::V Hv::W Hv::X Hv::Y Hv::Z Hv::lbracket Hv::backslash Hv::rbracket
+Hv::caret Hv::underscore Hv::apostrophe Hv::a Hv::b Hv::c Hv::d Hv::e 
+Hv::f Hv::g Hv::h Hv::i Hv::j Hv::k Hv::l Hv::m Hv::n Hv::o Hv::p Hv::q
+Hv::r Hv::s Hv::t Hv::u Hv::v Hv::w Hv::x Hv::y Hv::z Hv::lbrace Hv::vbar
+Hv::rbrace Hv::tilde Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar 
+Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar
+Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar
+Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar
+Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar
+Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar
+Hv::Aogonek Hv::uu Hv::Lslash Hv::sy2 Hv::Lcaron Hv::Sacute Hv::sy1
+Hv::umlaut Hv::Scaron Hv::Scedil Hv::Tcaron Hv::Zacute Hv::dash Hv::Zcaron
+Hv::Zdot Hv::circ Hv::aogonek Hv::ced2 Hv::lslash Hv::acute Hv::lcaron
+Hv::sacute Hv::vee Hv::cedilla
+Hv::scaron Hv::scedil Hv::tcaron Hv::zacute Hv::uml2 Hv::zcaron Hv::zdot
+Hv::Racute Hv::Aacute Hv::Acircum Hv::Abreve Hv::Adier Hv::Lacute Hv::Cacute Hv::Ccedil
+Hv::Ccaron Hv::Eacute Hv::Eogonek Hv::Edier Hv::Ecaron Hv::Iacute Hv::Icircum Hv::Dcaron
+Hv::Eth Hv::Nacute Hv::Ncaron Hv::Oacute Hv::Ocircum Hv::Ouml2 Hv::Odier Hv::times
+Hv::Rcaron Hv::Ucirc Hv::Uacute Hv::Uuml2 Hv::Udier Hv::Yacute Hv::Tcedil Hv::sset
+Hv::racute Hv::aacute Hv::acircum Hv::abreve Hv::adier Hv::lacute Hv::cacute Hv::ccedil
+Hv::ecaron Hv::eacute Hv::eogonek Hv::edier Hv::ecaron Hv::iacute Hv::icircum Hv::dcaron
+Hv::dbar Hv::nacute Hv::ncaron Hv::oacute Hv::ocircum Hv::ouml2 Hv::odier Hv::divide
+Hv::rcaron Hv::ucirc Hv::uacute Hv::uuml2 Hv::udier Hv::yacute Hv::togonek Hv::dotacc
+
+derived:   Helvetica-BoldISO2        bold     normal     PostScript
+derived:   Helvetica-ObliqueISO2     normal   italic     PostScript
+derived:   Helvetica-BoldObliqueISO2 bold     italic     PostScript

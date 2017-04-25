@@ -1,0 +1,190 @@
+%! PostScript set of library objects for XCircuit
+%  Version: 3.2
+%  Library name is: digital
+%  Author: R. Timothy Edwards <tim@stravinsky.jhuapl.edu>
+
+% XCircuitLib library built-in objects
+
+/digital::nand {
+% trivial
+begingate
+1 1.0 0 -48 -64 -48 -64 48 0 48 4 polygon
+1 1.0 56 0 8 0 360 xcarc
+1 1.0 0 0 48 -90 90 xcarc
+1 0 0 scb
+(Out) {/Times-Roman cf} 1 4 0 1.0 64 0 pinlabel
+(In.1) {/Times-Roman cf} 1 7 0 1.0 -64 32 pinlabel
+(In.2) {/Times-Roman cf} 1 7 0 1.0 -64 -32 pinlabel
+sce
+endgate
+} def
+
+/digital::nor {
+% trivial
+begingate
+-64 48 -35 48 wire
+-64 -48 -35 -48 wire
+1 1.0 -128 0 80 -37 37 xcarc
+1 1.0 56 0 8 0 360 xcarc
+1 1.0 -35 -48 96 30 90 xcarc
+1 1.0 -35 48 96 270 330 xcarc
+1 0 0 scb
+(Out) {/Times-Roman cf} 1 4 0 1.0 64 0 pinlabel
+(In.1) {/Times-Roman cf} 1 7 0 1.0 -56 32 pinlabel
+(In.2) {/Times-Roman cf} 1 7 0 1.0 -56 -32 pinlabel
+sce
+endgate
+} def
+
+/digital::invert {
+% trivial
+begingate
+0  1.00 -32 -40 -32 40 40 0 3 polygon
+1  1.00 48 0 8 0.00 360.00 xcarc
+1  1.00 -32 0 -48 0 2 polygon
+1  1.00 56 0 64 0 2 polygon
+1.000 0.000 0.000 scb
+(Out) {/Times-Roman cf} 1 4 0 1.0 64 0 pinlabel
+(In) {/Times-Roman cf} 1 7 0 1.0 -48 0 pinlabel
+sce
+endgate
+} def
+
+/digital::and {
+% trivial
+begingate
+1 1.0 0 -48 -64 -48 -64 48 0 48 4 polygon
+1 1.0 0 0 48 -90 90 xcarc
+1 0 0 scb
+(Out) {/Times-Roman cf} 1 4 0 1.0 48 0 pinlabel
+(In.1) {/Times-Roman cf} 1 7 0 1.0 -64 32 pinlabel
+(In.2) {/Times-Roman cf} 1 7 0 1.0 -64 -32 pinlabel
+sce
+endgate
+} def
+
+/digital::or {
+% trivial
+begingate
+1 1.0 -19 -48 96 30 90 xcarc
+1 1.0 -19 48 96 270 330 xcarc
+1 1.0 -112 0 80 -37 37 xcarc
+-48 48 -19 48 wire
+-48 -48 -19 -48 wire
+1 0 0 scb
+(Out) {/Times-Roman cf} 1 4 0 1.0 64 0 pinlabel
+(In.1) {/Times-Roman cf} 1 7 0 1.0 -40 32 pinlabel
+(In.2) {/Times-Roman cf} 1 7 0 1.0 -40 -32 pinlabel
+sce
+endgate
+} def
+
+/digital::buffer {
+% trivial
+begingate
+0 1.0 -32 -40 -32 40 40 0 3 polygon
+-32 0 -48 0 wire
+40 0 64 0 wire
+1.000 0.000 0.000 scb
+(Out) {/Times-Roman cf} 1 4 0 1.0 64 0 pinlabel
+(In) {/Times-Roman cf} 1 7 0 1.0 -48 0 pinlabel
+sce
+endgate
+} def
+
+/digital::xor {
+% trivial
+begingate
+1 1.0 -19 -48 96 30 90 xcarc
+1 1.0 -19 48 96 270 330 xcarc
+1 1.0 -128 0 80 -37 37 xcarc
+1 1.0 -112 0 80 -37 37 xcarc
+-48 48 -19 48 wire
+-48 -48 -19 -48 wire
+1 0 0 scb
+(Out) {/Times-Roman cf} 1 4 0 1.0 64 0 pinlabel
+(In.1) {/Times-Roman cf} 1 7 0 1.0 -56 32 pinlabel
+(In.2) {/Times-Roman cf} 1 7 0 1.0 -56 -32 pinlabel
+sce
+endgate
+} def
+
+/digital::xnor {
+% trivial
+begingate
+1 1.0 72 0 8 0 360 xcarc
+1 1.0 -19 -48 96 30 90 xcarc
+1 1.0 -19 48 96 270 330 xcarc
+1 1.0 -128 0 80 -37 37 xcarc
+1 1.0 -112 0 80 -37 37 xcarc
+-48 48 -19 48 wire
+-48 -48 -19 -48 wire
+1 0 0 scb
+(Out) {/Times-Roman cf} 1 4 0 1.0 80 0 pinlabel
+(In.1) {/Times-Roman cf} 1 7 0 1.0 -56 32 pinlabel
+(In.2) {/Times-Roman cf} 1 7 0 1.0 -56 -32 pinlabel
+sce
+endgate
+} def
+
+/digital::5V {
+% trivial
+begingate
+-32 0 32 0 wire
+0 0 0 -32 wire
+(V) {/Times-Roman cf} (+5) {/Symbol cf} 2 17 0 0.9 0 8 label
+0.933 0.604 0 scb
+(dVdd) {/Times-Roman cf} 1 13 0 1.0 0 -32 pinglobal
+sce
+endgate
+} def
+
+/analog::gnd {
+% trivial
+begingate
+0 0 0 -32 wire
+-32 -32 32 -32 wire
+-18 -46 18 -46 wire
+-4 -60 4 -60 wire
+0.933 0.604 0 scb
+(GND) {/Times-Roman cf} 1 1 0 1.0 0 0 pinglobal
+sce
+endgate
+} def
+
+/digital::battery {
+% trivial
+begingate
+-32 32 32 32 wire
+0 64 0 32 wire
+-16 12 16 12 wire
+-16 -28 16 -28 wire
+-32 -8 32 -8 wire
+0 -64 0 -28 wire
+1 0 0 scb
+(b.p) {/Times-Roman cf} 1 9 0 1.0 0 64 pinlabel
+(b.m) {/Times-Roman cf} 1 13 0 1.0 0 -64 pinlabel
+sce
+endgate
+} def
+
+/digital::passtrans {
+% trivial
+begingate
+0 1.0 -64 48 0 -48 64 48 3 polygon
+0 1.0 0 48 -64 -48 64 -48 3 polygon
+-50 0 -80 0 wire
+32 0 80 0 wire
+0 48 0 64 wire
+0 -48 0 -64 wire
+1 1.0 -42 0 8 0 360 xcarc
+1 0 0 scb
+(c.p) {/Times-Roman cf} 1 7 0 1.0 -80 0 pinlabel
+(c.n) {/Times-Roman cf} 1 4 0 1.0 80 0 pinlabel
+(p.1) {/Times-Roman cf} 1 9 0 1.0 0 64 pinlabel
+(p.2) {/Times-Roman cf} 1 13 0 1.0 0 -64 pinlabel
+sce
+endgate
+} def
+
+% EndLib

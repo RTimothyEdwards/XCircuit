@@ -1,0 +1,11 @@
+| sim circuit "logic" from XCircuit v3.30
+p Pin.1 Vdd int6
+n Pin.1 GND int6
+p int6 Vdd Pin.4
+n int6 nand_1/ext13 Pin.4
+n Pin.2 GND nand_1/ext13
+p Pin.2 Vdd Pin.4
+p Pin.2 Vdd Pin.5
+n Pin.2 nand_2/ext13 Pin.5
+n Pin.3 GND nand_2/ext13
+p Pin.3 Vdd Pin.5

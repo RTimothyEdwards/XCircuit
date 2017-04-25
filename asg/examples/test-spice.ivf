@@ -1,0 +1,11 @@
+MX sn7474.gates{
+MP{l IN;m IN;n OUT;p OUT;}}
+MF{
+FS{l m n p}
+FS{ w x y z }
+FG LZ.0{INDR 0 I 1 l 1 x }
+FG RZ.0{PMOS 0 I 1 x 1 y }
+FG VAMP.0{VAMP 0 I 1 y 1 n }
+FG LZ.1{INDR 0 I 1 m 1 w }
+FG RZ.1{RESTR 0 I 1 w 1 z }
+FG VAMP.1{VAMP 0 I 1 z 1 p }}

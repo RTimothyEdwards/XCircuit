@@ -1,0 +1,435 @@
+%! PostScript set of library objects for XCircuit
+%  Version: 3.2
+%  Library name is: ic_templates
+%  Author: R. Timothy Edwards <tim@stravinsky.jhuapl.edu>
+%
+
+% XCircuitLib library objects
+/templateCLK {
+<</clock_rate (?) /@index (?) /title (clock IC) >> begingate
+0 1.00 -144 -144 -144 144 144 144 144 -144 4 polygon
+mark title {/Helvetica-Bold cf} ctmk 25 0 1.00 0 16 label
+mark (MHz) {hS} clock_rate {/Helvetica cf} ctmk 21 0 1.00 0 -32 label
+(N/C) {/Helvetica cf} 2 20 0 1.00 -128 96 label
+(GND) {/Helvetica cf} 2 20 0 1.00 -128 -96 label
+(OUT) {/Helvetica cf} 2 23 0 1.00 128 -96 label
+(Vdd) {/Helvetica cf} 2 23 0 1.00 128 96 label
+0.180 0.545 0.341 scb
+mark @index (pcb:X) {/Helvetica cf} ctmk 21 0 1.00 0 -176 infolabel
+1.000 0.000 0.000 scb
+(1) {/Helvetica cf} 2 23 0 1.00 -144 96 pinlabel
+(4) {/Helvetica cf} 2 23 0 1.00 -144 -96 pinlabel
+(5) {/Helvetica cf} 2 20 0 1.00 144 -96 pinlabel
+(8) {/Helvetica cf} 2 20 0 1.00 144 96 pinlabel
+sce
+mark @index (X) {/Helvetica cf} ctmk 16 0 1.00 -16 160 label
+endgate
+} def
+
+/template8 {
+<</pkg (DIP8) /title (generic 8-pin IC) /gate (part #) /@index (?) /pin14
+(14) /pin13 (13) /pin12 
+(12) /pin11 (11) /pin10 (10) /pin9 (9) /pin8 (8) /pin7 (7) /pin6 (6) /pin5 
+(5) /pin4 (4) /pin3 (3) /pin2 (2) /pin1 (1) >> begingate
+0 1.00 -224 176 -224 464 224 464 224 176 4 polygon
+mark title {/Helvetica-Bold cf} ctmk 29 0 1.00 0 336 label
+mark gate {/Helvetica-Bold cf} ctmk 21 0 1.00 0 384 label
+mark @index (U) {/Helvetica cf} ctmk 17 0 1.00 0 496 label
+mark pin1 {/Helvetica cf} ctmk 20 0 1.00 -208 416 label
+mark pin2 {/Helvetica cf} ctmk 20 0 1.00 -208 352 label
+mark pin3 {/Helvetica cf} ctmk 20 0 1.00 -208 288 label
+mark pin4 {/Helvetica cf} ctmk 20 0 1.00 -208 224 label
+mark pin5 {/Helvetica cf} ctmk 23 0 1.00 208 224 label
+mark pin6 {/Helvetica cf} ctmk 23 0 1.00 208 288 label
+mark pin7 {/Helvetica cf} ctmk 23 0 1.00 208 352 label
+mark pin8 {/Helvetica cf} ctmk 23 0 1.00 208 416 label
+mark (\)) pkg (\() {/Helvetica cf} ctmk 21 0 1.00 0 256 label
+1.000 0.000 0.000 scb
+(1) {/Helvetica cf} 2 23 0 1.00 -224 416 pinlabel
+(2) {/Helvetica cf} 2 23 0 1.00 -224 352 pinlabel
+(3) {/Helvetica cf} 2 23 0 1.00 -224 288 pinlabel
+(4) {/Helvetica cf} 2 23 0 1.00 -224 224 pinlabel
+(5) {/Helvetica cf} 2 20 0 1.00 224 224 pinlabel
+(6) {/Helvetica cf} 2 20 0 1.00 224 288 pinlabel
+(7) {/Helvetica cf} 2 20 0 1.00 224 352 pinlabel
+(8) {/Helvetica cf} 2 20 0 1.00 224 416 pinlabel
+endgate
+} def
+
+/template14 {
+<</pin1 (1) /pin2 (2) /pin3 (3) /pin4 (4) /pin5 (5) /pin6 (6) /pin7 (7) /pin8 
+(8) /pin9 (9) /pin10 (10) /pin11 (11) /pin12 (12) /pin13 (13) /pin14 (14) /@index 
+(?) /gate (part #) /title (generic 14-pin IC) /pkg (DIP14) >> begingate
+0 1.00 -224 0 -224 448 224 448 224 0 4 polygon
+mark title {/Helvetica-Bold cf} ctmk 29 0 1.00 0 272 label
+mark gate {/Helvetica-Bold cf} ctmk 21 0 1.00 0 320 label
+mark @index (U) {/Helvetica cf} ctmk 17 0 1.00 0 464 label
+mark pin1 {/Helvetica cf} ctmk 20 0 1.00 -208 416 label
+mark pin2 {/Helvetica cf} ctmk 20 0 1.00 -208 352 label
+mark pin3 {/Helvetica cf} ctmk 20 0 1.00 -208 288 label
+mark pin4 {/Helvetica cf} ctmk 20 0 1.00 -208 224 label
+mark pin5 {/Helvetica cf} ctmk 20 0 1.00 -208 160 label
+mark pin6 {/Helvetica cf} ctmk 20 0 1.00 -208 96 label
+mark pin7 {/Helvetica cf} ctmk 20 0 1.00 -208 32 label
+mark pin8 {/Helvetica cf} ctmk 23 0 1.00 208 32 label
+mark pin9 {/Helvetica cf} ctmk 23 0 1.00 208 96 label
+mark pin10 {/Helvetica cf} ctmk 23 0 1.00 208 160 label
+mark pin11 {/Helvetica cf} ctmk 23 0 1.00 208 224 label
+mark pin12 {/Helvetica cf} ctmk 23 0 1.00 208 288 label
+mark pin13 {/Helvetica cf} ctmk 23 0 1.00 208 352 label
+mark pin14 {/Helvetica cf} ctmk 23 0 1.00 208 416 label
+mark (\)) pkg (\() {/Helvetica cf} ctmk 21 0 1.00 0 64 label
+1.000 0.000 0.000 scb
+(1) {/Helvetica cf} 2 23 0 1.00 -224 416 pinlabel
+(2) {/Helvetica cf} 2 23 0 1.00 -224 352 pinlabel
+(3) {/Helvetica cf} 2 23 0 1.00 -224 288 pinlabel
+(4) {/Helvetica cf} 2 23 0 1.00 -224 224 pinlabel
+(5) {/Helvetica cf} 2 23 0 1.00 -224 160 pinlabel
+(6) {/Helvetica cf} 2 23 0 1.00 -224 96 pinlabel
+(7) {/Helvetica cf} 2 23 0 1.00 -224 32 pinlabel
+(8) {/Helvetica cf} 2 20 0 1.00 224 32 pinlabel
+(9) {/Helvetica cf} 2 20 0 1.00 224 96 pinlabel
+(10) {/Helvetica cf} 2 20 0 1.00 224 160 pinlabel
+(11) {/Helvetica cf} 2 20 0 1.00 224 224 pinlabel
+(12) {/Helvetica cf} 2 20 0 1.00 224 288 pinlabel
+(13) {/Helvetica cf} 2 20 0 1.00 224 352 pinlabel
+(14) {/Helvetica cf} 2 20 0 1.00 224 416 pinlabel
+endgate
+} def
+
+/template16 {
+<</pin16 (16) /pin15 (15) /pin1 (1) /pin2 (2) /pin3 (3) /pin4 (4) /pin5 (5) /pin6 
+(6) /pin7 (7) /pin8 (8) /pin9 (9) /pin10 (10) /pin11 (11) /pin12 (12) /pin13 
+(13) /pin14 (14) /@index (?) /gate (part #) /title (generic 16-pin IC)
+/pkg (DIP16) >> begingate
+0 1.00 -224 0 -224 512 224 512 224 0 4 polygon
+mark title {/Helvetica-Bold cf} ctmk 29 0 1.00 0 272 label
+mark gate {/Helvetica-Bold cf} ctmk 21 0 1.00 0 320 label
+mark @index (U) {/Helvetica cf} ctmk 17 0 1.00 0 544 label
+mark pin1 {/Helvetica cf} ctmk 20 0 1.00 -208 480 label
+mark pin2 {/Helvetica cf} ctmk 20 0 1.00 -208 416 label
+mark pin3 {/Helvetica cf} ctmk 20 0 1.00 -208 352 label
+mark pin4 {/Helvetica cf} ctmk 20 0 1.00 -208 288 label
+mark pin5 {/Helvetica cf} ctmk 20 0 1.00 -208 224 label
+mark pin6 {/Helvetica cf} ctmk 20 0 1.00 -208 160 label
+mark pin7 {/Helvetica cf} ctmk 20 0 1.00 -208 96 label
+mark pin8 {/Helvetica cf} ctmk 20 0 1.00 -208 32 label
+mark pin9 {/Helvetica cf} ctmk 23 0 1.00 208 32 label
+mark pin10 {/Helvetica cf} ctmk 23 0 1.00 208 96 label
+mark pin11 {/Helvetica cf} ctmk 23 0 1.00 208 160 label
+mark pin12 {/Helvetica cf} ctmk 23 0 1.00 208 224 label
+mark pin13 {/Helvetica cf} ctmk 23 0 1.00 208 288 label
+mark pin14 {/Helvetica cf} ctmk 23 0 1.00 208 352 label
+mark pin15 {/Helvetica cf} ctmk 23 0 1.00 208 416 label
+mark pin16 {/Helvetica cf} ctmk 23 0 1.00 208 480 label
+mark (\)) pkg (\() {/Helvetica cf} ctmk 21 0 1.00 0 64 label
+1.000 0.000 0.000 scb
+(1) {/Helvetica cf} 2 23 0 1.00 -224 480 pinlabel
+(2) {/Helvetica cf} 2 23 0 1.00 -224 416 pinlabel
+(3) {/Helvetica cf} 2 23 0 1.00 -224 352 pinlabel
+(4) {/Helvetica cf} 2 23 0 1.00 -224 288 pinlabel
+(5) {/Helvetica cf} 2 23 0 1.00 -224 224 pinlabel
+(6) {/Helvetica cf} 2 23 0 1.00 -224 160 pinlabel
+(7) {/Helvetica cf} 2 23 0 1.00 -224 96 pinlabel
+(8) {/Helvetica cf} 2 23 0 1.00 -224 32 pinlabel
+(9) {/Helvetica cf} 2 20 0 1.00 224 32 pinlabel
+(10) {/Helvetica cf} 2 20 0 1.00 224 96 pinlabel
+(11) {/Helvetica cf} 2 20 0 1.00 224 160 pinlabel
+(12) {/Helvetica cf} 2 20 0 1.00 224 224 pinlabel
+(13) {/Helvetica cf} 2 20 0 1.00 224 288 pinlabel
+(14) {/Helvetica cf} 2 20 0 1.00 224 352 pinlabel
+(15) {/Helvetica cf} 2 20 0 1.00 224 416 pinlabel
+(16) {/Helvetica cf} 2 20 0 1.00 224 480 pinlabel
+endgate
+} def
+
+/template20 {
+<</pin20 (20) /pin19 (19) /pin18 (18) /pin17 (17) /pin16 (16) /pin15 (15) /pkg 
+(DIP20) /title (generic 20-pin IC) /gate (part #) /@index (?) /pin14 (14) /pin13
+(13) /pin12 (12) /pin11 (11) /pin10 (10) /pin9 (9) /pin8 (8) /pin7 (7) /pin6
+(6) /pin5 (5) /pin4 (4) /pin3 (3) /pin2 (2) /pin1 (1) >> begingate
+0 1.00 -224 0 -224 640 224 640 224 0 4 polygon
+mark title {/Helvetica-Bold cf} ctmk 29 0 1.00 0 400 label
+mark gate {/Helvetica-Bold cf} ctmk 21 0 1.00 0 448 label
+mark @index (U) {/Helvetica cf} ctmk 17 0 1.00 0 656 label
+mark pin1 {/Helvetica cf} ctmk 20 0 1.00 -208 608 label
+mark pin2 {/Helvetica cf} ctmk 20 0 1.00 -208 544 label
+mark pin3 {/Helvetica cf} ctmk 20 0 1.00 -208 480 label
+mark pin4 {/Helvetica cf} ctmk 20 0 1.00 -208 416 label
+mark pin5 {/Helvetica cf} ctmk 20 0 1.00 -208 352 label
+mark pin6 {/Helvetica cf} ctmk 20 0 1.00 -208 288 label
+mark pin7 {/Helvetica cf} ctmk 20 0 1.00 -208 224 label
+mark pin8 {/Helvetica cf} ctmk 20 0 1.00 -208 160 label
+mark pin9 {/Helvetica cf} ctmk 20 0 1.00 -208 96 label
+mark pin10 {/Helvetica cf} ctmk 20 0 1.00 -208 32 label
+mark pin11 {/Helvetica cf} ctmk 23 0 1.00 208 32 label
+mark pin12 {/Helvetica cf} ctmk 23 0 1.00 208 96 label
+mark pin13 {/Helvetica cf} ctmk 23 0 1.00 208 160 label
+mark pin14 {/Helvetica cf} ctmk 23 0 1.00 208 224 label
+mark pin15 {/Helvetica cf} ctmk 23 0 1.00 208 288 label
+mark pin16 {/Helvetica cf} ctmk 23 0 1.00 208 352 label
+mark pin17 {/Helvetica cf} ctmk 23 0 1.00 208 416 label
+mark pin18 {/Helvetica cf} ctmk 23 0 1.00 208 480 label
+mark pin19 {/Helvetica cf} ctmk 23 0 1.00 208 544 label
+mark pin20 {/Helvetica cf} ctmk 23 0 1.00 208 608 label
+mark (\)) pkg (\() {/Helvetica cf} ctmk 21 0 1.00 0 64 label
+1.000 0.000 0.000 scb
+(1) {/Helvetica cf} 2 23 0 1.00 -224 608 pinlabel
+(2) {/Helvetica cf} 2 23 0 1.00 -224 544 pinlabel
+(3) {/Helvetica cf} 2 23 0 1.00 -224 480 pinlabel
+(4) {/Helvetica cf} 2 23 0 1.00 -224 416 pinlabel
+(5) {/Helvetica cf} 2 23 0 1.00 -224 352 pinlabel
+(6) {/Helvetica cf} 2 23 0 1.00 -224 288 pinlabel
+(7) {/Helvetica cf} 2 23 0 1.00 -224 224 pinlabel
+(8) {/Helvetica cf} 2 23 0 1.00 -224 160 pinlabel
+(9) {/Helvetica cf} 2 23 0 1.00 -224 96 pinlabel
+(10) {/Helvetica cf} 2 23 0 1.00 -224 32 pinlabel
+(11) {/Helvetica cf} 2 20 0 1.00 224 32 pinlabel
+(12) {/Helvetica cf} 2 20 0 1.00 224 96 pinlabel
+(13) {/Helvetica cf} 2 20 0 1.00 224 160 pinlabel
+(14) {/Helvetica cf} 2 20 0 1.00 224 224 pinlabel
+(15) {/Helvetica cf} 2 20 0 1.00 224 288 pinlabel
+(16) {/Helvetica cf} 2 20 0 1.00 224 352 pinlabel
+(17) {/Helvetica cf} 2 20 0 1.00 224 416 pinlabel
+(18) {/Helvetica cf} 2 20 0 1.00 224 480 pinlabel
+(19) {/Helvetica cf} 2 20 0 1.00 224 544 pinlabel
+(20) {/Helvetica cf} 2 20 0 1.00 224 608 pinlabel
+endgate
+} def
+
+/template24 {
+<</pin24 (24) /pin23 (23) /pin22 (22) /pin21 (21) /pin20 (20) /pin19 (19) /pin18 
+(18) /pin17 (17) /pin16 (16) /pin15 (15) /pin1 (1) /pin2 (2) /pin3 (3) /pin4 
+(4) /pin5 (5) /pin6 (6) /pin7 (7) /pin8 (8) /pin9 (9) /pin10 (10) /pin11 
+(11) /pin12 (12) /pin13 (13) /pin14 (14) /@index (?) /gate (part #)
+/title (generic 24-pin IC) /pkg (DIP24) >> begingate
+0 1.00 -224 0 -224 768 224 768 224 0 4 polygon
+mark title {/Helvetica-Bold cf} ctmk 29 0 1.00 0 528 label
+mark gate {/Helvetica-Bold cf} ctmk 21 0 1.00 0 576 label
+mark @index (U) {/Helvetica cf} ctmk 17 0 1.00 0 784 label
+mark pin1 {/Helvetica cf} ctmk 20 0 1.00 -208 736 label
+mark pin2 {/Helvetica cf} ctmk 20 0 1.00 -208 672 label
+mark pin3 {/Helvetica cf} ctmk 20 0 1.00 -208 608 label
+mark pin4 {/Helvetica cf} ctmk 20 0 1.00 -208 544 label
+mark pin5 {/Helvetica cf} ctmk 20 0 1.00 -208 480 label
+mark pin6 {/Helvetica cf} ctmk 20 0 1.00 -208 416 label
+mark pin7 {/Helvetica cf} ctmk 20 0 1.00 -208 352 label
+mark pin8 {/Helvetica cf} ctmk 20 0 1.00 -208 288 label
+mark pin9 {/Helvetica cf} ctmk 20 0 1.00 -208 224 label
+mark pin10 {/Helvetica cf} ctmk 20 0 1.00 -208 160 label
+mark pin11 {/Helvetica cf} ctmk 20 0 1.00 -208 96 label
+mark pin12 {/Helvetica cf} ctmk 20 0 1.00 -208 32 label
+mark pin13 {/Helvetica cf} ctmk 23 0 1.00 208 32 label
+mark pin14 {/Helvetica cf} ctmk 23 0 1.00 208 96 label
+mark pin15 {/Helvetica cf} ctmk 23 0 1.00 208 160 label
+mark pin16 {/Helvetica cf} ctmk 23 0 1.00 208 224 label
+mark pin17 {/Helvetica cf} ctmk 23 0 1.00 208 288 label
+mark pin18 {/Helvetica cf} ctmk 23 0 1.00 208 352 label
+mark pin19 {/Helvetica cf} ctmk 23 0 1.00 208 416 label
+mark pin20 {/Helvetica cf} ctmk 23 0 1.00 208 480 label
+mark pin21 {/Helvetica cf} ctmk 23 0 1.00 208 544 label
+mark pin22 {/Helvetica cf} ctmk 23 0 1.00 208 608 label
+mark pin23 {/Helvetica cf} ctmk 23 0 1.00 208 672 label
+mark pin24 {/Helvetica cf} ctmk 23 0 1.00 208 736 label
+mark (\)) pkg (\() {/Helvetica cf} ctmk 21 0 1.00 0 64 label
+1.000 0.000 0.000 scb
+(1) {/Helvetica cf} 2 23 0 1.00 -224 736 pinlabel
+(2) {/Helvetica cf} 2 23 0 1.00 -224 672 pinlabel
+(3) {/Helvetica cf} 2 23 0 1.00 -224 608 pinlabel
+(4) {/Helvetica cf} 2 23 0 1.00 -224 544 pinlabel
+(5) {/Helvetica cf} 2 23 0 1.00 -224 480 pinlabel
+(6) {/Helvetica cf} 2 23 0 1.00 -224 416 pinlabel
+(7) {/Helvetica cf} 2 23 0 1.00 -224 352 pinlabel
+(8) {/Helvetica cf} 2 23 0 1.00 -224 288 pinlabel
+(9) {/Helvetica cf} 2 23 0 1.00 -224 224 pinlabel
+(10) {/Helvetica cf} 2 23 0 1.00 -224 160 pinlabel
+(11) {/Helvetica cf} 2 23 0 1.00 -224 96 pinlabel
+(12) {/Helvetica cf} 2 23 0 1.00 -224 32 pinlabel
+(13) {/Helvetica cf} 2 20 0 1.00 224 32 pinlabel
+(14) {/Helvetica cf} 2 20 0 1.00 224 96 pinlabel
+(15) {/Helvetica cf} 2 20 0 1.00 224 160 pinlabel
+(16) {/Helvetica cf} 2 20 0 1.00 224 224 pinlabel
+(17) {/Helvetica cf} 2 20 0 1.00 224 288 pinlabel
+(18) {/Helvetica cf} 2 20 0 1.00 224 352 pinlabel
+(19) {/Helvetica cf} 2 20 0 1.00 224 416 pinlabel
+(20) {/Helvetica cf} 2 20 0 1.00 224 480 pinlabel
+(21) {/Helvetica cf} 2 20 0 1.00 224 544 pinlabel
+(22) {/Helvetica cf} 2 20 0 1.00 224 608 pinlabel
+(23) {/Helvetica cf} 2 20 0 1.00 224 672 pinlabel
+(24) {/Helvetica cf} 2 20 0 1.00 224 736 pinlabel
+endgate
+} def
+
+/template28 {
+<</pin28 (28) /pin27 (27) /pin26 (26) /pin25 (25) /pin24 (24) /pin23 (23) /pin22 
+(22) /pin21 (21) /pin20 (20) /pin19 (19) /pin18 (18) /pin17 (17) /pin16 
+(16) /pin15 (15) /pkg (DIP28) /title (generic 28-pin IC) /gate (part #)
+/@index (?) /pin14 (14) /pin13 (13) /pin12 (12) /pin11 (11) /pin10 (10) /pin9
+(9) /pin8 (8) /pin7 (7) /pin6 (6) /pin5 (5) /pin4 (4) /pin3 (3) /pin2 (2)
+/pin1 (1) >> begingate
+0 1.00 -224 0 -224 896 224 896 224 0 4 polygon
+mark title {/Helvetica-Bold cf} ctmk 29 0 1.00 0 592 label
+mark gate {/Helvetica-Bold cf} ctmk 21 0 1.00 0 640 label
+mark @index (U) {/Helvetica cf} ctmk 17 0 1.00 0 912 label
+mark pin1 {/Helvetica cf} ctmk 20 0 1.00 -208 864 label
+mark pin2 {/Helvetica cf} ctmk 20 0 1.00 -208 800 label
+mark pin3 {/Helvetica cf} ctmk 20 0 1.00 -208 736 label
+mark pin4 {/Helvetica cf} ctmk 20 0 1.00 -208 672 label
+mark pin5 {/Helvetica cf} ctmk 20 0 1.00 -208 608 label
+mark pin6 {/Helvetica cf} ctmk 20 0 1.00 -208 544 label
+mark pin7 {/Helvetica cf} ctmk 20 0 1.00 -208 480 label
+mark pin8 {/Helvetica cf} ctmk 20 0 1.00 -208 416 label
+mark pin9 {/Helvetica cf} ctmk 20 0 1.00 -208 352 label
+mark pin10 {/Helvetica cf} ctmk 20 0 1.00 -208 288 label
+mark pin11 {/Helvetica cf} ctmk 20 0 1.00 -208 224 label
+mark pin12 {/Helvetica cf} ctmk 20 0 1.00 -208 160 label
+mark pin13 {/Helvetica cf} ctmk 20 0 1.00 -208 96 label
+mark pin14 {/Helvetica cf} ctmk 20 0 1.00 -208 32 label
+mark pin15 {/Helvetica cf} ctmk 23 0 1.00 208 32 label
+mark pin16 {/Helvetica cf} ctmk 23 0 1.00 208 96 label
+mark pin17 {/Helvetica cf} ctmk 23 0 1.00 208 160 label
+mark pin18 {/Helvetica cf} ctmk 23 0 1.00 208 224 label
+mark pin19 {/Helvetica cf} ctmk 23 0 1.00 208 288 label
+mark pin20 {/Helvetica cf} ctmk 23 0 1.00 208 352 label
+mark pin21 {/Helvetica cf} ctmk 23 0 1.00 208 416 label
+mark pin22 {/Helvetica cf} ctmk 23 0 1.00 208 480 label
+mark pin23 {/Helvetica cf} ctmk 23 0 1.00 208 544 label
+mark pin24 {/Helvetica cf} ctmk 23 0 1.00 208 608 label
+mark pin25 {/Helvetica cf} ctmk 23 0 1.00 208 672 label
+mark pin26 {/Helvetica cf} ctmk 23 0 1.00 208 736 label
+mark pin27 {/Helvetica cf} ctmk 23 0 1.00 208 800 label
+mark pin28 {/Helvetica cf} ctmk 23 0 1.00 208 864 label
+mark (\)) pkg (\() {/Helvetica cf} ctmk 21 0 1.00 0 64 label
+1.000 0.000 0.000 scb
+(1) {/Helvetica cf} 2 23 0 1.00 -224 864 pinlabel
+(2) {/Helvetica cf} 2 23 0 1.00 -224 800 pinlabel
+(3) {/Helvetica cf} 2 23 0 1.00 -224 736 pinlabel
+(4) {/Helvetica cf} 2 23 0 1.00 -224 672 pinlabel
+(5) {/Helvetica cf} 2 23 0 1.00 -224 608 pinlabel
+(6) {/Helvetica cf} 2 23 0 1.00 -224 544 pinlabel
+(7) {/Helvetica cf} 2 23 0 1.00 -224 480 pinlabel
+(8) {/Helvetica cf} 2 23 0 1.00 -224 416 pinlabel
+(9) {/Helvetica cf} 2 23 0 1.00 -224 352 pinlabel
+(10) {/Helvetica cf} 2 23 0 1.00 -224 288 pinlabel
+(11) {/Helvetica cf} 2 23 0 1.00 -224 224 pinlabel
+(12) {/Helvetica cf} 2 23 0 1.00 -224 160 pinlabel
+(13) {/Helvetica cf} 2 23 0 1.00 -224 96 pinlabel
+(14) {/Helvetica cf} 2 23 0 1.00 -224 32 pinlabel
+(15) {/Helvetica cf} 2 20 0 1.00 224 32 pinlabel
+(16) {/Helvetica cf} 2 20 0 1.00 224 96 pinlabel
+(17) {/Helvetica cf} 2 20 0 1.00 224 160 pinlabel
+(18) {/Helvetica cf} 2 20 0 1.00 224 224 pinlabel
+(19) {/Helvetica cf} 2 20 0 1.00 224 288 pinlabel
+(20) {/Helvetica cf} 2 20 0 1.00 224 352 pinlabel
+(21) {/Helvetica cf} 2 20 0 1.00 224 416 pinlabel
+(22) {/Helvetica cf} 2 20 0 1.00 224 480 pinlabel
+(23) {/Helvetica cf} 2 20 0 1.00 224 544 pinlabel
+(24) {/Helvetica cf} 2 20 0 1.00 224 608 pinlabel
+(25) {/Helvetica cf} 2 20 0 1.00 224 672 pinlabel
+(26) {/Helvetica cf} 2 20 0 1.00 224 736 pinlabel
+(27) {/Helvetica cf} 2 20 0 1.00 224 800 pinlabel
+(28) {/Helvetica cf} 2 20 0 1.00 224 864 pinlabel
+endgate
+} def
+
+/template40 {
+<</@index (?) /title (generic 40-pin IC) /gate (part #) /pkg (PLCC40) /pin1 (1) /pin2 
+(2) /pin3 (3) /pin4 (4) /pin5 (5) /pin6 (6) /pin7 (7) /pin8 (8) /pin9 (9) /pin10 
+(10) /pin11 (11) /pin12 (12) /pin13 (13) /pin14 (14) /pin15 (15) /pin16 
+(16) /pin17 (17) /pin18 (18) /pin19 (19) /pin20 (20) /pin21 (21) /pin22 (22) /pin23 
+(23) /pin24 (24) /pin25 (25) /pin26 (26) /pin27 (27) /pin28 (28) /pin29 
+(29) /pin30 (30) /pin31 (31) /pin32 (32) /pin33 (33) /pin34 (34) /pin35 (35) /pin36 
+(36) /pin37 (37) /pin38 (38) /pin39 (39) /pin40 (40) >> begingate
+0 1.00 -480 -352 -480 480 352 480 352 -352 4 polygon
+mark gate {/Helvetica-Bold cf} ctmk 17 0 1.00 -80 224 label
+mark title {/Helvetica cf} ctmk 21 0 1.00 -80 160 label
+mark @index (U) {/Helvetica cf} ctmk 21 0 1.00 -80 -32 label
+mark (\)) pkg (\() {/Helvetica cf} ctmk 21 0 1.00 -96 -160 label
+mark pin1 {/Helvetica cf} ctmk 20 0 1.00 -464 352 label
+mark pin2 {/Helvetica cf} ctmk 20 0 1.00 -464 288 label
+mark pin3 {/Helvetica cf} ctmk 20 0 1.00 -464 224 label
+mark pin4 {/Helvetica cf} ctmk 20 0 1.00 -464 160 label
+mark pin5 {/Helvetica cf} ctmk 20 0 1.00 -464 96 label
+mark pin6 {/Helvetica cf} ctmk 20 0 1.00 -464 32 label
+mark pin7 {/Helvetica cf} ctmk 20 0 1.00 -464 -32 label
+mark pin8 {/Helvetica cf} ctmk 20 0 1.00 -464 -96 label
+mark pin9 {/Helvetica cf} ctmk 20 0 1.00 -464 -160 label
+mark pin10 {/Helvetica cf} ctmk 20 0 1.00 -464 -224 label
+mark pin11 {/Helvetica cf} ctmk 20 270 1.00 -353 -332 label
+mark pin12 {/Helvetica cf} ctmk 20 270 1.00 -290 -332 label
+mark pin13 {/Helvetica cf} ctmk 20 270 1.00 -224 -332 label
+mark pin14 {/Helvetica cf} ctmk 20 270 1.00 -161 -332 label
+mark pin15 {/Helvetica cf} ctmk 20 270 1.00 -98 -333 label
+mark pin16 {/Helvetica cf} ctmk 20 270 1.00 -34 -333 label
+mark pin17 {/Helvetica cf} ctmk 20 270 1.00 29 -333 label
+mark pin18 {/Helvetica cf} ctmk 20 270 1.00 93 -335 label
+mark pin19 {/Helvetica cf} ctmk 20 270 1.00 156 -336 label
+mark pin20 {/Helvetica cf} ctmk 20 270 1.00 221 -335 label
+mark pin21 {/Helvetica cf} ctmk 23 0 1.00 336 -224 label
+mark pin22 {/Helvetica cf} ctmk 23 0 1.00 336 -160 label
+mark pin23 {/Helvetica cf} ctmk 23 0 1.00 336 -96 label
+mark pin24 {/Helvetica cf} ctmk 23 0 1.00 336 -32 label
+mark pin25 {/Helvetica cf} ctmk 23 0 1.00 336 32 label
+mark pin26 {/Helvetica cf} ctmk 23 0 1.00 336 96 label
+mark pin27 {/Helvetica cf} ctmk 23 0 1.00 336 160 label
+mark pin28 {/Helvetica cf} ctmk 23 0 1.00 336 224 label
+mark pin29 {/Helvetica cf} ctmk 23 0 1.00 336 288 label
+mark pin30 {/Helvetica cf} ctmk 23 0 1.00 336 352 label
+mark pin31 {/Helvetica cf} ctmk 20 90 1.00 225 463 label
+mark pin32 {/Helvetica cf} ctmk 20 90 1.00 160 462 label
+mark pin33 {/Helvetica cf} ctmk 20 90 1.00 98 460 label
+mark pin34 {/Helvetica cf} ctmk 20 90 1.00 34 460 label
+mark pin35 {/Helvetica cf} ctmk 20 90 1.00 -32 460 label
+mark pin36 {/Helvetica cf} ctmk 20 90 1.00 -95 462 label
+mark pin37 {/Helvetica cf} ctmk 20 90 1.00 -159 461 label
+mark pin38 {/Helvetica cf} ctmk 20 90 1.00 -223 460 label
+mark pin39 {/Helvetica cf} ctmk 20 90 1.00 -289 460 label
+mark pin40 {/Helvetica cf} ctmk 20 90 1.00 -351 460 label
+0.180 0.545 0.341 scb
+mark @index (pcb:U) {/Helvetica cf} ctmk 21 0 1.00 -80 304 infolabel
+1.000 0.000 0.000 scb
+(1) {/Helvetica cf} 2 23 0 1.00 -480 352 pinlabel
+(2) {/Helvetica cf} 2 23 0 1.00 -480 288 pinlabel
+(3) {/Helvetica cf} 2 23 0 1.00 -480 224 pinlabel
+(4) {/Helvetica cf} 2 23 0 1.00 -480 160 pinlabel
+(5) {/Helvetica cf} 2 23 0 1.00 -480 96 pinlabel
+(6) {/Helvetica cf} 2 23 0 1.00 -480 32 pinlabel
+(7) {/Helvetica cf} 2 23 0 1.00 -480 -32 pinlabel
+(8) {/Helvetica cf} 2 23 0 1.00 -480 -96 pinlabel
+(9) {/Helvetica cf} 2 23 0 1.00 -480 -160 pinlabel
+(10) {/Helvetica cf} 2 23 0 1.00 -480 -224 pinlabel
+(11) {/Helvetica cf} 2 29 0 1.00 -352 -352 pinlabel
+(12) {/Helvetica cf} 2 29 0 1.00 -288 -352 pinlabel
+(13) {/Helvetica cf} 2 29 0 1.00 -224 -352 pinlabel
+(14) {/Helvetica cf} 2 29 0 1.00 -160 -352 pinlabel
+(15) {/Helvetica cf} 2 29 0 1.00 -96 -352 pinlabel
+(16) {/Helvetica cf} 2 29 0 1.00 -32 -352 pinlabel
+(17) {/Helvetica cf} 2 29 0 1.00 32 -352 pinlabel
+(18) {/Helvetica cf} 2 29 0 1.00 96 -352 pinlabel
+(19) {/Helvetica cf} 2 29 0 1.00 160 -352 pinlabel
+(20) {/Helvetica cf} 2 29 0 1.00 224 -352 pinlabel
+(21) {/Helvetica cf} 2 20 0 1.00 352 -224 pinlabel
+(22) {/Helvetica cf} 2 20 0 1.00 352 -160 pinlabel
+(23) {/Helvetica cf} 2 20 0 1.00 352 -96 pinlabel
+(24) {/Helvetica cf} 2 20 0 1.00 352 -32 pinlabel
+(25) {/Helvetica cf} 2 20 0 1.00 352 32 pinlabel
+(26) {/Helvetica cf} 2 20 0 1.00 352 96 pinlabel
+(27) {/Helvetica cf} 2 20 0 1.00 352 160 pinlabel
+(28) {/Helvetica cf} 2 20 0 1.00 352 224 pinlabel
+(29) {/Helvetica cf} 2 20 0 1.00 352 288 pinlabel
+(30) {/Helvetica cf} 2 20 0 1.00 352 352 pinlabel
+(31) {/Helvetica cf} 2 25 0 1.00 224 480 pinlabel
+(32) {/Helvetica cf} 2 25 0 1.00 160 480 pinlabel
+(33) {/Helvetica cf} 2 25 0 1.00 96 480 pinlabel
+(34) {/Helvetica cf} 2 25 0 1.00 32 480 pinlabel
+(35) {/Helvetica cf} 2 25 0 1.00 -32 480 pinlabel
+(36) {/Helvetica cf} 2 25 0 1.00 -96 480 pinlabel
+(37) {/Helvetica cf} 2 25 0 1.00 -160 480 pinlabel
+(38) {/Helvetica cf} 2 25 0 1.00 -224 480 pinlabel
+(39) {/Helvetica cf} 2 25 0 1.00 -288 480 pinlabel
+(40) {/Helvetica cf} 2 25 0 1.00 -352 480 pinlabel
+endgate
+} def
+
+
+% EndLib

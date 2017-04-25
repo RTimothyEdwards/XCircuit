@@ -1,0 +1,109 @@
+* standard_cells_3V.cir, netlists for verifying standard cells
+*
+* Conrad Ziesler and Tim Edwards, MultiGiG, Inc., 2005
+* Standard cells are from the IIT standard cell library.
+*
+* These cells have been modified for operation at 3.3V in a
+* nominally 1.8V process (generally, 0.18um feature size),
+* using thick oxide implant.
+
+.subckt BUFX4_3V vdd gnd A Y
+M1 x A gnd gnd nhv l=360n w=1.35u m=1
+M2 x A vdd vdd phv l=360n w=2.70u m=1
+M3 Y x gnd gnd nhv l=360n w=1.80u m=2
+M4 Y x vdd vdd phv l=360n w=3.60u m=2
+.ends
+
+.subckt BUFX2_3V vdd gnd A Y
+M1 x A gnd gnd nhv l=360n w=0.90u m=1
+M2 x A vdd vdd phv l=360n w=1.80u m=1
+M3 Y x gnd gnd nhv l=360n w=1.80u m=1
+M4 Y x vdd vdd phv l=360n w=3.60u m=1
+.ends
+
+.subckt INVX1_3V vdd gnd A Y
+M1 Y A gnd gnd nhv l=360n w=0.90u m=1
+M2 Y A vdd vdd phv l=360n w=1.80u m=1
+.ends
+
+.subckt NOR2X1_3V vdd gnd A B Y
+M1 Y A gnd gnd nhv l=360n w=0.90u m=1
+M2 Y B gnd gnd nhv l=360n w=0.90u m=1
+M3 x1 A vdd vdd phv l=360n w=3.60u m=1
+M4 Y  B x1  vdd phv l=360n w=3.60u m=1
+.ends
+
+.subckt NOR4X1_3V vdd gnd A B C D Y
+M1 Y A gnd gnd nhv l=360n w=0.90u m=1
+M2 Y B gnd gnd nhv l=360n w=0.90u m=1
+M3 Y C gnd gnd nhv l=360n w=0.90u m=1
+M4 Y D gnd gnd nhv l=360n w=0.90u m=1
+M5 x1 A vdd vdd phv l=360n w=2.70u m=2
+M6 x2 B x1  vdd phv l=360n w=2.70u m=2
+M7 x3 C x2  vdd phv l=360n w=2.70u m=2
+M8 Y  D x3  vdd phv l=360n w=2.70u m=2
+.ends
+
+.subckt NOR3X1_3V vdd gnd A B C Y
+M1 Y A gnd gnd nhv l=360n w=0.90u m=1
+M2 Y B gnd gnd nhv l=360n w=0.90u m=1
+M3 Y C gnd gnd nhv l=360n w=0.90u m=1
+M4 x1 A vdd vdd phv l=360n w=2.70u m=2
+M5 x2 B x1  vdd phv l=360n w=2.70u m=2
+M6 Y  C x2  vdd phv l=360n w=2.70u m=2
+.ends
+
+.subckt NAND2X1_3V vdd gnd A B Y
+M1 x1 A gnd gnd nhv l=360n w=1.80u m=1
+M2 Y  B x1  gnd nhv l=360n w=1.80u m=1
+M3 Y  A vdd vdd phv l=360n w=1.80u m=1
+M4 Y  B vdd vdd phv l=360n w=1.80u m=1
+.ends
+
+.subckt NAND3X1_3V vdd gnd A B C Y
+M1 x1 A gnd gnd nhv l=360n w=1.80u m=1
+M2 x2 B x1  gnd nhv l=360n w=1.80u m=1
+M3 Y  C x2  gnd nhv l=360n w=1.80u m=1
+M4 Y  A vdd vdd phv l=360n w=2.70u m=1
+M5 Y  B vdd vdd phv l=360n w=2.70u m=1
+M6 Y  C vdd vdd phv l=360n w=2.70u m=1
+.ends
+
+.subckt NAND4X1_3V vdd gnd A B C D Y
+M1 x1 A gnd gnd nhv l=360n w=1.80u m=1
+M2 x2 B x1  gnd nhv l=360n w=1.80u m=1
+M3 x3 C x2  gnd nhv l=360n w=1.80u m=1
+M4 Y  D x3  gnd nhv l=360n w=1.80u m=1
+M5 Y  A vdd vdd phv l=360n w=2.70u m=1
+M6 Y  B vdd vdd phv l=360n w=2.70u m=1
+M7 Y  C vdd vdd phv l=360n w=2.70u m=1
+M8 Y  D vdd vdd phv l=360n w=2.70u m=1
+.ends
+
+.subckt OR2X1_3V vdd gnd A B Y
+M1 x2 A gnd gnd nhv l=360n w=0.90u m=1
+M2 x2 B gnd gnd nhv l=360n w=0.90u m=1
+M3 x1 B vdd vdd phv l=360n w=3.60u m=1
+M4 x2 A x1  vdd phv l=360n w=3.60u m=1
+M5 Y x2 gnd gnd nhv l=360n w=0.90u m=1
+M6 Y x2 vdd vdd phv l=360n w=1.80u m=1
+.ends
+
+.subckt LATCH_3V vdd gnd CLK D Q
+M1 cb CLK gnd gnd nhv l=360n w=0.90u m=2
+M2 cb CLK vdd vdd phv l=360n w=0.90u m=4
+
+M3 x2 D  vdd vdd phv l=360n w=0.90u m=2
+M4 qb cb   x2  vdd phv l=360n w=0.90u m=2
+M5 x4 D  gnd  gnd nhv l=360n w=0.90u m=1
+M6 qb CLK   x4   gnd nhv l=360n w=0.90u m=1
+
+M7  x5 Q  vdd vdd phv l=360n w=0.90u m=1
+M8  qb CLK    x5  vdd phv l=360n w=0.90u m=1
+M9  x7 Q   gnd  gnd nhv l=360n w=0.90u m=1
+M10 qb cb    x7   gnd nhv l=360n w=0.90u m=1
+
+M11 Q qb gnd gnd nhv l=360n w=0.90u m=2
+M12 Q qb vdd vdd phv l=360n w=0.90u m=4
+.ends
+

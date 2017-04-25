@@ -1,0 +1,2786 @@
+Xcircuit v3.x  Change Log (file CHANGES)
+----------------------------------------------------------------------
+
+Please note that there is an automatically-generated, up-to-date list
+of the most recent code changes at the URL
+
+	http://opencircuitdesign.com/xcircuit/changes.html
+
+Occasionally I spend some time to convert that list into text and put it
+back here. So if you're looking for the most recent changes, try the
+website.
+
+Version 3.6 (January 2006 to present)
+----------------------------------------------------------------------
+369  v3.6 rev 21	4/7/06
+     Incorporated Michael Goffioul's code for (native) Windows
+     compilation.
+
+368  v3.6 rev 20	4/5/06
+     Fixed an error with the -noconsole -nowindow startup, where
+     the option switches were passed to GUI_init; XCircuit now
+     searches the arguments for a Tk window name rather than relying
+     on the number of arguments to figure out whether or not it is
+     running in batch mode.
+     Also:  Fixed an error in a Wprintf() statement when a library
+     file cannot be found.
+
+368  v3.6 rev 19	3/31/06
+     Fixed the select color, which got changed to cyan because the
+     wrong line was deleted from the source file.  Also, implemented
+     a policy of removing redundant points after a line has been
+     drawn, because some drawing programs use left-button + middle-
+     button, and I've seen several xcircuit novices doing this.
+     Also:  Fixed the undo mechanism with respect to rotates and
+     flips, so that rotates and flips during a move or copy operation
+     don't screw up the undo operation.
+     Also:  Changed the look of the GUI a bit, with softer colors and
+     no red borders around the buttons and message widgets.
+
+367  v3.6 rev 18	3/30/06
+     Added command option "config database" to update the internal
+     list of colors, fonts, and other values that should be able
+     to be set with the Tk "option" command.  This now allows colors
+     to be redefined from within the startup script.  Removed the
+     "query" color, which is no longer used, and the "filter2" and
+     "bar2" colors, which are (and never were) necessary.
+
+366  v3.6 rev 17	3/28/06
+     Reorganized the source code to separate most of the Xt GUI
+     functions into two separate files, xtgui.c and xtfuncs.c.
+
+365  v3.6 rev 16	3/27/06
+     Changed the "keybind" function to be per-window so that the
+     scroll-wheel and auto-increment functions work in multiple
+     xcircuit windows.
+     Also:  Corrected a bad error that allowed an object instance
+     being moved to be selected when "carrying" it into another
+     object, causing xcircuit to crash.
+     Also:  Changed the behavior of Tcl expression parameters so that
+     the parameter evaluation is done ONLY as part of the opsubstitute()
+     routine;  this places some restrictions on the use of expression
+     parameters but should avoid problems where expression parameters
+     make XCircuit crash.
+     Also:  Created a new symbol "netpointer" in the generic library
+     that implements a "netlist get" function.  Corrected a number of
+     errors related to properly executing expression parameters.
+     Also:  Added "analoglib3.lps" and "digitallib.lps" to the installed
+     libraries.
+     Also:  Corrected the library zoom/position problem definitively
+     (see note for revision 13).
+
+364  v3.6 rev 15	3/22/06
+     Added command options "library writable" and "library changed".
+     Removed the "Library: " string from the beginning of library
+     names.  Modified the "Write All" Tcl script to handle automatic
+     writeback of libraries that have changed, and to note libraries
+     that have changed but which are not writable.
+
+364  v3.6 rev 14	3/21/06
+     Added the "-target <library>" option to the "page load" command.
+     This allows objects in a file to be placed somewhere other than
+     the "User Library", without having to move them by hand.  Let
+     XCOps(library) stand for *both* the -replace and -target libraries.
+     Fixed the Tcl wrapper script procedures accordingly.
+     Also:  Added command-line options "xcircuit --help" and
+     "xcircuit --version" providing essential information.
+     Also:  Added command option "library compose", although the fact
+     that the library does not get composed in certain cases needs to
+     be investigated.
+     Also:  Added variable xobjs.hold = XCOps(hold);  when FALSE, the
+     mouse HOLD modifier is disabled (perhaps this should be an
+     integer that sets the delay time, with 0 = disabled?).
+     Also:  Fixed menu command callbacks that were broken for several
+     revisions.
+
+363  v3.6 rev 13	3/18/06
+     Various fixes to correct problems found running various steps
+     while writing tutorial number 3:  Fixed Alt-f key binding for
+     font changes, user library redraw (still is wrong somewhere),
+     variable substitution in filenames, and a few others.
+
+362  v3.6 rev 12	3/17/06
+     Added the ability to move objects both within a library and between
+     libraries simply by using the "library move" macro (Shift-M) to
+     pick up the object, then transferring it between library pages.
+     Also, virtual copies can be made of any object in the library (not
+     just those that have paramters), and the virtual copies can be
+     flipped and rotated.
+     Also: Fixed the "-noconsole -nowindow" invocation, which was
+     broken.
+     Also: Added variable and tilde expansion to filenames in the
+     "%F" and "%f" escapes in info labels.
+
+361  v3.6 rev 11	3/15/06
+     Corrected a number of event errors, including the inability to
+     select from the library via a button tap and drop into "move"
+     mode.
+     Also: Implemented a version of James Vernon's mouse button hints.
+     Also: Corrected the LaTeX mode output to properly account for files
+     with non-".ps" extensions (e.g., ".eps").
+
+360  v3.6 rev 10	3/14/06
+     Corrected an error which prevented edited library object names
+     from being applied to the object name.  This resulted in confusion,
+     because the library would show the modified name, while the
+     object itself retained its original name.
+     Also: Added multiple window handling to the undo/redo mechanism.
+     Also: Added a window close procedure and a command "config delete"
+     to correspond to it.
+
+359  v3.6 rev 9		3/13/06
+     A number of fixes to the key binding and function dispatch
+     routines from rev 8:  Fixed Finish_Copy mode, fixed handling
+     of ASCII keystrokes in text entry modes, fixed retention of
+     view scale and position after displaying a library page.
+     Fixed error in prohibiting justification action in "normal"
+     mode.
+     Also:  A number of fixes to the wrapper window menus for
+     multiple pages:  Changed library and page menus to be shared,
+     applied new color, font, and encoding functions to all windows,
+     and fixed the Tk color picker call for the "add new color" menu
+     option.
+
+359  v3.6 rev 8		3/12/06
+     Major overhaul of the key binding and function dispatching
+     mechanisms to accomodate multiple windows.
+     Still to be done:  Some menu items (lists of Libraries and
+     Pages, for example) need to be shared among all windows.
+     Need a window close routine.  Need a routine to transfer a
+     selection between two windows.  Need to handle multiple
+     windows in undo/redo.
+     Also: Fixed a warning message on number of parts that should
+     apply only to library objects, not pages.
+
+358  v3.6 rev 7		2/24/06
+     Changed the meaning of CAD_HOME to point to "libdir", such
+     that distributions can set it to something like /usr/share
+     without causing trouble.  Changed CAD_HOME to CAD_ROOT so as
+     to prevent it from breaking backward-compatibility.
+
+357  v3.6 rev 6		2/23/06
+     Fixed a spurious "Error:  end of file" message.
+     Corrected the configure.in once again because Tcl/Tk defines
+     TCL_INCLUDE_SPEC but *not*, stupidly enough, TK_INCLUDE_SPEC.
+
+356  v3.6 rev 5		2/21/06
+     Added the Shift-Button-1 bindings to duplicate Button-2
+     functions as an alternative to using "xcircuit -2".
+     Also:  Added a flag bit to the line styles representing
+     square end caps.
+
+355  v3.6 rev 4		2/13/06
+     Fixed an error with the LaTeX mode ".tex" output to correctly
+     handle the filename when the extension of the xcircuit file
+     is not the default ".ps".  Also, changed the configure script
+     to add some other standard locations to the directory search
+     for tclConfig.sh and tkConfig.sh, and made use of the
+     TCL_INCLUDE_SPEC and TK_INCLUDE_SPEC from those files to set
+     the INC_SPECS definition.  Thanks to John Rigg for pointing
+     out these problems with the Debian compile.
+     Also:  Fixed a bug that can potentially cause XCircuit to
+     crash when a box is drawn.
+
+354  v3.6 rev 3		2/3/06
+     Added a number of "undo" functions for minor things that had
+     been left unimplemented, including linewidth changes, scale
+     changes, style changes, and text justification and option
+     settings (flip invariance, latex mode, etc.).  Thanks to Joel
+     Kuusk for pointing out the omissions.
+
+353  v3.6 rev 2		1/22/06
+     Updated a number of changes from around version 3.5.3 that
+     broke the non-Tcl-based version of xcircuit (not exhaustively
+     tested).
+
+352  v3.6 rev 1		1/20/06
+     Finally got around to correcting the crash backup behavior
+     so that xcircuit ignores crash backup files belonging to an
+     active process (i.e., another xcircuit currently running).
+
+351  v3.6 rev 0		1/7/06
+     Restructured variables internally to acommodate multiple
+     layout pages.  This is only a start, as currently new
+     windows have no callbacks created.
+     Also:  Created an enhanced version of the "Make Matching
+     Symbol" routine, and created a new routine and menu selection
+     "SPICE to Symbol", which creates a symbol for, and link to,
+     a SPICE file containing a subcircuit definition.
+     Also:  Longtime error:  Corrected the quick screen intersection
+     check to include the schematic bounding box.  Otherwise, when
+     only pin and info labels intersect the window, nothing is drawn.
+
+Version 3.5 (November 2005 to January 2006)
+----------------------------------------------------------------------
+350  v3.5 rev 5		12/19/05
+     Added command option "object <handle> library [<library>]"
+     where the final optional argument was previously unavailable.
+     If present, the final argument declares a new library for the
+     object.  If not present, the number of the library containing
+     the object is returned.
+     Also:  Corrected lib/tcl/symbol.tcl where the "%n" was missing
+     from the end of the subcircuit call statement.
+
+349  v3.5 rev 4		12/14/05
+     Fixed an error in netlisting which causes the netlister to
+     write "X.." lines in the SPICE output of "trivial" symbols
+     like the "dot" object.
+
+348  v3.5 rev 3		12/13/05
+     Fixed another fatal error in file writing due to having a
+     NULL filename.
+     Also:  Revised the Wprintf() calls to accept variable
+     argument lists, rewrote the Tcl versions of W*printf() as
+     calls to a script rather than being hard-coded as a specific
+     Tk function.  This allows me to rewrite the script equivalent
+     of Wprintf() to print to both the message widget and the
+     console output, so the console now gets a complete record of
+     warning, error, and informational messages produced by
+     xcircuit.
+     Also:  Fixed two fatal errors with "Load Dependencies", one
+     which crashed xcircuit due to a typo in the Tcl code for
+     command "page links load", and the other which created an
+     infinite loop if loadfile() failed to load a file inside
+     the recursive call to "page links load".
+
+347  v3.5 rev 2		12/8/05
+     Corrected a behavioral error in which xcircuit does not
+     generate netlist output for a symbol containing an info
+     label but no pins.  Thanks to Herman Lee for pointing out
+     this problem.
+     Also:  Corrected a problem in 3.5.1 in which xcircuit
+     changes filenames in a multi-schematic session to match
+     the top-level schematic.  It ignored the setting of
+     "dmultiple", and thus would make changes without warning
+     when it generated the crash backup file, for example.
+     Also:  Added a widget for managing multi-schematic file
+     writes, with a menu hook from "Files->Write All...".
+     Also:  Changed the behavior of "page changes" to include
+     change counts of all descendents.  Fixed the Tcl parsing
+     of the "page" command for certain options when a page is
+     specified in the command (e.g., "page 1 fit").  Modified
+     the "page changes" command so that the change count can
+     be altered, thus forcing a page to be recognized as either
+     modified or unmodified.
+
+346  v3.5 rev 1		11/21/05
+     Separated the source code into distribution (version 3.4) and
+     development (version 3.5) branches, on the suggestion of
+     Zvezdan Petkovic.
+     Also:  Added command option "page changes" which reports the
+     number of changes on a page.  Modified some behavior so that
+     starting certain commands like "copy" does not increment the
+     number of changes, so that the command can be canceled without
+     xcircuit thinking that the page has been modified.
+     Also:  Added command option "config search file|library <list>"
+     with a colon-separated list <list>, specifying the search order
+     on a specific set of directories.  These lists are initially
+     null, and behavior remains the same as before while these lists
+     are null.  A non-null search path overrides the default search
+     on the current working directory, and a non-null library search
+     path overrides the search on XCIRCUIT_LIB_DIR and the default
+     install directory path.  Modified the library manager to use
+     search paths.
+     Also:  Allow "library load <filename>" on a regular xcircuit
+     (.ps) file, which has the behavior of loading the objects from
+     the file without loading the pages themselves.
+     Also:  Added command option "netlist get -hier" to generate
+     a slash-separated hierarchy using device names and indices.
+     Also:  Fixed "netlist goto <name>" to accept the same syntax
+     that is produced by "netlist get -hier", and finished the coding
+     of the routine.
+     Also:  Added command options "netlist select <netname>" and
+     "netlist position <netname>".
+     Also:  Changed behavior of the "%" macro so that it also raises
+     the console to the top of the window.
+     Also:  Added command option "netlist parse <mode>" (e.g.,
+     "netlist parse spice") that allows some selective parsing from
+     a Tcl script.
+     Also:  Created a script called "symbol.tcl" that replaces the
+     function of the "Make Matching Symbol" button in the xcircuit
+     menu, with a considerably fancier interface.
+     Also:  Modified the command "color set" to accept color names.
+
+346  v3.5 rev 0		11/21/05
+     This revision was not posted, but reflects changes made through
+     version 3.4 revision 10 that were removed from the "stable"
+     branch of the distribution.
+     1. Changed the crash backup file name to include the process ID.
+     This is intended to prevent xcircuit process from treating a backup
+     file from another existing xcircuit process as a crash file to be
+     recovered, but the code is not yet finished.
+     2. Enabled creation of parameters on a top-level page, and revised
+     the Tcl "param set" command to handle this case.
+     3. Added a "page links sheet" option to allow querying "sheet A of B".
+     4. Added a "page links load" option to allow symbols to specify which
+     file contains the schematic, and load these prior to writing a netlist.
+
+Version 3.4 (August 2005 to November 2005)
+----------------------------------------------------------------------
+345  v3.4 rev 10	11/16/05
+     Removed the problem with automatic generation of pin labels on a
+     symbol during a copy action in the schematic.
+     Also:  Added doubly-protected backups to standard file writes.
+     This renames the existing file to filename + tilde ("~") so
+     that the file is not truncated if a crash happens during a
+     normal file write.
+     Also:  Added patch files by Zvezdan Petkovic for proper
+     compilation on OpenBSD.
+
+344  v3.4 rev 9		11/14/05
+     Applied (partially) a patch from Larry Doolittle that fixes a
+     pointer bug in the non-Tcl version, and allows compilation of
+     the non-Tcl version on a 64-bit system.
+     Also: Fixed the event mechanism to allow pages to be selected
+     in the page directory (otherwise, pages cannot be swapped).
+     Also: Fixed the Tcl "push" command so that "push selected" now
+     works, and clicking the "push" toolbar button when an object
+     is selected has the expected effect.
+     Also: Fixed the Tcl "label justify" command so that changing
+     vertical justification does not reset the horizontal justfication.
+     Also: Fixed the Tcl-to-xcircuit string conversion so that plain
+     text with spaces is handled as expected (thanks to Mark Martin
+     for pointing out this problem).
+
+343  v3.4 rev 8		11/10/05
+     Changed an instance of "regsub" to make it backwardly compatible
+     to Tcl version 8.3;  otherwise, xcircuit fails to start up
+     properly when linked to Tcl/Tk 8.3.
+
+342  v3.4 rev 7		10/28/05
+     Corrected event handling of schematic/symbol association,
+     which was allowing xcircuit to return to "normal" mode while
+     on a library page, resulting in bizarre behavior, and preventing
+     the schematic/symbol association from being made.  Thanks to
+     James Vernon for pointing out the problem.
+
+341  v3.4 rev 6		10/25/05
+     Fixed bounding-box calculations on instance loads so that
+     instanced values of expression parameters are handled correctly
+     on file read-in.  Also, corrected "resolveparams" to remove
+     cached expression results before writing a page to a file.
+     Also: Added component unnumbering feature (as written, only
+     for devices having the "idx" parameter).
+
+340  v3.4 rev 5		10/21/05
+     Added command option "label replace", menu items "Text->
+     Increment" and "Text->Decrement", and key bindings "i" and
+     "I" (respectively) to auto-increment (decrement) numerical
+     values inside text labels.  As part of this, I also rewrote
+     and completed the Tcl list-to-XCircuit string conversion
+     routine.
+     Also: Fixed a bug reported by James Vernon due to accessing
+     free'd memory, which appears to be fatal under Cygwin but
+     not under Linux.
+
+339  v3.4 rev 4		10/19/05
+     Added command option "library filename" and the ability to
+     save the first file from which a library page was loaded.
+     Also: Added the "page load -replace" and the ability to
+     load/save specific libraries by name.  Changed the "File"
+     menu and the popup prompts to allow all of this to be done
+     from the GUI interface.
+     Also: Added more Cygwin handling to the Makefile process,
+     and tested the Cygwin compile and install. 
+
+338  v3.4 rev 3		10/6/05
+     Some fixes to things broken between versions 3.3 and 3.4:
+     Move "undo" stays on grid.  Items being moved during move
+     and copy commands stay with the cursor through pans.
+     Button-3 now does the proper thing for cancellations
+     during move mode.
+
+337  v3.4 rev 2		10/6/05
+     Refined and expanded the hierarchical element handle
+     notation to cover all commands accepting element handles.
+     This will now work for commands such as "element type".
+     Still, only "polygon points", "spline points", and
+     "instance center" commands translate point positions back
+     to the top level.
+
+336  v3.4 rev 1		10/5/05
+     Fixed an error with finishing path edit operations,
+     added "internal units" type to the grid display types,
+     and implemented a (preliminary) hierarchical specification
+     for element handles that can be used with the "polygon
+     points" command to refer point positions back to the
+     top level.
+
+335  v3.4 rev 0		10/3/05
+     Substantially revised the interface and input mechanism,
+     removing the remaining methods that were hard-coded to
+     various mouse buttons.  Instead, I have implemented the
+     button "Hold" mechanism in a general-purpose manner that
+     also allows definitions of key hold bindings.  I removed
+     many of the event modes, including all of the element
+     creation modes available from the GUI tool buttons, as
+     these are more obviously implemented by changing button
+     bindings.  This allows the various modes to be switched
+     on and off, and allows wire drawing mode to be just one
+     of the modes rather than the default mode.  Adding "wire",
+     "move", and "pan" modes as more-or-less obvious button
+     binding variations.  Added ASCII85 and Flate encoding/
+     decoding to the graphic read/write operations.  Added
+     a "-2" option to the command-line invocation of xcircuit
+     to set mouse button bindings for 2-button mice.
+
+Version 3.3 (September 2004 to July 2005)
+----------------------------------------------------------------------
+334  v3.3 rev 38        9/28/05
+     Corrected multiple-button checking routine to look at
+     the event state only, not the button, as the button
+     entry is changed by some routines.  This was preventing
+     the shift-button key bindings from working.
+
+333  v3.3 rev 37        9/20/05
+     Corrected SPICE output to generate a line break and
+     continuation "+" character for wraparound lines.
+
+332  v3.3 rev 36        9/16/05
+     Fixed an error with netlist output in which parameters are
+     not substituted if xcircuit is run in batch mode.
+
+331  v3.3 rev 35        9/15/05
+     Fixed parameter indirection---parameter string was not
+     initialized on library read-in, causing a segfault.  Also,
+     changed the behavior of ordered spice lines so that they
+     will be placed after any subcircuits are written, to avoid
+     nesting subcircuits.  A syntax "spice@" has been added for   
+     lines that really should go in front of everything (except
+     for the special title line #1).
+
+330  v3.3 rev 34        9/14/05
+     Implemented "label latex" in the Tcl version, which was
+     missed in the move from Xt to Tcl, and because it is an
+     obscure function, was not noticed for some time.  Thanks
+     to Eric West for bringing it to my attention.  Also:
+     Applied a patch by Joerg Wunsch that prevents a segfault
+     when rotating a path element.
+
+329  v3.3 rev 33        9/8/05
+     Corrected an error in netlisting that would incorrectly
+     identify empty parameter strings as the "idx" parameter.
+     Also, added a "-nowindow" switch to the UNIX command-line
+     invocation to allow xcircuit to be used as a filter (batch
+     process) without creating/displaying an X11 window.
+
+328  v3.3 rev 32        9/6/05
+     Changed the handling of netlist writing from symbols, in
+     particular to avoid crashing on encountering unexpected
+     info label contents.  Also:  Added a "-replace" option to
+     file loads, that causes any object in a file to be
+     overridden by one in a library "master copy".  Also:  Revised
+     the "library make" command to allow an arbitrary number of
+     empty libraries to be created.
+
+327  v3.3 rev 31        8/10/05
+     Fixed a problem with the graphic image handling in which graphic
+     images are saved to the output file if they exist, regardless of
+     whether or not they show up in the output page.  Also fixed the
+     PPM reader to handle whitespace and newlines in the header
+     correctly, according to the PPM spec.
+     Also:  Added revision information to the "welcome"
+     message in addition to the major.minor version.
+     Also:  Some changes to the Makefile to properly handle
+     passing of linker flags in the shared vs. static compiles.
+
+326  v3.3 rev 30	7/28/05
+     Fixed a problem with the startup TCL code that causes XCircuit
+     to fail to start if a parse error is found in the user's
+     ~/.Xdefaults file (even a completely unrelated parse error).
+     Thanks to Roland Roberts for the bug report (and, much earlier,
+     Romano Giannetti, although at the time I administered to the
+     symptoms, not the disease.
+
+325  v3.3 rev 29	7/22/05
+     And yet more auto-numbering revisions.  Ensure clearing of
+     device indices prior to both netlist output and auto-numbering.
+     Also, fixed parseinfo() to correctly handle the mode="" case.
+
+324  v3.3 rev 28	7/21/05
+     More fixes to auto-numbering code ($#!@&).  Appears to work
+     now for various cases, although I am not satisfied that it
+     covers all situations.  One part of the fix forces xcircuit
+     to ignore all fixed component assignments when generating
+     flattened netlists.  While this ensures that all component
+     numbers are unique, the output is not what might be expected,
+     especially if there is no hierarchy in the schematic.
+     Probably the parsing for fixed device numbers should *not*
+     be done by parseinfo() but should be handled separately,
+     under the assumption that this handles a limited number of
+     backwardly-compatible cases and that normally it should
+     expect to find "idx" and "class" parameters for each component.
+
+323  v3.3 rev 27	7/20/05
+     Revamped the auto-numbering code (again!) to better handle
+     the "class" and "idx" parameter method, and make auto-numbering
+     independent of the netlist format (i.e., SPICE vs. pcb).
+     Device (component) name ("class") was moved from the object
+     structure to the Calllist structure (after all, if the class
+     is parameterized, then an instance may have a different class
+     from the object's default class), and this is generated directly
+     after generating the Calllist structure, since it is independent
+     of the netlist output format.
+
+322  v3.3 rev 26	7/19/05
+     Further corrections to revision 20 code.  Device classes are
+     now checked and updated for non-pcb devices (e.g., mosfets)
+     when doing autonumbering.  Also:  parameter setting works
+     for multiple selections;  e.g., several transistors can be
+     selected at once and have width or length changed simultaneously
+     for all of them.  Thanks to Carsten Thomas for the bug report
+     and feature request.
+
+322  v3.3 rev 25	7/18/05
+     Finally logged into SourceForge and incorporated some of the
+     more recent patches found there.  Includes a patch to
+     configure.in by Min Sik Kim, and a patch to fontfile.c by
+     Zunda.
+
+321  v3.3 rev 24	7/17/05
+     Updated keybindings with the new function "Graphic", which
+     otherwise causes the help utility to crash.  Thanks to John
+     Rigg for the bug report.
+
+320  v3.3 rev 23	7/15/05
+     Added file load and save methods for the "graphic" element,
+     as well as undo/redo operations, a menu item for loading
+     graphic elements, and all essential operations.
+
+319  v3.3 rev 22	7/14/05
+     Corrected broken file parsing from revision 21.  Image data
+     is now read from "objectread" like everything else inside
+     the Setup block.
+
+318  v3.3 rev 21	7/13/05
+     Fixed a bug introduced in revision 20.  Also, started adding
+     the new basic element type "graphic", to handle inclusion and
+     placement of arbitrary graphic images.  This will eventually
+     replace the buggy and cumbersome "background postscript"
+     rendering via ghostscript.
+
+317  v3.3 rev 20	7/8/05
+     Changed the component auto-numbering so that all component
+     values are treated as base-36, to allow handling of non-numeric
+     component numbers.  Also, the routine that determines the
+     number to assign will return the smallest unused integer
+     instead of (1 + (largest number found)) so that use of
+     non-numeric values doesn't cause the auto-numbering algorithm
+     to generate strangely large numbers.  Also:  The auto-numbering
+     algorithm now looks at the parameter "idx" if it cannot find
+     a "pcb"-style info-label.  This allows non-pcb parts like
+     transistors in VLSI schematics to be auto-numbered.  This is
+     really the preferred way to handle auto-numbering, and all
+     library parts ought to be updated to contain the "idx" parameter.
+
+316  v3.3 rev 19	6/28/05
+     Resolved the issue with retaining the stack order of
+     parts through a delete-undo cycle, so that all previous
+     undo records point to the correct parts in the correct
+     order.  This eliminates a lot of spurious error messages
+     coming from the undo mechanism.
+     Also: Resolved the issue with polygon/arc/spline/path
+     rotations, where rotations cannot be undone exactly due
+     to accumulating roundoff errors.  The solution is simply
+     to treat the rotation as an edit for these element types.
+     Also: Fixed an error with label deletion.  Labels that
+     are edited out of existance were not handled properly,
+     an egregious error that was somehow overlooked.
+     Also:  Modified console.tcl script to withdraw the
+     console window on a window manager "close" request,
+     rather than exit the application.  This bolsters
+     the end-user illusion that the console is a subsidiary
+     window of the layout, rather than vice versa.
+
+315  v3.3 rev 18	6/16/05
+     Fixed an error reported by Benoit Bidoggia, in which
+     an attempt to clean up redundant font changes triggers
+     a crash becuase it has been passed the top-level instance
+     instead of NULL (NULL is necessary because this function
+     is called when reading an object definition, at which
+     point there are no instances).
+
+314  v3.3 rev 17	6/12/05
+     Fixed another error that showed up in Uwe's schematic,
+     which is that the "test_insideness" algorithm fails if
+     the box is degenerate---which happens for labels that
+     are parameters set to a null string.
+    
+313  v3.3 rev 16	6/10/05
+     Corrected an error found by Uwe Zimmermann in which
+     xcircuit calls free() on an unallocated space when 
+     destroying an object containing an indirect parameter.
+     Also:  Added some experimental code replacing the
+     drawing functions with OpenGL.  This can be compiled
+     in by passing "--with-opengl" to the "configure"
+     script.  However, the code is currently unfinished.
+
+312  v3.3 rev 15	5/31/05
+     Added another feature to the change of revision 14:
+     Info labels that have negative sequence numbers (e.g.,
+     "spice-1:", "spice-2:", etc.) will be written after all
+     subcircuit and component output, whereas the usual positive
+     sequenced labels "spice1:", "spice2:", etc., will be written
+     before subcircuit and component output.  Each sequenced line
+     is followed by a return character in the output.  First and
+     last line of the netlist output is hard-coded (e.g., circuit
+     title and ".end" line in SPICE (see rev 5 comments)).
+
+311  v3.3 rev 14	5/27/05
+     Changed behavior of netlist generation to allow (finally!)
+     info labels on a top-level schematic.  These labels are
+     written verbatim into the output.  Probably needs checks
+     to avoid attempting to process certain embedded escapes
+     like pins. . .
+
+310  v3.3 rev 13	4/08/05
+     Fixed an error that missed recalulating the instance
+     bounding box after a text rejustification.
+
+309  v3.3 rev 12	3/29/05
+     Changed behavior of the netlist connectivity highlight
+     function in response to a suggestion by Long Yang that
+     pin connection points should be hightlighted, the better
+     to show places where a net does not attach to a pin.
+     Also: Added a feature in response to a comment by John
+     Barry that error messages disappear when netlists are
+     saved if the netlist is not recreated.  This feature
+     includes a checkbox in the Tcl wrapper that by default
+     forces regeneration of the netlist on each netlist file
+     write function.
+
+     IN PROGRESS---Added "idx" to Pagedata; need to separate
+     areastruct.page from the actual printed page number.
+     This simplifies page re-ordering and allows schematic
+     libraries to be "hidden" among the rest of the pages.
+     xobjs.pages and areastruct.page will still refer to the
+     index into pagelist.
+
+308  v3.3 rev 11	3/12/05
+     Fixed an error, pointed out by Long Yang and Svenn Bjerkem
+     in which xcircuit crashes when descending into an object.
+     This was due to out-of-bounds array addressing, and must
+     have been in the code for some time, but only shows up
+     on some compilers (Solaris?).
+     
+307  v3.3 rev 10	2/27/05
+     Fixed an error in the flattened netlist output that has
+     probably existed in most revisions of 3.3 to date,
+     where net names are not correctly passed down from
+     parent cell to child cell.  Thanks to Mark Chang for
+     pointing out the error.
+     Also:  Fixed a bug in the selection mechanism where
+     the selection is not NULLed prior to return from the
+     calling routine if no selections are found.
+     
+306  v3.3 rev 9		2/5/05
+     More changes to the selection mechanism.  Selection
+     mechanism sorts polygons (wires) according to
+     distance of the nearest edit point.  Previous
+     selection is always kept and compared against
+     current selection.  "pick" is only advanced if the
+     selections are the same.  Pointer position when
+     selecting a polygon to edit is restored from the
+     warped position after a button-3 cancel function.
+     Also:  Added all edit functions to the "undo"
+     mechanism, as well as label creation.
+
+305  v3.3 rev 8		2/4/05
+     Corrected several mistakes in the selection mechanism
+     that left pending (unfinished) events on the stack.
+     Also:  Corrected a problem from rev. 7 that did not
+     register unselection events (key "x") with the undo
+     mechanism.
+
+304  v3.3 rev 7		2/1/05
+     Revamped the selection mechanism (finally) to get
+     rid of the cumbersome "click to select or reject"
+     method.  The new method picks one element, and
+     cycles through objects so that a different object
+     is selected on each button press, if several elements
+     are found at the pointer position.  This method would
+     be equally unwieldy save for a change in the way
+     object instances are selected---the selection routine
+     recursively searches for elements inside objects that
+     are close to the pointer position (albeit with a wider
+     capture range than on the top level).  This prevents
+     selecting an object instance with lots of white space
+     if the pointer is in the middle of the white space
+     (such as a frame or border object).
+     Also:  Corrected the "Make Matching Symbol" callback.
+     Thanks to Mark Chang for pointing out the error.
+
+303  v3.3 rev 6		1/4/05
+     Made additions to the "pcbout.tcl" script to support
+     SMD integrated circuits, and resistors and capacitors
+     (both chip and axial).  "pkg" parameter added to the
+     Resistor and Capacitor parts in the "analoglib2"
+     library.
+
+302  v3.3 rev 5		12/16/04
+     Corrected a fatal error in library copies if no valid
+     object is selected.  Corrected a compile error (C++-like
+     syntax fails on many compilers).  Added option to print
+     or not to print the ".end" statement at the end of a
+     SPICE deck.
+
+301  v3.3 rev 4		12/10/04
+     Corrected an error that allows "temp label" pins to be
+     assigned the same name for different nets.  The number
+     following "int" or "ext" on temp labels is now changed
+     to match the net number when referencing the label name,
+     if it is found to be different.
+     Also:  Corrected another bug that causes a crash when
+     copying an edited parameter back to an object.  The
+     data record for the PARAM_END structure was not zeroed.
+     This was okay previously because the data record was
+     unused.
+
+300  v3.3 rev 3		12/6/04
+     Corrected a problem in which drawn subcircuits and
+     subcircuits declared with an "X.." in the info label
+     will share index numbers, by forcing SPICE output to
+     generate a devname of "X" for each drawn subcircuit
+     object.
+     Also: Changed the behavior so that device numbering
+     starts at zero, not one.  Otherwise, if a device is
+     numbered zero on the drawing (e.g., by having the index
+     number entered by hand), xcircuit will generate a spurious
+     "duplicate part" warning.
+
+299  v3.3 rev 2		12/3/04
+     Fixed an error (apparently from 3.3 rev 0) that caused
+     parameters to become hosed if changed (also causes program
+     crashes).
+     Also: Added handling of X11 button4 and button5 events for
+     (potential) binding to mouse scroll wheel motion.
+
+298  v3.3 rev 1		10/8/04
+     Changed the behavior of the PCB netlist generator to be
+     more intelligent about finding the bottom of the
+     layout hierarchy.  Also, corrected the netlist generator
+     where it allowed a global net to be merged into a local
+     net.
+     
+297  v3.3 rev 0		9/28/04
+     Replaced the "hspice" directory with Conrad Ziesler's
+     "spiceparser".  The use of routine AddNTermModule() has
+     broken the spice input for now, although once fixed, the
+     results should be much improved.
+     Also, changed the handling of expression parameters so
+     that expression parameter results may be numeric, and
+     evaluated results are saved in the PostScript output as
+     instance values.  When traversing the hierarchy during
+     redisplay, commands invoking a "selected" element will
+     pick up the object instance being rendered.  The
+     combination of these changes allows the implementation
+     of several useful features such as counter-rotation and
+     displaying the name of an object within the object.
+
+Version 3.2 (January 2004 to September 2004)
+----------------------------------------------------------------------
+296  v3.2 rev 27	9/17/04
+     Quick fix to allow the non-Tcl code to compile;  the
+     experimental "ngspice" code contains numerous Tcl references,
+     and although it does not depend on Tcl in principle, it is
+     easier just to disable the code for the non-Tcl compile.
+     It will not be missed.
+     Also:  Changed the startup method from the hacked-up
+     redirection of $HOME to a standalone "wish"-like executable
+     that sets up "wish" to read in the .xcircuitrc file as its
+     startup script.
+
+295  v3.2 rev 26	9/7/04
+     Changes based on comments from Dale Grover for correct
+     compilation/linking/installing under "Fink" on Mac OS-X
+     10.3.
+
+294  v3.2 rev 25	9/6/04
+     Fixed the wrapper code to ignore Tk's standard binding for
+     the Tab and Shift-Tab key events during label text input.
+     Otherwise, the window loses focus, which is an annoyance.
+
+293  v3.2 rev 24	8/25/04
+     One major fix to the netlist code to insist that "updatenets"
+     is never run on a symbol.  Otherwise, a circuit that has a
+     symbol that is not used anywhere will generate an error when
+     netlisting, resulting in no netlist.
+     Also, many minor fixes/enhancements to the TCL command-line
+     functions, mainly to support scripting.  There is now a
+     script called "sue_xc.tcl" that supports the generation of
+     schematics from ".sue" files (in particular, this is to
+     allow xcircuit support for the IIT standard cell library;
+     see http://www.ece.iit.edu/~vlsi/scells/).
+
+292  v3.2 rev 23	8/18/04
+     Rather important fix from back in revision 19, in which routine
+     "pointtonet" is supposed to merge crossing wires if they cross
+     on top of a subcell port.  This is the method used to connect
+     crossing wires with the "dot" symbol, so it is rather important.
+
+291  v3.2 rev 22	6/21/04
+     Added capability to the parameter selection mechanism to handle
+     Tcl-expression parameters of the form "lindex {list} <index>".
+     Such expressions will generate a listbox-type popup window in
+     which the user is prompted to select one of the choices in the
+     list.  The parameter will be replaced by the same expression
+     but with <index> changed to reflect the index position of the
+     chosen parameter value.  The way to make such parameters in the
+     first place is "parameter make expression <name> {lindex {list}
+     <index>}".  To change the expression itself instead of selecting
+     a choice from the list, use "parameter set" instead of the GUI
+     interface.  Thanks to Paul Surgeon for suggesting this method.
+
+289  v3.2 rev 21	5/58/04
+     More quick fixes:  Makefile error installing .tcl and .lps files
+     due to an error in Makefile.am;  library object import now checks
+     library version and does not attempt to import libraries that may
+     be missing a dependency list.  Distribution libraries updated to
+     make sure all of them will work with the library import function.
+     Tcl function "library <name> <options...>" changed to accept
+     "<name>" when library name is "Library: <name>".  This makes more
+     sense, as it allows one to do, for instance:
+	"library load asg_spice"
+	"library asg_spice save asg_spice_new"
+
+288  v3.2 rev 20	5/26/04
+     Quick fix to a bug pointed out by Petter Larsson, which must have
+     been in the code for some time, which checks for names incompatible
+     with the PostScript interpreter but then fails to make the change.
+     Also, cleaned out some source code copies left over from bus
+     representation implementation.
+
+287  v3.2 rev 19	5/20/04
+     Finally got the bus notation handling into enough of a working
+     condition that I dare to post the distribution.  In addition to
+     basic fixes, improvements include handling of buses and partial
+     buses with the "connectivity" function, and in particular,
+     handling of instance-specific labels throughout the netlist
+     (previously was only applicable to the netlist output).  The
+     instance-specific labels allow the new "tap" object to work.
+     Added the tutorial file "buses.ps" to the examples directory.
+
+286  v3.2 rev 18	5/6/04
+     Removed the requirement that the GUI must be in place prior
+     to startup.  XCircuit can be embedded directly in another
+     application with or without its own GUI.  Without the GUI,
+     it is necessary to create (and map) a "simple" window
+     (e.g., "simple .mytest.draw -bg white -width 700 -height 400"),
+     and then set the Tcl array variable "XCOps(window)" to be the
+     Tk pathname of this window.  This creates a window into which
+     things can be drawn by Tcl command-line commands.  To enable
+     button and key actions, it is necessary to do:
+
+     bind .mywin.draw <ButtonPress> {xcircuit::standardaction %b down %s}
+     bind .mywin.draw <ButtonRelease> {xcircuit::standardaction %b up %s}
+     bind .mywin.draw <KeyPress> {xcircuit::standardaction %k key %s}
+     bind .mywin.draw <Enter> {focus %W}
+ 
+     from the Tcl command line.  It is also possible to rewrite the
+     wrapper script so that the whole GUI is present but rooted in a
+     location different from ".xcircuit".  In that case, set the
+     variable "XCOps(top)" to the top-level window name before
+     invoking xcircuit::start.  In either case, one must run "wish"
+     first, then load "xcircuit.so", create the appropriate Tk window
+     or windows, set the appropriate XCOps() variable, then do
+     xcircuit::start.
+
+     Handling of bus notation is still unfinished in this (unreleased)
+     version, and probably breaks the schematic capture altogether.
+     This will be fixed prior to an actual distribution release.
+
+285  v3.2 rev 17	4/14/04
+     Major enhancement:  Handling of bus notation in netlists!
+     Also, Prohibit parameters from shadowing PostScript reserved
+     names and definitions in xcircps2.pro, as is done for object
+     names.  Also, finally found and excised the bug that was
+     preventing correct comparison between object definitions on
+     read-in, which was introduced along with the parameter type-
+     promotion code.  Fixed another bug which prevented
+     parameterizing position.  And, fixed a bug which prevented
+     disabling flip invariance on text from the menu in the TCL
+     version.  Also:  made more convenient constructor/destructor
+     functions in elements.c, for general purpose use; these are
+     called from tclxcircuit.c.  Also:  Reimplemented "strdup"
+     as "Tcl_Strdup" in the TCL version; otherwise, there are
+     places where memory is allocated by strdup, bypassing TCL's
+     memory allocation, but free'd by Tcl_Free().  Also: modified
+     the library manager "library import" routine to load any
+     library instances of an object in addition to the object
+     itself.
+
+284  v3.2 rev 15	3/15/04
+     Reinstated colors and other parameters as XDefaults-style options
+     in the TCL version using the Tk_GetOption() command.  Changed
+     autoconf so that the TCL version is compiled by default (unless
+     not found, or explicitly disabled).  Initial work on bus
+     notation parsing.
+     
+283  v3.2 rev 14	3/03/04
+     Added a library manager (often requested) for handling large
+     lists of parts.  Allows objects to be imported from libraries
+     piecemeal.
+
+282  v3.2 rev 13	3/03/04
+     Changed the TCL scripts and shell startup file so that the
+     README directions for a test execution prior to install actually
+     work as advertised.  Also, finally found a way to force automake
+     to compile the tcl version with just "make" and "make install",
+     thus hopefully eliminating the greatest source of compile-time
+     woes.  Re-implemented the .so file loading so that the reported
+     error is the real root cause error, not "file not found".  Also:
+     removed Imakefile and all references to it.  Also:  Added a
+     menu item for the PCB layout generation.  This is not yet
+     sourced by default.
+
+281  v3.2 rev 12	3/01/04
+     A couple of fixes to bugs reported by Brek Miller.  1) Library
+     copy did not copy parameters correctly (missed both the "key"
+     and "which" entries), and 2) The object comparison mechanism
+     failed to correctly compare objects with parameters due to a
+     typo in the code.
+
+280  v3.2 rev 11	2/27/04
+     Some changes to command functions and netlist output.  Added
+     file lib/tcl/pcbout.tcl, a script that converts an xcircuit
+     schematic into a preliminary PCB layout.  This is very spare
+     at the moment, to say the least; for instance, it only
+     supports 7400-series devices.  But it's mostly proof-of-
+     concept.
+
+279  v3.2 rev 10	2/26/04
+     Some Makefile/configure changes, esp. for systems like Debian
+     that do not find the Tcl/Tk include files.  Also, rearranged
+     the menus so that "linewidth" commands (global and wire line-
+     width) are more obviously placed ("wire linewidth" duplicates
+     the "element border" entry).  Thanks to Forrest Cook for this
+     suggestion.  Also, rewrote the library load command in
+     xcircuit.tcl so that it prints the actual root cause error
+     instead of complaining about "file not found".  Also, rewrote
+     and extended the "help" window in Tcl, making it entirely
+     script-driven from Tcl, and adding help text for each function.
+     This required adding Tcl command "bindkey" variant with no
+     arguments, which returns a list of all functions which can be
+     bound, and "bindkey -func <function>", which definitively
+     asserts that the argument is a function, not a key (because,
+     e.g., "Delete" is both a key name and a function).  Also,
+     made XCF_Prompt (key "%") execute xcircuit::raiseconsole in
+     the TCL version (previously undefined in TCL).
+
+278  v3.2 rev 9		2/20/04
+     Greatly expanded the undo mechanism, which now covers most of
+     the major xcircuit functions.  This is definitely "beta test"
+     code.  Also, renamed a number of functions and definitions to
+     be clear about the difference between an element and an
+     object (this confusion was left over from the really early
+     days of the program).
+
+277  v3.2 rev 8		2/11/04
+     Improved the ghostscript rendering mechanism so that it can
+     handle (non-encapsulated) pages output from ghostview (which
+     includes some global state-setting commands).  Also, greatly
+     improved the rendering by backgrounding the process.  Xcircuit
+     draws a blank background and continues until ghostscript
+     reports that the page is finished, at which point the page
+     gets redrawn with the background.
+
+276  v3.2 rev 7		2/6/04
+     Some fixes to the ASG and hspice routines;  automake now checks
+     for g++-3 <stl> vs. the older <stl.h> header file and adjusts
+     accordingly.  The hspice parser no longer produces files
+     netlist.sp and netlist-flat.sp.  Compilation of ASG is now
+     disabled by default (and will be until it's stable. . .), and
+     requires "configure --enable-asg" to enable the module.
+
+275  v3.2 rev 6		2/5/04
+     Added the ASG and hspice parser modules back in, with additions
+     to the master Makefile and configure script to support compiling
+     both modules into the xcircuit Tcl shared object library
+     xcircuit.so.
+     
+274  v3.2 rev 5		1/29/04
+     There was a 3.2 previously for the ASG implementation.  This is
+     being done again from scratch, but I'm continuing the revision
+     numbers where I left off, at 5.  Prior to adding ASG back in,
+     version 3.2 is in the process of implementing the "comprehensive
+     undo" function by creating the framework for running undo/redo
+     events and recasting the "delete" function into this framework.
+     More to be added in coming revisions.
+
+Version 3.1 (January 2003 to January 2004)
+----------------------------------------------------------------------
+273  v3.1 rev 38	1/28/04
+     Removed #ifdef SCHEMA from everything.  This should have been
+     done long ago. . . Also, removed %%PageBoundingBox from the
+     output for encapsulated PostScript files, as this appears to
+     screw up output when including the drawing in a document, such
+     as a LaTeX file.  Changed the behavior of the output dialog box
+     such that the page label is checked before writing, and the page
+     label is set to the filename if the label is still "Page #"
+     at the time the label is set.  Fixed the behavior of selecting
+     fill and border styles, especially a critical error with fill
+     styles that would allow polygons to acquire an invalid state,
+     causing netlist problems and/or unmatching PostScript output.
+     Changed the selection behavior such that elements are not
+     unselected after border/fill/color changes.  Fixed the behavior
+     of network connectivity highlighting to work with multi-page
+     schematics.  Changed some event handling to let most button-
+     release events act on the mouse position on the previous
+     button press (this works for drawing wires and editing polygons,
+     but not for copying elements).  Added "%N" escape to the
+     tag callback mechanism to allow all arguments to be passed to
+     the callback procedure as a list.  Fixed marking of "Closed"
+     checkbox in the Tcl "Border" menu.
+
+272  v3.1 rev 37	1/23/04
+     Preparing for XCircuit 3.2 (ASG).
+     Revised some of the code structure of netlist.c, added routines
+     NameToPosition(), from the ASG code (xcircuit-3.2), and
+     PortToPosition(), which is a variant thereof.  Added the routine
+     ratsnest(), called by the command "netlist ratsnest" in the
+     Tcl console, which demonstrates some of the features required
+     for true ASG.  Also:  removes deleted items from the netlist
+     piecemeal, so that an ASG system can operate on an invalidated
+     netlist without encountering dereferenced pointers, or elements
+     which are not on the page they claim to be on.
+     Also:  Fixed another bug similar to that in #271 where no space
+     was printed after the closing "}" in multipart strings appearing
+     in parameters, which equally bad results.
+
+271  v3.1 rev 36	1/21/04
+     Added support for schematics spread over multiple pages.  The
+     method is that all top-level pages that have the same page
+     label (object name) will be considered part of the same
+     schematic.  One of the pages is considered the "master", or
+     "primary" page, and keeps the netlist/portlist/calllist for
+     all the pages.  The other pages are the "slave" or "secondary"
+     pages, and refer to the master page for netlist information.
+     Also:  Fixed a couple of bugs resulting from messing with
+     the parameter formats, namely 1) put back the check for
+     equal "which" value in varpcheck and varfcheck, and 2) added
+     a space after printing a null-string "()" parameter value.
+
+270  v3.1 rev 35	1/16/04
+     Modified and completed support for expressions in parameters.
+     In the TCL version, this supports all TCL expressions.  In the
+     non-TCL version, it allows simple character strings to be used
+     in parameters.  The expressions are not translated into
+     PostScript; the PostScript output records the expression, which
+     is unused, and the last evaluated result, which is taken to be
+     the parameter value.  Cleaned up more code for numeric and
+     indirect parameters, and added TCL options "-verbatim" and
+     "-indirect" to the "parameter" command to facilitate handling
+     indirect and expression parameters.
+
+269  v3.1 rev 34	1/9/04
+     Cleaned up and finished most of the stuff having to do with
+     numeric parameters, parameters promoted from numeric to string
+     types, parameters on a top-level page, and indirectly-referenced
+     parameters.  Also:  Tcl variables moved into a single array.
+     Also:  Some support for arithmetic expressions in parameters.
+     Very rudimentary at present.
+
+268  v3.1 rev 33	12/16/03
+     Fixed the text justification routine in TCL ("label justify ...").
+     Thanks to Petter Larsson for the bug report.  Fixed two problems
+     with "page clear"---one reported by Brek Miller, showing that
+     the free_single() routine was removing parameters from the
+     referenced object, not the instance, and one reported by Joel
+     Kuusk, where the Tcl "clear page" command allows clearing a page
+     while editing an object instance in the hierarchy of that page,
+     causing an immediate crash.  Finally, corrected prototypes.h
+     for routines setjustbit() and setpinjustbit() for the non-Tcl
+     compile, left in an improper state in revision 32.  Thanks to
+     Dave Armbruster for this bug report.
+
+267  v3.1 rev 32	12/10/03
+     Fixes to the linewidth/border width changing from the menu in the
+     TCL version, as pointed out by Rob Olsen.  Also, on suggestion from
+     Makram Mansour, added LaTeX label handling.
+     
+266  v3.1 rev 31	12/08/03
+     Three fixes from bug reports by Bliss Carkhuff: "page save" returns
+     TCL_OK rather than an undefined value, parameter entry requires
+     exact match to keywords to get text escapes such as "underline", and
+     substring parameter creation corrected for creating parameters in
+     the middle of a label.  Page save error also pointed out by Mark
+     Martin, and Rob Olsen who additionally noted the additional error
+     in linewidth selection (which has also been fixed).
+
+265  v3.1 rev 30	12/01/03
+     Made another change to the output such that all objects used on
+     all pages are output first, inside a PostScript DSC block
+     "DocumentSetup", followed by all the pages.  This modification
+     allows viewers like ghostview to figure out that these objects
+     may be used by any page, and prevents errors that occur when
+     skipping pages forwards or backwards in the viewer.
+
+264  v3.1 rev 29	11/26/03
+     In response to Romano Giannetti, fixed the bounding box
+     routines so that EPS files are handled the way they used to be.
+     The only thing required was to set the overall bounding box to
+     remove the 1" margins; the page bounding boxes remain the same,
+     and ghostscript, ghostview, and EPS insertions into LaTeX
+     documents all appear to be handled correctly.  Also, added the
+     "override" commands to the TCL interface, although to match the
+     rest of the TCL syntax, these have been changed to "library
+     override", "loadfont override", etc.
+
+263  v3.1 rev 28	11/19/03
+     Changed the way XCircuit handles embedded bounding boxes
+     and does page scaling and translation in the output.
+     Removed the "offsets" comment line from the output and
+     changed it to a PostScript translation, which means that
+     all the positional values in the PostScript output on a
+     top-level page are all in xcircuit internal units, without
+     offset, and are therefore invariant with scale, page size,
+     etc.  When an embedded bounding box is present, xcircuit
+     translates the output such that the bounding box is centered
+     on the page.  If "auto-scale" is selected, then the output
+     is scaled such that the bounding box fits centered on the
+     page with 1" margins minimum.
+
+262  v3.1 rev 27	11/16/03
+     Extended the parameter method to include parameters passed
+     inherited by an object instance from its parent.  Fixed the
+     "make object" method such that parameters are copied into the
+     new object (as yet, the new object does not correctly inherit
+     the parameter from the parent).  Added preliminary support
+     for promoting numerical parameters to strings.
+
+261  v3.1 rev 26	11/11/03
+     More fixes and extensions related to parameter key:value
+     pairs.  Added a popup window in the Tcl version for
+     editing substring parameters of an object instance,
+     including functions for formatting ASCII strings from
+     string parameters and vice versa.  Added a function
+     for the "Add New Color" button in the Tcl version, which
+     was missing.  Command syntax "color <idx>" changed to
+     "color set <idx>" and option "color add <name>" added.
+
+260  v3.1 rev 25	11/6/02
+     Changed parameter handling to a key:value pair model.
+     Revised built-in libraries to take advantage of this
+     method, using keys like "value", "units", "length",
+     "width", etc.  Expanded and revised the "parameter"
+     command in Tcl-based XCircuit to provide the key:value
+     information, as well as providing parameter information
+     down one level in the hierarchy for an object instance
+     (using the key "-forward" as the last argument to the
+     "parameter" command).  Added command option "type" to
+     list parameter types, or to list parameters by type.
+     Finished code for removing parameters.
+
+259  v3.1 rev 24	9/19/03
+     Added feature (macro "V" key) to make a library virtual
+     instance from an object selected on a page.  This allows
+     users to make temporary copies of parameterized (or
+     rotated, or flipped) objects for quick retrieval.
+     Several corrections:  Xcircuit now checks for symbols
+     associated with schematics and saves them, even if the
+     symbols are not used in any schematic.  This prevents
+     associations from being lost after a save/quit/load
+     cycle in an unfinished schematic.  Also:  Snap and
+     polygon edit will invalidate the netlist.  Also:  "Make
+     matching symbol" reports an error if the schematic page
+     has an invalid name.
+
+258  v3.1 rev 23	9/15/03
+     Corrected revision 22, which duplicated the NameToObject
+     routine by mistake.  Also added TCL wrapper key bindings
+     for function keys "Page Up" and "Page Down" to increment
+     or decrement the page number (helps with large numbers of
+     schematic pages).
+
+257  v3.1 rev 22	9/10/03
+     Moved routine NameToObject from tclxcircuit.c to schema.c,
+     since it is used by the non-Tcl based code and prevents
+     compiling the non-Tcl version.  Thanks to Swee-Ann Teo for
+     pointing out the error.
+
+256  v3.1 rev 21	9/5/03
+     Fixed a problem with the Tcl calls to the zoom functions,
+     which were passing a NULL event structure.  Thanks to Ed
+     Casas for pointing out this error.  Also:  Fixed the
+     Makefile.am file for compilation under Cygwin, which was
+     presented the wrong name for menudep.o.  Thanks to Carlos
+     Davila for pointing out this error.
+
+255  v3.1 rev 20	9/4/03
+     Changed key and button handling in Tcl to work using the Tk
+     "bind" function, with the usual behavior being bound to the
+     "standardaction" command.  Standard actions can be rebound
+     using the xcircuit "bindkey" command, or keys can be bound
+     to Tcl procedures using the Tk "bind" command.
+
+254  v3.1 rev 19	8/12/03
+     Required reconfiguring without Tcl once to generate the
+     "Makefile.in" in the Xw directory;  otherwise, automake 1.7
+     becomes a requirement.
+
+253  v3.1 rev 18	8/6/03
+     A fix to the output, correcting the page numbering in the
+     PostScript page headers.  The incorrect numbering can cause
+     some printers to lock up. . .
+
+252  v3.1 rev 17	7/14/03
+     Thanks to Ted Roth for fixing my rather too-hasty fix of
+     revision 16.  Also:  Some fixes to the autoconf script (also
+     from Ted Roth), and autoconf script updated to work with the
+     latest versions of autoconf/automake/aclocal.
+
+251  v3.1 rev 16	7/08/03
+     Fix to "x" and "y" output for .sim format---thanks to Kath Shih
+     for pointing out this error.
+
+250  v3.1 rev 14	5/05/03
+     Incorporated a patch from Max Horn to remove all references
+     to "malloc.h" from the headers, and fix the configuration file
+     for Mac OS-X compilation.
+
+249  v3.1 rev 13	4/29/03
+     Fixed a problem due to automatic search for schematics which
+     prevents a single page from being saved.  The output window
+     now shows both "schematics" and "subcircuits" with checkboxes;
+     pushing "schematics" unlinks top-level schematics, and pushing
+     "subcircuits" can prevent subcircuits from being saved along
+     with the file.  In either case, the filename is blanked out
+     so the user will not mistakenly overwrite the original file
+     with a truncated one.  In conjunction with this method, the
+     Tcl "page links" command has been extended to include the
+     options "independent", "dependent", "total", "pagedependent",
+     and "all".  Eventually, I expect to add an additional option
+     "list" to list page names instead of simply enumerating them.
+     Thanks to Mark Jones for pointing out this error.
+
+248  v3.1 rev 12	4/14/03
+     Fixed the PostScript background rendering, which was only
+     broken because of a broken implementation of ghostscript
+     (version 6.5).
+
+247  v3.1 rev 10	3/21/03
+     Replaced TkCon with the version used with magic, fixing a
+     minor issue with handling backslash escape sequences.
+
+246  v3.1 rev 9		2/26/03
+     Fixed the install for revision 8, which failed to run the
+     xcircuit.tcl script through the m4 preprocessor.  Also, on
+     recommendation of Mark Jones, added a warning message when
+     pins exist on a symbol which do not exist in the associated
+     schematic.
+
+245  v3.1 rev 8		2/23/03
+     Resolved numerous issues with cross-application methods.
+     Overloaded the "label" Tcl procedure to accept both xcircuit
+     and Tcl syntax, and removed the "bgerror.tcl" file.
+     Added procedures for calling netgen, IRSIM, and magic while
+     running XCircuit.
+
+244  v3.1 rev 5		2/19/03
+     Fixed (for the third time(!)) occurrences of "getline" which
+     should have been changed to "setline".  Fixed the toolbar
+     widget so that it recomputes its width when the window size
+     changes, and so that it does not squeeze the height of the
+     bottom message bar.
+
+243  v3.1 rev 4		2/12/03
+     Added handling of "va_copy" to the configuration script for
+     systems which do not define it.  Also:  Added "%x" and "%y"
+     escapes to the info label syntax, for writing positional
+     information to the output (helps LVS programs like "netgen"
+     trace back errors to the schematic).  Split the "Manifest"
+     file into "CHANGES" and "TODO" and started adding revision
+     numbers to the change log entries to match the revision
+     number on the website download page.
+
+242  v3.1 rev 3		2/10/03
+     Added Tcl handling of the string parameter insertion via a
+     popup prompt.
+
+241  v3.1 rev 2		2/04/03
+     Traced the "No per display information" error to use of an Xt
+     function (XtDispatchEvent()); replaced with Tk_HandleEvent().
+
+240  v3.1 rev 1		2/03/03
+     Fixed numerous problems with the Tcl-based version, and added
+     several missing functions (such as the select filter, and
+     handling keystroke <return> in the filelist widget).
+
+239  v3.1 rev 0		1/24/03
+     Finished preliminary version of Tcl-based xcircuit.  Relocated
+     runtime files back to (default) "/usr/local/lib" (instead of
+     autoconf's default $datadir "/usr/local/share").  Threw in
+     tkcon.tcl for compatibility with magic/irsim/netgen and recast
+     fprintf() as macro Fprintf(), which calls "tcl_printf()" in
+     the Tcl version and "fprintf()" in the other versions.  Added
+     command-line function "-exec <file>" to the Tcl version for
+     running in batch mode (or alternately, just to bypass the
+     default startup file).
+
+Version 3.0 (June 2002 to January 2003)
+----------------------------------------------------------------------
+238  v3.0		1/15/03
+     On advice from Zhengdao Wang, changed the postscript header to
+     draw "opaque" styles as solid color, not stipples.  All fill
+     styles except for white (empty) are made opaque by default and
+     fill style white is made transparent by default.  The "opaque"
+     menu button can set the non-default behavior.
+     Also:  Added a file loading command to the python and
+     non-interpreter command-line interfaces.
+
+237  v3.0		11/25/02
+     Cleaned up some code with respect to 64-bit pointers, checking
+     for the size of pointers in "configure", and setting the proper
+     integer type for pointers in xcircuit.h.  Should compile cleanly
+     on 64-bit systems without the "-taso" switch (which doesn't
+     exist for Linux/alpha systems).
+
+236  v3.0		9/23/02
+     Added pixmap image handling to Tk/Tcl, and removed SWIG from
+     the "make" process.  Configure option "--enable-wrapper" changed
+     to "--enable-tcl", "make wrapper" changed to "make tcl", and
+     "make install-wrapper" changed to "make install-tcl".  Added
+     the toolbar and associated functions.  Added "netlist" function
+     to Tcl for generic netlist handling.  Fixed numerous errors in
+     the Tcl callbacks.  Tcl functionality is now about 95% of what
+     it should be.  Non-Tcl version has not been affected by these
+     changes.
+
+235) v3.0		7/17/02
+     Several bug fixes for bugs reported by Massimo Gaspari (see
+     below).
+
+234) v3.0		7/08/02
+     Fixed bug in the Python "bind" command such that keys not
+     bound to macros return an xcircuit error, not a Python error
+     (bug reported by Bob Paddock).  Also fixed a bug reported by 
+     Petter Larsson <f97-pla@nada.kth.se> in which the result of
+     getenv("XCIRCUIT_LIB_DIR") is not check for a NULL value
+     when executed from (any) interpreter.
+
+233) v3.0		7/03/02
+     Several bug fixes for parameter-functionality bugs found by
+     Massimo Gaspari <gaspari@tin.it>.  Changes are relatively minor
+     and not worth inducing a version number change.
+
+232) v3.0		6/24/02
+     Abount 90% of the Tcl functionality necessary to duplicate all
+     existing functions has been completed.  This makes the Tcl-wrapped
+     version useable, but experimental, and a bit crash-prone.  The
+     command set it written up in "README.Tcl".  Compiling involves
+     doing "configure --enable-wrapper" followed by "make wrapper"
+     and "make install-wrapper".  Otherwise, the standard "configure"
+     and "make" results in the standard version of xcircuit.
+
+Version 2.5 (November 2001 to June 2002)
+----------------------------------------------------------------------
+231) v2.5.5		5/21/02
+     Started on the Tcl-wrapped version of XCircuit.  Currently
+     this is just a big mess.  I am posting it to the distribution
+     with all the wrapper stuff disabled and no instructions on how
+     to compile it, mainly so I don't have to keep making sure that
+     bug fixes are reflected in both versions.
+
+230) v2.5.4		5/14/02
+     Revised the CvtStringToPixel so that it satisfies (or should
+     satisfy) all X servers doing 8 bpp, even those that return
+     bogus values on XLookupColor().  Previous "fix" had disabled
+     private colormap installation.
+     Also:  Improved "gettext.py" to deal with tabs and page breaks,
+     and takes optional values for maximum lines per page and font
+     to use.  Fixed a bug in "pagebbox.py" and also a related bug
+     which clipped color values to size short when set by "setattr"
+     in Python.
+
+229) v2.5.4		5/10/02
+     Fixed a bug in which XCIRCUIT_LIB_DIR must be defined or the
+     program will crash.  Also:  Added text split and join functions,
+     and text "up" and "down", mapped to the Up and Down arrow keys.
+
+228) v2.5.4		5/09/02
+     Changed the format of the output of the Python netlist() function
+     to better facilitate flattened netlists.  Nets are passed by
+     number and associated to names in a separate dictionary.  This
+     allows names to be changed (as required when flattening) without
+     altering the netlist.  Otherwise, it becomes a big mess.  The
+     new format ends up being smaller than the original.  "flatspice.py"
+     has not yet been completed, though.
+
+227) v2.5.4		5/07/02
+     Repaired some problems with the Python netlist() function, and
+     wrote a working version of "spice.py".  Will replace the
+     internal functions when the "sim" and "pcb" scripts are written.
+
+226) v2.5.4		4/29/02
+     Various changes in response to bug reports:  Fixed library and
+     page object exchange, PCB infolabels on quad parts.  Seg fault
+     due to missing code in "unmakenumericalp" has been worked around,
+     but the routine still needs to be finished.  Patched filelist.c
+     to query result of stat().  Fixed error with XQueryColors in
+     8-bit pseudocolor mode.
+
+225) v2.5.4		4/26/02
+     Got rid of the "passive grab" action, which seems to be the root
+     cause of the video screen blanking on some systems.  Eventually
+     discovered that "XtAddEventHandler" doesn't work for ButtonMotion
+     if it's called AFTER the button has already been pressed.  With
+     this fact in hand, it was easy to avoid all the Add/Remove calls
+     and just add the event handler once, at the beginning.
+
+224) v2.5.4		4/19/02
+     Replaced the top-level object with a top-level instance, with
+     all the ensuing fallout.  The resulting code is much cleaner.
+
+223) v2.5.4		3/25/02
+     Fixed the problem of parts being auto-deleted by the netlister
+     pointed out by Jeremy Brown.  Also:  Fixed a problem found by
+     Bob Paddock in which label segments are miscounted on output;
+     apparently, this only happens using the "gettext" script.
+
+222) v2.5.4		3/21/02
+     Changed library structure so that every object gets an instance.
+     This precipitated many code changes.  Along the way I fixed up
+     a bunch of minor errors, too many to list.  Bounding boxes in
+     the PostScript output ("bbox" entry) have become obsolete,
+     except for font files, where the bounding box is not necessarily
+     coincident with its contents.
+
+221) v2.5.4		3/19/02
+     Added key binding for "pin global" (key "G"), which was
+     documented but was not actually in the program.  Thanks to
+     Jeremy Brown (jhbrown@ai.mit.edu) for pointing this out.
+     Also:  On another suggestion of Jeremy's, added a scrollbar
+     to the help window.  Along the same lines, cleaned up the
+     "file read" window so that the pixmap is never shorter than
+     the viewport.  Fixed a small error with PostScript background
+     rendering---newline before "end_insert" avoids problems with
+     binary-format PostScript.  Changed default key binding for
+     BackSpace to equal behavior of Delete.  This seems to be what
+     most people expect and/or want as default behavior.
+
+220) v2.5.4		3/12/02
+     Implemented instance-defined bounding boxes and cleaned up a
+     lot of stuff related to bounding boxes.  This was needed to
+     properly implement the new "libinst" method described below.
+     Also: Altered the connectivity highlight function so that it
+     retains the number of the highlighted net in the netlist, and
+     continues to display the highlight through page changes and
+     expose events.  Fixed a bug in the PCB netlister.
+
+219) v2.5.3		2/27/02
+     Fixed a few minor inconsistencies related to color allocation.
+     Also:  Implemented a "select previous" command, an undo command
+     for selections.  Third mouse button function ("Escape") will
+     unselect anything that is selected, but if nothing is selected,
+     it will retrieve the last selection.  Page/object changes
+     destroy the previous selection record.  Also:  Added intanced
+     scale and rotation values to the "libinst" record (values are
+     optional).  This allows, for instance, the "arrowhead90" object
+     to be replaced by an instance of the original "arrowhead"
+     rotated by 90 degrees.  All libraries updated to include
+     useful instantiations of objects rotated by 90 degrees:
+     arrowhead, arrow, circle, jumper, and all of the analoglib2
+     objects which allow instanced rotation and justification of
+     their parameter value labels.
+
+218) v2.5.3		2/26/02
+     Bug fixes to incremental netlisting.  Also:  Separated the loading
+     of GUI colors from that for layout colors.  The schematic capture
+     was re-using SNAPCOLOR, AUXCOLOR, and BBOXCOLOR, which causes bad
+     effects if one attempts to change these values in the X defaults.
+     Re-used GUI colors were not necessarily duplicated or available
+     in the layout color palette, which was also confusing.  Also:
+     environment variable XCIRCUIT_LIB_DIR now applies to the search
+     for the startup script.  This enables xcircuit to be tested prior
+     to installation by doing "setenv XCIRCUIT_LIB_DIR ./lib" in the
+     top-level source directory.
+
+217) v2.5.3		1/30/02
+     Changed the behavior of the PostScript background so that it scales,
+     rotates, and translates with output selections (Landscape vs. Portrait,
+     and vs.  Output Scale), so the behavior is what would be expected.  Still
+     allows only one background image per page, though, and the PostScript
+     image can't be scaled, rotated, and translated independently of the rest
+     of the drawing (those things must be done to the image prior to loading).
+
+216) v2.5.3		1/3/02
+     Minor bugfixes:  variable reading (varfscan, varpscan) requires skip
+     over whitespace.  Netlist requires reinstating routine nearpoint()
+     because matrix transformations have roundoff errors and pin positions
+     should not be compared exactly.  Updated Copyrights to 2002.  Netlist
+     generation has been confirmed on a large schematic design.
+
+215) v2.5.3             1/1/02
+     First cut at incremental netlisting---implemented a scheme in which
+     netlists are kept after being generated, until they are invalidated
+     or the object is destroyed.  This scheme allows the netlist structure
+     to be queried at any time.  Netlist creation is independent of the
+     netlist mode, as it should have been to begin with.
+
+215) v2.5.2		12/26/01
+     Correction to duplicate object code makes sure that schematic/symbol
+     association does not get destroyed along with the duplicate object!
+
+     Also:  Applied Holger Vogt's patches to configure.in for proper
+     compilation under Cygwin.
+
+214) v2.5.2		12/15/01
+     XCircuit now allows pin labels to be parameterized, treating them
+     as an instance-dependent label.  While this does not alter the
+     SPICE and sim netlists, it allows (for example) quad parts such
+     as four NAND gates of a 7400 chip, each having its own unique
+     pinout but sharing the same object.
+
+     Also:  To go with the pin labels, added a method for generating
+     "virtual copies" of an object to appear on a library page ("V"
+     key from the library page).  The virtual copy is a different
+     instance of the object, and can take different parameters.
+     Started on library "quadparts" with 7400-series pinouts to
+     facilitate use of the new feature with PCB netlisting.
+
+213) v2.5.1		12/06/01
+     Revised the routines that deal with duplicate objects.  New routines
+     prevent propagation of appended underscores (used to differentiate
+     between objects with the same name but different structure).  The
+     major change is that a list of aliases is kept for objects with the
+     same structure but different names, so there is no confusion through
+     the process of reading the library.  When the loading is done, the
+     aliases are removed and the names are cleaned up.
+
+     Also:  Switched the copyright to GPL for better compatibility with
+     other open-source tools, and because it's the Right Thing To Do.
+
+212) v2.5.0		11/28/01
+     Removed an ill-conceived routine which would delete duplicate
+     copies of an object even if the names were different.  This action
+     can give rise to very bad inconsistencies.  A better idea would be
+     to try to "clean up" leading underscores whenever an object with
+     a leading underscore is deleted.  However, this is a minor point.
+
+     Also:  Fixed a string overrun bug in charreport().
+
+211) v2.5.0		11/16/01
+     Finally (!) added support for parameterized values other than
+     label (sub)strings.  This includes parameterization of all
+     element values except color (which is handled by an inheritance
+     model).  Includes parameterization of:  point position (x, y, or
+     both), line style, linewidth, scale, rotation, label justification,
+     and arc radius, minor axis, and endpoint angles.  Includes support
+     loading, saving, displaying, printing, and editing.
+
+Version 2.4 (November 2001)
+----------------------------------------------------------------------
+210) v2.4.0		11/14/01
+     Added python script "pagebbox.py" to create standard page-size
+     bounding boxes (request from Bob Paddock).  Along with this,
+     I updated the python code to handle colors by name or RGB
+     components, rather than by index, which is visual-dependent.
+
+209) v2.4.0		11/12/01
+     Bug fixes to 2.4.0:  Fallback resources string must be null-
+     terminated, added 2 remaining fallback resources that are
+     not taken care of by the XtGetApplicationResources() routine,
+     and changed XtAddConverter to XtAppAddConverter.  I hope that
+     the application-specific references will prevent problems
+     with the timeout functions, and maybe with input focus as well.
+
+     Also: Fixed type casting of values retrieved from the message3
+     widget---values are type "Dimension" and "Position" (usually
+     defined as unsigned short and short, respectively), not int.
+     Causes errors under Solaris and probably other systems, too.
+
+208) v2.4.0		11/09/01
+     Switched to a new method for defining rotation.  Rotation in
+     xcircuit is now given in degrees, which matches the PostScript
+     output.  Flipping is done in the obvious way by declaring a
+     negative scale value (which is applied only to the X component
+     in the transformation matrix;  Y is always positive).  Lookup
+     tables for sines and cosines are replaced by the math library
+     functions, which presumably are fast enough not to show any
+     performance hit on most machines.  The redefinition of the
+     PostScript prologue prompts the move to a new minor version
+     number.  Rotation is still an integer value, so the minimum
+     rotation increment is 1 degree.
+
+     Also: Fixed an error in the PostScript prolog in which text
+     flip invariance was incorrectly implemented after the addition
+     of text kerning & scaling methods.  Fixed another error in which
+     XCircuit and PostScript disagree about text orientation due to
+     roundoff errors.  Matrix values must be compared to some epsilon,
+     not zero, to determine when the orientation is 90 or 270 degrees.
+     epsilon = 1e-9 works fine.
+
+     Also: Changed certain Xt routines to include XtAppContext in the
+     hope of avoiding the problem with the TimeOut function conflicting
+     with other X11 programs (namely, screensavers).  Hopefully the
+     addition of fallback_resources to XtOpenApplication will prevent
+     problems with the X defaults when the X defaults file cannot be
+     found.
+
+Version 2.3 (May 2001 to November 2001) 
+----------------------------------------------------------------------
+208) v2.3.6		11/05/01
+     Added rudimentary "edit-in-place".  Currently, this is a bit odd,
+     because the hierarchy above the object is rotated to match the
+     "natural" orientation of the object, rather than the other way
+     around.  This should be fixed by allowing rotation and flips to
+     the top-level page (keep the transformation matrix for the page
+     rather than just the scale and position).  Skewing of the grid
+     due to rotations is a can of worms, though.  Probably rotating
+     to the nearest 90 degrees would suffice for most purposes.
+     Edit-in-Place is turned on by default.  It can be turned off if
+     the extra drawing clutters the window.
+
+207) v2.3.6		11/01/01
+     Fixed a long-standing error in which the "rejustify" routine
+     was giving labels invalid "justify" bit fields.  Fixed a problem
+     with the "visible pins" in which the visibility flag would always
+     be reset by a rejustification of the label.
+
+     Also:  Removed the ":n" suffix from pages in multiple-page files
+     with the same name.  The addition of the suffix was screwing up
+     the association of symbols to schematics on file reads, and it
+     seems to work fine without it.  Some attempt is made to enforce
+     unique names for pages associated to symbols, but it seems to
+     work correctly whether or not names are unique.
+
+     Also:  Fixed an error in string parameter deletion, and added
+     a call to mergestring() after deletestring() to connect any
+     divided text.
+
+206) v2.3.6		10/25/01
+     Revamped the file list window on the suggestion of Zhengdao
+     to highlight files that match the expected file extension.
+     Extended this idea to include a "file filter" which displays
+     only those files with matching extensions.  This feature can
+     be turned off by clicking a toggle button in case a file with
+     an unusual name or extension cannot be seen.
+
+     Also: Added a flag to the label justification value which
+     allows pins to be seen on hierarchical levels other than the
+     top.  Changes to the prolog prompted the change to subversion
+     6 although the change is fully backward-compatible.  Thanks
+     to Bob Paddock for the suggestion.
+
+205) v2.3.5		10/24/01
+     Fixed a netlisting bug pointed out by Bryce Denny in which the
+     layer ordering of label vs. polygon can cause the label to not
+     be associated with the network under it.  This led me to
+     discover another bug in which a label position would update the
+     netlist properly but the actual label itself would not be added
+     to the netlist (the only apparent consequence is that the label
+     is not hightlighted during a connectivity check).
+
+     Also:  Fixed the behavior of the .xcircuitrc file loading so that
+     keys can be rebound from the file.  Added Python commands for
+     pan and zoom, and wrote an example script which rebinds keys "Z"
+     and "z" to a python function which combines the pan and zoom.
+     Separated zoom functions between those with and without screen
+     refresh.
+
+204) v2.3.4		10/22/01
+     Fixed some buggy behavior with respect to loading and setting
+     default fonts in .xcircuitrc and xcstartup.py.  Thanks to Jeremy
+     Braun (jtbraun@MIT.EDU) for reporting these errors in detail.
+     Also:  Fixed a missing requirement in checking object name
+     syntax.  A PostScript name must be a string which cannot be
+     interpreted as a number.  Thus, "+9" and "1E9" are illegal
+     names.  Thanks to Bob Paddock (bpaddock@csonline.net) for
+     reporting this bug.
+
+     Also:  Changed behavior with respect to environtment variables,
+     allowing "TMPDIR" to set the temporary directory and allowing
+     an override of the "XAPPLRESDIR" directory.  Added a list of
+     environment variables used by xcircuit to the manual page.
+
+     Also: Revised the tempfile mechanism once again to include a
+     check on the number of times a file has been modified;  heavy
+     modification will induce a temp-file save even if the timer
+     has not expired.
+
+203) v2.3.4		10/19/01
+     Implemented a "changed" file mechanism which checks for changes
+     to pages and objects and queries for confirmation if there are
+     unsaved changes upon quitting.  Changed filename behavior so that
+     all filenames have their own malloc'd space, instead of sharing
+     filenames.  Extended file backup to include different filenames
+     on different pages.  Added a toggle box on the output popup
+     window so that a page can be unlinked from a multipage file,
+     and displays the number of pages in the file.  Added the simple
+     popup window (no text entry) to the list of python calls.
+
+202) v2.3.4		10/18/01
+     Fixed the crash file recovery so that ONLY the given crash file
+     can be loaded (load and cancel are the only choices).  Also,
+     the actual temp file name is hidden from view, and the original
+     filename is recovered from the "%%Title:" header line.
+     Also:  Fixed the problem in which startwire() was called after
+     a popup window button was selected.
+
+201) v2.3.4		9/18/01
+     Names of pages added to the library and page directories.
+     Thanks to Bob Paddock <bpaddock@csonline.net> for suggesting
+     the feature.
+
+     Also: Updated "configure.in" to check for the infamous python
+     version 1.5, and disable the python interface if found.
+
+200) v2.3.4             9/10/01
+     RPM package makefile fixes (thanks to Alex Habig
+     <habig@neutrino.d.umn.edu>).  Also:  changed undelete() to
+     xc_undelete() to avoid conflict with OpenBSD/FreeBSD system
+     calls.  Thanks to Mike Andrews <mikea@mikea.ath.cx> for
+     bringing this to my attention.
+
+200) v2.3.4		8/12/01
+     Implemented a Python interface into the netlist structures.
+     Set up for use of Python scripts to generate all netlist
+     output, as well as dealing with non-PostScript format input.
+
+     Also: fixed a problem with crash recovery caused by the
+     program exiting on call to Py_Exit.  Improved the crash
+     recovery mechanism to automatically find crash files on
+     startup, and prompt user to load.
+
+     Also: added more Python functions, for page clear, page change,
+     add key bindings to Python functions, and create menu buttons
+     with callbacks to Python functions.  Added Python functions for
+     calling a popup prompt, file browser.
+
+198) v2.3.3		7/27/01
+     Fixed more man page problems with the make process.  Added
+     default values for Python libraries when the Python Makefile
+     can't be found.  Made the rcfile parsing more robust, esp.
+     so it doesn't crash if it attempts to read a non-script file.
+
+197) v2.3.3		7/26/01
+     Added auto-numbering of component numbers using netlist mode
+     "idxpcb".  This works for all component numbering (including
+     SPICE and sim) where the component number is parameterized and
+     denoted by a question mark ("?").  Thanks to Lapo Pieri
+     <lapo@iroe.fi.cnr.it> for the suggestion and some code to
+     implement the function outside of xcircuit.
+
+     Also: Fixed Imakefile so that imake uses m4 to generate the
+     man page correctly on "make install.man".
+
+196) v2.3.3		7/18/01
+     Fixed two errors, one which split global nets in hierarchical PCB
+     netlists, the other which failed to find nested parameters.
+
+195) v2.3.3		7/17/01
+     Some changes to the GNU autoconf (with much help from Albert
+     Chin) for correct parsing of the path to python, avoidance of
+     errors when generating the man page, and re-instantiation of
+     the keyboard input focus workaround.
+
+     Also: Removed the behavior of turning pins back into labels
+     when creating objects or moving labels between pages or
+     objects.  Added behavior that if a pin is removed (or moved
+     out of an object), and the pin has a unique string, any pin
+     on the corresponding symbol/schematic will revert to a plain
+     label.  This was the intended behavior.
+
+194) v2.3.3		7/09/01
+     Added label strings to the Python setattr() command.  Added a
+     getcursor() command to Python.  Created a python script called
+     "gettext(filename)" which creates an xcircuit label from the
+     contents of an ASCII file.
+
+193) v2.3.3		7/06/01
+     Quick fix to an error in interpreting key names for key bindings.
+
+192) v2.3.3		7/05/01
+     Added environment variable XAPPLRESDIR so that application
+     defaults come from the location specified by the configure script,
+     not /usr/lib/X11/app-defaults.  This also allows app-defaults to
+     be used even if xcircuit is compiled without root privileges.
+     The configure script was modified to compile in Xpm, if it can
+     be found.
+
+191) v2.3.3		7/02/01
+     Changed netlist behavior so that wires only connect at endpoints
+     (although an endpoint may attach TO any location along a segment
+     of another wire).  Optimized a few routines for speed.  Netlist
+     output now changes symbol font and standard font "mu" (i.e.,
+     micro) to "u".  Fixed a bug preventing correct loading of files
+     containing multi-part strings as parameters.
+
+190) v2.3.3		6/28/01
+     Cleaned up some behavior with respect to component numbering,
+     including fixing numbering for flattened SPICE output.  Added
+     a PCB library for generic IC parts.
+
+189) v2.3.3		6/27/01
+     Corrected the parseinfo() routine so that it correctly uses the
+     symbol, not the schematic, to pick up information about a pcb
+     name.  Changed some of the library objects (namely the passive
+     devices like Resistor and Capacitor) so that pin names are PCB-
+     like and device can be given a part number.  Changed the netlist
+     compiler behavior so that all indices are numbered relative to
+     a particular component, rather than numbered relative to all
+     components.
+
+188) v2.3.2		6/25/01
+     Replaced the imake build with a GNU configure build.  Thanks to
+     Albert Chin-A-Young <china@thewrittenword.com> for setting up
+     the scripts for automake/autoconf.  For purposes of compliance
+     with modern directory nomenclature, startup files and such are
+     now installed in /usr/local/share/ instead of /usr/local/lib/.
+
+     Also:  Added a "show pin positions" feature (recommended by
+     Larry Doolittle) to the Options menu, which allows pin locations
+     to appear on the hierarchical level above, to help in finding
+     pin connections into objects.
+
+187) v2.3.1		6/22/01
+     More patches from Larry Doolittle, some cleaning up cruft flagged
+     by compiling with -Wall, and re-patching a string function (an
+     error which I am unable to duplicate.  But I will take his word
+     for it).  Also, worked on Xw/TextEdit.c to implement horizontal
+     scrolling of text (so it will no longer run off the end of the
+     window).
+
+     Also, finally implemented a way to check for overlapping objects
+     caused by a copy or move (this is not exhaustive, but covers the
+     most obvious ways this can happen).  This is especially critical
+     for schematics, because multiple circuit elements will end up in
+     the netlist when they cannot be seen on the schematic.
+
+186) v2.3.1		6/21/01
+     Applied patch from Larry Doolittle <ldoolitt@recycle.lbl.gov>
+     to correct error in line length computation when writing output.
+     Also modified file reader to treat lines ending with "{" as
+     continuation lines (such as the beginning of a label), if they
+     don't look like object definitions.
+
+     Also: Copying library objects now also copies the parameters,
+     and the page viewing parameters.  Corrected an error wherein
+     stringcopy() calls makesegment(), although the former is
+     supposed to ignore parameters, and the latter doesn't.  Also,
+     instantiated a slightly "improved" object compare that is able
+     to compare objects against objects with underscore-prepended name
+     adjustments, in an attempt to avoid a proliferation of underscores.
+     Fixed an error that reset "version" in the middle of a file read
+     if a font was loaded.  Updated some of the "examples" files to the
+     current format.
+
+185) v2.3.1		6/18/01
+     Added tilde ('~') expansions to filenames.  Thanks to Norman
+     Werner <norman.werner@student.uni-magdeburg.de> for patches which
+     seeded the final version of this code.
+
+184) v2.3.1		6/12/01
+     Changed the Imakefile for Python-2.1 and added instructions to the
+     README file on how to make a shared (.so) python library.
+
+183) v2.3.1		6/11/01
+     Corrected a few errors which showed up on other compilers (thanks
+     once again to Albert Chin, <china@thewrittenword.com>).
+
+182) v2.3.1		6/04/01
+     Fixed an error caught by John Livsey (<jlivsey@bigpond.com>) in
+     which loading old library files causes the version number to
+     revert to 1.9, causing havoc when reloading saved files.  This
+     has been fixed along with code to check more decisively for
+     which label syntax is in the file, and adjust the version number
+     accordingly rather than depend solely on the version number
+     extracted from the file header.
+
+181) v2.3.1		5/31/01
+     Cleaned up errors found in the netlist code while doing a large
+     chip project.  Added flattened SPICE output and changed SPICE
+     output to be compatible with "hspice" syntax.  Netlist compilation
+     runs about three times faster than before, but should be able to
+     do better, still.
+
+180) v2.3		5/16/01
+     Completed the full hierarchy search on subschematics.  searchconnect()
+     makes a call to search_on_siblings(), looking for any connection from
+     any object in the hierarchy of viewable (sub)schematics to the object
+     under consideration.  Added a bounding box disjoint test to reduce
+     unnecessary searching.  Could use a lot more optimization, though.
+
+     Also, from the March 27 version, genportpins() has been merged back
+     into gencalllist().  Spice and Sim netlists are correct for numerous
+     torture tests given to xcircuit.
+
+     Corrected errors in text generation stemming from the new
+     PostScript profile (thanks to Jeremy T Braun <jtbraun@MIT.EDU>
+     for patches).  Ultimately, decided to more closely match the
+     PostScript and XCircuit label formats by declaring an overall
+     scale outside of the label segments.  All font scales declared
+     by "cf" commands are therefore relative, not absolute.  The
+     change in output format prompted the change to version number
+     2.3.
+
+Version 2.2 (December 2000 to May 2001)
+----------------------------------------------------------------------
+179) v2.2.3		3/27/01
+     Completely overhauled the method for text strings, implementing
+     a linked-list method.  In conjunction with this change, also
+     overhauled parameters to be called bottom-up rather than top-
+     down, thus eliminating the need for tracking reallocated
+     memory (which was not compiling correctly under the latest
+     version of gcc).  Also made other structural changes, removed
+     the text backspace character, and replaced it with a tabbing
+     system.  Made key bindings for text home, end, left, right,
+     delete, return, and special character insert, as well as the
+     new tabbing commands.  PostScript profile revised to
+     incorporate the tabbing features.
+     Also:  Overhauled the netlist generator.  The result is much
+     cleaner and more understandable.  The main difference is that
+     the Netlist structure is comprised of nets and pins (no
+     separate Pinlist), and the Paramlist (now called a Portlist
+     to distinguish from object parameters) calls by net number,
+     not by pin name.  Ports are accessed dictionary-style, by
+     key-value pairs (port ID : netID).  The netlist is generated
+     in by three recursive routines, gennetlist(), genportpins(),
+     and gencalllist().  genportpins() now searches for net
+     connections arbitrarily far down into the netlist hierarchy.
+     gencalllist() resolves net numbers and removes empty calls
+     as it traverses the hierarchy.
+     Also:  Implemented recursive selection for finding network
+     connectivity, so any net visible on the page can be queried
+     for both a net name and highlighting the network.
+     Also:  Implemented automatic redraw of text with parameters,
+     so that parameters which are edited are immediately updated
+     wherever they occur in the current top-level page.
+     Also:  Thanks to Masao Kawamura (kawamura@mlb.co.jp) Media Lab.
+     Inc., Japan, for tracking down several bugs, including a very
+     bad one in which the admittedly dubious syntax
+                a[x] = a[--x];
+     acts like (the intended) 
+                a[x] = a[x - 1];  x--;
+     when compiled with -g (debug) option, but acts like
+                x--; a[x] = a[x];
+     when compiled without debug.  Also, temporary files have been
+     reimplemented using mkstemp(), which is more secure than
+     tempnam() and tmpnam().
+
+178) v2.2.2		3/7/01
+     Added significantly to the Python interface, including access to
+     all elements on a page by dictionary key:value pair assignment.
+     Added mouse button handling to the key binding, and changed the
+     help window to reflect current key bindings.
+     
+177) v2.2.2		3/1/01
+     Fixed a bug in the PostScript profile introduced with version 2.2,
+     wherein string bounding boxes were computed incorrectly because
+     user space was rotated.
+
+176) v2.2.1		2/27/01
+     Implemented code for user-defined key bindings; set up default
+     key bindings to match all prior versions of xcircuit, and added
+     python and script commands to bind and unbind keys with function
+     definitions.
+
+175) v2.2.1		1/30/01
+     Cleaned up a lot of code, making the subroutine parameter lists
+     consistent.  Added all the necessary function prototypes as a
+     separate prototypes.h file, and removed unused parameters and
+     unused variables.  Fixed a few heretofore unnoticed bugs in the
+     process.  Thanks to Karim Kaschani (karim.kaschani@arcormail.de)
+     for instigating this process, although I failed to find the bugs
+     he was experiencing, and may have to revamp the label and
+     parameter string concept (again!) to fix it.  Also, thanks to
+     David Nicholls (davidallannicholls@hotmail.com) for a fix to
+     nosprint(), although I didn't implement the rest of his
+     thoughtfully provided code (and there was a lot of it!),
+     preferring to leave much of it to Python scripts, which are
+     coming soon.  Expanded the Python functions, but so far, still
+     mostly experimental.
+
+174) v2.2.1		1/22/01
+     Completely redefined the command-line, including the startup
+     script and .xcircuitrc file to be Python scripts, and embedded
+     the Python interpreter into xcircuit.
+
+173) v2.2.0		12/19/00
+     Made additions to the command-line functions; also, declared
+     the library inclusion commands "loadlibrary" and "loadfontencoding"
+     to be obsolete, and changed the startup file "builtins.lps" to
+     a startup script called "startup.script".  This makes a lot more
+     sense.
+
+172) v2.2.0		12/15/00
+     Finally declared version to be stable enough for a non-beta
+     release.  Revised methods for generating schematics and symbols
+     in the circuit hierarchy.  Added (a modified) analoglib2.lps
+     (circuit elements with parameters) to the "builtins" list.
+     Fixed errors with sim and pcb netlist outputs, and cleaned up
+     other minor things.  Object types are now "fundamental",
+     "trivial", and "subschematic", as well as "normal" object,
+     with the type depending partly on context.
+
+Version 2.1b (July 2000 to December 2000)
+----------------------------------------------------------------------
+171) v2.1b9 (beta)	11/30/00
+     Added full functionality for text blocks (carriage-return),
+     kerning, scaling, and color change within labels.
+
+170) v2.1b8 (beta)	11/11/00
+     More fixes to the parameterization and netlist functions (thanks
+     to Terry Hancock <hancock@earthlink.net> for help with testing
+     and debugging this extraordinarily complex code).  Created a new
+     PostScript prolog which not only fixes one very long-standing
+     error, but also allows text blocks with carriage returns and
+     kerning within text blocks.  These functions have not yet been
+     reflected in the xcircuit code.
+
+169) v2.1b7 (beta)	10/30/00
+     Possible fix (again!) to the input focus problem:  Added an
+     event handler to catch map and unmap events, so xcircuit should
+     never attempt to set input focus on an unmapped window.  Also:
+     extention to information labels allows labels to be broken into
+     parts, i.e., "sim1:", "sim2:", etc., and extended the protocol
+     of '%' sequences to include %r (carriage-return), %t (tab), and
+     %% ('%' symbol, literal).
+
+168) v2.1b7 (beta)	10/25/00
+     Extended PCB netlist capability:  An info label beginning with
+     "pcb:" now indicates the object name to be used in naming the
+     pins.  The info label can contain all the %-escapes used for
+     spice: and sim: info labels, and similarly, can use parameters
+     with the Alt-p key sequence.  A new escape "%n" has been added
+     which inserts the name of the object into the output.  The new
+     pcb method can be used to explicitly define instances of an
+     object (i.e., "cap_1", "cap_2") or to redefine a name locally
+     ("inverter" becomes "1/6 74HC04", for instance).
+
+167) v2.1b6 (beta)      10/23/00
+     Fixed a fatal bug pointed out by Wilson Barroz
+     (wbarroz@bol.com.br), in which a break statement got lost,
+     effectively crashing xcircuit if a path was selected.
+
+166) v2.1b6 (beta)	10/2/00
+     Fixed problem with schematic capture on/off, so that pins and
+     info labels are not displayed or saved when schematic capture
+     has been turned off.  Fixed much of the problem with parameter
+     strings, and added simple capability to apply a single parameter
+     to multiple strings.
+
+165) v2.1b5 (beta)	9/27/00
+     Fixed problem with writing empty parameter strings to the output;
+     also, fixed a fatal crash error when an entire string is a
+     parameter and is deleted.  XCircuit now prevents the creation of
+     parameters on a top-level page.
+
+164) v2.1b5 (beta)	9/25/00
+     More changes to bounding box calculation:  Everything was correct
+     except for the top-level page offsets, which were calculated from
+     the bounding box excluding schematic pins and info labels.  Thanks
+     to Albert Ma <ama@cag.lcs.mit.edu> for pointing this out.
+
+163) v2.1b4 (beta)	9/22/00
+     Added menu option to read a script, which has the same
+     functionality as the .xcircuitrc script (see #160, below).  Added
+     "enable toolbar" and "enable xschema" to the command-line parser.
+
+162) v2.1b3 (beta)	8/7/00
+     Changes to fix problems caused by (158) below; the toolbar widget
+     has finally been arranged to use multiple columns when there is
+     not enough room for one.
+
+161) v2.1b2 (beta)	8/4/00
+     Added a "auto-fit" feature to automatically scale the drawing to
+     fit the output page.  Also improved the behavior of the text-edit
+     widget to delete a selection if it exists in lieu of deleting a
+     character.
+
+160) v2.1b2 (beta)	8/3/00
+     Added a command-line window which accepts the same commands as
+     the .xcircuitrc file.  This syntax will be expanded in the near
+     future.  Added text hints to the toolbar buttons.  Added a
+     user-definable bounding-box capability, and fixed the automatic
+     bounding-box calculation to include spacing between pins and
+     their text.
+
+159) v2.1b1 (beta)	8/1/00
+     Added a temporary file saving feature for recovery from crashes,
+     sudden power-downs, or emergency exit.  Added a Control-C handler
+     to execute graceful exits from a hung state.  Temporary files are
+     doubly-protected by duplication before writing, so crashes during
+     writes will not cause the (previous) backup to be lost.
+
+158) v2.1b1 (beta)	7/31/00
+     Minor changes for compilation using HP/UX's ANSI-C compiler; one
+     major fix preventing loadlibrary() from calling composelib()
+     with argument FONTLIB (composefontlib() should be used for that).
+     Updated version number to 2.1 after Graham Murphy pointed out
+     that xcircuit-2.0a11 crashes when reading 2.0b4 input:
+     incompatibility is due to the reformatted label statement.
+     Added warning if file version is greater than executable version.
+
+Version 2.0b (October 1999 to July 2000)
+----------------------------------------------------------------------
+157) v2.0b4 (beta)	7/18/00
+     Corrected the partial-text-selection algorithm;  new algorithm
+     makes an insideness test between each string character and the
+     select box.
+
+156) v2.0b4 (beta)	6/28/00
+     Corrected and enhanced the routine printing the cursor position
+     and other information to the top of the window.
+
+155) v2.0b4 (beta)	2/25/00
+     Finished implementing ghostscript-rendered backgrounds.  Added
+     a toolbar widget for easy access to common commands; this
+     implementation is not yet complete.
+
+154) v2.0b3 (beta)	2/13/00
+     More bug fixes, covering several bugs which were introduced
+     with the 2.0b series:  bbox calculation after copy & move
+     across pages, segmentation fault when using middle mouse button
+     to finish a text label, double-printing of non-ASCII characters
+     in the output, confusion of grid and snap space functions from
+     the menu, and incorrect path starting position saved when 1st
+     path component is a spline or arc.
+
+153) v2.0b3 (beta)	2/8/00
+     Testing preliminary support for Ghostscript-rendered backgrounds.
+     Bugfix to multiple library code (fatal error---adding new library
+     writes over current user library).  Another bugfix---objcompare
+     was not being called.
+
+152) v2.0b3 (beta)	1/26/00
+     Further implementation of multiple libraries, including loading,
+     appending, and saving; specifying library pages from the rc
+     file and the library file (specifically, "builtins.lps"), and
+     a menu item for creating new library pages.  Currently there
+     is no way to move objects from one library page to any other
+     than the "User Library" (always defined as the last library
+     page), which is also true for object creation using "M" or
+     "Make Object".
+
+151) v2.0b3 (beta)      1/13/00
+     Fixed behavior of rotate and flip when acting on groups and
+     extended behavior of both to cover all elements.  Fixed a bug
+     in text select.  Added a library-list page to enable multiple
+     libraries.  Fixed bounding box calculations so that the bounding
+     box updates on every element change, and that update is reflected
+     in the page directory, libraries, and library directory as
+     required.
+
+150) v2.0b2 (beta)     1/10/00
+     More changes:  Added a page-list page to enable page reordering.
+     Structural changes:  Put page parameters into separate structure
+     and viewscale and pcorner parameters into the object structure.
+     Now every object retains its zoom scale and position where last
+     edited.  Also: some attempt to keep all/only variables required
+     by the top-level window in "areastruct", so later it will be
+     possible to implement multiple windows.  Also some bug fixes and
+     other cleanups to the code, particularly the window/object
+     resizing and centering.
+
+149) v2.0b2 (beta)     1/5/00
+     Numerous minor bug fixes, including automatic loading of derived
+     fonts (previously handled incorrectly), proper drawing during
+     scrollbar drags, and many fixes to the schematic capture system.
+     Symbol-Schematic association redone so that the symbol and
+     schematic do not have to have the same name.  Because this code
+     is beta, this feature will not be backwardly compatible with
+     previous versions.
+
+148) v2.0b1 (beta)     11/2/99
+     Changes to the Imakefile from Monte Bateman fix the reported
+     problems with both the RPM creation, and with the make process
+     not generating the proper subdirectories/installing files.
+     Changes to the RPM spec file go along with these fixes.
+     Support added for parameterized objects (full support for
+     string parameters, partial implementation of integer
+     parameters).
+
+Version 2.0a (July 1998 to November 1999)
+----------------------------------------------------------------------
+147) v2.0a11 (alpha)   11/19/99
+     Thanks to Mathieu Clar (mclar@ulg.ac.be) for finding that fix
+     #144 can be overridden if environment variable LANG is set
+     (e.g., to "french") and results in the same kind of program
+     crash.  Now xcircuit sets LANG to "POSIX" internally.
+
+146) v2.0a11 (alpha)   10/26/99
+     After a number of partial fixes, and with the help of Raymond
+     Burns (rayburns@eskimo.com), I fixed the keyboard input focus
+     problem which plagued, especially, the WindowMaker window
+     manager.  Neverthess, this problem refuses to go away, and
+     this appears not yet to be the end of the story.
+
+145) v2.0a10 (alpha)	6/25/99
+     Changed behavior of wire drawing so that mouse button 3 deletes
+     only the last segment of the line rather than deleting the
+     whole line.  Added key macro "." to place a dot object or draw
+     a dot at the cursor position.
+
+144) v2.0a10 (alpha)    6/16/99
+     Fixed a problem under non-US UNIX versions in which LC_NUMERIC
+     is set to use a comma character as a numeric decimal point.
+     Thanks to Lars Pettersson <larsp@oso.chalmers.se> and Paulo
+     Mario dos Santos Dias de Moraes <paulo.mario@omninet.com.br>
+     for helping to track down the problem  (6/24/99---changed from
+     LC_NUMERIC to LC_ALL because there are apparently other things
+     which also screw up file loads if not set to US or equivalent).
+
+143) v2.0a10 (alpha)    6/14/99
+     Added ISO-Latin5 (Turkish) on request from Recai Oktas at
+     Ondokuz Mayis University <roktas@samsun.omu.edu.tr>.  Rewrote
+     source to allow future inclusion of all ISO-LatinX encodings.
+
+142) v2.0a10 (alpha)    5/25/99
+     Finally got around to instantiating edit mode for paths.
+
+141) v2.0a10 (alpha)	5/24/99
+     In text edit modes, the backslash character brings up a
+     page containing the font encoding, allowing entry of non-
+     printing characters by simple point-and-click.  Use of
+     backslash escape sequences is deprecated.  Also, fixed a
+     bug which prevented compilation if MAKE_LGF was not defined
+     in the Imakefile;  thanks to Zhengdao Wang for the bug fix
+     <zhengdao@aphrodite.ee.umn.edu>.
+
+140) v2.0a9 (alpha)	5/20/99
+     Finally fixed the "actions not found" bug, which seems to
+     be due to conflicting names of widget classes between Xaw
+     and Xw, and changed the popup menu behavior to place the
+     popup menu such that the cursor is initially on the title,
+     not on the top button.   Also, added a README.ISOLatin2 file
+     giving instructions on how to setup xcircuit for Latin2
+     encoded output.
+
+139) v2.0a9 (alpha)	5/17/99
+     Changed menu button calling to the style adopted for
+     the abandoned attempt at using Motif;  this style calls
+     each menubutton by its Widget address rather than explicitly
+     referring to the path created by panes, managers, etc., which
+     can be toolkit-dependent.
+     
+138) v2.0a9 (alpha)	5/12/99
+     Added font vectors for ISO-Latin2 encoding.  Also, reparied
+     two fatal bugs (one involving the backslash character in
+     text, the other involving large user library files), and
+     reintroduced fix number 117 which somehow got lost.
+
+137) v2.0a9 (alpha)	5/1/99
+     Font-drawing mechanism completely overhauled and replaced
+     with object-encoded fonts.  Added font encoding selection
+     and a better interface for choosing font family, shape,
+     and encoding.  Added PostScript output for generating
+     ISOLatin1 encodings of standard PostScript fonts.  Fonts
+     extended and heavily revised;  Courier, Helvetica, Times,
+     and Symbol all have unique font vectors.
+
+136) v2.0a8 (alpha)     5/6/99
+     Zoltan Csahok <csahok@phase4.ujf-grenoble.fr> sent a bug fix
+     for the problem in which some objects would be made "hidden"
+     without being declared hidden in the library.
+
+135) v2.0a8 (alpha)	4/14/99
+     Paul Ortyl <ortylp@key.net.pl> sent a fix to allow keyboard
+     entry of 8-bit characters (e.g., ISO-Latin1 or ISO-Latin2
+     encoding).  Text vectors still reflect Adobe Standard
+     encoding but hopefully this will be extended in the near
+     future.  Added "W" key macro for popping up Write-Xcircuit
+     dialog, at Paul's request.
+
+134) v2.0a8 (alpha)	2/25/99
+     Possibly just fixed the problematic window manager hints
+     (WMHints) bug which has been plaguing the system.
+
+133) v2.0a7 (alpha)     1/26/99
+     Fixed a bug which was introduced into version 2.0a7 which
+     prevents landscape-oriented files from being loaded back into
+     xcircuit.
+
+132) v2.0a7 (alpha)	12/18/98
+     Fixed a problem wherein the FileList and Help widgets set
+     their own fonts directly rather than getting them from the
+     X Resource manager.  This causes XCircuit to crash when the
+     computer does not have that particular font preinstalled, as
+     noted by Niitsu Yoichiro <niitsu@amc.toshiba.co.jp>.
+
+131) v2.0a7 (alpha)	11/20/98
+     Fixed a long-standing bug by making gridspace and snapspace
+     per-page variables, and permitting loading and saving these
+     values in the output file.  At the same time, made these
+     values type float for better resolution (preliminary to
+     making all internal point values type float).
+
+130) v2.0a7 (alpha)	11/19/98
+     Added the "zoom-out" box suggested by ():
+     the current area of the drawing window is made to fit into
+     the area bounded by the box.  Added a button to the little
+     square at the intersection of the horizontal and vertical
+     scrollbars which acts like the "zoom view" function or "v"
+     key macro.
+
+129) v2.0a7 (alpha)	11/17/98
+     Changed the behavior of the horizontal and vertical scrollbars
+     so that some smooth scrolling is possible (that which can be
+     accomplished by copying from the existing pixmap onto the
+     window, without redrawing the whole window).
+
+128) v2.0a6 (alpha)	11/16/98
+     Made some fixes for Dale Scheetz <dwarf@polaris.net> to correct
+     some odd behavior under Linux:  The help page has been shortened
+     by 30 pixels to clear the Windows-95-like menu bar in fvwm95, and
+     the "done" button has been moved to the top of the help window.
+     Also, reduced argv[0] (the command from the command line) to its
+     root before comparing to "xschema" and loading Xdefaults so that
+     the program isn't confused by an appended pathname.
+
+127) v2.0a6 (alpha)	11/12/98
+     Added code suggested by Alireza Moini <moini@eleceng.adelaide.edu.au>
+     to use environment variable "XCIRCUIT_LIB_DIR" for searching for
+     libraries before trying the hard-coded BUILTINS_DIR as a last
+     resort.
+
+126) v2.0a6 (alpha)	10/4/98
+     Cleaned up the code a little;  moved most of the menu button
+     callbacks into a single file "menucalls.c", moved the file
+     list widget code into "filelist.c", and moved the help window
+     code into "help.c".
+
+125) v2.0a6 (alpha)	10/4/98
+     Fixed a long-standing problem with the simple help window in
+     which it could not be repositioned.  In addition, I prevented
+     the window from exceeding the computer screen boundary; when
+     it does, the help window is truncated but can be "scrolled"
+     in a simple sense by clicking the mouse in the help text
+     window.
+
+124) v2.0a5 (alpha)	9/27/98
+     Fixed a problem apparently due to the above pixmap icon code
+     which caused window managers to lose input focus for the whole
+     xcircuit window.  This appears to be fixed at least for "i386"
+     Linux systems.
+
+123) v2.0a4 (alpha)	9/1/98
+     Upon urging of Michael Le, I generated a built-in pixmap icon. 
+     Also fixed what was apparently a long-standing bug in resizearea().
+
+122) v2.0a3 (alpha)	8/23/98
+     Fixed a bug pointed out by Geert Jordaens which limited library
+     object names to 20 characters on file input.  Added flip-invariant
+     text.  Added pad space to pin labels.  Began preliminary work on
+     support for parameterized objects (beginning with some example
+     code and a postscript prolog).  Added missing definitions for
+     quarter and half space to xcircps2.pro.  Changed library files
+     to take advantage of flip invariant text.
+     
+121) v2.0a2 (alpha)     8/11/98
+     More "load file" fixing:  Modified the file loading routine so that
+     library files can be loaded with "Read Xcircuit PS"; i.e., they are
+     read like normal postscript files, and so can be read on the command
+     line.  Only restriction is that they go into the user library, as
+     they would if read as part of a regular xcircuit postscript file.
+
+120) v2.0a2 (alpha)	8/10/98
+     Fixed three LGF-related errors:  1) LGF files were imported whether
+     "read" or "import" was selected, 2) labels needed to set property
+     "pin", and 3) one of the connections in the definition for "TO"
+     in lgf.lps needed to be moved.
+
+119) v2.0a1 (alpha)	7/17/98
+     Fixed some errors in setting filename and object name when loading
+     or attempting to load files.  Fixed netlist error for connecting
+     multiple instances of the same label on a page.  Got rid of
+     string-sharing behavior for labels and malloc'd each copy instead.
+
+118) v2.0a0 (alpha)	7/10/98
+     Replaced Xcircuit version 1.7 with version 2.0, schematic capture
+     system included.  Instantiating better management for version
+     numbers, starting right here!
+
+Version 1.6 (January 1998 to May 1998)
+----------------------------------------------------------------------
+May 1998
+
+117) A few bugfixes and additions courtesy of Jo"rg Wunsch, including
+     the addition of handling WM_DELETE_WINDOW client messages to
+     allow the program to be closed by window manager controls.
+
+116) Bug fixes from Paul Slootman for the 64-bit Alpha platform.
+
+115) David DiGiacomo pointed out that the problem with the "make"
+     halting under Solaris is the indeterminate exit status returned
+     by the menudep program.  This has been fixed.
+
+April 1998
+
+114) Backspace can no longer be typed from the keyboard; instead,
+     the keyboard Backspace acts like Delete, and a Backspace
+     character can be inserted from the "Text" menu.
+
+March 1998
+
+113) Fixed a bug found by Cliff Koch <koch@cig.mot.com> in which
+     xcircuit did not check if an object name consists entirely of
+     numerals, which screws up the PostScript interpreter, which
+     tries to treat it as an integer.
+112) Fixed a bug found by Dale Scheetz <dwarf@polaris.net> in which
+     a divide by zero would occur if a directory list was longer than
+     the pixel height of the file read window.
+111) Fixed the colormap problem by figuring out how to get XCircuit
+     to gracefully install its own colormap on startup if the default
+     map is full.
+
+February 1998
+
+110) Cleaned up the last typecasting problems in both the toplevel
+     directory and Xw;  now should compile cleanly on all platforms
+     without specifically setting CCOPTIONS and CDEBUGFLAGS in the
+     Imakefile.
+109) Changed the file loading routine so that Xcircuit automatically
+     figures out whether the file is a PostScript or LGF file, so  
+     that there are no longer two separate "load" commands in the
+     File menu.
+108) Added a number of "diglog" gates to the lgf.lps library;  fixed
+     a bug reported by Jean-Luc Margot in which Imakefile refuses
+     to create the lib directory.
+107) Fixed more problems with the inch/cm conversion, bugs reported
+     by Uwe Steinmann.  Made all displays report in cm when in cm
+     gridstyle mode.  Also made the full page switch from letter
+     size to A4 size when switching between inch and cm grids.
+
+January 1998
+
+106) Cleaned up typecasting problems which produced compile-time
+    warnings.  Added "integral" sign to the alphabet vectors and
+    revised the signal.lps library to include it.
+105) Fixed longstanding bug in which the library (M)ove command would
+    overwrite an object with another.
+104) Fixed another bug found by Monte Bateman in which the system
+    crashed when one tried to delete an object which had a dependency
+    somewhere.
+103) Fixed a bug found by Monte Bateman which was that the alternate
+    color scheme flag did not toggle if the alternate color set was
+    chosen from the .xcircuitrc file, and in which the catalog objects
+    did not invert color and so became black-on-black or white-on-white.
+    All catalog objects now have color DEFAULTCOLOR instead of color
+    FOREGROUND, which makes more sense anyway.
+
+Version 1.5 (May 1997 to December 1997)
+----------------------------------------------------------------------
+
+December 1997
+
+102) Added a copyright "artistic license".  Changed filename
+    of distribution tarfile to contain the version number
+    (xcircuit-6.1.tar.gz).  Began posting xcircuit to
+    sunsite.unc.edu.
+
+November 1997
+
+101) Fixed a bug found by Mark Cohen in which xcircuit loses track of
+    the drawing area-to-window coordinate transformation whenever the
+    window is resized.
+
+October 1997
+
+100) Fixed a long-standing problem with rhomboid-edit style for
+    polygons.  The edit points can no longer spontaneously change
+    during editing; they are fixed when the editing begins.  Added
+    a "Rhomboid-A" style, which is similar to Manhattan style.
+99) Used a global variable to keep track of which element is being
+    edited so that it is unnecessary to swap elements to the end of
+    the list in order to edit them.
+98) Fixed "bug" to make RHOMBOID edit like NORMAL edit when there are
+    only 2 points in the line (otherwise the second point gets dragged
+    along with the first).
+97) Added capability to "hide" objects if the name of the object ends
+    with an ampersand ('&').
+96) Added override of default colors and addition of new colors to the
+    .xcircuitrc file definition.
+95) Changed all color entries from type "short" to type "int" to allow
+    xcircuit to run on 16- and 24-bit TrueColor visuals.
+
+August 1997
+
+94) Added "setmiterlimit" command to xcircps.pro to supress odd glitches
+    in some renderers (gs and certain printers) when drawing paths.  Do
+    these devices not have the (stated) default value of 10?
+93) Finished adding color.  Added "scb" and "sce" (select-color-begin
+    and -end) to PS profile.  "Opaque-stipple" style no longer selects
+    "setgray" in postscript;  gray is selected by choosing the color
+    gray.  Added "Inherited" color to list & based color scheme on the
+    idea of "color inheritence".
+92) Began adding color; separated definitions for color and stipple
+    patterns, and set default color scheme to black-on-white.  Added
+    stippled and colored rectangles to the Xw MenuBtn options for
+    menu buttons.
+
+July 1997:
+
+91) Added path horizontal and vertical flipping;  fixed a long-standing
+    bug to let user cancel a "make object" command during the object
+    name popup prompt.
+90) Stopped linking the filename to the page (object) name.
+89) Enabled creation of paths through the use of the "join" function,
+    and the ability to deconstruct the path into its constituent parts
+    with the "unjoin" (keystroke "J") function.
+88) Implemented paths (currently no editing capability).
+87) Redesigned the edit and element creation modes to be consistent
+    between polygons, arcs, and splines.  Arcs and splines can be
+    edited when created by using mouse button 1 to cycle between
+    control points.
+86) Finished implementation of the revised "attach" command, including
+    attachment to ellipses and to the chord on a closed arc.
+85) Finished implementation of ellipses.
+84) Implemented a dual color scheme which is switchable from the menu;
+    no longer need XCircuit.ad.alt.  This is preliminary to adding full
+    color.
+
+
+May 1997:
+
+83) Preliminary implementation of ellipses.  On the top level, ellipses
+    are constrained to the x-y axes, but can be rotated as part of an
+    object.
+82) Changed the "attach" command to operate on *all* elements, so,
+    e.g., a polygon end can be forcibly attached to a circle perimeter,
+    and so forth.  Needs a little refining, plus effects should be
+    duplicated for edit mode in "trackpoly", "trackarc", and
+    "trackspline".
+81) Finished implementing rotate and flip for all element types.
+80) Implemented optional graphics double-buffering for very clean and
+    quick refreshing of graphics.
+79) Changed lists of elements from separate list for each element to
+    one list of type (genericptr *), which is re-typecast to each
+    element type.  Makes a number of things much cleaner
+78) Got rid of type WIRE altogether; only has polygons.  No more "J"
+    command for unjoin, but "j" joins polygons together and the
+    algorithm is much cleaner than before and shouldn't be error-prone.
+77) Gave arcs a line-segment representation, thus fixing the problem
+    of filled arcs and paving the way for the "path" aggregate element.
+
+Version 1.4 (August 1995 to March 1997)
+----------------------------------------------------------------------
+
+March 1997:
+
+76) Made the scaling slightly more restrictive, to prevent xcircuit
+    from exceeding bounds of type short int either in the window or
+    in the page coordinate system.
+75) Prevented drawing objects and labels outside of the window area
+    in order to speed up rendering at close scales.
+74) Better precision for Bezier curve rendering and object attachment.
+73) Changed rendering to a stacked transformation matrix model.
+    Speeds up rendering, makes rendering more accurate, and cuts
+    down on code complexity.
+72) Added Fixed-Width (Courier) font, made proper widths for both
+    Times and Helvetica fonts;  implemented some different
+    characters for each font.
+71) Allow change of font, style, and justification for one or more
+    selected labels.  Now deselects labels and arc/poly/spline after
+    a style change.
+70) Menu entries for text font, style and arc/poly/spline style change
+    to reflect the status of the currently selected element.
+69) Colormap allocation problem fixed by new CvtStringToPixel() routine
+    which searches colormap for best approximation to color on a failed
+    color allocation.
+68) Wrote program to automatically generate the pathnames for button
+    and cascade widgets in the pulldown menus.
+67) Added polygon flip capability.
+
+February 1997:
+
+66) Expanded file selection widget to select and load multiple files,
+    also to load (single or multiple) library .lps and analog .lgf files.
+65) Added a file selection widget to the popup prompt when selecting
+    a file to read.
+64) Changed structure "select" to "selection" in order to get around
+    problem compiling under Solaris.
+
+January 1997:
+
+63) Added an output page width and height per xcircuit page instead
+    of the default 8.5" x 11" page that existed previously.  Output
+    continues to be centered on the page.
+62) Separated file names and page names.  These are linked by default,
+    but can be separated by supplying a different page name, or by
+    having a multi-page output.
+
+December 1996:
+
+61) Added inch/cm reporting for keyboard-adjusted snap spacing.
+
+November 1996:
+
+60) Fixed minor bugs in the DSC-PostScript: %%PageTrailer statement
+    is not needed, and %%Trailer *must* come after all page commands
+    including the "showpage".  Only the XCIRCsave restore statement
+    should be between %%Trailer and %%EOF.
+59) Output scale changed to default of 1.0, with the arbitrary
+    pixel-to-PostScript-units constants bansished to the
+    PostScript prologue.
+58) Changed grid and snap spacing routines to display inches/cm
+    instead of pixel coordinates.  Pixel coordinates are now
+    entirely hidden from the user, who only sees things in
+    inches or centimeters (with a default of inches, reported
+    in fractions).
+57) Position display now gives length of simple wires in addition
+    to the cursor position.
+56) Modified routine to print coordinates in fractional inches,
+    to be able to generate a fraction from an arbitrary float.
+
+October 1996:
+
+55) Added code to prevent infinite recursion by attempting
+    to place an object within itself.
+54) Revised .lgf-file reading for an exact 1:1 correspondence
+    of lgf names to the xcircuit library object names; made
+    a library "lgf.lps" to cover the main analog gates, with
+    some stylistic changes to the look of some of the gates.
+53) Added capability to move objects around inside the
+    libraries.
+52) Added capability to make a copy of an object from
+    either library page into the user library.
+51) Added capability to delete objects from the library.
+
+September 1996:
+
+50) Cleaned up the Xw code so that it will compile on
+    not-so-forgiving compilers;  also pruned out a
+    few things that are not used by Xcircuit.
+49) Finally wrote the routine to compare objects and
+    avoid name conflicts.
+48) Made PostScript output DSC-compliant, made file
+    reading more robust to errors in the input file.
+47) Started implementing library manipulation routines
+    with library object rename; also added keystroke
+    "c" from library mode for "copy".
+46) Fixed some problems with catalog organization of
+    objects.
+45) Added multiple page loads and saves:  pages with
+    the same name will be grouped together into one
+    file.  EPS is not an option for multiple pages.
+44) Made pages reallocatable, and added "Goto Page"
+    option in menu for accessing page numbers > 10.
+    New pages are automatically added to the pull-down
+    menu.  Page names are the same as the object name.
+43) Changed format of file ".xcircuitrc" and added
+    ability to load libraries, override the default
+    library load, load extra fonts, and set certain
+    variables.
+42) Added ability to load an arbitrary number of
+    user-defined fonts.  New fonts are automatically
+    added to the pull-down Font menu.
+41) Changed embedded commands in text string to two bytes
+    each, allowing future extension of embedded commands.
+40) Added handling of Ctrl-A and Ctrl-E for moving
+    to beginning and end of text, respectively
+
+August 1996:
+
+39) Added reading of ".xcircuitrc" in user's home
+    directory as an additional library file (file
+    takes same form as xcircuit or library files).
+38) String text appears in message window immediately
+    upon starting or editing a label, and disappears
+    when done.
+37) Fixed bugs in labels:  Rewrote routines so all
+    labels start with a font-change specifier;
+    removed "fontset" command from PostScript profile.
+
+February 1996:
+
+36) Differentiate between Writing and Overwriting
+    a file (to prevent disasters!) and warn user
+    when file is about to be overwritten.
+35) Made all spline routines relative to SPLINESEGS
+    and increased default SPLINESEGS to 20
+
+January 1996:
+
+34) Allow push and pop while an object or objects
+    are selected and being dragged.
+33) Added Rhomboid box editing in addition to
+    Manhattan box edit.
+32) Added arrow-attachment routine to align arrows
+    with an underlying wire/polygon/spline/arc while
+    dragging.
+31) Changed selection mechanism (again) to a simple
+    cartesian measure of distance from a line to
+    the cursor position.
+30) Added capability to flip, rotate, and snap-to 
+    while an object is selected and being dragged.
+
+August 1995:
+
+29) Added vertical flipping capability using macro "F".
+28) Added extended character set capability;
+    both octal codes and LaTeX-like symbol names
+    can be entered at the text prompt after a
+    backslash.
+27) Added lines to show spline control points and
+    arc center during creation and editing.
+26) Moved to PostScript prologue version 1.5, for
+    which the order of parameters for polygon, arc,
+    and spline are rearranged and made similar to
+    each other.  Reading of v1.4 files is kept for
+    backward compatibility.
+25) Added rudimentary opaque-fill style for polygons,
+    arcs, and splines.  "Vertical" alignment can only
+    be controlled on the object level, using the X
+    command (exchange).
+24) Added "Manhattan Box Edit" style (default: ON)
+    such that right angles in polygons are maintained
+    during editing.
+
+Version 1.3 (March 1995 to June 1995)
+----------------------------------------------------------------------
+
+May/June 1995:
+
+23) Added backspace character handling in text.
+22) One-step keystroke for dotted/dashed/solid line.
+21) Allowed "join wires" to join wires and polygons.
+20) Allowed "styles" options to operate on wires
+    by automatically converting them to polygons.
+19) Fixed bug in which Xw copy buffer overflowed
+    string in sprintf() [solution: restrict
+    "precision" of string thus: "%.149s"].
+18) Added "edit (e)" command to menu.
+17) Added capability to read Caltech tools' "analog"
+    .lgf format files.
+
+March 1995:
+
+16) Added feature to report non-printing characters
+    in a label, when editing.
+15) Added Zoom Box function.
+14) Changed copy behavior to allow multiple copies
+    when button1 is used, and a single copy when
+    button2 is used.
+13) Fixed problems with pixel trash left behind by
+    text editing.
+12) Beeps when it doesn't write file due to filename
+    problem.
+11) Added countdown for multiple selections.
+10) Added new cursor for edit mode.
+9) Xcircuit *only* does auto delete/addition of the
+   extension if extension is ".ps".  All other
+   filename extensions are left alone.
+8) Changed behavior so that request to load a file
+   which does not exist will change the current
+   file name, provided that current page is empty.
+7) Changed library pages to be actual objects, made
+   routine "composelib" to arrange the library objects
+   based on height and width of each object, changed
+   names of objects to xcircuit labels.
+6) Fixed numerous malloc() bugs.
+5) Added function to import xcircuit files into the
+   current file as well as loading them into a page
+   with page reset.
+4) Added ability to change coordinate grid and
+   report coordinates in inches (decimal and
+   fractional) and centimeters as well as the usual
+   pixel grid.
+3) Added (simple) help screen
+2) Added simple scrollbars on side and bottom, allowing
+   click-to-pan.  Added global variables to save current
+   GC state and foreground color.
+1) Added 2 message widgets, one for name of file
+   to edit, one for coordinates, one for information
+
+----------------------------------------------------------------------

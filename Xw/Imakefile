@@ -1,0 +1,99 @@
+# Compile flags
+CC = cc
+# If you wish to compile with gcc:
+#CC = gcc
+
+# cckr is for SGI only (non-ansi-standard switch):
+#CCOPTIONS = -O2 -cckr -Wf,-XNh2000
+# for DEC Alpha:
+#CCOPTIONS = -Olimit 1000 -taso
+# for DEC ULTRIX:
+#CCOPTIONS = -Olimit 1000
+# for Linux:
+#CCOPTIONS = -O2 -w -m486
+# otherwise (Sun, gcc, etc.):       
+#CCOPTIONS = -O2 -w
+
+# CDEBUGFLAGS is passed from top-level Imakefile
+
+INCLUDES = -I.. -I$(TOP)
+INSTALLFLAGS = $(INSTINCFLAGS)
+
+HEADERS = \
+	BBoard.h \
+	BBoardP.h \
+	Cascade.h \
+	CascadeP.h \
+	DisplayP.h \
+	Form.h \
+	FormP.h \
+	MenuBtn.h \
+	MenuBtnP.h \
+	PButton.h \
+	PButtonP.h \
+	PopupMgr.h \
+	PopupMgrP.h \
+	SText.h \
+	STextP.h \
+	SourceP.h \
+	TextEdit.h \
+	TextEditP.h \
+	Toggle.h \
+	ToggleP.h \
+	WorkSpace.h \
+	WorkSpaceP.h \
+	Xw.h \
+	XwP.h
+
+SRCS = \
+	BBoard.c\
+	Button.c\
+	Cascade.c\
+	Display.c\
+	Form.c\
+	Manager.c\
+	MapEvents.c\
+	MenuBtn.c\
+	MenuMgr.c\
+	MenuPane.c\
+	PButton.c\
+	PopupMgr.c\
+	Primitive.c\
+	ResConvert.c\
+	SText.c\
+	SourceStr.c\
+	TextEdit.c\
+	Toggle.c\
+	Traversal.c\
+	WorkSpace.c
+
+OBJS = \
+	BBoard.o\
+	Button.o\
+	Cascade.o\
+	Display.o\
+	Form.o\
+	Manager.o\
+	MapEvents.o\
+	MenuBtn.o\
+	MenuMgr.o\
+	MenuPane.o\
+	PButton.o\
+	PopupMgr.o\
+	Primitive.o\
+	ResConvert.o\
+	SText.o\
+	SourceStr.o\
+	TextEdit.o\
+	Toggle.o\
+	Traversal.o\
+	WorkSpace.o
+
+NormalLibraryObjectRule()
+NormalLibraryTarget(xcXw,$(OBJS))
+DependTarget()
+
+clean::
+	rm *.o
+veryclean::
+	rm *.o libxcXw.a

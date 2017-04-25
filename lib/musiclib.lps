@@ -1,0 +1,701 @@
+%! PostScript set of library objects for XCircuit
+%  Version: 3.6
+%  Library name is: musiclib
+%  Author: R. Timothy Edwards <tim@khachaturian.tim.linglan.net>
+%
+
+% Depend musiclib::qn musiclib::hd
+% Depend musiclib::qnd musiclib::qn
+% Depend musiclib::qstem1 musiclib::qn musiclib::lnt
+% Depend musiclib::qstem2 musiclib::qn musiclib::lnt
+% Depend musiclib::qstem3 musiclib::qn musiclib::lnt
+% Depend musiclib::qstem4 musiclib::qn musiclib::lnt
+% Depend musiclib::hn musiclib::hhd
+% Depend musiclib::hnd musiclib::hn
+% Depend musiclib::hnd2 musiclib::lnt musiclib::hn
+% Depend musiclib::hnd3 musiclib::lnt musiclib::hn
+% Depend musiclib::hnt musiclib::lnt musiclib::hn
+% Depend musiclib::hnt2 musiclib::hn musiclib::lnt
+% Depend musiclib::wnt musiclib::lnt musiclib::wn
+% Depend musiclib::en musiclib::qn musiclib::flg
+% Depend musiclib::en2 musiclib::qn musiclib::flg
+% Depend musiclib::ent musiclib::en2 musiclib::lnt
+% Depend musiclib::ent2 musiclib::en musiclib::lnt
+% Depend musiclib::ent3 musiclib::en musiclib::lnt
+% Depend musiclib::ent4 musiclib::en2 musiclib::lnt
+% Depend musiclib::sn musiclib::qn musiclib::flg
+% Depend musiclib::sn2 musiclib::qn
+% Depend musiclib::sr musiclib::er
+% Depend musiclib::keyBf musiclib::flt
+% Depend musiclib::keyEf musiclib::flt
+% Depend musiclib::keyDf musiclib::flt
+% Depend musiclib::cuttime musiclib::common
+% Depend musiclib::pedalstop musiclib::ppin
+% Depend musiclib::rept musiclib::ddot
+% Depend musiclib::gliss musiclib::blip
+% Depend musiclib::staff musiclib::lines musiclib::br1 musiclib::bar musiclib::tclef musiclib::bclef
+% Depend musiclib::doublet musiclib::qn
+% Depend musiclib::triplet musiclib::qn musiclib::hd
+
+% XCircuitLib library objects
+/musiclib::lnt {
+begingate
+1 1.750 -4 0 60 0 2 polygon
+endgate
+} def
+
+/musiclib::hd {
+begingate
+6 9 beginpath
+-2 25 -38 9 -30 -9 curveto
+-22 -25 14 -9 6 9 curveto
+241 1.000 endpath
+endgate
+} def
+
+/musiclib::qn {
+begingate
+1.000 0 -7 16 musiclib::hd
+1 1.000 0 18 0 128 2 polygon
+endgate
+} def
+
+/musiclib::qnd {
+begingate
+1.000 180 -40 32 musiclib::qn
+endgate
+} def
+
+/musiclib::qstem1 {
+begingate
+1.000 180 -40 32 musiclib::qn
+1.000 0 -48 16 musiclib::lnt
+endgate
+} def
+
+/musiclib::qstem2 {
+begingate
+1.000 180 -40 32 musiclib::qn
+1.000 0 -52 0 musiclib::lnt
+endgate
+} def
+
+/musiclib::qstem3 {
+begingate
+1.000 0 0 0 musiclib::qn
+1.000 0 -48 16 musiclib::lnt
+endgate
+} def
+
+/musiclib::qstem4 {
+begingate
+1.000 0 0 0 musiclib::qn
+1.000 0 -45 32 musiclib::lnt
+endgate
+} def
+
+/musiclib::hhd {
+begingate
+6 28 beginpath
+16 12 -20 -12 -30 4 curveto
+-24 -6 12 20 6 28 curveto
+-4 44 -40 20 -30 4 curveto
+-36 12 0 
+38 6 28 curveto
+241 1.000 endpath
+endgate
+} def
+
+/musiclib::hn {
+begingate
+1 1.000 0 23 0 128 2 polygon
+1.000 0 -8 0 musiclib::hhd
+endgate
+} def
+
+/musiclib::hnd {
+begingate
+1.000 180 -40 32 musiclib::hn
+endgate
+} def
+
+/musiclib::hnd2 {
+begingate
+1.000 0 -48 0 musiclib::lnt
+1.000 180 -40 32 musiclib::hn
+endgate
+} def
+
+/musiclib::hnd3 {
+begingate
+1.000 0 -48 16 musiclib::lnt
+1.000 180 -40 32 musiclib::hn
+endgate
+} def
+
+/musiclib::hnt {
+begingate
+1.000 0 -48 16 musiclib::lnt
+1.000 0 0 0 musiclib::hn
+endgate
+} def
+
+/musiclib::hnt2 {
+begingate
+1.000 0 0 0 musiclib::hn
+1.000 0 -44 32 musiclib::lnt
+endgate
+} def
+
+/musiclib::wn {
+begingate
+-28 32 beginpath
+-48 32 -28 0 -12 0 curveto
+-52 0 -52 32 -28 32 curveto
+12 32 12 0 -12 0 curveto
+8 0 -12 
+32 -28 32 curveto
+241 1.000 endpath
+endgate
+} def
+
+/musiclib::wnt {
+begingate
+1.000 0 -49 16 musiclib::lnt
+1.000 0 0 0 musiclib::wn
+endgate
+} def
+
+/musiclib::flg {
+begingate
+0 76 beginpath
+0 32 68 8 28 -52 curveto
+64 0 0 32 0 32 curveto
+240 1.000 endpath
+endgate
+} def
+
+/musiclib::en {
+begingate
+1.000 0 0 0 musiclib::qn
+1.000 0 0 78 musiclib::flg
+endgate
+} def
+
+/musiclib::en2 {
+begingate
+1.000 180 -40 32 musiclib::qn
+-1.000 180 -40 -54 musiclib::flg
+endgate
+} def
+
+/musiclib::ent {
+begingate
+1.000 0 0 0 musiclib::en2
+1.000 0 -48 16 musiclib::lnt
+endgate
+} def
+
+/musiclib::ent2 {
+begingate
+1.000 0 0 0 musiclib::en
+1.000 0 -44 16 musiclib::lnt
+endgate
+} def
+
+/musiclib::ent3 {
+begingate
+1.000 0 0 0 musiclib::en
+1.000 0 -44 32 musiclib::lnt
+endgate
+} def
+
+/musiclib::ent4 {
+begingate
+1.000 0 0 0 musiclib::en2
+1.000 0 -52 0 musiclib::lnt
+endgate
+} def
+
+/musiclib::sn {
+begingate
+1.000 0 0 0 musiclib::qn
+0 188 beginpath
+0 144 56 120 36 72 curveto
+52 104 0 144 0 144 curveto
+240 1.000 endpath
+1.000 0 0 72 musiclib::flg
+endgate
+} def
+
+/musiclib::sn2 {
+begingate
+1.000 180 -40 32 musiclib::qn
+-40 -136 beginpath
+-40 -92 16 -68 -4 -20 curveto
+12 -52 -40 -92 -40 -92 curveto
+240 1.000 endpath
+-40 -96 beginpath
+-40 -52 12 -36 -4 4 curveto
+8 -24 -40 -52 -40 -52 curveto
+240 1.000 endpath
+endgate
+} def
+
+/musiclib::flt {
+begingate
+1 1.000 -8 71 -8 -1 2 polygon
+-8 -2 beginpath
+32 22 12 46 -8 30 curveto
+2 40 20 22 -8 -2 curveto
+241 1.000 endpath
+endgate
+} def
+
+/musiclib::shp {
+begingate
+240 1.000 -16 24 16 32 16 40 -16 32 4 polygon
+240 1.000 -16 -8 16 0 16 8 -16 0 4 polygon
+1 1.000 -8 56 -8 -28 2 polygon
+1 1.000 8 -24 8 60 2 polygon
+endgate
+} def
+
+/musiclib::nat {
+begingate
+240 1.000 -14 -8 8 0 8 8 -14 0 4 polygon
+240 1.000 -14 24 8 32 8 40 -14 32 4 polygon
+1 1.000 -14 62 -14 -8 2 polygon
+1 1.000 8 -32 8 40 2 polygon
+endgate
+} def
+
+/musiclib::hr {
+begingate
+240 1.000 -24 0 -24 16 20 16 20 0 4 polygon
+endgate
+} def
+
+/musiclib::qr {
+begingate
+1 1.000 3 41 -1 49 2 polygon
+1 1.000 14 -34 -14 6 2 polygon
+8 -26 beginpath
+-2 -12 -30 -22 -6 -50 curveto
+-20 -36 -4 -24 14 -34 curveto
+241 1.000 endpath
+-14 6 beginpath
+-10 30 6 34 -2 50 curveto
+10 26 1 polyc
+-2 14 -6 -6 0 -14 curveto
+241 1.000 endpath
+endgate
+} def
+
+/musiclib::er {
+begingate
+1 1.300 -3 39 -20 -8 2 polygon
+241 1.000 -24 36 6 0.000 360.000 xcarc
+1 1.000 -18 44 16 237.000 337.000 xcarc
+endgate
+} def
+
+/musiclib::sr {
+begingate
+241 1.000 -34 12 6 0.000 360.000 xcarc
+1 1.000 -28 20 16 237.000 337.000 xcarc
+1.000 0 -3 -6 musiclib::er
+endgate
+} def
+
+/musiclib::fermata {
+begingate
+241 1.000 0 -12 4 0.000 360.000 xcarc
+-32 -12 beginpath
+-24 28 24 28 32 -12 curveto
+28 16 -28 16 -32 -12 curveto
+241 1.000 endpath
+endgate
+} def
+
+/musiclib::br1 {
+begingate
+0 96 beginpath
+-76 52 60 -100 -32 -160 curveto
+44 -116 -92 36 0 96 curveto
+241 1.000 endpath
+endgate
+} def
+
+/musiclib::tclef {
+begingate
+1 1.000 -2 -26 16 180.000 360.000 xcarc
+241 1.000 -8 -26 10 0.000 360.000 xcarc
+1 1.000 14 -26 -4 112 2 polygon
+-4 12 beginpath
+-20 20 -16 50 12 50 curveto
+42 50 36 0 4 0 curveto
+48 0 52 64 12 64 curveto
+-20 64 -28 
+20 -4 12 curveto
+241 1.000 endpath
+4 0 beginpath
+-24 0 -32 16 -32 32 curveto
+-32 80 30 84 30 140 curveto
+30 170 -10 140 -4 112 curveto
+-10 
+156 12 164 22 168 curveto
+28 158 30 152 30 140 curveto
+30 108 -44 92 -44 40 curveto
+-44 8 -16 0 4 0 curveto
+241 
+1.000 endpath
+endgate
+} def
+
+/musiclib::bclef {
+begingate
+1 1.000 0 5 27 90.000 192.000 xcarc
+241 1.000 48 16 3 0.000 360.000 xcarc
+241 1.000 48 -15 3 0.000 360.000 xcarc
+241 1.000 -17 3 10 0.000 360.000 xcarc
+36 -4 beginpath
+36 -44 8 -60 -28 -68 curveto
+40 -52 32 32 0 32 curveto
+28 32 36 12 36 -4 curveto
+241 
+1.000 endpath
+endgate
+} def
+
+/musiclib::keyBf {
+begingate
+1.000 0 -18 -17 musiclib::flt
+1.000 0 14 31 musiclib::flt
+endgate
+} def
+
+/musiclib::keyEf {
+begingate
+1.000 0 -18 -17 musiclib::flt
+1.000 0 14 31 musiclib::flt
+1.000 0 46 -33 musiclib::flt
+endgate
+} def
+
+/musiclib::keyDf {
+begingate
+1.000 0 -96 -48 musiclib::flt
+1.000 0 -64 0 musiclib::flt
+1.000 0 -32 -64 musiclib::flt
+1.000 0 0 -16 musiclib::flt
+1.000 0 32 -80 musiclib::flt
+endgate
+} def
+
+/musiclib::dot {
+begingate
+248 1.000 0 0 6 0.000 360.000 xcarc
+endgate
+} def
+
+/musiclib::ddot {
+begingate
+241 1.000 0 16 5 0.000 360.000 xcarc
+241 1.000 0 -16 5 0.000 360.000 xcarc
+endgate
+} def
+
+/musiclib::common {
+begingate
+241 1.000 14 18 8 -180.000 180.000 xcarc
+1 1.000 18 30 20 26 22 20 8 32 spline
+1 1.000 18 -26 22 -20 24 -14 14 -28 spline
+-24 0 beginpath
+-24 16 -16 36 8 32 curveto
+-20 38 -18 -48 14 -28 curveto
+4 -36 -24 -32 -24 0 curveto
+241 
+1.000 endpath
+endgate
+} def
+
+/musiclib::cuttime {
+begingate
+1.000 0 0 0 musiclib::common
+1 1.000 2 46 2 -46 2 polygon
+endgate
+} def
+
+/musiclib::two {
+begingate
+241 1.000 -10 18 8 0.000 360.000 xcarc
+1 1.000 -14 30 -16 26 -18 20 -4 32 spline
+1 1.000 -18 -20 -18 -16 2 -6 -24 -32 spline
+26 -12 beginpath
+26 -50 -14 -20 -24 -32 curveto
+-8 0 26 -34 26 -12 curveto
+241 1.000 endpath
+-4 32 beginpath
+16 34 22 4 2 -6 curveto
+24 2 26 8 26 18 curveto
+26 24 20 36 -4 32 curveto
+241 1.000 endpath
+endgate
+} def
+
+/musiclib::three {
+begingate
+241 1.000 -14 -18 8 0.000 360.000 xcarc
+1 1.000 -18 -30 -20 -26 -22 -20 -8 -32 spline
+241 1.000 -14 18 8 0.000 360.000 xcarc
+1 1.000 -18 30 -20 26 -22 20 -8 32 spline
+-6 0 beginpath
+16 0 22 6 22 18 curveto
+22 24 16 36 -8 32 curveto
+12 34 18 0 -6 0 curveto
+16 0 22 -6 22 
+-18 curveto
+22 -24 16 -34 -8 -32 curveto
+12 -34 18 0 -6 0 curveto
+241 1.000 endpath
+endgate
+} def
+
+/musiclib::four {
+begingate
+1 1.000 -24 -10 24 -10 2 polygon
+12 -24 beginpath
+11 -28 15 -31 20 -32 curveto
+-10 -32 1 polyc
+-5 -31 -2 -28 -2 -24 curveto
+12 
+-24 12 18 -2 2 3 polyc
+241 1.000 endpath
+-24 -10 beginpath
+-16 0 -6 20 -6 28 curveto
+-22 -10 14 32 2 polyc
+241 1.000 endpath
+endgate
+} def
+
+/musiclib::six {
+begingate
+241 1.000 12 20 8 0.000 360.000 xcarc
+1 1.000 16 30 18 26 20 20 6 32 spline
+1 1.000 -6 4 -12 -4 -10 -14 0 4 spline
+0 4 beginpath
+14 5 12 -34 0 -32 curveto
+-26 -32 -24 -4 -24 0 curveto
+-24 8 -20 36 6 32 curveto
+-14 34 
+-16 -32 0 -32 curveto
+20 -32 22 -20 22 -12 curveto
+22 2 8 6 0 4 curveto
+241 1.000 endpath
+endgate
+} def
+
+/musiclib::eight {
+begingate
+1 1.000 -6 -34 8 -34 14 -30 -12 -30 spline
+-10 30 beginpath
+-22 24 -30 4 0 -6 curveto
+20 -14 22 -24 14 -30 curveto
+26 -24 34 0 4 10 curveto
+-14 16 
+-18 24 -10 30 curveto
+241 1.000 endpath
+-12 -30 beginpath
+-18 -26 -22 -14 -14 0 curveto
+-24 -6 -28 -22 -12 -30 curveto
+241 1.000 endpath
+14 30 beginpath
+22 22 20 10 16 4 curveto
+22 8 30 22 14 30 curveto
+241 1.000 endpath
+1 1.000 -4 34 8 34 14 30 -10 30 spline
+endgate
+} def
+
+/musiclib::nine {
+begingate
+241 1.000 -16 -18 8 0.000 360.000 xcarc
+1 1.000 -20 -30 -22 -26 -24 -20 -10 -32 spline
+1 1.000 4 -4 8 0 9 10 -4 -4 spline
+-4 -4 beginpath
+-18 -5 -16 34 -4 32 curveto
+15 32 16 -39 -10 -32 curveto
+26 -34 24 -6 24 0 curveto
+24 4 
+26 32 -4 32 curveto
+-24 32 -26 20 -26 12 curveto
+-26 -2 -13 -4 -4 -4 curveto
+241 1.000 endpath
+endgate
+} def
+
+/musiclib::pedal {
+begingate
+1 1.000 -22 34 -32 32 -36 30 -12 30 spline
+4 -28 beginpath
+-8 -18 -30 -34 -32 -32 curveto
+-34 -30 -18 -24 -4 -32 curveto
+4 -28 1 polyc
+241 
+1.000 endpath
+-20 -28 beginpath
+-6 0 -32 12 -26 32 curveto
+-40 4 -14 -8 -20 -28 curveto
+241 1.000 endpath
+-18 18 beginpath
+-6 2 4 22 -12 30 curveto
+18 18 -8 -12 -18 18 curveto
+241 1.000 endpath
+-36 30 beginpath
+-60 18 -52 -10 -34 6 curveto
+-50 -4 -48 24 -36 30 curveto
+241 1.000 endpath
+1 1.000 22 -18 20 0 12 0 4 -28 spline
+44 -30 beginpath
+30 -36 24 -4 32 0 curveto
+20 -6 20 -40 44 -30 curveto
+62 -20 42 22 12 16 curveto
+36 24 
+52 -24 44 -30 curveto
+241 1.000 endpath
+12 0 beginpath
+-2 0 0 -44 26 -28 curveto
+8 -40 4 0 12 0 curveto
+241 1.000 endpath
+241 1.000 58 -30 2 0.000 360.000 xcarc
+endgate
+} def
+
+/musiclib::ppin {
+% hidden
+begingate
+3 -12 beginpath
+3 -9 1 polyc
+-1 -8 0 1 2 2 curveto
+5 4 6 7 5 10 curveto
+3 13 0 14 -2 13 curveto
+-5 11 -6 
+8 -5 5 curveto
+-4 4 -3 3 -2 2 curveto
+0 1 1 -8 -3 -9 curveto
+-3 -12 1 polyc
+-1 -10 1 -10 2 -12 curveto
+241 
+1.000 endpath
+endgate
+} def
+
+/musiclib::blip {
+% hidden
+begingate
+0 -16 beginpath
+-24 8 12 4 0 16 curveto
+24 -8 -12 -4 0 -16 curveto
+241 1.000 endpath
+endgate
+} def
+
+/musiclib::pedalstop {
+begingate
+-1.000 45 11 11 musiclib::ppin
+1.000 0 0 15 musiclib::ppin
+1.000 90 15 0 musiclib::ppin
+-1.000 225 -11 -11 musiclib::ppin
+-1.000 315 -11 11 musiclib::ppin
+-1.000 270 -15 0 musiclib::ppin
+-1.000 180 0 -15 musiclib::ppin
+-1.000 135 11 -11 musiclib::ppin
+endgate
+} def
+
+/musiclib::rept {
+begingate
+240 1.000 -32 -256 -32 256 -16 256 -16 -256 4 polygon
+1 1.000 0 256 0 -256 2 polygon
+1.000 0 16 192 musiclib::ddot
+1.000 0 16 -192 musiclib::ddot
+endgate
+} def
+
+/musiclib::gliss {
+begingate
+1.000 0 0 80 musiclib::blip
+1.000 0 0 16 musiclib::blip
+1.000 0 0 48 musiclib::blip
+1.000 0 0 -16 musiclib::blip
+1.000 0 0 -80 musiclib::blip
+1.000 0 0 -48 musiclib::blip
+endgate
+} def
+
+/musiclib::bar {
+begingate
+1 1.500 0 256 0 -256 2 polygon
+endgate
+} def
+
+/musiclib::lines {
+begingate
+1 1.000 0 -32 3552 -32 2 polygon
+1 1.000 0 64 3552 64 2 polygon
+1 1.000 0 0 3552 0 2 polygon
+1 1.000 0 32 3552 32 2 polygon
+1 1.000 0 -64 3552 -64 2 polygon
+endgate
+} def
+
+/musiclib::staff {
+begingate
+1.000 0 64 -192 musiclib::lines
+1.000 0 64 192 musiclib::lines
+-1.000 180 48 -160 musiclib::br1
+1.000 0 48 160 musiclib::br1
+1.000 0 64 0 musiclib::bar
+1.000 0 3616 0 musiclib::bar
+1.000 0 144 128 musiclib::tclef
+1.000 0 128 -160 musiclib::bclef
+endgate
+} def
+
+/musiclib::doublet {
+<</p_xps 64 /p_yps -64 /p_yps2 80 (expr @p_yps + 144) pop /p_yps3 64 
+(expr @p_yps + 128) pop >> begingate
+1.000 0 -32 -96 musiclib::qn
+1.000 0 p_xps p_yps musiclib::qn
+496 1.000 -32 32 -32 48 p_xps p_yps2 p_xps p_yps3 4 polygon
+endgate
+} def
+
+/musiclib::triplet {
+<</p_yps3 96 (expr @p_yps + 128) pop
+ /p_yps2 112 (expr @p_yps + 144) pop
+ /p_yps -32 /p_xps 160 /p_yps4 -48
+ /p_xps2 64 (expr -32 + (@p_xps + 32) / 2) pop
+ /p_xps3 72 (expr @p_xps2 + 7) pop
+ /p_yps5 64 (expr 8 + (32 + @p_yps3) / 2) pop >> begingate
+1.000 0 -32 -96 musiclib::qn
+1.000 0 p_xps p_yps musiclib::qn
+1.000 0 p_xps2 p_yps4 musiclib::hd
+1 1.000 p_xps3 p_yps4 p_xps3 p_yps5 2 polygon
+496 1.000 -32 32 -32 48 p_xps p_yps2 p_xps p_yps3 4 polygon
+endgate
+} def
+
+/musiclib::tie {
+<</p_xps -96 /p_yps -32 /p_xps2 96 /p_yps2 32 /p_xps3 0 /p_xps4 64
+/p_yps5 -24 /p_yps4 -18 (expr @p_yps5 + 6) pop
+/p_yps6 -56 /p_yps3 -50 (expr @p_yps6 + 6) pop >> begingate
+p_xps p_yps beginpath
+p_xps3 p_yps3 p_xps4 p_yps4 p_xps2 p_yps2 curveto
+p_xps4 p_yps5 p_xps3 p_yps6 p_xps p_yps curveto
+497 1.000 endpath
+endgate
+} def
+
+% EndLib

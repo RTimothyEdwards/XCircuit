@@ -1,0 +1,43 @@
+%! PostScript set of library objects for XCircuit
+%  Version: 3.2
+%  Library name is: digital
+%  Author: R. Timothy Edwards <tim.edwards@multigig.com>
+
+% XCircuitLib library built-in objects
+
+/digital::LED {
+% nonetwork
+<</p_col6 {0 0 0 }
+(switch -glob @digit {[1,4,7] {color index @offcolor} default {expr @p_color}})
+pop /p_col5 {0 0 0 }
+(switch @digit {2 {color index @offcolor} default {expr @p_color}})
+pop /p_col4 {0 0 0 }
+(switch -glob @digit {[0,2,6,8] {expr @p_color} default {color index @offcolor}})
+pop /p_col3 {1.000 1.000 1.000 }
+(switch -glob @digit {[0-1,7] {color index @offcolor} default {expr @p_color}})
+pop /p_col2 {0 0 0 }
+(switch -glob @digit {[5-6] {color index @offcolor} default {expr @p_color}})
+pop /p_col1 {0 0 0 }
+(switch -glob @digit {[1-3,7] {color index @offcolor} default {expr @p_color}})
+pop /p_col {0 0 0 }
+(switch @digit {1 - 4 {color index @offcolor} default {expr @p_color}})
+pop /@offcolor (white) /@digit (0)
+(lindex {0 1 2 3 4 5 6 7 8 9} 0) pop >> begingate
+p_col4 scb
+496 1.000 -36 -53 -28 -66 -20 -58 -20 -10 -28 -2 -36 -10 6 polygon
+p_col1 scb
+496 1.000 -36 10 -28 2 -20 10 -20 58 -28 66 -36 58 6 polygon
+p_col2 scb
+496 1.000 20 10 28 2 36 10 36 58 28 66 20 58 6 polygon
+p_col5 scb
+496 1.000 20 -58 28 -66 36 -58 36 -10 28 -2 20 -10 6 polygon
+p_col6 scb
+496 1.000 -26 -68 -18 -60 18 -60 26 -68 18 -76 -18 -76 6 polygon
+p_col3 scb
+496 1.000 -26 0 -18 8 18 8 26 0 18 -8 -18 -8 6 polygon
+p_col scb
+496 1.000 -26 68 -18 76 18 76 26 68 18 60 -18 60 6 polygon
+endgate
+} def
+
+% EndLib

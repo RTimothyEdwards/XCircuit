@@ -1,0 +1,55 @@
+%! PostScript set of library objects for XCircuit
+%  Library name is: Hv
+%  Version: 2.0
+%
+%
+
+% XCircuitLib library built-in objects
+/Hv::Guu {
+% 4 0 26 34 bbox
+begingate
+1.00 0 0 0 Hv::G
+1.00 0 4 2 Hv::uu
+endgate
+} def
+
+/Hv::Idot {
+% 4 0 7 37 bbox
+begingate
+1.00 0 0 0 Hv::I
+1.00 0 -4 12 Hv::dot
+endgate
+} def
+
+/Hv::Scedil {
+% 4 -6 22 32 bbox
+begingate
+1.00 0 0 0 Hv::S
+1.00 0 4 0 Hv::cedilla
+endgate
+} def
+
+/Hv::scedil {
+% 4 -6 16 22 bbox
+begingate
+1.00 0 0 0 Hv::s
+1.00 0 4 0 Hv::cedilla
+endgate
+} def
+
+/Hv::guu {
+% 4 -6 16 30 bbox
+begingate
+1.00 0 0 0 Hv::g
+1.00 0 2 -8 Hv::uu
+endgate
+} def
+
+/Hv::dotlessi {
+% 6 0 4 16 bbox
+begingate
+1  1.00 6 0 6 16 2 polygon
+endgate
+} def
+
+% EndLib

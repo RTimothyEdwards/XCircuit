@@ -1,0 +1,48 @@
+% XCircuit Font encoding (XFE) file
+name:     HelveticaISO5
+% file:     helvetica.lps
+file:     helveticaiso5.lps
+family:   Helvetica
+weight:   normal
+shape:    normal
+type:     PostScript
+encoding: ISOLatin5
+Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar
+Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar
+Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar
+Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar 
+Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar
+Hv::nullchar Hv::nullchar 
+Hv::space Hv::exclam Hv::quote Hv::pound Hv::dollar Hv::percent Hv::ampersand
+Hv::apostrophe Hv::lparen Hv::rparen Hv::asterisk Hv::plus Hv::comma Hv::minus
+Hv::period Hv::slash Hv::zero Hv::one Hv::two Hv::three Hv::four Hv::five
+Hv::six Hv::seven Hv::eight Hv::nine Hv::colon Hv::semi Hv::less Hv::equal
+Hv::more Hv::question Hv::at Hv::A Hv::B Hv::C Hv::D Hv::E Hv::F Hv::G Hv::H
+Hv::I Hv::J Hv::K Hv::L Hv::M Hv::N Hv::O Hv::P Hv::Q Hv::R Hv::S Hv::T Hv::U
+Hv::V Hv::W Hv::X Hv::Y Hv::Z Hv::lbracket 
+Hv::backslash Hv::rbracket Hv::caret Hv::underscore Hv::apostrophe Hv::a Hv::b
+Hv::c Hv::d Hv::e Hv::f Hv::g Hv::h Hv::i Hv::j Hv::k Hv::l Hv::m Hv::n Hv::o
+Hv::p Hv::q Hv::r Hv::s Hv::t Hv::u Hv::v Hv::w Hv::x 
+Hv::y Hv::z Hv::lbrace Hv::vbar Hv::rbrace Hv::tilde
+Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar
+Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar 
+Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar Hv::nullchar Hv::onesmall
+Hv::grave Hv::acute
+Hv::hat Hv::tilde Hv::bar Hv::uu Hv::dot Hv::umlaut Hv::nullchar Hv::circ
+Hv::cedilla Hv::nullchar Hv::uml2 Hv::ced2 Hv::vee Hv::space
+Hv::upexclam Hv::cent Hv::lb Hv::sy2 Hv::yen Hv::vbar Hv::sy1 Hv::umlaut Hv::copy
+Hv::ordfem Hv::lgqt Hv::lognot Hv::dash Hv::regis Hv::bar Hv::circ Hv::pm Hv::twosup
+Hv::threesup Hv::acute Hv::mu Hv::para Hv::dot Hv::cedilla Hv::onesup Hv::ordmasc
+Hv::rgqt Hv::quarter Hv::half Hv::threeq Hv::uqest
+Hv::Agrave Hv::Aacute Hv::Acircum Hv::Atilde Hv::Adier Hv::Aring Hv::AE Hv::Ccedil
+Hv::Egrave Hv::Eacute Hv::Ecircum Hv::Edier Hv::Igrave Hv::Iacute Hv::Icircum Hv::Idier
+Hv::Guu Hv::Ntilde Hv::Ograve Hv::Oacute Hv::Ocircum Hv::Otilde Hv::Odier Hv::times
+Hv::Oslash Hv::Ugrave Hv::Uacute Hv::Ucircum Hv::Udier Hv::Idot Hv::Scedil Hv::sset
+Hv::agrave Hv::aacute Hv::acircum Hv::atilde Hv::adier Hv::aring Hv::ae Hv::ccedil
+Hv::egrave Hv::eacute Hv::ecircum Hv::edier Hv::igrave Hv::iacute Hv::icircum Hv::idier
+Hv::guu Hv::ntilde Hv::ograve Hv::oacute Hv::ocircum Hv::otilde Hv::odier Hv::divide
+Hv::osl Hv::ugrave Hv::uacute Hv::ucircum Hv::udier Hv::dotlessi Hv::scedil Hv::ydier
+
+derived:   Helvetica-BoldISO5        bold     normal     PostScript
+derived:   Helvetica-ObliqueISO5     normal   italic     PostScript
+derived:   Helvetica-BoldObliqueISO5 bold     italic     PostScript

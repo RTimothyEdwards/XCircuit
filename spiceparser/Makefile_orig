@@ -1,0 +1,38 @@
+OBJS = bitlist.o \
+eqn.o \
+eqnlist.o \
+equations.o \
+hash.o \
+list.o \
+list_search.o \
+memory.o \
+mergedup.o \
+names.o \
+netlist.o \
+netlist_dev.o \
+netlist_extract.o \
+netlist_funcs.o \
+netlist_lib.o \
+netlist_spice.o \
+netlist_template.o \
+scanner.o \
+sort.o \
+
+
+CFLAGS = -Wall -I. -DCONFIGURED
+
+CC = gcc
+
+top: $(OBJS) example
+
+:%.o:%.c:
+	$(CC) $(CFLAGS) -o $@ $<
+
+example: README.c $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $^ -lm 
+
+run_example: example test.lib
+	./example -i test.lib -o test.out -p test.pins
+
+clean:
+	${RM} -f *.o example test.out test.pins

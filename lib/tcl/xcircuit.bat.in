@@ -1,0 +1,34 @@
+@echo off
+rem
+rem This script starts xcircuit under the Tcl interpreter,
+rem reading commands from a special .wishrc script which
+rem launches magic and retains the Tcl interactive interpreter.
+rem
+
+set XCIRCUIT_LIB_DIR=XCLIBDIR
+set XCIRCUIT_WISH=WISH_EXE
+
+set loclibdir=%XCIRCUIT_LIB_DIR%
+
+set TKCON=1
+for %%i in (%*) do (
+	if "%%i" == "-noconsole" set TKCON=0
+)
+
+if "%TKCON%" == "1" (
+
+   if not exist %loclibdir%/CONSOLE set loclibdir=%loclibdir%/tcl
+
+   start %XCIRCUIT_WISH% %loclibdir%/CONSOLE -eval "source %loclibdir%/CONSOLE_SCRIPT" -slave "package require Tk; set argv [list %*]; set argc [llength argv]; source %loclibdir%/WRAPPER_INIT"
+
+) else (
+
+
+rem Run the stand-in for wish (xcircexec), which acts exactly like "wish"
+rem except that it replaces ~/.wishrc with xcircuit.tcl.  This executable is
+rem *only* needed when running without the console; the console itself is
+rem capable of sourcing the startup script.
+
+   %loclibdir%/xcircexec -- %*
+
+)

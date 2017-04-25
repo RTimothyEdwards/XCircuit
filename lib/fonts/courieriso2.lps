@@ -1,0 +1,414 @@
+%! PostScript set of library objects for XCircuit
+%  Library name is: Cr
+%  Version: 2.0
+%
+
+% XCircuitLib font library
+/Cr::Aogonek {
+% 4 -5 20 31 bbox
+begingate
+1.00 0 0 0 Cr::A
+1.00 0 12 0 Cr::ced2
+endgate
+} def
+
+/Cr::Lcaron {
+% 4 0 20 27 bbox
+begingate
+1.00 0 12 0 Cr::apostrophe
+1.00 0 0 0 Cr::L
+endgate
+} def
+
+/Cr::Scedil {
+% 4 -6 20 32 bbox
+begingate
+1.00 0 0 0 Cr::S
+1.00 0 4 0 Cr::cedilla
+endgate
+} def
+
+/Cr::Sacute {
+% 4 0 20 36 bbox
+begingate
+1.00 0 0 0 Cr::S
+1.00 0 4 4 Cr::acute
+endgate
+} def
+
+/Cr::Scaron {
+% 4 0 20 34 bbox
+begingate
+1.00 0 0 0 Cr::S
+1.00 0 4 2 Cr::vee
+endgate
+} def
+
+/Cr::Zacute {
+% 4 0 20 34 bbox
+begingate
+1.00 0 0 0 Cr::Z
+1.00 0 2 2 Cr::acute
+endgate
+} def
+
+/Cr::Zcaron {
+% 4 0 20 34 bbox
+begingate
+1.00 0 4 2 Cr::vee
+1.00 0 0 0 Cr::Z
+endgate
+} def
+
+/Cr::Zdot {
+% 4 0 20 35 bbox
+begingate
+1.00 0 0 0 Cr::Z
+1.00 0 8 32 Cr::period
+endgate
+} def
+
+/Cr::aogonek {
+% 4 -5 20 21 bbox
+begingate
+1.00 0 0 0 Cr::a
+1.00 0 8 0 Cr::ced2
+endgate
+} def
+
+/Cr::lcaron {
+% 3 0 21 27 bbox
+begingate
+1.00 0 0 0 Cr::l
+1.00 0 4 0 Cr::apostrophe
+endgate
+} def
+
+/Cr::sacute {
+% 4 0 20 24 bbox
+begingate
+1.00 0 0 0 Cr::s
+1.00 0 0 -8 Cr::acute
+endgate
+} def
+
+/Cr::zacute {
+% 4 0 20 24 bbox
+begingate
+1.00 0 0 0 Cr::z
+1.00 0 0 -8 Cr::acute
+endgate
+} def
+
+/Cr::zcaron {
+% 4 0 20 24 bbox
+begingate
+1.00 0 0 -8 Cr::vee
+1.00 0 0 0 Cr::z
+endgate
+} def
+
+/Cr::zdot {
+% 4 0 20 25 bbox
+begingate
+1.00 0 2 22 Cr::period
+1.00 0 0 0 Cr::z
+endgate
+} def
+
+/Cr::tcaron {
+% 4 0 20 27 bbox
+begingate
+1.00 0 0 0 Cr::t
+1.00 0 12 0 Cr::apostrophe
+endgate
+} def
+
+/Cr::scedil {
+% 4 -6 20 22 bbox
+begingate
+1.00 0 2 0 Cr::cedilla
+1.00 0 0 0 Cr::s
+endgate
+} def
+
+/Cr::Rcaron {
+% 4 0 20 34 bbox
+begingate
+1.00 0 0 0 Cr::R
+1.00 0 2 2 Cr::vee
+endgate
+} def
+
+/Cr::Racute {
+% 4 0 20 36 bbox
+begingate
+1.00 0 0 0 Cr::R
+1.00 0 0 4 Cr::acute
+endgate
+} def
+
+/Cr::Abreve {
+% 4 0 20 32 bbox
+begingate
+1.00 0 0 0 Cr::A
+1.00 0 4 0 Cr::uu
+endgate
+} def
+
+/Cr::Lacute {
+% 4 0 20 36 bbox
+begingate
+1.00 0 0 0 Cr::L
+1.00 0 -4 4 Cr::acute
+endgate
+} def
+
+/Cr::Cacute {
+% 4 0 20 36 bbox
+begingate
+1.00 0 0 0 Cr::C
+1.00 0 8 4 Cr::acute
+endgate
+} def
+
+/Cr::Ccaron {
+% 4 0 20 34 bbox
+begingate
+1.00 0 0 0 Cr::C
+1.00 0 4 2 Cr::vee
+endgate
+} def
+
+/Cr::Eogonek {
+% 4 -5 20 31 bbox
+begingate
+1.00 0 0 0 Cr::E
+1.00 0 8 0 Cr::ced2
+endgate
+} def
+
+/Cr::Ecaron {
+% 4 0 20 34 bbox
+begingate
+1.00 0 0 0 Cr::E
+1.00 0 4 2 Cr::vee
+endgate
+} def
+
+/Cr::Dcaron {
+% 4 0 20 34 bbox
+begingate
+1.00 0 0 0 Cr::D
+1.00 0 2 2 Cr::vee
+endgate
+} def
+
+/Cr::Ncaron {
+% 4 0 20 32 bbox
+begingate
+1.00 0 0 0 Cr::N
+1.00 0 0 0 Cr::vee
+endgate
+} def
+
+/Cr::Nacute {
+% 4 0 20 32 bbox
+begingate
+1.00 0 0 0 Cr::N
+1.00 0 4 0 Cr::acute
+endgate
+} def
+
+/Cr::Ouml2 {
+% 4 0 20 34 bbox
+begingate
+1.00 0 0 0 Cr::O
+1.00 0 2 2 Cr::uml2
+endgate
+} def
+
+/Cr::Ucirc {
+% 4 0 20 38 bbox
+begingate
+1.00 0 0 0 Cr::U
+1.00 0 4 4 Cr::circ
+endgate
+} def
+
+/Cr::Uuml2 {
+% 4 0 20 34 bbox
+begingate
+1.00 0 0 0 Cr::U
+1.00 0 6 2 Cr::uml2
+endgate
+} def
+
+/Cr::Tcedil {
+% 4 -6 20 32 bbox
+begingate
+1.00 0 0 0 Cr::T
+1.00 0 4 0 Cr::cedilla
+endgate
+} def
+
+/Cr::racute {
+% 4 0 20 24 bbox
+begingate
+1.00 0 0 0 Cr::r
+1.00 0 0 -8 Cr::acute
+endgate
+} def
+
+/Cr::rcaron {
+% 4 0 20 24 bbox
+begingate
+1.00 0 0 0 Cr::r
+1.00 0 0 -8 Cr::vee
+endgate
+} def
+
+/Cr::abreve {
+% 4 0 20 23 bbox
+begingate
+1.00 0 0 0 Cr::a
+1.00 0 2 -9 Cr::uu
+endgate
+} def
+
+/Cr::lacute {
+% 3 0 21 36 bbox
+begingate
+1.00 0 0 0 Cr::l
+1.00 0 -4 4 Cr::acute
+endgate
+} def
+
+/Cr::cacute {
+% 4 0 20 24 bbox
+begingate
+1.00 0 0 0 Cr::c
+1.00 0 4 -8 Cr::acute
+endgate
+} def
+
+/Cr::ccaron {
+% 4 0 20 24 bbox
+begingate
+1.00 0 0 0 Cr::c
+1.00 0 2 -8 Cr::vee
+endgate
+} def
+
+/Cr::eogonek {
+% 4 -5 20 21 bbox
+begingate
+1.00 0 2 0 Cr::ced2
+1.00 0 0 0 Cr::e
+endgate
+} def
+
+/Cr::ecaron {
+% 4 0 20 24 bbox
+begingate
+1.00 0 0 0 Cr::e
+1.00 0 2 -8 Cr::vee
+endgate
+} def
+
+/Cr::dcaron {
+% 4 0 20 27 bbox
+begingate
+1.00 0 0 0 Cr::d
+1.00 0 10 0 Cr::apostrophe
+endgate
+} def
+
+/Cr::dbar {
+% 4 0 20 26 bbox
+begingate
+1.00 0 0 0 Cr::d
+1.00 0 8 -8 Cr::bar
+endgate
+} def
+
+/Cr::ncaron {
+% 4 0 20 24 bbox
+begingate
+1.00 0 0 0 Cr::n
+1.00 0 0 -8 Cr::vee
+endgate
+} def
+
+/Cr::nacute {
+% 4 0 20 24 bbox
+begingate
+1.00 0 0 0 Cr::n
+1.00 0 2 -8 Cr::acute
+endgate
+} def
+
+/Cr::ucirc {
+% 4 0 20 26 bbox
+begingate
+1.00 0 0 0 Cr::u
+1.00 0 2 -8 Cr::circ
+endgate
+} def
+
+/Cr::uuml2 {
+% 4 0 20 24 bbox
+begingate
+1.00 0 0 0 Cr::u
+1.00 0 4 -8 Cr::uml2
+endgate
+} def
+
+/Cr::tcedil {
+% 4 -6 20 32 bbox
+begingate
+1.00 0 0 0 Cr::t
+1.00 0 4 0 Cr::cedilla
+endgate
+} def
+
+/Cr::togonek {
+% 4 -5 20 31 bbox
+begingate
+1.00 0 0 0 Cr::t
+1.00 0 5 0 Cr::ced2
+endgate
+} def
+
+/Cr::ouml2 {
+% 4 0 20 24 bbox
+begingate
+1.00 0 0 0 Cr::o
+1.00 0 4 -8 Cr::uml2
+endgate
+} def
+
+/Cr::scaron {
+% 4 0 20 24 bbox
+begingate
+1.00 0 0 0 Cr::s
+1.00 0 0 -8 Cr::vee
+endgate
+} def
+
+/Cr::Tcaron {
+% 4 0 20 33 bbox
+begingate
+1.00 0 0 0 Cr::T
+1.00 0 3 1 Cr::vee
+endgate
+} def
+
+/Cr::dotacc {
+% 8 30 16 3 bbox
+begingate
+1.00 0 4 30 Cr::period
+endgate
+} def
+
+% EndLib

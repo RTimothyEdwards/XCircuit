@@ -1,0 +1,4 @@
+MZ_1 3 int_node1_2 int_node2_0 1.92514e-11
+LZ_1 3 int_node1_2 1.92514e-11
+RZ_1 int_node0_2 int_node0_3 1.94286
+Vam_0 int_node0_3 2 dc=0v

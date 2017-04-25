@@ -1,0 +1,54 @@
+XCircuit as a front-end GUI to ng-spice
+------------------------------------------------------
+XCircuit can work as an ng-spice front-end.  However,
+there is the problem that ng-spice can't handle being
+used interactively through a read-write pipe.  The
+problem is that ngspice auto-detects whether standard
+input is a tty, and if standard input is not (such as
+when it is an I/O pipe), ngspice switches to batch
+mode.  I submitted the patch below to the ngspice
+project at SourceForge.  Hopefully it will get into
+the distribution.
+
+To test whether ngspice is patched, run XCircuit, and
+type this command into the console:  "spice start".
+If you get a delay followed by an error message:
+
+   ngspice: invalid option -- p
+
+then your version of ngspice is not patched, and you
+need to apply the patch file below to the ngspice
+source and recompile.
+
+File pipemode.patch:  Put in directory ng-spice-rework-17 and
+apply with the command "patch -p1 < pipemode.patch".
+
+-------------------cut here----------------------------------------------------------
+--- ng-spice-rework-17.orig/src/main.c	2006-04-05 10:52:26.060853760 -0700
++++ ng-spice-rework-17/src/main.c	2006-04-05 11:02:53.581165821 -0700
+@@ -516,6 +516,7 @@
+ 	   "  -i, --interactive         run in interactive mode\n"
+ 	   "  -n, --no-spiceinit        don't load the local or user's config file\n"
+ 	   "  -o, --output=FILE         set the outputfile\n"
++	   "  -p, --pipe		run in I/O pipe mode\n"
+ 	   "  -q, --completion          activate command completion\n"
+ 	   "  -r, --rawfile=FILE        set the rawfile output\n"             
+ 	   "  -s, --server              run spice as a server process\n"
+@@ -738,6 +739,7 @@
+ 	    {"interactive", 0, 0, 'i'},
+ 	    {"no-spiceinit", 0, 0, 'n'},
+ 	    {"output", 0, 0, 'o'},
++	    {"pipe", 0, 0, 'p'},
+ 	    {"completion", 0, 0, 'q'},
+ 	    {"rawfile", 1, 0, 'r'},
+ 	    {"server", 0, 0, 's'},
+@@ -745,7 +747,7 @@
+ 	    {0, 0, 0, 0}
+ 	};
+ 
+-	c = getopt_long (argc, argv, "hvbc:ihno:qr:st:",
++	c = getopt_long (argc, argv, "hvbc:ihno:pqr:st:",
+ 			 long_options, &option_index);
+ 	if (c == -1)
+ 	    break;
+

@@ -1,0 +1,312 @@
+%! PostScript set of library objects for XCircuit
+%  Version: 3.6
+%  Library name is: analog
+%  Author: R. Timothy Edwards <tim@khachaturian.tim.linglan.net>
+%
+
+% Depend analog::vsource analog::source
+% Depend analog::isource analog::source generic::arrowhead
+% Depend analog::acsource analog::source
+% Depend analog::nmos2 analog::nmos generic::arrowhead
+% Depend analog::pmos2 analog::nmos generic::arrowhead
+% Depend analog::npn generic::arrowhead
+% Depend analog::pnp generic::arrowhead
+% Depend analog::switch generic::circle generic::arrowhead
+
+% XCircuitLib library objects
+/analog::capacitor {
+begingate
+1 1.000 0 -64 0 -6 2 polygon
+1 1.000 0 64 0 6 2 polygon
+1 1.000 -32 6 32 6 2 polygon
+1 1.000 -32 -6 32 -6 2 polygon
+1.000 0.000 0.000 scb
+(c.1) {/Times-Roman cf} 2 9 0 1.000 0 64 pinlabel
+(c.2) {/Times-Roman cf} 2 13 0 1.000 0 -64 pinlabel
+0.180 0.545 0.341 scb
+(spice:C%i %pc.1 %pc.2 1.0P) {/Times-Roman cf} 2 0 0 1.000 -208 -160 infolabel
+(sim:c %pc.1 %pc.2) {/Times-Roman cf} 2 0 0 1.000 -208 -208 infolabel
+endgate
+} def
+
+/analog::polarized {
+begingate
+1 1.000 0 -64 0 -6 2 polygon
+1 1.000 0 64 0 6 2 polygon
+1 1.000 -32 6 32 6 2 polygon
+1 1.000 0 -80 74 66.000 114.000 xcarc
+1.000 0.000 0.000 scb
+(t) {/Times-Roman cf} 2 9 0 1.000 0 64 pinlabel
+(b) {/Times-Roman cf} 2 13 0 1.000 0 -64 pinlabel
+0.180 0.545 0.341 scb
+(spice:C%i %pt %pb 1.0P) {/Times-Roman cf} 2 0 0 1.000 -208 -160 infolabel
+(sim:e %pt %pb %pb) {/Times-Roman cf} 2 0 0 1.000 -208 -208 infolabel
+endgate
+} def
+
+/analog::resistor {
+begingate
+1 1.000 0 64 0 36 2 polygon
+1 1.000 0 -64 0 -36 2 polygon
+1 1.000 0 -36 14 -30 -14 -18 14 -6 -14 6 14 18 -14 30 0 36 8 polygon
+1.000 0.000 0.000 scb
+(r.1) {/Times-Roman cf} 2 9 0 1.000 0 64 pinlabel
+(r.2) {/Times-Roman cf} 2 13 0 1.000 0 -64 pinlabel
+0.180 0.545 0.341 scb
+(spice:R%i %pr.1 %pr.2 1.0K) {/Times-Roman cf} 2 0 0 1.000 -208 -160 infolabel
+(sim:r %pr.1 %pr.2) {/Times-Roman cf} 2 0 0 1.000 -208 -208 infolabel
+endgate
+} def
+
+/analog::inductor {
+begingate
+1 1.000 20 -22 20 -38 0 -42 0 -18 spline
+1 1.000 -20 -14 -20 -26 0 -22 0 -18 spline
+1 1.000 20 38 20 22 0 18 0 42 spline
+1 1.000 20 18 20 2 0 -2 0 22 spline
+1 1.000 20 -2 20 -18 0 -22 0 2 spline
+1 1.000 -20 26 -20 14 0 18 0 22 spline
+1 1.000 -20 6 -20 -6 0 -2 0 2 spline
+1 1.000 0 -42 0 -64 2 polygon
+1 1.000 0 42 0 64 2 polygon
+1.000 0.000 0.000 scb
+(l.1) {/Times-Roman cf} 2 9 0 1.000 0 64 pinlabel
+(l.2) {/Times-Roman cf} 2 13 0 1.000 0 -64 pinlabel
+0.180 0.545 0.341 scb
+(spice:L%i %pl.1 %pl.2 1.0U) {/Times-Roman cf} 2 0 0 1.000 -208 -160 infolabel
+(sim:l %pl.1 %pl.2) {/Times-Roman cf} 2 0 0 1.000 -208 -208 infolabel
+endgate
+} def
+
+/analog::opamp {
+begingate
+0 1.000 -80 -80 -80 80 80 0 3 polygon
+(-) {/Symbol cf} 2 5 0 1.000 -61 42 label
+(+) {/Symbol cf} 2 5 0 1.000 -61 -50 label
+1.000 0.000 0.000 scb
+(in.m) {/Times-Roman cf} 2 7 0 1.000 -80 48 pinlabel
+(in.p) {/Times-Roman cf} 2 7 0 1.000 -80 -48 pinlabel
+(out) {/Times-Roman cf} 2 4 0 1.000 80 0 pinlabel
+endgate
+} def
+
+/analog::vdd {
+% trivial
+begingate
+1 1.000 0 0 0 32 2 polygon
+1 1.000 -32 32 32 32 2 polygon
+(Vdd) {/Times-Roman cf} 2 17 0 0.900 0 38 label
+0.933 0.604 0.000 scb
+(Vdd) {/Times-Roman cf} 2 13 0 1.000 0 0 pinglobal
+endgate
+} def
+
+/analog::gnd {
+% trivial
+begingate
+1 1.000 0 0 0 -32 2 polygon
+1 1.000 -32 -32 32 -32 2 polygon
+1 1.000 -18 -46 18 -46 2 polygon
+1 1.000 -4 -60 4 -60 2 polygon
+0.933 0.604 0.000 scb
+(GND) {/Times-Roman cf} 2 1 0 1.000 0 0 pinglobal
+endgate
+} def
+
+/analog::source {
+% hidden
+begingate
+1 1.000 0 0 32 0.000 360.000 xcarc
+1 1.000 0 32 0 64 2 polygon
+1 1.000 0 -32 0 -64 2 polygon
+endgate
+} def
+
+/analog::vsource {
+begingate
+1.000 0 0 0 analog::source
+(+) {/Symbol cf} 2 5 0 1.000 0 14 label
+(-) {/Symbol cf} 2 5 0 1.000 0 -22 label
+1.000 0.000 0.000 scb
+(v.p) {/Times-Roman cf} 2 9 0 1.000 0 64 pinlabel
+(v.m) {/Times-Roman cf} 2 13 0 1.000 0 -64 pinlabel
+endgate
+} def
+
+/generic::arrowhead {
+% nonetwork
+begingate
+8 -28 beginpath
+3 -18 3 -15 0 0 curveto
+-3 -15 -3 -18 -8 -28 curveto
+-2 -26 2 -26 8 -28 curveto
+249 
+1.000 endpath
+endgate
+} def
+
+/analog::isource {
+begingate
+1.000 0 0 0 analog::source
+1 0.750 0 20 0 -8 2 polygon
+0.800 180 0 -20 generic::arrowhead
+1.000 0.000 0.000 scb
+(i.p) {/Times-Roman cf} 2 9 0 1.000 0 64 pinlabel
+(i.m) {/Times-Roman cf} 2 13 0 1.000 0 -64 pinlabel
+endgate
+} def
+
+/analog::acsource {
+begingate
+1.000 0 0 0 analog::source
+1 0.800 0 -48 0 48 -16 0 16 0 spline
+1.000 0.000 0.000 scb
+(s.p) {/Times-Roman cf} 2 9 0 1.000 0 64 pinlabel
+(s.m) {/Times-Roman cf} 2 13 0 1.000 0 -64 pinlabel
+endgate
+} def
+
+/analog::nmos {
+begingate
+1 1.000 0 -64 0 -28 -32 -28 -32 28 0 28 0 64 6 polygon
+1 1.000 -44 -28 -44 28 2 polygon
+1 1.000 -44 0 -64 0 2 polygon
+1.000 0.000 0.000 scb
+(G) {/Times-Roman cf} 2 7 0 1.000 -64 0 pinlabel
+(S) {/Times-Roman cf} 2 13 0 1.000 0 -64 pinlabel
+(D) {/Times-Roman cf} 2 9 0 1.000 0 64 pinlabel
+0.180 0.545 0.341 scb
+(spice:M%i %pD %pG %pS GND nmos) {/Times-Roman cf} 2 4 0 1.000 -244 -139 
+infolabel
+(sim:n %pG %pS %pD) {/Times-Roman cf} 2 4 0 1.000 -244 -187 infolabel
+endgate
+} def
+
+/analog::pmos {
+begingate
+1 1.000 -44 -28 -44 28 2 polygon
+1 1.000 -60 0 -64 0 2 polygon
+1 1.000 0 -64 0 -28 -32 -28 -32 28 0 28 0 64 6 polygon
+1 1.000 -52 0 8 0.000 360.000 xcarc
+1.000 0.000 0.000 scb
+(S) {/Times-Roman cf} 2 9 0 1.000 0 64 pinlabel
+(D) {/Times-Roman cf} 2 13 0 1.000 0 -64 pinlabel
+(G) {/Times-Roman cf} 2 7 0 1.000 -64 0 pinlabel
+0.180 0.545 0.341 scb
+(spice:M%i %pD %pG %pS Vdd pmos) {/Times-Roman cf} 2 4 0 1.000 -196 -139 
+infolabel
+(sim:p %pG %pS %pD) {/Times-Roman cf} 2 4 0 1.000 -196 -187 infolabel
+endgate
+} def
+
+/analog::nmos2 {
+begingate
+1.000 0 0 0 analog::nmos
+1.000 90 0 -28 generic::arrowhead
+1.000 0.000 0.000 scb
+(G) {/Times-Roman cf} 2 7 0 1.000 -64 0 pinlabel
+(S) {/Times-Roman cf} 2 13 0 1.000 0 -64 pinlabel
+(D) {/Times-Roman cf} 2 9 0 1.000 0 64 pinlabel
+endgate
+} def
+
+/analog::pmos2 {
+begingate
+1.000 0 0 0 analog::nmos
+1.000 270 -32 28 generic::arrowhead
+1.000 0.000 0.000 scb
+(G) {/Times-Roman cf} 2 7 0 1.000 -64 0 pinlabel
+(S) {/Times-Roman cf} 2 9 0 1.000 0 64 pinlabel
+(D) {/Times-Roman cf} 2 13 0 1.000 0 -64 pinlabel
+endgate
+} def
+
+/analog::diode {
+begingate
+248 1.000 -18 -16 0 16 18 -16 3 polygon
+1 1.000 0 -48 0 -16 2 polygon
+1 1.000 0 48 0 16 2 polygon
+1 1.000 -18 16 18 16 2 polygon
+1.000 0.000 0.000 scb
+(d.m) {/Times-Roman cf} 2 9 0 1.000 0 48 pinlabel
+(d.p) {/Times-Roman cf} 2 13 0 1.000 0 -48 pinlabel
+endgate
+} def
+
+/analog::npn {
+begingate
+1 1.000 -48 0 -64 0 2 polygon
+1 1.000 -48 48 -48 -48 2 polygon
+1 1.000 0 48 -48 22 2 polygon
+1 1.000 0 48 0 64 2 polygon
+1 1.000 0 -48 -48 -22 2 polygon
+1 1.000 0 -48 0 -64 2 polygon
+1.000 120 0 -48 generic::arrowhead
+1.000 0.000 0.000 scb
+(C) {/Times-Roman cf} 2 9 0 1.000 0 64 pinlabel
+(B) {/Times-Roman cf} 2 7 0 1.000 -64 0 pinlabel
+(E) {/Times-Roman cf} 2 13 0 1.000 0 -64 pinlabel
+0.180 0.545 0.341 scb
+(spice:Q%i %pC %pB %pE npn) {/Times-Roman cf} 2 4 0 1.000 -244 -139 infolabel
+(sim:b %pB %pE %pC) {/Times-Roman cf} 2 4 0 1.000 -244 -187 infolabel
+endgate
+} def
+
+/analog::pnp {
+begingate
+1 1.000 -48 0 -64 0 2 polygon
+1 1.000 -48 48 -48 -48 2 polygon
+1 1.000 0 48 -48 22 2 polygon
+1 1.000 0 48 0 64 2 polygon
+1 1.000 0 -48 -48 -22 2 polygon
+1 1.000 0 -48 0 -64 2 polygon
+1.000 240 -48 22 generic::arrowhead
+1.000 0.000 0.000 scb
+(C) {/Times-Roman cf} 2 13 0 1.000 0 -64 pinlabel
+(B) {/Times-Roman cf} 2 7 0 1.000 -64 0 pinlabel
+(E) {/Times-Roman cf} 2 9 0 1.000 0 64 pinlabel
+0.180 0.545 0.341 scb
+(spice:Q%i %pC %pB %pE pnp) {/Times-Roman cf} 2 4 0 1.000 -244 -139 infolabel
+endgate
+} def
+
+/analog::crystal {
+begingate
+0 1.000 -24 -12 -24 12 24 12 24 -12 4 polygon
+1 1.000 0 48 0 24 2 polygon
+1 1.000 0 -48 0 -24 2 polygon
+1 1.000 -20 24 20 24 2 polygon
+1 1.000 -20 -24 20 -24 2 polygon
+1.000 0.000 0.000 scb
+(x.1) {/Times-Roman cf} 2 9 0 1.000 0 48 pinlabel
+(x.2) {/Times-Roman cf} 2 13 0 1.000 0 -48 pinlabel
+endgate
+} def
+
+/generic::circle {
+% trivial
+begingate
+1 1.000 16 0 6 0.000 360.000 xcarc
+1 1.000 0 0 10 0 2 polygon
+1.000 0.000 0.000 scb
+(out) {/Times-Roman cf} 2 4 0 1.000 16 0 pinlabel
+(out) {/Times-Roman cf} 2 7 0 1.000 0 0 pinlabel
+endgate
+} def
+
+/analog::switch {
+% trivial
+begingate
+1 1.300 32 32 2 -43 2 polygon
+1 0.600 0 -48 57 49.000 90.000 xcarc
+-1.000 90 0 -64 generic::circle
+0.600 270 -12 8 generic::arrowhead
+1.000 90 0 48 generic::circle
+1.000 0.000 0.000 scb
+(sw.1) {/Times-Roman cf} 2 9 0 1.000 0 48 pinlabel
+(sw.2) {/Times-Roman cf} 2 13 0 1.000 0 -64 pinlabel
+endgate
+} def
+
+
+% EndLib

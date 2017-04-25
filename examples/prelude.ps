@@ -1,0 +1,936 @@
+%!PS-Adobe-3.0
+%%Title: prelude
+%%Creator: Xcircuit v1.6
+%%CreationDate: Thu Aug 28 13:10:40 1997
+%%Pages: 1
+%%BoundingBox: 32 35 578 756
+%%DocumentNeededResources: font Times-BoldItalic font Times-Bold 
+%%+ font Times-Roman 
+%%EndComments
+%%BeginProlog
+%
+%  PostScript prolog for output from xcircuit
+%  Version: 1.6
+%
+%  Electrical circuit (and otherwise general) drawing program
+%
+%  Written by Tim Edwards 8/5/93--8/8/97  (tim@bach.ece.jhu.edu)
+%  The Johns Hopkins University
+%
+%%BeginResource: procset XCIRCproc 1.6 2
+% supporting definitions --- these are the primary xcircuit types.
+
+/XCIRCsave save def
+/topmat matrix currentmatrix def
+
+/fontslant { /slant exch def [1 0 slant 1 0 0] 
+    exch findfont exch makefont dup length dict /ndict exch def
+    { 1 index /FID ne { ndict 3 1 roll put } { pop pop } ifelse } forall
+    ndict definefont pop} def
+/cf { dup type /realtype eq {40 mul /fscale exch def} if dup /xfont exch def
+   findfont fscale scalefont setfont } def
+/Ss { gsave 0.67 dup scale gsave mty neg rmoveto
+   glevel 1 add /glevel exch def } def
+/ss { gsave 0.67 dup scale gsave mty 0.5 mul rmoveto
+   glevel 1 add /glevel exch def } def
+/ns { currentpoint transform   % preserve x position!
+   glevel {grestore} repeat /glevel 0 def
+   itransform pop currentpoint pop sub 0 rmoveto } def
+/ul { showflag 1 eq { gsave 
+   currentpoint topmat setmatrix 0 0 moveto 2 index stringwidth pop (_)
+   false charpath flattenpath pathbbox grestore exch pop 1 index
+   sub setlinewidth exch pop currentpoint 3 -1 roll add moveto 0
+   rlineto stroke moveto } if } def
+/ol { showflag 1 eq { gsave gsave
+   currentpoint topmat setmatrix 2 index stringwidth pop 3 index
+   true charpath flattenpath pathbbox grestore exch pop
+   exch pop topmat setmatrix (_) true charpath pathbbox grestore
+   exch pop 1 index sub setlinewidth exch pop currentpoint
+   exch 4 1 roll exch sub add moveto pop 0 rlineto stroke
+   moveto } if } def
+/bs { gsave true charpath flattenpath pathbbox pop exch pop sub
+   grestore 0 rmoveto } def
+/textx { dup 2 mul 1 add copy 0 exch
+   { exch exec exch stringwidth pop add } repeat neg ns } def
+/mty { 0 topmat setmatrix (A) true charpath flattenpath pathbbox exch
+   pop exch sub exch pop neg grestore } def
+/texty { gsave 2 copy pop exec mty } def
+/tcenter { textx grestore 0.5 mul 0 rmoveto } def
+/tright  { textx grestore 0 rmoveto } def
+/tmiddle { texty 0.5 mul rmoveto } def
+/ttop    { texty rmoveto } def
+/tshow { { exec show } repeat ns } def
+
+/label { gsave translate 0 0 moveto rotate /just exch def
+      /glevel 0 def /showflag 0 def
+      just 1 and 0 gt {gsave just 2 and 0 gt {tright}{tcenter} ifelse} if
+      just 4 and 0 gt {just 8 and 0 gt {ttop}{tmiddle}   ifelse} if
+      /showflag 1 def tshow grestore } def
+
+/begingate { gsave translate 0 0 moveto dup 0 lt {neg 1 sub -1 1 scale} if
+        rotate dup scale } bind def
+/endgate { grestore } bind def
+
+/tmpa [1 0 0 1 0 0] def
+/gar {8 8 true tmpa {<c0 c0 00 00 0c 0c 00 00>} imagemask} bind
+{8 8 true tmpa {<30 70 60 02 03 07 06 20>} imagemask} bind
+{8 8 true tmpa {<0c 1e 1e 0c c0 e1 e1 c0>} imagemask} bind
+{8 8 true tmpa {<0f 0f 0f 0f f0 f0 f0 f0>} imagemask} bind
+{8 8 true tmpa {<3f f3 e1 e1 f3 3f 1e 1e>} imagemask} bind
+{8 8 true tmpa {<df cf 8f 9f fd fc f8 f9>} imagemask} bind
+{8 8 true tmpa {<ff 3f 3f ff ff f3 f3 ff>} imagemask} bind 7 array astore def
+/ppaint { gsave tmpa pathbbox clip transform neg exch neg 4 2 roll transform
+  neg 4 -1 roll 2 copy gt {exch} if 8 div ceiling 8 mul 4 2 roll neg 2 copy
+  gt {exch} if 8 div ceiling 8 mul 3 -1 roll -8 5 -1 roll
+  [1 0 0 1 0 0] setmatrix { 3 index exch 5 exch put dup -8 3 index { 3 index
+  exch 4 exch put 3 index exec } for } for pop pop pop pop grestore } bind def
+/setstyles {
+  currentlinewidth mul setlinewidth /style exch def
+  style 1 and 0 gt not {closepath} if
+  style 2 and 0 gt {currentlinewidth 4 mul dup 2 array astore 0 setdash} if 
+  style 4 and 0 gt {0.5 currentlinewidth 4 mul 2 array astore 0 setdash} if 
+  style dup 256 ge exch 480 lt and { gsave 1 setgray eofill grestore } if
+  style 16 and 0 gt { gsave style 224 and -5 bitshift dup 7 lt
+	{gar exch get ppaint} { pop eofill } ifelse grestore } if
+  style 8 and 0 gt { newpath } { stroke } ifelse grestore } def
+/scb { gsave setrgbcolor } bind def  /sce { grestore } bind def
+
+/polygon { gsave /num exch def moveto num 1 sub {lineto} repeat setstyles } def
+/xcarc   { gsave newpath arc setstyles } def
+/elb { matrix currentmatrix 7 -1 roll 7 -1 roll translate 5 1 roll 4 -1 roll
+	3 index div 1 scale } def
+/ele { 0 4 1 roll 0 4 1 roll } bind def
+/ellipse { gsave elb newpath ele arc setmatrix setstyles } def
+/pellip  { elb ele arc setmatrix } def
+/nellip  { elb ele arcn setmatrix } def
+/spline  { gsave moveto curveto setstyles } def
+/polyc   { {lineto} repeat } bind def
+/beginpath { gsave moveto } bind def
+/endpath { setstyles } bind def
+/bop	 { 1 setlinecap 0 setlinejoin 6 setmiterlimit 0 setgray } def
+/inchscale  {0.375 mul dup scale} def
+/cmscale    {0.35433071 mul dup scale} def
+
+%%EndResource
+%%EndProlog
+
+% XCircuit output starts here.
+
+/hd {
+% -31 -15 38 30 bbox
+begingate
+6 9 beginpath
+-2 25 -38 9 -30 -9 curveto
+-22 -25 14 -9 6 9 curveto
+241  1.00 endpath
+endgate
+} def
+
+/qn {
+% -38 1 38 127 bbox
+begingate
+1.00 0 -7 16 hd
+1  1.00 0 18 0 128 2 polygon
+endgate
+} def
+
+/qnd {
+% -40 -96 38 127 bbox
+begingate
+1.00 180 -40 32 qn
+endgate
+} def
+
+/wn {
+% -44 0 48 32 bbox
+begingate
+-28 32 beginpath
+-48 32 -28 0 -12 0 curveto
+-52 0 -52 32 -28 32 curveto
+12 32 12 0 -12 0 curveto
+8 0 -12 32 -28 32 curveto
+241  1.00 endpath
+endgate
+} def
+
+/lines {
+% 0 -64 3552 128 bbox
+begingate
+1  1.00 0 -32 3552 -32 2 polygon
+1  1.00 0 64 3552 64 2 polygon
+1  1.00 0 0 3552 0 2 polygon
+1  1.00 0 32 3552 32 2 polygon
+1  1.00 0 -64 3552 -64 2 polygon
+endgate
+} def
+
+/br1 {
+% -33 -160 34 256 bbox
+begingate
+0 96 beginpath
+-76 52 60 -100 -32 -160 curveto
+44 -116 -92 36 0 96 curveto
+241  1.00 endpath
+endgate
+} def
+
+/bar {
+% 0 -256 0 512 bbox
+begingate
+1  1.50 0 256 0 -256 2 polygon
+endgate
+} def
+
+/tclef {
+% -44 -42 83 210 bbox
+begingate
+1  1.00 -2 -26 16 180.00 360.00 xcarc
+241  1.00 -8 -26 10 0.00 360.00 xcarc
+1  1.00 14 -26 -4 112 2 polygon
+-4 12 beginpath
+-20 20 -16 50 12 50 curveto
+42 50 36 0 4 0 curveto
+48 0 52 64 12 64 curveto
+-20 64 -28 20 -4 12 curveto
+241  1.00 endpath
+4 0 beginpath
+-24 0 -32 16 -32 32 curveto
+-32 80 30 84 30 140 curveto
+30 170 -10 140 -4 112 curveto
+-10 156 12 164 22 168 curveto
+28 158 30 152 30 140 curveto
+30 108 -44 92 -44 40 curveto
+-44 8 -16 0 4 0 curveto
+241  1.00 endpath
+endgate
+} def
+
+/bclef {
+% -28 -68 79 100 bbox
+begingate
+1  1.00 0 5 27 90.00 192.00 xcarc
+241  1.00 48 16 3 0.00 360.00 xcarc
+241  1.00 48 -15 3 0.00 360.00 xcarc
+241  1.00 -17 3 10 0.00 360.00 xcarc
+36 -4 beginpath
+36 -44 8 -60 -28 -68 curveto
+40 -52 32 32 0 32 curveto
+28 32 36 12 36 -4 curveto
+241  1.00 endpath
+endgate
+} def
+
+/flt {
+% -8 -2 23 73 bbox
+begingate
+1  1.00 -8 71 -8 -1 2 polygon
+-8 -2 beginpath
+32 22 12 46 -8 30 curveto
+2 40 20 22 -8 -2 curveto
+241  1.00 endpath
+endgate
+} def
+
+/keyBf {
+% -42 -51 56 121 bbox
+begingate
+1.00 0 -18 -17 flt
+1.00 0 14 31 flt
+endgate
+} def
+
+/staff {
+% 15 -275 3601 571 bbox
+begingate
+1.00 0 64 -192 lines
+1.00 0 64 192 lines
+1.00 -181 48 -160 br1
+1.00 0 48 160 br1
+1.00 0 64 0 bar
+1.00 0 3616 0 bar
+1.00 0 144 128 tclef
+1.00 0 128 -160 bclef
+1.00 0 240 -224 keyBf
+1.00 0 240 192 keyBf
+endgate
+} def
+
+/hhd {
+% -39 -1 38 34 bbox
+begingate
+6 28 beginpath
+16 12 -20 -12 -30 4 curveto
+-24 -6 12 20 6 28 curveto
+-4 44 -40 20 -30 4 curveto
+-36 12 0 38 6 28 curveto
+241  1.00 endpath
+endgate
+} def
+
+/hn {
+% -39 -1 39 129 bbox
+begingate
+1  1.00 0 23 0 128 2 polygon
+1.00 0 -8 0 hhd
+endgate
+} def
+
+/flg {
+% 0 -52 40 128 bbox
+begingate
+0 76 beginpath
+0 32 68 8 28 -52 curveto
+64 0 0 32 0 32 curveto
+240  1.00 endpath
+endgate
+} def
+
+/en {
+% -38 1 78 153 bbox
+begingate
+1.00 0 0 0 qn
+1.00 0 0 78 flg
+endgate
+} def
+
+/shp {
+% -16 -28 32 88 bbox
+begingate
+240  1.00 -16 24 16 32 16 40 -16 32 4 polygon
+240  1.00 -16 -8 16 0 16 8 -16 0 4 polygon
+1  1.00 -8 56 -8 -28 2 polygon
+1  1.00 8 -24 8 60 2 polygon
+endgate
+} def
+
+/lnt {
+% -4 -14 64 28 bbox
+begingate
+1  1.75 -4 0 60 0 2 polygon
+endgate
+} def
+
+/hnt {
+% -52 -1 64 129 bbox
+begingate
+1.00 0 -48 16 lnt
+1.00 0 0 0 hn
+endgate
+} def
+
+/hr {
+% -24 0 44 16 bbox
+begingate
+240  1.00 -24 0 -24 16 20 16 20 0 4 polygon
+endgate
+} def
+
+/qstem1 {
+% -52 -96 64 127 bbox
+begingate
+1.00 180 -40 32 qn
+1.00 0 -48 16 lnt
+endgate
+} def
+
+/er {
+% -30 -8 27 50 bbox
+begingate
+1  1.30 -3 39 -20 -8 2 polygon
+241  1.00 -24 36 6 0.00 360.00 xcarc
+1  1.00 -18 44 16 237.00 337.00 xcarc
+endgate
+} def
+
+/qstem2 {
+% -55 -96 64 127 bbox
+begingate
+1.00 180 -40 32 qn
+1.00 0 -52 0 lnt
+endgate
+} def
+
+/qr {
+% -15 -50 29 100 bbox
+begingate
+1  1.00 3 41 -1 49 2 polygon
+1  1.00 14 -34 -14 6 2 polygon
+8 -26 beginpath
+-2 -12 -30 -22 -6 -50 curveto
+-20 -36 -4 -24 14 -34 curveto
+241  1.00 endpath
+-14 6 beginpath
+-10 30 6 34 -2 50 curveto
+10 26 1 polyc
+-2 14 -6 -6 0 -14 curveto
+241  1.00 endpath
+endgate
+} def
+
+/dot {
+% -10 -10 20 20 bbox
+begingate
+248  1.00 0 0 6 0.00 360.00 xcarc
+endgate
+} def
+
+/en2 {
+% -40 -130 40 161 bbox
+begingate
+1.00 180 -40 32 qn
+1.00 -181 -40 -54 flg
+endgate
+} def
+
+/nat {
+% -14 -32 22 94 bbox
+begingate
+240  1.00 -14 -8 8 0 8 8 -14 0 4 polygon
+240  1.00 -14 24 8 32 8 40 -14 32 4 polygon
+1  1.00 -14 62 -14 -8 2 polygon
+1  1.00 8 -32 8 40 2 polygon
+endgate
+} def
+
+/four {
+% -24 -32 48 64 bbox
+begingate
+1  1.00 -24 -10 24 -10 2 polygon
+12 -24 beginpath
+20 -24 8 180.00 270.00 arc
+-10 -32 1 polyc
+-10 -24 8 -90.00 0.00 arc
+12 -24 12 18 -2 2 3 polyc
+241  1.00 endpath
+-24 -10 beginpath
+-16 0 -6 20 -6 28 curveto
+-22 -10 14 32 2 polyc
+241  1.00 endpath
+endgate
+} def
+
+/wnt {
+% -53 0 64 32 bbox
+begingate
+1.00 0 -49 16 lnt
+1.00 0 0 0 wn
+endgate
+} def
+
+/hnd {
+% -40 -96 39 129 bbox
+begingate
+1.00 180 -40 32 hn
+endgate
+} def
+
+/ent {
+% -52 -130 64 161 bbox
+begingate
+1.00 0 0 0 en2
+1.00 0 -48 16 lnt
+endgate
+} def
+
+/qstem3 {
+% -52 1 64 127 bbox
+begingate
+1.00 0 0 0 qn
+1.00 0 -48 16 lnt
+endgate
+} def
+
+/qstem4 {
+% -49 1 64 127 bbox
+begingate
+1.00 0 0 0 qn
+1.00 0 -45 32 lnt
+endgate
+} def
+
+%%Page: 1 1
+/pgsave save def bop
+% -7 154 offsets
+0.4000 inchscale
+2.6000 setlinewidth
+
+1  1.00 3753 4858 3753 4890 2 polygon
+1  1.00 3641 4842 3641 4874 2 polygon
+1  1.00 3417 4858 3417 4794 2 polygon
+1  1.00 1049 3594 1049 3610 2 polygon
+1  1.00 1217 3498 1217 3458 2 polygon
+1  1.00 2041 4730 2041 4794 2 polygon
+1  1.00 2169 4778 2169 4810 2 polygon
+1  1.00 2665 3978 2665 4074 2 polygon
+1  1.00 2377 3978 2377 4026 2 polygon
+1  1.00 1881 3962 1881 4058 2 polygon
+1  1.00 1593 3962 1593 4010 2 polygon
+1  1.00 3481 3946 3481 4042 2 polygon
+1  1.00 3193 3946 3193 3994 2 polygon
+1  1.00 1745 3162 1745 3258 2 polygon
+1  1.00 1481 3162 1481 3210 2 polygon
+1  1.00 2641 3178 2641 3274 2 polygon
+1  1.00 2377 3178 2377 3226 2 polygon
+1  1.00 953 3242 953 3290 2 polygon
+1  1.00 689 3242 689 3258 2 polygon
+1  1.00 769 3194 769 3274 2 polygon
+1  1.00 1929 4394 1929 4362 2 polygon
+1  1.00 3457 3226 3457 3306 2 polygon
+1  1.00 3633 3194 3633 3298 2 polygon
+1  1.00 3721 3290 3721 3306 2 polygon
+1  1.00 569 2426 569 2498 2 polygon
+1  1.00 753 2458 745 2466 2 polygon
+1  1.00 841 2426 841 2466 2 polygon
+1  1.00 3369 3274 3369 3258 2 polygon
+1  1.00 3281 3194 3281 3250 2 polygon
+1  1.00 3121 1966 3121 1942 2 polygon
+1  1.00 3033 1954 3033 1978 2 polygon
+1  1.00 1945 1146 1945 1186 2 polygon
+1  1.00 1393 1162 1393 1130 2 polygon
+1  1.00 1169 1146 1169 1130 2 polygon
+1  1.00 617 938 617 906 2 polygon
+1  1.00 729 938 729 946 2 polygon
+1  1.00 953 954 953 986 2 polygon
+1  1.00 1081 906 1081 914 2 polygon
+1  1.00 1305 922 1305 954 2 polygon
+1  1.00 1193 938 1193 954 2 polygon
+1  1.00 1577 1194 1577 1218 2 polygon
+1  1.00 3017 505 3017 553 2 polygon
+1  1.00 985 2746 985 2722 2 polygon
+1  1.00 1161 2746 1161 2722 2 polygon
+1  1.00 1425 906 1425 962 2 polygon
+1  1.00 1081 914 1081 970 2 polygon
+496  1.00 1705 4730 1705 4746 1801 4730 1801 4714 4 polygon
+496  1.00 1401 4794 1401 4810 1497 4794 1497 4778 4 polygon
+496  1.00 1401 4762 1401 4778 1497 4762 1497 4746 4 polygon
+496  1.00 1097 4826 1097 4842 1193 4826 1193 4810 4 polygon
+496  1.00 1097 4794 1097 4810 1193 4794 1193 4778 4 polygon
+496  1.00 1705 4762 1705 4778 1801 4762 1801 4746 4 polygon
+496  1.00 2617 4794 2617 4810 2729 4826 2729 4810 4 polygon
+496  1.00 809 4842 809 4858 905 4842 905 4826 4 polygon
+496  1.00 3001 4842 3001 4858 3097 4842 3097 4826 4 polygon
+496  1.00 3001 4874 3001 4890 3097 4874 3097 4858 4 polygon
+496  1.00 3193 4874 3193 4890 3305 4842 3305 4826 4 polygon
+496  1.00 3417 4842 3417 4858 3753 4890 3753 4874 4 polygon
+240  1.00 617 4058 617 4074 921 4026 921 4010 4 polygon
+496  1.00 809 4874 809 4890 905 4874 905 4858 4 polygon
+496  1.00 617 3642 617 3658 729 3690 729 3674 4 polygon
+496  1.00 1217 3458 1217 3474 1313 3514 1313 3498 4 polygon
+496  1.00 1929 4762 1929 4778 2297 4842 2297 4826 4 polygon
+496  1.00 1049 3602 1049 3618 1145 3658 1145 3642 4 polygon
+496  1.00 1921 3474 1921 3490 2113 3530 2113 3514 4 polygon
+497  1.00 2377 4010 2377 4026 2665 4074 2665 4058 4 polygon
+496  1.00 2705 3490 2705 3506 2897 3546 2897 3530 4 polygon
+497  1.00 1593 3994 1593 4010 1881 4058 1881 4042 4 polygon
+496  1.00 3193 3978 3193 3994 3481 4042 3481 4026 4 polygon
+496  1.00 3521 3458 3521 3474 3713 3514 3713 3498 4 polygon
+496  1.00 609 1290 609 1306 953 1370 953 1354 4 polygon
+496  1.00 689 3258 689 3274 953 3290 953 3274 4 polygon
+496  1.00 1481 3194 1481 3210 1745 3258 1745 3242 4 polygon
+496  1.00 1865 2674 1865 2690 2041 2730 2041 2714 4 polygon
+496  1.00 2697 2722 2697 2738 2873 2778 2873 2762 4 polygon
+496  1.00 2377 3210 2377 3226 2641 3274 2641 3258 4 polygon
+496  1.00 3457 3290 3457 3306 3721 3306 3721 3290 4 polygon
+496  1.00 569 2482 569 2498 841 2466 841 2450 4 polygon
+496  1.00 953 2434 953 2450 1209 2490 1209 2474 4 polygon
+496  1.00 3193 3226 3193 3242 3369 3274 3369 3258 4 polygon
+496  1.00 2705 2442 2705 2458 2897 2490 2897 2474 4 polygon
+496  1.00 2569 1938 2569 1954 2865 2010 2865 1994 4 polygon
+496  1.00 2201 2090 2201 2106 2505 2154 2505 2138 4 polygon
+521 1970 beginpath
+505 1930 465 1914 425 1930 curveto
+465 1906 505 1922 521 1970 curveto
+241  1.00 endpath
+496  1.00 1345 2042 1345 2058 1649 2106 1649 2090 4 polygon
+496  1.00 1721 1890 1721 1906 2017 1962 2017 1946 4 polygon
+496  1.00 3033 1954 3033 1970 3329 1922 3329 1906 4 polygon
+496  1.00 3465 2122 3465 2138 3785 2090 3785 2074 4 polygon
+496  1.00 3017 538 3017 554 3353 506 3353 490 4 polygon
+1.00 0 1081 1226 qnd
+1  1.00 1081 538 1081 546 2 polygon
+496  1.00 985 2722 985 2738 1161 2738 1161 2722 4 polygon
+496  1.00 1577 1194 1577 1210 1945 1162 1945 1146 4 polygon
+496  1.00 617 930 617 946 953 994 953 978 4 polygon
+1  1.00 2793 536 2793 568 2 polygon
+496  1.00 1849 2394 1849 2410 2057 2450 2057 2434 4 polygon
+496  1.00 2113 1354 2113 1370 2449 1322 2449 1306 4 polygon
+496  1.00 1081 954 1081 970 1425 962 1425 946 4 polygon
+1.00 0 3545 362 wn
+1.00 0 217 3738 staff
+1.00 0 3081 2762 wn
+1.00 0 569 1994 hn
+1.00 0 665 4714 qn
+1.00 0 2873 4714 en
+1.00 0 3345 4634 shp
+1.00 0 1401 4682 qn
+1.00 0 1497 4666 qn
+1.00 0 1273 4714 en
+1.00 0 1577 4682 en
+1.00 0 1129 4698 shp
+1.00 0 1097 4714 qn
+1.00 0 1193 4698 qn
+1.00 0 1737 4634 shp
+1.00 0 1705 4650 qn
+1.00 0 1801 4634 qn
+1.00 0 2425 4698 qn
+1.00 0 2617 4682 qn
+1.00 0 2729 4698 qn
+1.00 0 2425 4394 hnt
+1.00 0 2409 4314 hr
+1.00 0 1929 4378 hn
+1.00 0 1929 4234 hn
+1.00 0 2777 4506 bar
+1.00 180 2833 4410 hn
+1.00 180 2833 4682 hn
+1.00 0 665 4234 wn
+1.00 180 2833 4714 hn
+1.00 180 3377 4666 hn
+1.00 0 809 4762 qn
+1.00 0 905 4746 qn
+1.00 0 985 4762 en
+1.00 0 841 4746 shp
+1.00 0 3001 4762 qn
+1.00 0 3097 4746 qn
+1.00 0 3033 4746 shp
+1.00 0 3193 4762 qn
+1.00 0 3305 4714 qn
+1.00 0 3417 4666 qn
+1.00 0 3529 4730 qn
+1.00 0 3641 4714 qn
+1.00 0 3753 4730 qn
+1.00 180 3601 4362 qn
+1.00 0 3417 4394 qstem1
+1.00 0 3569 4330 shp
+1.00 0 617 3946 qn
+1.00 0 729 3930 qn
+1.00 0 825 3914 qn
+1.00 0 921 3898 qn
+1.00 0 1049 3930 qn
+1.00 0 1257 3914 qn
+1.00 0 1849 4506 bar
+1.00 0 1417 3738 bar
+1.00 180 577 3930 hn
+1.00 180 577 3898 hn
+1.00 180 1009 3930 qn
+1.00 180 1009 3898 qn
+1.00 180 1217 3914 qn
+1.00 180 1217 3866 qn
+1.00 0 665 4874 er
+1.00 0 617 3530 qn
+1.00 0 729 3562 qn
+1.00 0 825 3642 qstem2
+1.00 0 545 3866 shp
+1.00 0 1049 3466 qn
+1.00 0 1145 3530 qn
+1.00 180 1217 3610 qn
+1.00 180 1313 3626 qn
+1.00 0 1929 4650 qn
+1.00 0 2169 4650 qn
+1.00 0 2297 4714 qn
+1.00 0 2041 4602 qn
+1.00 0 1401 3738 bar
+1.00 0 2709 1674 qr
+1.00 0 2201 3738 bar
+1.00 0 2265 3914 er
+1.00 0 2377 3850 qn
+1.00 0 2569 3930 qn
+1.00 0 2665 3850 qn
+1.00 0 2473 3898 qn
+1.00 180 2705 3626 qn
+1.00 180 2801 3642 qn
+1.00 0 2505 3546 hr
+1.00 0 2753 3930 qr
+1.00 0 2785 3914 dot
+1.00 0 1513 3914 er
+1.00 0 1505 3610 en2
+1.00 0 1593 3834 qn
+1.00 0 1785 3914 qn
+1.00 0 1881 3834 qn
+1.00 0 1689 3882 qn
+1.00 180 1921 3610 qn
+1.00 180 2017 3626 qn
+1.00 180 2113 3642 qn
+1.00 0 1721 3546 hr
+1.00 0 1977 3930 qr
+1.00 0 2009 3914 dot
+1.00 0 3001 3738 bar
+1.00 0 3081 3914 er
+1.00 0 3081 3594 en2
+1.00 0 3385 3898 qn
+1.00 0 3289 3866 qn
+1.00 180 3521 3594 qn
+1.00 180 3617 3610 qn
+1.00 180 3713 3626 qn
+1.00 0 3329 3546 hr
+1.00 0 3593 3930 qr
+1.00 0 3625 3914 dot
+1.00 0 1353 3146 er
+1.00 0 1353 2810 en2
+1.00 0 1657 3114 qn
+1.00 0 1569 3082 qn
+1.00 180 1865 2810 qn
+1.00 180 1953 2826 qn
+1.00 180 2041 2842 qn
+1.00 0 1585 2778 hr
+1.00 0 1865 3162 qr
+1.00 0 1897 3146 dot
+1.00 0 577 3146 er
+1.00 0 569 2842 en2
+1.00 0 689 3114 qn
+1.00 0 865 3146 qn
+1.00 0 953 3114 qn
+1.00 0 769 3066 qn
+1.00 180 985 2874 qn
+1.00 180 1073 2858 qn
+1.00 180 1161 2874 qn
+1.00 0 753 2778 hr
+1.00 0 1073 3162 qr
+1.00 0 1105 3146 dot
+1.00 0 2249 3146 er
+1.00 0 2249 2826 en2
+1.00 0 2553 3130 qn
+1.00 0 2465 3098 qn
+1.00 180 2697 2858 qn
+1.00 180 2785 2874 qn
+1.00 0 2441 2778 hr
+1.00 0 2761 3162 qr
+1.00 0 2793 3146 dot
+1.00 0 2161 2970 bar
+1.00 0 217 2970 staff
+1.00 0 217 4506 staff
+1.00 0 665 4378 wn
+1.00 0 2969 2970 bar
+1.00 0 3049 3146 er
+1.00 0 3457 3098 qn
+1.00 0 3545 3178 qn
+1.00 0 3633 3066 qn
+1.00 0 3721 3162 qn
+1.00 0 657 3562 shp
+1.00 180 1585 762 qn
+1.00 0 1281 2970 bar
+1.00 0 1209 2362 qn
+1.00 0 1361 2346 hn
+1.00 0 569 2298 qn
+1.00 0 649 2362 qn
+1.00 0 753 2330 qn
+1.00 0 841 2298 qn
+1.00 0 953 2314 qn
+1.00 0 1041 2330 qn
+1.00 0 1129 2346 qn
+1.00 0 897 2314 nat
+1.00 0 969 2010 hr
+1.00 0 2089 2202 bar
+1.00 0 2937 2202 bar
+1.00 0 3193 3098 qn
+1.00 0 3281 3066 qn
+1.00 0 3369 3130 qn
+1.00 0 3121 3098 shp
+1.00 0 1361 2378 hn
+1.00 0 2201 2346 hn
+1.00 0 1361 2298 hn
+1.00 0 1297 2378 nat
+1.00 0 2137 2314 nat
+1.00 0 1953 2298 qn
+1.00 0 2057 2314 qn
+1.00 0 1993 2314 nat
+1.00 0 1737 2378 er
+1.00 0 2705 2330 qn
+1.00 0 2809 2346 qn
+1.00 0 2897 2362 qn
+1.00 0 2585 2378 er
+1.00 0 3081 2362 hn
+1.00 0 3081 2330 hn
+1.00 0 3081 2298 hn
+1.00 0 689 2330 shp
+1.00 0 3393 2346 shp
+1.00 0 2201 2314 hn
+1.00 0 3465 2314 hn
+1.00 0 3465 2346 hn
+1.00 0 217 2202 staff
+1.00 0 2969 2330 shp
+1.00 0 2745 2074 nat
+1.00 180 2569 2074 qn
+1.00 180 2665 2090 qn
+1.00 180 2769 2106 qn
+1.00 0 3009 2298 shp
+1.00 0 2201 1978 qn
+1.00 0 2297 1994 qn
+1.00 0 2409 2010 qn
+1.00 0 2505 2026 qn
+1.00 0 2345 2010 nat
+1.00 0 1801 2010 nat
+1.00 0 1345 1930 qn
+1.00 0 1441 1946 qn
+1.00 0 1553 1962 qn
+1.00 0 1649 1978 qn
+1.00 180 2017 2074 qn
+1.00 180 1721 2026 qn
+1.00 180 1825 2042 qn
+1.00 180 1921 2058 qn
+1.00 0 1489 1962 nat
+1.00 0 1249 2202 bar
+1.00 0 2561 1434 bar
+1.00 0 3009 2074 nat
+1.00 180 3329 2074 qn
+1.00 180 3033 2106 qn
+1.00 180 3121 2090 qn
+1.00 180 3225 2058 qn
+1.00 0 3601 1978 shp
+1.00 0 3465 2010 qn
+1.00 0 3561 1994 qn
+1.00 0 3673 1978 qn
+1.00 0 3785 1962 qn
+1.00 0 3721 1962 nat
+1.00 0 3297 2042 shp
+1.00 180 1945 1290 qn
+1.00 0 1617 1578 hn
+1.00 0 3193 2026 shp
+1.00 0 2113 1578 hn
+1.00 0 1617 1530 hn
+1.00 0 2113 1514 hnt
+1.00 0 2729 1546 wn
+1.00 0 1081 1290 hn
+1.00 0 2729 1258 wn
+1.00 0 2729 1178 wn
+1.00 0 2985 1562 qn
+1.00 0 3289 1594 qn
+1.00 0 3593 1626 qn
+1.00 0 2657 1258 shp
+1.00 0 2909 1562 shp
+1.00 0 1145 1242 nat
+1.00 0 609 1178 qn
+1.00 0 721 1194 qn
+1.00 0 849 1210 qn
+1.00 0 953 1242 qn
+1.00 180 1393 1290 qn
+1.00 180 1169 1274 qn
+1.00 180 1281 1258 qn
+1.00 0 1497 1434 bar
+1.00 0 617 1594 qn
+1.00 0 849 1578 qn
+1.00 0 1089 1578 qn
+1.00 0 1321 1562 qn
+1.00 180 577 1578 hn
+1.00 180 1049 1562 hn
+1.00 0 617 1322 hnt
+1.00 0 217 1434 staff
+1.00 0 553 1546 nat
+1.00 180 577 762 hn
+1.00 180 1041 778 hn
+1.00 0 1081 522 hnt
+1.00 0 617 778 qn
+1.00 0 729 810 qn
+1.00 0 841 842 qn
+1.00 0 953 826 qn
+1.00 0 1081 778 qn
+1.00 0 1193 810 qn
+1.00 0 1305 794 qn
+1.00 0 1425 778 qn
+1.00 0 617 394 hn
+1.00 0 1081 410 hn
+1.00 0 617 506 hn
+1.00 0 1625 762 hn
+1.00 0 2073 762 hn
+1.00 0 2073 794 hn
+1.00 0 1497 634 bar
+1.00 0 2457 634 bar
+1.00 180 1577 1338 qn
+1.00 180 1697 1322 qn
+1.00 180 1817 1306 qn
+1.00 0 1737 554 qstem1
+1.00 0 1849 538 qstem2
+1.00 0 2681 1530 lnt
+1.00 0 1977 522 qstem1
+1.00 0 1625 554 er
+1.00 0 2569 458 er
+1.00 180 1585 458 hn
+1.00 0 1849 730 qr
+1.00 0 785 1210 shp
+1.00 0 2489 762 shp
+1.00 0 2681 426 qn
+1.00 0 2793 410 qn
+1.00 0 2905 426 qn
+1.00 0 1553 762 shp
+1.00 0 2057 458 er
+1.00 0 2169 426 qn
+1.00 0 2281 442 qn
+1.00 0 2393 426 qn
+1.00 0 2449 1194 qn
+1.00 0 2113 1242 qn
+1.00 0 2225 1226 qn
+1.00 0 2337 1210 qn
+1.00 0 3353 378 qn
+1.00 0 3017 378 qn
+1.00 0 3129 410 qn
+1.00 0 3241 394 qn
+1.00 0 2569 362 wn
+1.00 0 2569 250 wn
+1.00 0 2521 346 lnt
+1.00 0 2521 314 lnt
+1.00 0 2521 282 lnt
+1.00 0 2569 730 wn
+1.00 0 2569 762 wn
+1.00 0 2569 794 wn
+1.00 0 3545 778 wn
+1.00 0 3545 698 wn
+1.00 0 3497 346 lnt
+1.00 0 3497 314 lnt
+1.00 0 3545 730 wn
+1.00 0 217 634 staff
+1.00 0 3545 250 wn
+1.00 0 3497 282 lnt
+1.00 0 3497 730 lnt
+1.00 0 3417 634 bar
+1.00 0 3817 634 bar
+1.00 0 537 1322 shp
+(f) {/Times-BoldItalic 2.250 cf} 1 5 0 569 4506 label
+(Prelude in g-minor) {/Times-Bold 3.000 cf} 1 9 0 1977 4938 label
+(Tempo I) {/Times-BoldItalic 2.000 cf} 1 0 0 377 994 label
+(Andante) {/Times-BoldItalic 2.000 cf} 1 0 0 289 4898 label
+(rit . . .) {/Times-BoldItalic 2.000 cf} 1 0 0 2937 1410 label
+(rit . . .) {/Times-BoldItalic 2.000 cf} 1 0 0 3009 626 label
+(Allegretto) {/Times-BoldItalic 2.000 cf} 1 0 0 1417 4074 label
+(Tim Edwards  1992) {/Times-Roman 2.000 cf} 1 11 0 3833 4938 label
+697 4410 beginpath
+857 4474 1721 4474 1865 4402 curveto
+1721 4466 857 4466 697 4410 curveto
+241  1.00 endpath
+697 4218 beginpath
+857 4154 1721 4154 1865 4226 curveto
+1721 4162 857 4162 697 4218 curveto
+241  1.00 endpath
+3129 2762 beginpath
+3217 2714 3657 2714 3817 2754 curveto
+3657 2706 3217 2706 3129 2762 curveto
+241  1.00 endpath
+496  1.00 2169 554 2169 570 2393 570 2393 554 4 polygon
+496  1.00 2681 554 2681 570 2905 570 2905 554 4 polygon
+1.00 0 537 4282 four
+1.00 0 537 4730 four
+1.00 0 537 4666 four
+1.00 0 537 4346 four
+1  1.00 3329 1906 3329 1950 2 polygon
+1.00 0 2729 1482 wnt
+1.00 0 2201 2282 hnt
+1.00 0 2425 4618 hnd
+1.00 0 665 4650 hnd
+1.00 0 2281 3626 ent
+1.00 0 2937 3626 qstem1
+1.00 0 3481 3818 qstem3
+1.00 0 3193 3818 qstem3
+1.00 0 1745 3034 qstem4
+1.00 0 1481 3034 qstem4
+1.00 0 2641 3050 qstem3
+1.00 0 2377 3050 qstem3
+1.00 0 2913 2858 qstem1
+1.00 0 2905 2090 qstem1
+496  1.00 1041 1114 1041 1130 1393 1146 1393 1130 4 polygon
+1  1.00 617 522 617 538 2 polygon
+496  1.00 1697 458 1697 474 1937 442 1937 426 4 polygon
+1.00 0 1689 538 lnt
+1.00 0 1849 2282 qstem3
+pgsave restore showpage
+
+%%Trailer
+XCIRCsave restore
+%%EOF

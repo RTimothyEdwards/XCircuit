@@ -1,0 +1,67 @@
+%! PostScript set of library objects for XCircuit
+%  Version: 3.2
+%  Library name is: signal
+%  Author: R. Timothy Edwards <tim@opencircuitdesign.com>
+%
+
+% Depend sum circle2
+% Depend times circle2
+% Depend delta square
+% Depend integrate square
+% Depend integ2 square
+
+% XCircuitLib library objects
+/triangle {
+begingate
+0 1.35 -32 36 32 0 -32 -36 3 polygon
+endgate
+} def
+
+/square {
+begingate
+0 1.35 -32 -32 -32 32 32 32 32 -32 4 polygon
+endgate
+} def
+
+/circle2 {
+begingate
+1 1.35 0 0 32 0.00 360.00 xcarc
+endgate
+} def
+
+/sum {
+begingate
+(S) {/Symbol cf} 2 21 0 1.30 0 0 label
+1.00 0 0 0 circle2
+endgate
+} def
+
+/times {
+begingate
+1.00 0 0 0 circle2
+(\264) {/Symbol cf} 2 21 0 1.75 2 4 label
+endgate
+} def
+
+/delta {
+begingate
+1.00 0 0 0 square
+(D) {/Symbol cf} 2 21 0 1.30 0 0 label
+endgate
+} def
+
+/integrate {
+begingate
+1.00 0 0 0 square
+(s) {/Symbol cf} 2 21 0 1.30 0 0 label
+endgate
+} def
+
+/integ2 {
+begingate
+1.00 0 0 0 square
+(\362) {/Symbol cf} 2 21 0 1.30 0 -2 label
+endgate
+} def
+
+% EndLib

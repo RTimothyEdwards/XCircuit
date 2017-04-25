@@ -1,0 +1,47 @@
+% XCircuit Font encoding (XFE) file
+name:     CourierISO5
+% file:     courier.lps
+file:     courieriso5.lps
+family:   Courier
+weight:   normal
+shape:    normal
+type:     PostScript
+encoding: ISOLatin5
+Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar
+Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar
+Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar
+Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar 
+Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar
+Cr::nullchar Cr::nullchar 
+Cr::space Cr::exclam Cr::quote Cr::pound Cr::dollar Cr::percent Cr::ampersand
+Cr::apostrophe Cr::lparen Cr::rparen Cr::asterisk Cr::plus Cr::comma Cr::minus
+Cr::period Cr::slash Cr::zero Cr::one Cr::two Cr::three Cr::four Cr::five
+Cr::six Cr::seven Cr::eight Cr::nine Cr::colon Cr::semi Cr::less Cr::equal
+Cr::more Cr::question Cr::at Cr::A Cr::B Cr::C Cr::D Cr::E Cr::F Cr::G Cr::H
+Cr::I Cr::J Cr::K Cr::L Cr::M Cr::N Cr::O Cr::P Cr::Q Cr::R Cr::S Cr::T Cr::U
+Cr::V Cr::W Cr::X Cr::Y Cr::Z Cr::lbracket Cr::backslash Cr::rbracket Cr::caret
+Cr::underscore Cr::apostrophe Cr::a Cr::b Cr::c Cr::d Cr::e Cr::f Cr::g Cr::h
+Cr::i Cr::j Cr::k Cr::l Cr::m Cr::n Cr::o Cr::p Cr::q Cr::r Cr::s Cr::t Cr::u
+Cr::v Cr::w Cr::x Cr::y Cr::z Cr::lbrace Cr::vbar Cr::rbrace Cr::tilde
+Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar
+Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar 
+Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::onesmall
+Cr::grave Cr::acute
+Cr::hat Cr::tilde Cr::bar Cr::uu Cr::dot Cr::umlaut Cr::nullchar Cr::circ
+Cr::cedilla Cr::nullchar Cr::uml2 Cr::ced2 Cr::vee Cr::space
+Cr::upexclam Cr::cent Cr::lb Cr::sy2 Cr::yen Cr::vbar Cr::sy1 Cr::umlaut Cr::copy
+Cr::ordfem Cr::lgqt Cr::lognot Cr::dash Cr::regis Cr::bar Cr::circ Cr::pm Cr::twosup
+Cr::threesup Cr::acute Cr::mu Cr::para Cr::dot Cr::cedilla Cr::onesup Cr::ordmasc
+Cr::rgqt Cr::quarter Cr::half Cr::threeq Cr::uqest
+Cr::Agrave Cr::Aacute Cr::Acircum Cr::Atilde Cr::Adier Cr::Aring Cr::AE Cr::Ccedil
+Cr::Egrave Cr::Eacute Cr::Ecircum Cr::Edier Cr::Igrave Cr::Iacute Cr::Icircum Cr::Idier
+Cr::Guu Cr::Ntilde Cr::Ograve Cr::Oacute Cr::Ocircum Cr::Otilde Cr::Odier Cr::times
+Cr::Oslash Cr::Ugrave Cr::Uacute Cr::Ucircum Cr::Udier Cr::Idot Cr::Scedil Cr::sset
+Cr::agrave Cr::aacute Cr::acircum Cr::atilde Cr::adier Cr::aring Cr::ae Cr::ccedil
+Cr::egrave Cr::eacute Cr::ecircum Cr::edier Cr::igrave Cr::iacute Cr::icircum Cr::idier
+Cr::guu Cr::ntilde Cr::ograve Cr::oacute Cr::ocircum Cr::otilde Cr::odier Cr::divide
+Cr::osl Cr::ugrave Cr::uacute Cr::ucircum Cr::udier Cr::dotlessi Cr::scedil Cr::ydier
+
+derived:   Courier-BoldISO5       bold     normal     PostScript
+derived:   Courier-ItalicISO5     normal   italic     PostScript
+derived:   Courier-BoldItalicISO5 bold     italic     PostScript

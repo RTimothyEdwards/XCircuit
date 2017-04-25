@@ -1,0 +1,1249 @@
+%! PostScript set of library objects for XCircuit
+%  Version: 3.2
+%  Library name is: pcb
+%  Author: R. Timothy Edwards <tim@opencircuitdesign.com>
+%
+
+% Depend cap300 polarized pin
+% Depend cap200 polarized pin
+% Depend res300 resistor pin
+% Depend regulator pin
+% Depend sip8 pin1 pin
+% Depend sip10 pin1 pin
+% Depend clock8 pin1 pin
+% Depend dip8 pin pin1
+% Depend dip14 pin pin1
+% Depend dip16 pin pin1
+% Depend dip20 pin1 pin
+% Depend dip24n pin pin1
+% Depend dip28n pin1 pin
+% Depend dip40 pin1 pin
+% Depend dio_port pin1 pin
+% Depend pga68 pin1 pin
+% Depend pga44 pin1 pin
+
+% XCircuitLib library objects
+/polarized {
+begingate
+1 1.00 0 -64 0 -6 2 polygon
+1 1.00 0 64 0 6 2 polygon
+1 1.00 -32 6 32 6 2 polygon
+1 1.00 0 -80 74 66.00 114.00 xcarc
+endgate
+} def
+
+/pin {
+begingate
+1 5.00 0 0 12 0.00 360.00 xcarc
+endgate
+} def
+
+/cap300 {
+begingate
+1 1.00 0 64 0 96 2 polygon
+1 1.00 0 -96 0 -64 2 polygon
+1.00 0 0 0 polarized
+(+) {/Symbol cf} 2 24 0 1.00 32 32 label
+1.00 0 0 96 pin
+1.00 0 0 -96 pin
+endgate
+} def
+
+/cap200 {
+begingate
+1.00 0 0 0 polarized
+(+) {/Symbol cf} 2 24 0 1.00 32 32 label
+1.00 0 0 64 pin
+1.00 0 0 -64 pin
+endgate
+} def
+
+/resistor {
+begingate
+1 1.00 0 64 0 36 2 polygon
+1 1.00 0 -64 0 -36 2 polygon
+1 1.00 0 -36 14 -30 -14 -18 14 -6 -14 6 14 18 -14 30 0 36 8 polygon
+endgate
+} def
+
+/res300 {
+begingate
+1.00 0 0 0 resistor
+1 1.00 0 64 0 96 2 polygon
+1 1.00 0 -96 0 -64 2 polygon
+1.00 0 0 96 pin
+1.00 0 0 -96 pin
+endgate
+} def
+
+/regulator {
+begingate
+0 1.00 -96 -48 -96 48 96 48 96 -48 4 polygon
+1 1.00 -96 16 96 16 2 polygon
+1.00 0 64 -16 pin
+1.00 0 0 -16 pin
+1.00 0 -64 -16 pin
+endgate
+} def
+
+/pin1 {
+begingate
+8 0 beginpath
+0 0 8 0.00 360.00  arc
+15 0 15 -15 -15 -15 -15 15 15 15 15 0 6 polyc
+
+241 1.00 endpath
+endgate
+} def
+
+/sip8 {
+begingate
+0.843 0.843 0.843 scb
+240 1.00 -240 -32 -240 0 240 0 240 -32 4 polygon
+0.000 0.000 1.000 scb
+(2) {/Times-Roman cf} 2 29 180 0.75 -160 16 label
+(4) {/Times-Roman cf} 2 29 180 0.75 -32 16 label
+(3) {/Times-Roman cf} 2 29 180 0.75 -96 16 label
+(1) {/Times-Roman cf} 2 29 180 0.75 -224 16 label
+(6) {/Times-Roman cf} 2 29 180 0.75 96 16 label
+(7) {/Times-Roman cf} 2 29 180 0.75 160 16 label
+(5) {/Times-Roman cf} 2 29 180 0.75 32 16 label
+(8) {/Times-Roman cf} 2 29 180 0.75 224 16 label
+sce
+1.00 0 -224 -16 pin1
+1.00 0 -160 -16 pin
+1.00 0 -96 -16 pin
+1.00 0 -32 -16 pin
+1.00 0 32 -16 pin
+1.00 0 96 -16 pin
+1.00 0 160 -16 pin
+1.00 0 224 -16 pin
+1.000 0.000 0.000 scb
+(2) {/Times-Roman cf} 2 17 180 0.75 -160 -16 pinlabel
+(4) {/Times-Roman cf} 2 17 180 0.75 -32 -16 pinlabel
+(3) {/Times-Roman cf} 2 17 180 0.75 -96 -16 pinlabel
+(1) {/Times-Roman cf} 2 17 180 0.75 -224 -16 pinlabel
+(6) {/Times-Roman cf} 2 17 180 0.75 96 -16 pinlabel
+(7) {/Times-Roman cf} 2 17 180 0.75 160 -16 pinlabel
+(5) {/Times-Roman cf} 2 17 180 0.75 32 -16 pinlabel
+(8) {/Times-Roman cf} 2 17 180 0.75 224 -16 pinlabel
+endgate
+} def
+
+/sip10 {
+begingate
+0.843 0.843 0.843 scb
+240 1.00 -240 -32 -240 0 368 0 368 -32 4 polygon
+0.000 0.000 1.000 scb
+(2) {/Times-Roman cf} 2 29 180 0.75 -160 16 label
+(4) {/Times-Roman cf} 2 29 180 0.75 -32 16 label
+(3) {/Times-Roman cf} 2 29 180 0.75 -96 16 label
+(1) {/Times-Roman cf} 2 29 180 0.75 -224 16 label
+(6) {/Times-Roman cf} 2 29 180 0.75 96 16 label
+(7) {/Times-Roman cf} 2 29 180 0.75 160 16 label
+(5) {/Times-Roman cf} 2 29 180 0.75 32 16 label
+(8) {/Times-Roman cf} 2 29 180 0.75 224 16 label
+(9) {/Times-Roman cf} 2 29 180 0.75 288 16 label
+(10) {/Times-Roman cf} 2 29 180 0.75 352 16 label
+sce
+1.00 0 -224 -16 pin1
+1.00 0 -160 -16 pin
+1.00 0 -96 -16 pin
+1.00 0 -32 -16 pin
+1.00 0 32 -16 pin
+1.00 0 96 -16 pin
+1.00 0 160 -16 pin
+1.00 0 224 -16 pin
+1.00 0 288 -16 pin
+1.00 0 352 -16 pin
+1.000 0.000 0.000 scb
+(2) {/Times-Roman cf} 2 17 180 0.75 -160 -16 pinlabel
+(4) {/Times-Roman cf} 2 17 180 0.75 -32 -16 pinlabel
+(3) {/Times-Roman cf} 2 17 180 0.75 -96 -16 pinlabel
+(1) {/Times-Roman cf} 2 17 180 0.75 -224 -16 pinlabel
+(6) {/Times-Roman cf} 2 17 180 0.75 96 -16 pinlabel
+(7) {/Times-Roman cf} 2 17 180 0.75 160 -16 pinlabel
+(5) {/Times-Roman cf} 2 17 180 0.75 32 -16 pinlabel
+(8) {/Times-Roman cf} 2 17 180 0.75 224 -16 pinlabel
+(9) {/Times-Roman cf} 2 17 180 0.75 288 -16 pinlabel
+(10) {/Times-Roman cf} 2 17 180 0.75 352 -16 pinlabel
+endgate
+} def
+
+/clock8 {
+begingate
+0.843 0.843 0.843 scb
+240 1.00 -96 -96 -96 96 96 96 96 -96 4 polygon
+0.000 0.000 1.000 scb
+(4) {/Times-Roman cf} 2 29 180 0.75 96 -64 label
+(8) {/Times-Roman cf} 2 17 180 0.75 -96 64 label
+(5) {/Times-Roman cf} 2 17 180 0.75 96 64 label
+(1) {/Times-Roman cf} 2 29 180 0.75 -96 -64 label
+sce
+1.00 0 -96 -96 pin1
+1.00 0 96 -96 pin
+1.00 0 96 96 pin
+1.00 0 -96 96 pin
+1.000 0.000 0.000 scb
+(4) {/Times-Roman cf} 2 17 180 0.75 96 -96 pinlabel
+(8) {/Times-Roman cf} 2 29 180 0.75 -96 96 pinlabel
+(5) {/Times-Roman cf} 2 29 180 0.75 96 96 pinlabel
+(1) {/Times-Roman cf} 2 17 180 0.75 -96 -96 pinlabel
+endgate
+} def
+
+/dip8 {
+begingate
+0.843 0.843 0.843 scb
+240 1.00 -272 -80 -272 112 -80 112 -80 -80 4 polygon
+0.000 0.000 1.000 scb
+(2) {/Times-Roman cf} 2 29 180 0.75 -208 -48 label
+(4) {/Times-Roman cf} 2 29 180 0.75 -80 -48 label
+(3) {/Times-Roman cf} 2 29 180 0.75 -144 -48 label
+(1) {/Times-Roman cf} 2 29 180 0.75 -272 -48 label
+(6) {/Times-Roman cf} 2 25 180 0.75 -208 80 label
+(7) {/Times-Roman cf} 2 25 180 0.75 -144 80 label
+(5) {/Times-Roman cf} 2 25 180 0.75 -272 80 label
+(8) {/Times-Roman cf} 2 25 180 0.75 -80 80 label
+sce
+1.00 0 -272 112 pin
+1.00 0 -208 112 pin
+1.00 0 -144 112 pin
+1.00 0 -80 112 pin
+1.00 0 -80 -80 pin
+1.00 0 -144 -80 pin
+1.00 0 -208 -80 pin
+1.00 0 -272 -80 pin1
+1.000 0.000 0.000 scb
+(2) {/Times-Roman cf} 2 17 180 0.75 -208 -80 pinlabel
+(4) {/Times-Roman cf} 2 17 180 0.75 -80 -80 pinlabel
+(3) {/Times-Roman cf} 2 17 180 0.75 -144 -80 pinlabel
+(1) {/Times-Roman cf} 2 17 180 0.75 -272 -80 pinlabel
+(6) {/Times-Roman cf} 2 29 180 0.75 -208 112 pinlabel
+(7) {/Times-Roman cf} 2 29 180 0.75 -144 112 pinlabel
+(5) {/Times-Roman cf} 2 29 180 0.75 -272 112 pinlabel
+(8) {/Times-Roman cf} 2 29 180 0.75 -80 112 pinlabel
+endgate
+} def
+
+/dip14 {
+begingate
+0.843 0.843 0.843 scb
+240 1.00 112 -80 112 112 -272 112 -272 -80 4 polygon
+1.000 0.000 0.000 scb
+(2) {/Times-Roman cf} 2 17 180 0.75 -208 -80 pinlabel
+(4) {/Times-Roman cf} 2 17 180 0.75 -80 -80 pinlabel
+(12) {/Times-Roman cf} 2 29 180 0.75 -144 112 pinlabel
+(14) {/Times-Roman cf} 2 29 180 0.75 -272 112 pinlabel
+(13) {/Times-Roman cf} 2 29 180 0.75 -208 112 pinlabel
+(11) {/Times-Roman cf} 2 29 180 0.75 -80 112 pinlabel
+(3) {/Times-Roman cf} 2 17 180 0.75 -144 -80 pinlabel
+(1) {/Times-Roman cf} 2 17 180 0.75 -272 -80 pinlabel
+(6) {/Times-Roman cf} 2 17 180 0.75 48 -80 pinlabel
+(7) {/Times-Roman cf} 2 17 180 0.75 112 -80 pinlabel
+(5) {/Times-Roman cf} 2 17 180 0.75 -16 -80 pinlabel
+(10) {/Times-Roman cf} 2 29 180 0.75 -16 112 pinlabel
+(9) {/Times-Roman cf} 2 29 180 0.75 48 112 pinlabel
+(8) {/Times-Roman cf} 2 29 180 0.75 112 112 pinlabel
+sce
+1.00 0 -272 112 pin
+1.00 0 -208 112 pin
+1.00 0 -144 112 pin
+1.00 0 -80 112 pin
+1.00 0 -16 112 pin
+1.00 0 48 112 pin
+1.00 0 112 112 pin
+1.00 0 112 -80 pin
+1.00 0 48 -80 pin
+1.00 0 -16 -80 pin
+1.00 0 -80 -80 pin
+1.00 0 -144 -80 pin
+1.00 0 -208 -80 pin
+1.00 0 -272 -80 pin1
+0.000 0.000 1.000 scb
+(12) {/Times-Roman cf} 2 17 180 0.75 -144 80 label
+(14) {/Times-Roman cf} 2 17 180 0.75 -272 80 label
+(13) {/Times-Roman cf} 2 17 180 0.75 -208 80 label
+(11) {/Times-Roman cf} 2 17 180 0.75 -80 80 label
+(10) {/Times-Roman cf} 2 17 180 0.75 -16 80 label
+(9) {/Times-Roman cf} 2 17 180 0.75 48 80 label
+(8) {/Times-Roman cf} 2 17 180 0.75 112 80 label
+(2) {/Times-Roman cf} 2 29 180 0.75 -208 -48 label
+(4) {/Times-Roman cf} 2 29 180 0.75 -80 -48 label
+(3) {/Times-Roman cf} 2 29 180 0.75 -144 -48 label
+(1) {/Times-Roman cf} 2 29 180 0.75 -272 -48 label
+(6) {/Times-Roman cf} 2 29 180 0.75 48 -48 label
+(7) {/Times-Roman cf} 2 29 180 0.75 112 -48 label
+(5) {/Times-Roman cf} 2 29 180 0.75 -16 -48 label
+endgate
+} def
+
+/dip16 {
+begingate
+0.843 0.843 0.843 scb
+240 1.00 -272 -80 -272 112 176 112 176 -80 4 polygon
+0.000 0.000 1.000 scb
+(2) {/Times-Roman cf} 2 29 180 0.75 -208 -48 label
+(4) {/Times-Roman cf} 2 29 180 0.75 -80 -48 label
+(12) {/Times-Roman cf} 2 25 180 0.75 -16 80 label
+(14) {/Times-Roman cf} 2 25 180 0.75 -144 80 label
+(13) {/Times-Roman cf} 2 25 180 0.75 -80 80 label
+(11) {/Times-Roman cf} 2 25 180 0.75 48 80 label
+(3) {/Times-Roman cf} 2 29 180 0.75 -144 -48 label
+(1) {/Times-Roman cf} 2 29 180 0.75 -272 -48 label
+(6) {/Times-Roman cf} 2 29 180 0.75 48 -48 label
+(7) {/Times-Roman cf} 2 29 180 0.75 112 -48 label
+(5) {/Times-Roman cf} 2 29 180 0.75 -16 -48 label
+(16) {/Times-Roman cf} 2 25 180 0.75 -272 80 label
+(15) {/Times-Roman cf} 2 25 180 0.75 -208 80 label
+(8) {/Times-Roman cf} 2 29 180 0.75 176 -48 label
+(10) {/Times-Roman cf} 2 25 180 0.75 112 80 label
+(9) {/Times-Roman cf} 2 25 180 0.75 176 80 label
+sce
+1.00 0 -272 112 pin
+1.00 0 -208 112 pin
+1.00 0 -144 112 pin
+1.00 0 -80 112 pin
+1.00 0 -16 112 pin
+1.00 0 48 112 pin
+1.00 0 112 112 pin
+1.00 0 176 112 pin
+1.00 0 -208 -80 pin
+1.00 0 -144 -80 pin
+1.00 0 -80 -80 pin
+1.00 0 -16 -80 pin
+1.00 0 48 -80 pin
+1.00 0 112 -80 pin
+1.00 0 176 -80 pin
+1.00 0 -272 -80 pin1
+1.000 0.000 0.000 scb
+(2) {/Times-Roman cf} 2 17 180 0.75 -208 -80 pinlabel
+(4) {/Times-Roman cf} 2 17 180 0.75 -80 -80 pinlabel
+(12) {/Times-Roman cf} 2 29 180 0.75 -16 112 pinlabel
+(14) {/Times-Roman cf} 2 29 180 0.75 -144 112 pinlabel
+(13) {/Times-Roman cf} 2 29 180 0.75 -80 112 pinlabel
+(11) {/Times-Roman cf} 2 29 180 0.75 48 112 pinlabel
+(3) {/Times-Roman cf} 2 17 180 0.75 -144 -80 pinlabel
+(1) {/Times-Roman cf} 2 17 180 0.75 -272 -80 pinlabel
+(6) {/Times-Roman cf} 2 17 180 0.75 48 -80 pinlabel
+(7) {/Times-Roman cf} 2 17 180 0.75 112 -80 pinlabel
+(5) {/Times-Roman cf} 2 17 180 0.75 -16 -80 pinlabel
+(16) {/Times-Roman cf} 2 29 180 0.75 -272 112 pinlabel
+(15) {/Times-Roman cf} 2 29 180 0.75 -208 112 pinlabel
+(8) {/Times-Roman cf} 2 17 180 0.75 176 -80 pinlabel
+(10) {/Times-Roman cf} 2 29 180 0.75 112 112 pinlabel
+(9) {/Times-Roman cf} 2 29 180 0.75 176 112 pinlabel
+endgate
+} def
+
+/dip20 {
+begingate
+0.843 0.843 0.843 scb
+240 1.00 -272 -80 -272 112 304 112 304 -80 4 polygon
+0.000 0.000 1.000 scb
+(2) {/Times-Roman cf} 2 29 180 0.75 -208 -48 label
+(4) {/Times-Roman cf} 2 29 180 0.75 -80 -48 label
+(12) {/Times-Roman cf} 2 25 180 0.75 240 80 label
+(14) {/Times-Roman cf} 2 25 180 0.75 112 80 label
+(13) {/Times-Roman cf} 2 25 180 0.75 176 80 label
+(11) {/Times-Roman cf} 2 25 180 0.75 304 80 label
+(3) {/Times-Roman cf} 2 29 180 0.75 -144 -48 label
+(1) {/Times-Roman cf} 2 29 180 0.75 -272 -48 label
+(6) {/Times-Roman cf} 2 29 180 0.75 48 -48 label
+(7) {/Times-Roman cf} 2 29 180 0.75 112 -48 label
+(5) {/Times-Roman cf} 2 29 180 0.75 -16 -48 label
+(16) {/Times-Roman cf} 2 25 180 0.75 -16 80 label
+(15) {/Times-Roman cf} 2 25 180 0.75 48 80 label
+(8) {/Times-Roman cf} 2 29 180 0.75 176 -48 label
+(10) {/Times-Roman cf} 2 29 180 0.75 304 -48 label
+(9) {/Times-Roman cf} 2 29 180 0.75 240 -48 label
+(18) {/Times-Roman cf} 2 25 180 0.75 -144 80 label
+(17) {/Times-Roman cf} 2 25 180 0.75 -80 80 label
+(20) {/Times-Roman cf} 2 25 180 0.75 -272 80 label
+(19) {/Times-Roman cf} 2 25 180 0.75 -208 80 label
+sce
+1.00 0 -272 -80 pin1
+1.00 0 -272 112 pin
+1.00 0 -208 112 pin
+1.00 0 -144 112 pin
+1.00 0 -80 112 pin
+1.00 0 -16 112 pin
+1.00 0 48 112 pin
+1.00 0 112 112 pin
+1.00 0 176 112 pin
+1.00 0 240 112 pin
+1.00 0 304 112 pin
+1.00 0 304 -80 pin
+1.00 0 240 -80 pin
+1.00 0 176 -80 pin
+1.00 0 112 -80 pin
+1.00 0 48 -80 pin
+1.00 0 -16 -80 pin
+1.00 0 -80 -80 pin
+1.00 0 -144 -80 pin
+1.00 0 -208 -80 pin
+1.000 0.000 0.000 scb
+(2) {/Times-Roman cf} 2 17 180 0.75 -208 -80 pinlabel
+(4) {/Times-Roman cf} 2 17 180 0.75 -80 -80 pinlabel
+(12) {/Times-Roman cf} 2 29 180 0.75 240 112 pinlabel
+(14) {/Times-Roman cf} 2 29 180 0.75 112 112 pinlabel
+(13) {/Times-Roman cf} 2 29 180 0.75 176 112 pinlabel
+(11) {/Times-Roman cf} 2 29 180 0.75 304 112 pinlabel
+(3) {/Times-Roman cf} 2 17 180 0.75 -144 -80 pinlabel
+(1) {/Times-Roman cf} 2 17 180 0.75 -272 -80 pinlabel
+(6) {/Times-Roman cf} 2 17 180 0.75 48 -80 pinlabel
+(7) {/Times-Roman cf} 2 17 180 0.75 112 -80 pinlabel
+(5) {/Times-Roman cf} 2 17 180 0.75 -16 -80 pinlabel
+(16) {/Times-Roman cf} 2 29 180 0.75 -16 112 pinlabel
+(15) {/Times-Roman cf} 2 29 180 0.75 48 112 pinlabel
+(8) {/Times-Roman cf} 2 17 180 0.75 176 -80 pinlabel
+(10) {/Times-Roman cf} 2 17 180 0.75 304 -80 pinlabel
+(9) {/Times-Roman cf} 2 17 180 0.75 240 -80 pinlabel
+(18) {/Times-Roman cf} 2 29 180 0.75 -144 112 pinlabel
+(17) {/Times-Roman cf} 2 29 180 0.75 -80 112 pinlabel
+(20) {/Times-Roman cf} 2 29 180 0.75 -272 112 pinlabel
+(19) {/Times-Roman cf} 2 29 180 0.75 -208 112 pinlabel
+endgate
+} def
+
+/dip24n {
+begingate
+0.843 0.843 0.843 scb
+240 1.00 -272 -80 -272 112 432 112 432 -80 4 polygon
+0.000 0.000 1.000 scb
+(2) {/Times-Roman cf} 2 29 180 0.75 -208 -48 label
+(4) {/Times-Roman cf} 2 29 180 0.75 -80 -48 label
+(14) {/Times-Roman cf} 2 25 180 0.75 368 80 label
+(13) {/Times-Roman cf} 2 25 180 0.75 432 80 label
+(3) {/Times-Roman cf} 2 29 180 0.75 -144 -48 label
+(1) {/Times-Roman cf} 2 29 180 0.75 -272 -48 label
+(6) {/Times-Roman cf} 2 29 180 0.75 48 -48 label
+(7) {/Times-Roman cf} 2 29 180 0.75 112 -48 label
+(5) {/Times-Roman cf} 2 29 180 0.75 -16 -48 label
+(16) {/Times-Roman cf} 2 25 180 0.75 240 80 label
+(15) {/Times-Roman cf} 2 25 180 0.75 304 80 label
+(8) {/Times-Roman cf} 2 29 180 0.75 176 -48 label
+(10) {/Times-Roman cf} 2 29 180 0.75 304 -48 label
+(9) {/Times-Roman cf} 2 29 180 0.75 240 -48 label
+(18) {/Times-Roman cf} 2 25 180 0.75 112 80 label
+(17) {/Times-Roman cf} 2 25 180 0.75 176 80 label
+(20) {/Times-Roman cf} 2 25 180 0.75 -16 80 label
+(19) {/Times-Roman cf} 2 25 180 0.75 48 80 label
+(21) {/Times-Roman cf} 2 25 180 0.75 -80 80 label
+(22) {/Times-Roman cf} 2 25 180 0.75 -144 80 label
+(23) {/Times-Roman cf} 2 25 180 0.75 -208 80 label
+(24) {/Times-Roman cf} 2 25 180 0.75 -272 80 label
+(12) {/Times-Roman cf} 2 29 180 0.75 432 -48 label
+(11) {/Times-Roman cf} 2 29 180 0.75 368 -48 label
+sce
+1.00 0 -272 112 pin
+1.00 0 -208 112 pin
+1.00 0 -144 112 pin
+1.00 0 -80 112 pin
+1.00 0 -16 112 pin
+1.00 0 48 112 pin
+1.00 0 112 112 pin
+1.00 0 176 112 pin
+1.00 0 240 112 pin
+1.00 0 304 112 pin
+1.00 0 368 112 pin
+1.00 0 432 112 pin
+1.00 0 -272 -80 pin1
+1.00 0 -208 -80 pin
+1.00 0 -144 -80 pin
+1.00 0 -80 -80 pin
+1.00 0 -16 -80 pin
+1.00 0 48 -80 pin
+1.00 0 112 -80 pin
+1.00 0 176 -80 pin
+1.00 0 240 -80 pin
+1.00 0 304 -80 pin
+1.00 0 368 -80 pin
+1.00 0 432 -80 pin
+1.000 0.000 0.000 scb
+(2) {/Times-Roman cf} 2 17 180 0.75 -208 -80 pinlabel
+(4) {/Times-Roman cf} 2 17 180 0.75 -80 -80 pinlabel
+(14) {/Times-Roman cf} 2 29 180 0.75 368 112 pinlabel
+(13) {/Times-Roman cf} 2 29 180 0.75 432 112 pinlabel
+(3) {/Times-Roman cf} 2 17 180 0.75 -144 -80 pinlabel
+(1) {/Times-Roman cf} 2 17 180 0.75 -272 -80 pinlabel
+(6) {/Times-Roman cf} 2 17 180 0.75 48 -80 pinlabel
+(7) {/Times-Roman cf} 2 17 180 0.75 112 -80 pinlabel
+(5) {/Times-Roman cf} 2 17 180 0.75 -16 -80 pinlabel
+(16) {/Times-Roman cf} 2 29 180 0.75 240 112 pinlabel
+(15) {/Times-Roman cf} 2 29 180 0.75 304 112 pinlabel
+(8) {/Times-Roman cf} 2 17 180 0.75 176 -80 pinlabel
+(10) {/Times-Roman cf} 2 17 180 0.75 304 -80 pinlabel
+(9) {/Times-Roman cf} 2 17 180 0.75 240 -80 pinlabel
+(18) {/Times-Roman cf} 2 29 180 0.75 112 112 pinlabel
+(17) {/Times-Roman cf} 2 29 180 0.75 176 112 pinlabel
+(20) {/Times-Roman cf} 2 29 180 0.75 -16 112 pinlabel
+(19) {/Times-Roman cf} 2 29 180 0.75 48 112 pinlabel
+(21) {/Times-Roman cf} 2 29 180 0.75 -80 112 pinlabel
+(22) {/Times-Roman cf} 2 29 180 0.75 -144 112 pinlabel
+(23) {/Times-Roman cf} 2 29 180 0.75 -208 112 pinlabel
+(24) {/Times-Roman cf} 2 29 180 0.75 -272 112 pinlabel
+(12) {/Times-Roman cf} 2 17 180 0.75 432 -80 pinlabel
+(11) {/Times-Roman cf} 2 17 180 0.75 368 -80 pinlabel
+endgate
+} def
+
+/dip28n {
+begingate
+0.843 0.843 0.843 scb
+240 1.00 -416 -96 -416 96 416 96 416 -96 4 polygon
+0.000 0.000 1.000 scb
+(2) {/Times-Roman cf} 2 29 180 0.75 -352 -64 label
+(4) {/Times-Roman cf} 2 29 180 0.75 -224 -64 label
+(22) {/Times-Roman cf} 2 25 180 0.75 -32 64 label
+(24) {/Times-Roman cf} 2 25 180 0.75 -160 64 label
+(23) {/Times-Roman cf} 2 25 180 0.75 -96 64 label
+(21) {/Times-Roman cf} 2 25 180 0.75 32 64 label
+(3) {/Times-Roman cf} 2 29 180 0.75 -288 -64 label
+(1) {/Times-Roman cf} 2 29 180 0.75 -416 -64 label
+(6) {/Times-Roman cf} 2 29 180 0.75 -96 -64 label
+(7) {/Times-Roman cf} 2 29 180 0.75 -32 -64 label
+(5) {/Times-Roman cf} 2 29 180 0.75 -160 -64 label
+(16) {/Times-Roman cf} 2 25 180 0.75 352 64 label
+(15) {/Times-Roman cf} 2 25 180 0.75 416 64 label
+(8) {/Times-Roman cf} 2 29 180 0.75 32 -64 label
+(10) {/Times-Roman cf} 2 29 180 0.75 160 -64 label
+(9) {/Times-Roman cf} 2 29 180 0.75 96 -64 label
+(18) {/Times-Roman cf} 2 25 180 0.75 224 64 label
+(17) {/Times-Roman cf} 2 25 180 0.75 288 64 label
+(20) {/Times-Roman cf} 2 25 180 0.75 96 64 label
+(19) {/Times-Roman cf} 2 25 180 0.75 160 64 label
+(26) {/Times-Roman cf} 2 25 180 0.75 -288 64 label
+(28) {/Times-Roman cf} 2 25 180 0.75 -416 64 label
+(27) {/Times-Roman cf} 2 25 180 0.75 -352 64 label
+(25) {/Times-Roman cf} 2 25 180 0.75 -224 64 label
+(11) {/Times-Roman cf} 2 29 180 0.75 224 -64 label
+(12) {/Times-Roman cf} 2 29 180 0.75 288 -64 label
+(14) {/Times-Roman cf} 2 29 180 0.75 416 -64 label
+(13) {/Times-Roman cf} 2 29 180 0.75 352 -64 label
+sce
+1.00 0 -416 -96 pin1
+1.00 0 -352 -96 pin
+1.00 0 -288 -96 pin
+1.00 0 -224 -96 pin
+1.00 0 -160 -96 pin
+1.00 0 -96 -96 pin
+1.00 0 -32 -96 pin
+1.00 0 32 -96 pin
+1.00 0 96 -96 pin
+1.00 0 160 -96 pin
+1.00 0 224 -96 pin
+1.00 0 288 -96 pin
+1.00 0 352 -96 pin
+1.00 0 416 -96 pin
+1.00 0 416 96 pin
+1.00 0 352 96 pin
+1.00 0 288 96 pin
+1.00 0 224 96 pin
+1.00 0 160 96 pin
+1.00 0 96 96 pin
+1.00 0 32 96 pin
+1.00 0 -32 96 pin
+1.00 0 -96 96 pin
+1.00 0 -160 96 pin
+1.00 0 -224 96 pin
+1.00 0 -288 96 pin
+1.00 0 -352 96 pin
+1.00 0 -416 96 pin
+1.000 0.000 0.000 scb
+(2) {/Times-Roman cf} 2 17 180 0.75 -352 -96 pinlabel
+(4) {/Times-Roman cf} 2 17 180 0.75 -224 -96 pinlabel
+(22) {/Times-Roman cf} 2 29 180 0.75 -32 96 pinlabel
+(24) {/Times-Roman cf} 2 29 180 0.75 -160 96 pinlabel
+(23) {/Times-Roman cf} 2 29 180 0.75 -96 96 pinlabel
+(21) {/Times-Roman cf} 2 29 180 0.75 32 96 pinlabel
+(3) {/Times-Roman cf} 2 17 180 0.75 -288 -96 pinlabel
+(1) {/Times-Roman cf} 2 17 180 0.75 -416 -96 pinlabel
+(6) {/Times-Roman cf} 2 17 180 0.75 -96 -96 pinlabel
+(7) {/Times-Roman cf} 2 17 180 0.75 -32 -96 pinlabel
+(5) {/Times-Roman cf} 2 17 180 0.75 -160 -96 pinlabel
+(16) {/Times-Roman cf} 2 29 180 0.75 352 96 pinlabel
+(15) {/Times-Roman cf} 2 29 180 0.75 416 96 pinlabel
+(8) {/Times-Roman cf} 2 17 180 0.75 32 -96 pinlabel
+(10) {/Times-Roman cf} 2 17 180 0.75 160 -96 pinlabel
+(9) {/Times-Roman cf} 2 17 180 0.75 96 -96 pinlabel
+(18) {/Times-Roman cf} 2 29 180 0.75 224 96 pinlabel
+(17) {/Times-Roman cf} 2 29 180 0.75 288 96 pinlabel
+(20) {/Times-Roman cf} 2 29 180 0.75 96 96 pinlabel
+(19) {/Times-Roman cf} 2 29 180 0.75 160 96 pinlabel
+(26) {/Times-Roman cf} 2 29 180 0.75 -288 96 pinlabel
+(28) {/Times-Roman cf} 2 29 180 0.75 -416 96 pinlabel
+(27) {/Times-Roman cf} 2 29 180 0.75 -352 96 pinlabel
+(25) {/Times-Roman cf} 2 29 180 0.75 -224 96 pinlabel
+(11) {/Times-Roman cf} 2 17 180 0.75 224 -96 pinlabel
+(12) {/Times-Roman cf} 2 17 180 0.75 288 -96 pinlabel
+(14) {/Times-Roman cf} 2 17 180 0.75 416 -96 pinlabel
+(13) {/Times-Roman cf} 2 17 180 0.75 352 -96 pinlabel
+endgate
+} def
+
+/dip40 {
+begingate
+0.843 0.843 0.843 scb
+240 1.00 -416 -96 -416 224 800 224 800 -96 4 polygon
+0.000 0.000 1.000 scb
+(2) {/Times-Roman cf} 2 29 180 0.75 -352 -64 label
+(4) {/Times-Roman cf} 2 29 180 0.75 -224 -64 label
+(22) {/Times-Roman cf} 2 25 180 0.75 736 192 label
+(24) {/Times-Roman cf} 2 25 180 0.75 608 192 label
+(23) {/Times-Roman cf} 2 25 180 0.75 672 192 label
+(21) {/Times-Roman cf} 2 25 180 0.75 800 192 label
+(3) {/Times-Roman cf} 2 29 180 0.75 -288 -64 label
+(1) {/Times-Roman cf} 2 29 180 0.75 -416 -64 label
+(6) {/Times-Roman cf} 2 29 180 0.75 -96 -64 label
+(7) {/Times-Roman cf} 2 29 180 0.75 -32 -64 label
+(5) {/Times-Roman cf} 2 29 180 0.75 -160 -64 label
+(8) {/Times-Roman cf} 2 29 180 0.75 32 -64 label
+(10) {/Times-Roman cf} 2 29 180 0.75 160 -64 label
+(9) {/Times-Roman cf} 2 29 180 0.75 96 -64 label
+(26) {/Times-Roman cf} 2 25 180 0.75 480 192 label
+(28) {/Times-Roman cf} 2 25 180 0.75 352 192 label
+(27) {/Times-Roman cf} 2 25 180 0.75 416 192 label
+(25) {/Times-Roman cf} 2 25 180 0.75 544 192 label
+(11) {/Times-Roman cf} 2 29 180 0.75 224 -64 label
+(12) {/Times-Roman cf} 2 29 180 0.75 288 -64 label
+(14) {/Times-Roman cf} 2 29 180 0.75 416 -64 label
+(13) {/Times-Roman cf} 2 29 180 0.75 352 -64 label
+(29) {/Times-Roman cf} 2 25 180 0.75 288 192 label
+(30) {/Times-Roman cf} 2 25 180 0.75 224 192 label
+(31) {/Times-Roman cf} 2 25 180 0.75 160 192 label
+(32) {/Times-Roman cf} 2 25 180 0.75 96 192 label
+(33) {/Times-Roman cf} 2 25 180 0.75 32 192 label
+(34) {/Times-Roman cf} 2 25 180 0.75 -32 192 label
+(35) {/Times-Roman cf} 2 25 180 0.75 -96 192 label
+(36) {/Times-Roman cf} 2 25 180 0.75 -160 192 label
+(37) {/Times-Roman cf} 2 25 180 0.75 -224 192 label
+(38) {/Times-Roman cf} 2 25 180 0.75 -288 192 label
+(39) {/Times-Roman cf} 2 25 180 0.75 -352 192 label
+(40) {/Times-Roman cf} 2 25 180 0.75 -416 192 label
+(15) {/Times-Roman cf} 2 29 180 0.75 480 -64 label
+(16) {/Times-Roman cf} 2 29 180 0.75 544 -64 label
+(17) {/Times-Roman cf} 2 29 180 0.75 608 -64 label
+(19) {/Times-Roman cf} 2 29 180 0.75 736 -64 label
+(18) {/Times-Roman cf} 2 29 180 0.75 672 -64 label
+(20) {/Times-Roman cf} 2 29 180 0.75 800 -64 label
+sce
+1.00 0 -416 -96 pin1
+1.00 0 -352 -96 pin
+1.00 0 -288 -96 pin
+1.00 0 -224 -96 pin
+1.00 0 -160 -96 pin
+1.00 0 -96 -96 pin
+1.00 0 -32 -96 pin
+1.00 0 32 -96 pin
+1.00 0 96 -96 pin
+1.00 0 160 -96 pin
+1.00 0 224 -96 pin
+1.00 0 288 -96 pin
+1.00 0 352 -96 pin
+1.00 0 416 -96 pin
+1.00 0 480 -96 pin
+1.00 0 544 -96 pin
+1.00 0 608 -96 pin
+1.00 0 672 -96 pin
+1.00 0 736 -96 pin
+1.00 0 800 -96 pin
+1.00 0 800 224 pin
+1.00 0 736 224 pin
+1.00 0 672 224 pin
+1.00 0 608 224 pin
+1.00 0 544 224 pin
+1.00 0 480 224 pin
+1.00 0 416 224 pin
+1.00 0 352 224 pin
+1.00 0 288 224 pin
+1.00 0 224 224 pin
+1.00 0 160 224 pin
+1.00 0 96 224 pin
+1.00 0 32 224 pin
+1.00 0 -32 224 pin
+1.00 0 -96 224 pin
+1.00 0 -160 224 pin
+1.00 0 -224 224 pin
+1.00 0 -288 224 pin
+1.00 0 -352 224 pin
+1.00 0 -416 224 pin
+1.000 0.000 0.000 scb
+(2) {/Times-Roman cf} 2 17 180 0.75 -352 -96 pinlabel
+(4) {/Times-Roman cf} 2 17 180 0.75 -224 -96 pinlabel
+(22) {/Times-Roman cf} 2 29 180 0.75 736 224 pinlabel
+(24) {/Times-Roman cf} 2 29 180 0.75 608 224 pinlabel
+(23) {/Times-Roman cf} 2 29 180 0.75 672 224 pinlabel
+(21) {/Times-Roman cf} 2 29 180 0.75 800 224 pinlabel
+(3) {/Times-Roman cf} 2 17 180 0.75 -288 -96 pinlabel
+(1) {/Times-Roman cf} 2 17 180 0.75 -416 -96 pinlabel
+(6) {/Times-Roman cf} 2 17 180 0.75 -96 -96 pinlabel
+(7) {/Times-Roman cf} 2 17 180 0.75 -32 -96 pinlabel
+(5) {/Times-Roman cf} 2 17 180 0.75 -160 -96 pinlabel
+(8) {/Times-Roman cf} 2 17 180 0.75 32 -96 pinlabel
+(10) {/Times-Roman cf} 2 17 180 0.75 160 -96 pinlabel
+(9) {/Times-Roman cf} 2 17 180 0.75 96 -96 pinlabel
+(26) {/Times-Roman cf} 2 29 180 0.75 480 224 pinlabel
+(28) {/Times-Roman cf} 2 29 180 0.75 352 224 pinlabel
+(27) {/Times-Roman cf} 2 29 180 0.75 416 224 pinlabel
+(25) {/Times-Roman cf} 2 29 180 0.75 544 224 pinlabel
+(11) {/Times-Roman cf} 2 17 180 0.75 224 -96 pinlabel
+(12) {/Times-Roman cf} 2 17 180 0.75 288 -96 pinlabel
+(14) {/Times-Roman cf} 2 17 180 0.75 416 -96 pinlabel
+(13) {/Times-Roman cf} 2 17 180 0.75 352 -96 pinlabel
+(29) {/Times-Roman cf} 2 29 180 0.75 288 224 pinlabel
+(30) {/Times-Roman cf} 2 29 180 0.75 224 224 pinlabel
+(31) {/Times-Roman cf} 2 29 180 0.75 160 224 pinlabel
+(32) {/Times-Roman cf} 2 29 180 0.75 96 224 pinlabel
+(33) {/Times-Roman cf} 2 29 180 0.75 32 224 pinlabel
+(34) {/Times-Roman cf} 2 29 180 0.75 -32 224 pinlabel
+(35) {/Times-Roman cf} 2 29 180 0.75 -96 224 pinlabel
+(36) {/Times-Roman cf} 2 29 180 0.75 -160 224 pinlabel
+(37) {/Times-Roman cf} 2 29 180 0.75 -224 224 pinlabel
+(38) {/Times-Roman cf} 2 29 180 0.75 -288 224 pinlabel
+(39) {/Times-Roman cf} 2 29 180 0.75 -352 224 pinlabel
+(40) {/Times-Roman cf} 2 29 180 0.75 -416 224 pinlabel
+(15) {/Times-Roman cf} 2 17 180 0.75 480 -96 pinlabel
+(16) {/Times-Roman cf} 2 17 180 0.75 544 -96 pinlabel
+(17) {/Times-Roman cf} 2 17 180 0.75 608 -96 pinlabel
+(19) {/Times-Roman cf} 2 17 180 0.75 736 -96 pinlabel
+(18) {/Times-Roman cf} 2 17 180 0.75 672 -96 pinlabel
+(20) {/Times-Roman cf} 2 17 180 0.75 800 -96 pinlabel
+endgate
+} def
+
+/dio_port {
+begingate
+0.843 0.843 0.843 scb
+240 1.00 -768 -32 -768 32 768 32 768 -32 4 polygon
+0.000 0.000 1.000 scb
+(12) {/Times-Roman cf} 2 25 180 0.75 448 -64 label
+(14) {/Times-Roman cf} 2 25 180 0.75 384 -64 label
+(3) {/Times-Roman cf} 2 29 180 0.75 704 64 label
+(1) {/Times-Roman cf} 2 29 180 0.75 768 64 label
+(7) {/Times-Roman cf} 2 29 180 0.75 576 64 label
+(5) {/Times-Roman cf} 2 29 180 0.75 640 64 label
+(16) {/Times-Roman cf} 2 25 180 0.75 320 -64 label
+(9) {/Times-Roman cf} 2 29 180 0.75 512 64 label
+(18) {/Times-Roman cf} 2 25 180 0.75 256 -64 label
+(20) {/Times-Roman cf} 2 25 180 0.75 192 -64 label
+(2) {/Times-Roman cf} 2 25 180 0.75 768 -64 label
+(4) {/Times-Roman cf} 2 25 180 0.75 704 -64 label
+(6) {/Times-Roman cf} 2 25 180 0.75 640 -64 label
+(8) {/Times-Roman cf} 2 25 180 0.75 576 -64 label
+(10) {/Times-Roman cf} 2 25 180 0.75 512 -64 label
+(11) {/Times-Roman cf} 2 29 180 0.75 448 64 label
+(13) {/Times-Roman cf} 2 29 180 0.75 384 64 label
+(15) {/Times-Roman cf} 2 29 180 0.75 320 64 label
+(17) {/Times-Roman cf} 2 29 180 0.75 256 64 label
+(19) {/Times-Roman cf} 2 29 180 0.75 192 64 label
+(21) {/Times-Roman cf} 2 29 180 0.75 128 64 label
+(23) {/Times-Roman cf} 2 29 180 0.75 64 64 label
+(25) {/Times-Roman cf} 2 29 180 0.75 0 64 label
+(27) {/Times-Roman cf} 2 29 180 0.75 -64 64 label
+(29) {/Times-Roman cf} 2 29 180 0.75 -128 64 label
+(31) {/Times-Roman cf} 2 29 180 0.75 -192 64 label
+(33) {/Times-Roman cf} 2 29 180 0.75 -256 64 label
+(35) {/Times-Roman cf} 2 29 180 0.75 -320 64 label
+(37) {/Times-Roman cf} 2 29 180 0.75 -384 64 label
+(39) {/Times-Roman cf} 2 29 180 0.75 -448 64 label
+(41) {/Times-Roman cf} 2 29 180 0.75 -512 64 label
+(43) {/Times-Roman cf} 2 29 180 0.75 -576 64 label
+(45) {/Times-Roman cf} 2 29 180 0.75 -640 64 label
+(47) {/Times-Roman cf} 2 29 180 0.75 -704 64 label
+(49) {/Times-Roman cf} 2 29 180 0.75 -768 64 label
+(22) {/Times-Roman cf} 2 25 180 0.75 128 -64 label
+(24) {/Times-Roman cf} 2 25 180 0.75 64 -64 label
+(26) {/Times-Roman cf} 2 25 180 0.75 0 -64 label
+(28) {/Times-Roman cf} 2 25 180 0.75 -64 -64 label
+(30) {/Times-Roman cf} 2 25 180 0.75 -128 -64 label
+(32) {/Times-Roman cf} 2 25 180 0.75 -192 -64 label
+(34) {/Times-Roman cf} 2 25 180 0.75 -256 -64 label
+(36) {/Times-Roman cf} 2 25 180 0.75 -320 -64 label
+(38) {/Times-Roman cf} 2 25 180 0.75 -384 -64 label
+(40) {/Times-Roman cf} 2 25 180 0.75 -448 -64 label
+(42) {/Times-Roman cf} 2 25 180 0.75 -512 -64 label
+(44) {/Times-Roman cf} 2 25 180 0.75 -576 -64 label
+(46) {/Times-Roman cf} 2 25 180 0.75 -640 -64 label
+(48) {/Times-Roman cf} 2 25 180 0.75 -704 -64 label
+(50) {/Times-Roman cf} 2 25 180 0.75 -768 -64 label
+sce
+1.00 0 768 32 pin1
+1.00 0 704 32 pin
+1.00 0 640 32 pin
+1.00 0 576 32 pin
+1.00 0 512 32 pin
+1.00 0 448 32 pin
+1.00 0 768 -32 pin
+1.00 0 704 -32 pin
+1.00 0 640 -32 pin
+1.00 0 576 -32 pin
+1.00 0 512 -32 pin
+1.00 0 448 -32 pin
+1.00 0 384 -32 pin
+1.00 0 384 32 pin
+1.00 0 320 32 pin
+1.00 0 256 32 pin
+1.00 0 320 -32 pin
+1.00 0 256 -32 pin
+1.00 0 192 -32 pin
+1.00 0 192 32 pin
+1.00 0 128 32 pin
+1.00 0 64 32 pin
+1.00 0 0 32 pin
+1.00 0 128 -32 pin
+1.00 0 64 -32 pin
+1.00 0 0 -32 pin
+1.00 0 -64 -32 pin
+1.00 0 -64 32 pin
+1.00 0 -128 32 pin
+1.00 0 -128 -32 pin
+1.00 0 -192 -32 pin
+1.00 0 -192 32 pin
+1.00 0 -256 32 pin
+1.00 0 -256 -32 pin
+1.00 0 -320 -32 pin
+1.00 0 -320 32 pin
+1.00 0 -384 32 pin
+1.00 0 -384 -32 pin
+1.00 0 -448 -32 pin
+1.00 0 -448 32 pin
+1.00 0 -512 32 pin
+1.00 0 -512 -32 pin
+1.00 0 -576 -32 pin
+1.00 0 -576 32 pin
+1.00 0 -640 32 pin
+1.00 0 -640 -32 pin
+1.00 0 -704 -32 pin
+1.00 0 -704 32 pin
+1.00 0 -768 32 pin
+1.00 0 -768 -32 pin
+1.000 0.000 0.000 scb
+(12) {/Times-Roman cf} 2 29 180 0.75 448 -32 pinlabel
+(14) {/Times-Roman cf} 2 29 180 0.75 384 -32 pinlabel
+(16) {/Times-Roman cf} 2 29 180 0.75 320 -32 pinlabel
+(18) {/Times-Roman cf} 2 29 180 0.75 256 -32 pinlabel
+(20) {/Times-Roman cf} 2 29 180 0.75 192 -32 pinlabel
+(2) {/Times-Roman cf} 2 29 180 0.75 768 -32 pinlabel
+(4) {/Times-Roman cf} 2 29 180 0.75 704 -32 pinlabel
+(6) {/Times-Roman cf} 2 29 180 0.75 640 -32 pinlabel
+(8) {/Times-Roman cf} 2 29 180 0.75 576 -32 pinlabel
+(10) {/Times-Roman cf} 2 29 180 0.75 512 -32 pinlabel
+(22) {/Times-Roman cf} 2 29 180 0.75 128 -32 pinlabel
+(24) {/Times-Roman cf} 2 29 180 0.75 64 -32 pinlabel
+(26) {/Times-Roman cf} 2 29 180 0.75 0 -32 pinlabel
+(28) {/Times-Roman cf} 2 29 180 0.75 -64 -32 pinlabel
+(30) {/Times-Roman cf} 2 29 180 0.75 -128 -32 pinlabel
+(32) {/Times-Roman cf} 2 29 180 0.75 -192 -32 pinlabel
+(34) {/Times-Roman cf} 2 29 180 0.75 -256 -32 pinlabel
+(36) {/Times-Roman cf} 2 29 180 0.75 -320 -32 pinlabel
+(38) {/Times-Roman cf} 2 29 180 0.75 -384 -32 pinlabel
+(40) {/Times-Roman cf} 2 29 180 0.75 -448 -32 pinlabel
+(42) {/Times-Roman cf} 2 29 180 0.75 -512 -32 pinlabel
+(44) {/Times-Roman cf} 2 29 180 0.75 -576 -32 pinlabel
+(46) {/Times-Roman cf} 2 29 180 0.75 -640 -32 pinlabel
+(48) {/Times-Roman cf} 2 29 180 0.75 -704 -32 pinlabel
+(50) {/Times-Roman cf} 2 29 180 0.75 -768 -32 pinlabel
+(3) {/Times-Roman cf} 2 17 180 0.75 704 32 pinlabel
+(1) {/Times-Roman cf} 2 17 180 0.75 768 32 pinlabel
+(7) {/Times-Roman cf} 2 17 180 0.75 576 32 pinlabel
+(5) {/Times-Roman cf} 2 17 180 0.75 640 32 pinlabel
+(9) {/Times-Roman cf} 2 17 180 0.75 512 32 pinlabel
+(11) {/Times-Roman cf} 2 17 180 0.75 448 32 pinlabel
+(13) {/Times-Roman cf} 2 17 180 0.75 384 32 pinlabel
+(15) {/Times-Roman cf} 2 17 180 0.75 320 32 pinlabel
+(17) {/Times-Roman cf} 2 17 180 0.75 256 32 pinlabel
+(19) {/Times-Roman cf} 2 17 180 0.75 192 32 pinlabel
+(21) {/Times-Roman cf} 2 17 180 0.75 128 32 pinlabel
+(23) {/Times-Roman cf} 2 17 180 0.75 64 32 pinlabel
+(25) {/Times-Roman cf} 2 17 180 0.75 0 32 pinlabel
+(27) {/Times-Roman cf} 2 17 180 0.75 -64 32 pinlabel
+(29) {/Times-Roman cf} 2 17 180 0.75 -128 32 pinlabel
+(31) {/Times-Roman cf} 2 17 180 0.75 -192 32 pinlabel
+(33) {/Times-Roman cf} 2 17 180 0.75 -256 32 pinlabel
+(35) {/Times-Roman cf} 2 17 180 0.75 -320 32 pinlabel
+(37) {/Times-Roman cf} 2 17 180 0.75 -384 32 pinlabel
+(39) {/Times-Roman cf} 2 17 180 0.75 -448 32 pinlabel
+(41) {/Times-Roman cf} 2 17 180 0.75 -512 32 pinlabel
+(43) {/Times-Roman cf} 2 17 180 0.75 -576 32 pinlabel
+(45) {/Times-Roman cf} 2 17 180 0.75 -640 32 pinlabel
+(47) {/Times-Roman cf} 2 17 180 0.75 -704 32 pinlabel
+(49) {/Times-Roman cf} 2 17 180 0.75 -768 32 pinlabel
+endgate
+} def
+
+/pga68 {
+begingate
+0.843 0.843 0.843 scb
+241 1.00 -448 -256 -384 -256 -384 -320 128 -320 128 -256 192 -256 192 256 128 
+256 128 320 -384 320 -384 256 -448 256 -448 0 -384 0 -384 192 -320 192 -320 256 
+64 256 64 192 128 192 128 -192 64 -192 64 -256 -320 -256 -320 -192 -384 -192 
+-384 0 -448 0 -448 -256 29 polygon
+sce
+1 1.00 -432 -272 0 0.00 360.00 xcarc
+0.000 0.000 1.000 scb
+(10) {/Times-Roman cf} 2 20 180 0.75 -480 256 label
+(11) {/Times-Roman cf} 2 28 180 0.75 -400 272 label
+(12) {/Times-Roman cf} 2 20 180 0.75 -480 192 label
+(13) {/Times-Roman cf} 2 23 180 0.75 -352 176 label
+(14) {/Times-Roman cf} 2 20 180 0.75 -480 128 label
+(15) {/Times-Roman cf} 2 23 180 0.75 -352 128 label
+(16) {/Times-Roman cf} 2 20 180 0.75 -480 64 label
+(17) {/Times-Roman cf} 2 23 180 0.75 -352 64 label
+(18) {/Times-Roman cf} 2 20 180 0.75 -480 0 label
+(19) {/Times-Roman cf} 2 23 180 0.75 -352 0 label
+(20) {/Times-Roman cf} 2 20 180 0.75 -480 -64 label
+(21) {/Times-Roman cf} 2 23 180 0.75 -352 -64 label
+(22) {/Times-Roman cf} 2 20 180 0.75 -480 -128 label
+(23) {/Times-Roman cf} 2 23 180 0.75 -352 -128 label
+(24) {/Times-Roman cf} 2 20 180 0.75 -480 -192 label
+(25) {/Times-Roman cf} 2 23 180 0.75 -352 -176 label
+(27) {/Times-Roman cf} 2 25 180 0.75 -384 -368 label
+(28) {/Times-Roman cf} 2 24 180 0.75 -400 -288 label
+(29) {/Times-Roman cf} 2 25 180 0.75 -320 -368 label
+(1) {/Times-Roman cf} 2 29 180 0.75 -128 352 label
+(2) {/Times-Roman cf} 2 25 180 0.75 -128 208 label
+(4) {/Times-Roman cf} 2 25 180 0.75 -192 208 label
+(6) {/Times-Roman cf} 2 25 180 0.75 -256 208 label
+(8) {/Times-Roman cf} 2 25 180 0.75 -320 208 label
+(3) {/Times-Roman cf} 2 29 180 0.75 -192 352 label
+(5) {/Times-Roman cf} 2 29 180 0.75 -256 352 label
+(7) {/Times-Roman cf} 2 29 180 0.75 -320 352 label
+(9) {/Times-Roman cf} 2 29 180 0.75 -384 352 label
+(30) {/Times-Roman cf} 2 29 180 0.75 -320 -224 label
+(32) {/Times-Roman cf} 2 29 180 0.75 -256 -224 label
+(34) {/Times-Roman cf} 2 29 180 0.75 -192 -224 label
+(36) {/Times-Roman cf} 2 29 180 0.75 -128 -224 label
+(38) {/Times-Roman cf} 2 29 180 0.75 -64 -224 label
+(40) {/Times-Roman cf} 2 29 180 0.75 0 -224 label
+(42) {/Times-Roman cf} 2 29 180 0.75 64 -224 label
+(31) {/Times-Roman cf} 2 25 180 0.75 -256 -368 label
+(33) {/Times-Roman cf} 2 25 180 0.75 -192 -368 label
+(35) {/Times-Roman cf} 2 25 180 0.75 -128 -368 label
+(37) {/Times-Roman cf} 2 25 180 0.75 -64 -368 label
+(39) {/Times-Roman cf} 2 25 180 0.75 0 -368 label
+(41) {/Times-Roman cf} 2 25 180 0.75 64 -368 label
+(43) {/Times-Roman cf} 2 25 180 0.75 128 -368 label
+(44) {/Times-Roman cf} 2 23 180 0.75 224 -256 label
+(46) {/Times-Roman cf} 2 23 180 0.75 224 -192 label
+(48) {/Times-Roman cf} 2 23 180 0.75 224 -128 label
+(50) {/Times-Roman cf} 2 23 180 0.75 224 -64 label
+(52) {/Times-Roman cf} 2 23 180 0.75 224 0 label
+(54) {/Times-Roman cf} 2 23 180 0.75 224 64 label
+(56) {/Times-Roman cf} 2 23 180 0.75 224 128 label
+(58) {/Times-Roman cf} 2 23 180 0.75 224 192 label
+(60) {/Times-Roman cf} 2 23 180 0.75 224 256 label
+(61) {/Times-Roman cf} 2 29 180 0.75 128 352 label
+(63) {/Times-Roman cf} 2 29 180 0.75 64 352 label
+(65) {/Times-Roman cf} 2 29 180 0.75 0 352 label
+(67) {/Times-Roman cf} 2 29 180 0.75 -64 352 label
+(45) {/Times-Roman cf} 2 27 180 0.75 144 -288 label
+(47) {/Times-Roman cf} 2 20 180 0.75 96 -176 label
+(49) {/Times-Roman cf} 2 20 180 0.75 96 -128 label
+(51) {/Times-Roman cf} 2 20 180 0.75 96 -64 label
+(53) {/Times-Roman cf} 2 20 180 0.75 96 0 label
+(55) {/Times-Roman cf} 2 20 180 0.75 96 64 label
+(57) {/Times-Roman cf} 2 20 180 0.75 96 128 label
+(59) {/Times-Roman cf} 2 20 180 0.75 96 176 label
+(62) {/Times-Roman cf} 2 31 180 0.75 144 288 label
+(64) {/Times-Roman cf} 2 25 180 0.75 64 208 label
+(66) {/Times-Roman cf} 2 25 180 0.75 0 208 label
+(68) {/Times-Roman cf} 2 25 180 0.75 -64 208 label
+(26) {/Times-Roman cf} 2 20 180 0.75 -480 -256 label
+sce
+1.00 0 -128 320 pin1
+1.00 0 -384 -256 pin
+1.00 0 -320 -256 pin
+1.00 0 -384 -320 pin
+1.00 0 -320 -320 pin
+1.00 0 -256 -320 pin
+1.00 0 -192 -320 pin
+1.00 0 -128 -320 pin
+1.00 0 -64 -320 pin
+1.00 0 0 -320 pin
+1.00 0 64 -320 pin
+1.00 0 128 -320 pin
+1.00 0 128 -256 pin
+1.00 0 64 -256 pin
+1.00 0 0 -256 pin
+1.00 0 -64 -256 pin
+1.00 0 -128 -256 pin
+1.00 0 -192 -256 pin
+1.00 0 -256 -256 pin
+1.00 0 -448 -256 pin
+1.00 0 -448 -192 pin
+1.00 0 -384 -192 pin
+1.00 0 -384 -128 pin
+1.00 0 -384 -64 pin
+1.00 0 -384 0 pin
+1.00 0 -384 64 pin
+1.00 0 -384 128 pin
+1.00 0 -384 192 pin
+1.00 0 -384 256 pin
+1.00 0 -384 320 pin
+1.00 0 -448 256 pin
+1.00 0 -448 192 pin
+1.00 0 -448 128 pin
+1.00 0 -448 64 pin
+1.00 0 -448 0 pin
+1.00 0 -448 -64 pin
+1.00 0 -448 -128 pin
+1.00 0 192 -256 pin
+1.00 0 192 -192 pin
+1.00 0 128 -192 pin
+1.00 0 128 -128 pin
+1.00 0 192 -128 pin
+1.00 0 192 -64 pin
+1.00 0 128 -64 pin
+1.00 0 128 0 pin
+1.00 0 192 0 pin
+1.00 0 192 64 pin
+1.00 0 128 64 pin
+1.00 0 128 128 pin
+1.00 0 192 128 pin
+1.00 0 192 192 pin
+1.00 0 128 192 pin
+1.00 0 128 256 pin
+1.00 0 192 256 pin
+1.00 0 128 320 pin
+1.00 0 64 320 pin
+1.00 0 64 256 pin
+1.00 0 0 256 pin
+1.00 0 0 320 pin
+1.00 0 -64 320 pin
+1.00 0 -64 256 pin
+1.00 0 -128 256 pin
+1.00 0 -192 256 pin
+1.00 0 -192 320 pin
+1.00 0 -256 320 pin
+1.00 0 -256 256 pin
+1.00 0 -320 256 pin
+1.00 0 -320 320 pin
+1.000 0.000 0.000 scb
+(13) {/Times-Roman cf} 2 20 180 0.75 -384 192 pinlabel
+(15) {/Times-Roman cf} 2 20 180 0.75 -384 128 pinlabel
+(17) {/Times-Roman cf} 2 20 180 0.75 -384 64 pinlabel
+(19) {/Times-Roman cf} 2 20 180 0.75 -384 0 pinlabel
+(21) {/Times-Roman cf} 2 20 180 0.75 -384 -64 pinlabel
+(23) {/Times-Roman cf} 2 20 180 0.75 -384 -128 pinlabel
+(25) {/Times-Roman cf} 2 20 180 0.75 -384 -192 pinlabel
+(2) {/Times-Roman cf} 2 29 180 0.75 -128 256 pinlabel
+(4) {/Times-Roman cf} 2 29 180 0.75 -192 256 pinlabel
+(6) {/Times-Roman cf} 2 29 180 0.75 -256 256 pinlabel
+(8) {/Times-Roman cf} 2 29 180 0.75 -320 256 pinlabel
+(30) {/Times-Roman cf} 2 17 180 0.75 -320 -256 pinlabel
+(32) {/Times-Roman cf} 2 17 180 0.75 -256 -256 pinlabel
+(34) {/Times-Roman cf} 2 17 180 0.75 -192 -256 pinlabel
+(36) {/Times-Roman cf} 2 17 180 0.75 -128 -256 pinlabel
+(38) {/Times-Roman cf} 2 17 180 0.75 -64 -256 pinlabel
+(40) {/Times-Roman cf} 2 17 180 0.75 0 -256 pinlabel
+(42) {/Times-Roman cf} 2 17 180 0.75 64 -256 pinlabel
+(47) {/Times-Roman cf} 2 23 180 0.75 128 -192 pinlabel
+(49) {/Times-Roman cf} 2 23 180 0.75 128 -128 pinlabel
+(51) {/Times-Roman cf} 2 23 180 0.75 128 -64 pinlabel
+(53) {/Times-Roman cf} 2 23 180 0.75 128 0 pinlabel
+(55) {/Times-Roman cf} 2 23 180 0.75 128 64 pinlabel
+(57) {/Times-Roman cf} 2 23 180 0.75 128 128 pinlabel
+(59) {/Times-Roman cf} 2 23 180 0.75 128 192 pinlabel
+(43) {/Times-Roman cf} 2 29 180 0.75 64 256 pinlabel
+(66) {/Times-Roman cf} 2 29 180 0.75 0 256 pinlabel
+(68) {/Times-Roman cf} 2 29 180 0.75 -64 256 pinlabel
+(44) {/Times-Roman cf} 2 20 180 0.75 192 -256 pinlabel
+(46) {/Times-Roman cf} 2 20 180 0.75 192 -192 pinlabel
+(48) {/Times-Roman cf} 2 20 180 0.75 192 -128 pinlabel
+(50) {/Times-Roman cf} 2 20 180 0.75 192 -64 pinlabel
+(52) {/Times-Roman cf} 2 20 180 0.75 192 0 pinlabel
+(54) {/Times-Roman cf} 2 20 180 0.75 192 64 pinlabel
+(56) {/Times-Roman cf} 2 20 180 0.75 192 128 pinlabel
+(58) {/Times-Roman cf} 2 20 180 0.75 192 192 pinlabel
+(60) {/Times-Roman cf} 2 20 180 0.75 192 256 pinlabel
+(1) {/Times-Roman cf} 2 17 180 0.75 -128 320 pinlabel
+(3) {/Times-Roman cf} 2 17 180 0.75 -192 320 pinlabel
+(5) {/Times-Roman cf} 2 17 180 0.75 -256 320 pinlabel
+(7) {/Times-Roman cf} 2 17 180 0.75 -320 320 pinlabel
+(9) {/Times-Roman cf} 2 17 180 0.75 -384 320 pinlabel
+(61) {/Times-Roman cf} 2 17 180 0.75 128 320 pinlabel
+(63) {/Times-Roman cf} 2 17 180 0.75 64 320 pinlabel
+(65) {/Times-Roman cf} 2 17 180 0.75 0 320 pinlabel
+(67) {/Times-Roman cf} 2 17 180 0.75 -64 320 pinlabel
+(27) {/Times-Roman cf} 2 29 180 0.75 -384 -320 pinlabel
+(29) {/Times-Roman cf} 2 29 180 0.75 -320 -320 pinlabel
+(31) {/Times-Roman cf} 2 29 180 0.75 -256 -320 pinlabel
+(33) {/Times-Roman cf} 2 29 180 0.75 -192 -320 pinlabel
+(35) {/Times-Roman cf} 2 29 180 0.75 -128 -320 pinlabel
+(37) {/Times-Roman cf} 2 29 180 0.75 -64 -320 pinlabel
+(39) {/Times-Roman cf} 2 29 180 0.75 0 -320 pinlabel
+(41) {/Times-Roman cf} 2 29 180 0.75 64 -320 pinlabel
+(43) {/Times-Roman cf} 2 29 180 0.75 128 -320 pinlabel
+(10) {/Times-Roman cf} 2 23 180 0.75 -448 256 pinlabel
+(12) {/Times-Roman cf} 2 23 180 0.75 -448 192 pinlabel
+(14) {/Times-Roman cf} 2 23 180 0.75 -448 128 pinlabel
+(16) {/Times-Roman cf} 2 23 180 0.75 -448 64 pinlabel
+(18) {/Times-Roman cf} 2 23 180 0.75 -448 0 pinlabel
+(20) {/Times-Roman cf} 2 23 180 0.75 -448 -64 pinlabel
+(22) {/Times-Roman cf} 2 23 180 0.75 -448 -128 pinlabel
+(24) {/Times-Roman cf} 2 23 180 0.75 -448 -192 pinlabel
+(26) {/Times-Roman cf} 2 23 180 0.75 -448 -256 pinlabel
+(62) {/Times-Roman cf} 2 31 180 0.75 128 256 pinlabel
+(11) {/Times-Roman cf} 2 28 180 0.75 -384 256 pinlabel
+sce
+1 1.00 432 -256 0 0.00 360.00 xcarc
+1.000 0.000 0.000 scb
+(45) {/Times-Roman cf} 2 19 180 0.75 128 -256 pinlabel
+(28) {/Times-Roman cf} 2 16 180 0.75 -384 -256 pinlabel
+endgate
+} def
+
+/pga44 {
+begingate
+0.843 0.843 0.843 scb
+240 1.00 -192 -256 -192 -320 128 -320 128 -256 192 -256 192 64 128 64 128 128 
+-192 128 -192 64 -256 64 -256 -128 -192 -128 -192 0 -128 0 -128 64 64 64 64 0 
+128 0 128 -192 64 -192 64 -256 -128 -256 -128 -192 -192 -192 -192 -128 -256 
+-128 -256 -256 28 polygon
+0.000 0.000 1.000 scb
+(7) {/Times-Roman cf} 2 20 180 0.75 -288 64 label
+(8) {/Times-Roman cf} 2 28 180 0.75 -216 96 label
+(9) {/Times-Roman cf} 2 20 180 0.75 -288 0 label
+(10) {/Times-Roman cf} 2 23 180 0.75 -160 -16 label
+(11) {/Times-Roman cf} 2 20 180 0.75 -288 -64 label
+(12) {/Times-Roman cf} 2 23 180 0.75 -160 -64 label
+(13) {/Times-Roman cf} 2 20 180 0.75 -288 -128 label
+(14) {/Times-Roman cf} 2 23 180 0.75 -160 -128 label
+(15) {/Times-Roman cf} 2 20 180 0.75 -288 -192 label
+(16) {/Times-Roman cf} 2 23 180 0.75 -160 -176 label
+(18) {/Times-Roman cf} 2 25 180 0.75 -192 -368 label
+(19) {/Times-Roman cf} 2 24 180 0.75 -224 -296 label
+(20) {/Times-Roman cf} 2 25 180 0.75 -128 -368 label
+(1) {/Times-Roman cf} 2 21 180 0.75 0 16 label
+(3) {/Times-Roman cf} 2 25 180 0.75 -64 16 label
+(5) {/Times-Roman cf} 2 25 180 0.75 -128 16 label
+(2) {/Times-Roman cf} 2 29 180 0.75 -64 160 label
+(4) {/Times-Roman cf} 2 29 180 0.75 -128 160 label
+(6) {/Times-Roman cf} 2 29 180 0.75 -192 160 label
+(21) {/Times-Roman cf} 2 29 180 0.75 -128 -224 label
+(23) {/Times-Roman cf} 2 29 180 0.75 -64 -224 label
+(25) {/Times-Roman cf} 2 29 180 0.75 0 -224 label
+(27) {/Times-Roman cf} 2 29 180 0.75 64 -224 label
+(22) {/Times-Roman cf} 2 25 180 0.75 -64 -368 label
+(24) {/Times-Roman cf} 2 25 180 0.75 0 -368 label
+(26) {/Times-Roman cf} 2 25 180 0.75 64 -368 label
+(28) {/Times-Roman cf} 2 25 180 0.75 128 -368 label
+(29) {/Times-Roman cf} 2 23 180 0.75 224 -256 label
+(31) {/Times-Roman cf} 2 23 180 0.75 224 -192 label
+(33) {/Times-Roman cf} 2 23 180 0.75 224 -128 label
+(35) {/Times-Roman cf} 2 23 180 0.75 224 -64 label
+(37) {/Times-Roman cf} 2 23 180 0.75 224 0 label
+(39) {/Times-Roman cf} 2 23 180 0.75 224 64 label
+(40) {/Times-Roman cf} 2 29 180 0.75 128 160 label
+(42) {/Times-Roman cf} 2 29 180 0.75 64 160 label
+(30) {/Times-Roman cf} 2 27 180 0.75 152 -296 label
+(32) {/Times-Roman cf} 2 20 180 0.75 96 -176 label
+(34) {/Times-Roman cf} 2 20 180 0.75 96 -128 label
+(36) {/Times-Roman cf} 2 20 180 0.75 96 -64 label
+(38) {/Times-Roman cf} 2 20 180 0.75 96 -16 label
+(41) {/Times-Roman cf} 2 31 180 0.75 160 96 label
+(43) {/Times-Roman cf} 2 25 180 0.75 64 16 label
+(17) {/Times-Roman cf} 2 20 180 0.75 -288 -256 label
+sce
+1.00 0 0 64 pin1
+1.00 0 -192 -256 pin
+1.00 0 -128 -256 pin
+1.00 0 -192 -320 pin
+1.00 0 -128 -320 pin
+1.00 0 -64 -320 pin
+1.00 0 0 -320 pin
+1.00 0 64 -320 pin
+1.00 0 128 -320 pin
+1.00 0 128 -256 pin
+1.00 0 64 -256 pin
+1.00 0 0 -256 pin
+1.00 0 -64 -256 pin
+1.00 0 -256 -256 pin
+1.00 0 -256 -192 pin
+1.00 0 -192 -192 pin
+1.00 0 -192 -128 pin
+1.00 0 -192 -64 pin
+1.00 0 -192 0 pin
+1.00 0 -192 64 pin
+1.00 0 -192 128 pin
+1.00 0 -256 64 pin
+1.00 0 -256 0 pin
+1.00 0 -256 -64 pin
+1.00 0 -256 -128 pin
+1.00 0 192 -256 pin
+1.00 0 192 -192 pin
+1.00 0 128 -192 pin
+1.00 0 128 -128 pin
+1.00 0 192 -128 pin
+1.00 0 128 -64 pin
+1.00 0 192 -64 pin
+1.00 0 192 0 pin
+1.00 0 128 0 pin
+1.00 0 128 64 pin
+1.00 0 192 64 pin
+1.00 0 128 128 pin
+1.00 0 64 128 pin
+1.00 0 64 64 pin
+1.00 0 -64 128 pin
+1.00 0 -64 64 pin
+1.00 0 -128 64 pin
+1.00 0 -128 128 pin
+1.000 0.000 0.000 scb
+(10) {/Times-Roman cf} 2 20 180 0.75 -192 0 pinlabel
+(12) {/Times-Roman cf} 2 20 180 0.75 -192 -64 pinlabel
+(14) {/Times-Roman cf} 2 20 180 0.75 -192 -128 pinlabel
+(16) {/Times-Roman cf} 2 20 180 0.75 -192 -192 pinlabel
+(6) {/Times-Roman cf} 2 29 180 0.75 -64 64 pinlabel
+(8) {/Times-Roman cf} 2 29 180 0.75 -128 64 pinlabel
+(21) {/Times-Roman cf} 2 17 180 0.75 -128 -256 pinlabel
+(23) {/Times-Roman cf} 2 17 180 0.75 -64 -256 pinlabel
+(25) {/Times-Roman cf} 2 17 180 0.75 0 -256 pinlabel
+(27) {/Times-Roman cf} 2 17 180 0.75 64 -256 pinlabel
+(32) {/Times-Roman cf} 2 23 180 0.75 128 -192 pinlabel
+(34) {/Times-Roman cf} 2 23 180 0.75 128 -128 pinlabel
+(36) {/Times-Roman cf} 2 23 180 0.75 128 -64 pinlabel
+(38) {/Times-Roman cf} 2 23 180 0.75 128 0 pinlabel
+(43) {/Times-Roman cf} 2 29 180 0.75 64 64 pinlabel
+(29) {/Times-Roman cf} 2 20 180 0.75 192 -256 pinlabel
+(31) {/Times-Roman cf} 2 20 180 0.75 192 -192 pinlabel
+(33) {/Times-Roman cf} 2 20 180 0.75 192 -128 pinlabel
+(35) {/Times-Roman cf} 2 20 180 0.75 192 -64 pinlabel
+(37) {/Times-Roman cf} 2 20 180 0.75 192 0 pinlabel
+(39) {/Times-Roman cf} 2 20 180 0.75 192 64 pinlabel
+(1) {/Times-Roman cf} 2 17 0 0.75 0 64 pinlabel
+(2) {/Times-Roman cf} 2 17 180 0.75 -64 128 pinlabel
+(4) {/Times-Roman cf} 2 17 180 0.75 -128 128 pinlabel
+(6) {/Times-Roman cf} 2 17 180 0.75 -192 128 pinlabel
+(40) {/Times-Roman cf} 2 17 180 0.75 128 128 pinlabel
+(42) {/Times-Roman cf} 2 17 180 0.75 64 128 pinlabel
+(18) {/Times-Roman cf} 2 29 180 0.75 -192 -320 pinlabel
+(20) {/Times-Roman cf} 2 29 180 0.75 -128 -320 pinlabel
+(22) {/Times-Roman cf} 2 29 180 0.75 -64 -320 pinlabel
+(24) {/Times-Roman cf} 2 29 180 0.75 0 -320 pinlabel
+(26) {/Times-Roman cf} 2 29 180 0.75 64 -320 pinlabel
+(28) {/Times-Roman cf} 2 29 180 0.75 128 -320 pinlabel
+(7) {/Times-Roman cf} 2 23 180 0.75 -256 64 pinlabel
+(9) {/Times-Roman cf} 2 23 180 0.75 -256 0 pinlabel
+(11) {/Times-Roman cf} 2 23 180 0.75 -256 -64 pinlabel
+(13) {/Times-Roman cf} 2 23 180 0.75 -256 -128 pinlabel
+(15) {/Times-Roman cf} 2 23 180 0.75 -256 -192 pinlabel
+(17) {/Times-Roman cf} 2 23 180 0.75 -256 -256 pinlabel
+(41) {/Times-Roman cf} 2 31 180 0.75 128 64 pinlabel
+(8) {/Times-Roman cf} 2 28 180 0.75 -192 64 pinlabel
+sce
+1 1.00 432 -256 0 0.00 360.00 xcarc
+1.000 0.000 0.000 scb
+(30) {/Times-Roman cf} 2 19 180 0.75 128 -256 pinlabel
+(19) {/Times-Roman cf} 2 16 180 0.75 -192 -256 pinlabel
+0.000 0.000 1.000 scb
+(44) {/Times-Roman cf} 2 29 180 0.75 0 160 label
+sce
+1.00 0 0 128 pin
+1.000 0.000 0.000 scb
+(44) {/Times-Roman cf} 2 17 180 0.75 0 128 pinlabel
+endgate
+} def
+
+
+% EndLib

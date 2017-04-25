@@ -1,0 +1,82 @@
+#include <windows.h>
+#include "resource.h"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icons
+//
+
+xcircuit	ICON	DISCARDABLE	"lib\\pixmaps\\xcircuit.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_INPUTDIALOG DIALOG DISCARDABLE  0, 0, 186, 63
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "XCircuit"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,7,42,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,129,42,50,14
+    LTEXT           "Static",IDC_INFOTEXT,7,7,172,8
+    EDITTEXT        IDC_EDIT1,7,20,172,12,ES_AUTOHSCROLL
+END
+
+IDD_HELPDLG DIALOG DISCARDABLE  0, 0, 186, 332
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Help"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,67,311,50,14
+    CONTROL         "",IDC_HELPPIX,"XcHelp",WS_VSCROLL,7,7,160,297
+END
+
+IDD_OUTPUTDLG DIALOG DISCARDABLE  0, 0, 272, 193
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Output"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Write File",IDOK,206,172,59,14
+    PUSHBUTTON      "Cancel",IDCANCEL,7,172,50,14
+    LTEXT           "Postscript output properties:",IDC_PSINFO,7,7,127,12,
+                    SS_CENTERIMAGE
+    CONTROL         "Pages",IDC_PAGENUM,"Button",BS_AUTOCHECKBOX | NOT 
+                    WS_VISIBLE | WS_TABSTOP,144,7,74,12
+    EDITTEXT        IDC_FILENAME,49,27,146,12,ES_AUTOHSCROLL
+    LTEXT           "Filename:",IDC_STATIC1,7,29,41,8
+    PUSHBUTTON      "Apply",IDC_APPLY1,215,26,50,14
+    EDITTEXT        IDC_PAGELABEL,49,47,158,12,ES_AUTOHSCROLL
+    LTEXT           "Page label:",IDC_STATIC2,7,49,41,8
+    PUSHBUTTON      "Apply",IDC_APPLY2,215,46,50,14
+    EDITTEXT        IDC_SCALE,49,67,158,12,ES_AUTOHSCROLL
+    LTEXT           "Scale:",IDC_STATIC3,7,69,40,8
+    PUSHBUTTON      "Apply",IDC_APPLY3,215,66,50,14
+    EDITTEXT        IDC_WIDTH,49,87,158,12,ES_AUTOHSCROLL
+    LTEXT           "Width:",IDC_STATIC4,7,89,40,8
+    PUSHBUTTON      "Apply",IDC_APPLY4,215,86,50,14
+    EDITTEXT        IDC_HEIGHT,49,107,158,12,ES_AUTOHSCROLL
+    LTEXT           "Height:",IDC_STATIC5,7,109,40,8
+    PUSHBUTTON      "Apply",IDC_APPLY5,215,106,50,14
+    LTEXT           "Orientation:",IDC_STATIC6,7,130,42,8
+    COMBOBOX        IDC_ORIENTATION,49,128,77,52,CBS_DROPDOWNLIST | CBS_SORT | 
+                    WS_TABSTOP
+    CONTROL         "Auto-fit",IDC_AUTOFIT,"Button",BS_AUTOCHECKBOX | NOT 
+                    WS_VISIBLE | WS_TABSTOP,135,129,38,10
+    LTEXT           "Mode:",IDC_STATIC7,7,149,41,8
+    COMBOBOX        IDC_MODE,49,147,77,52,CBS_DROPDOWNLIST | CBS_SORT | 
+                    WS_TABSTOP
+    PUSHBUTTON      "Apply",IDC_APPLY6,215,146,50,14,NOT WS_VISIBLE
+    EDITTEXT        IDC_FPEDIT,135,147,72,12,ES_AUTOHSCROLL | NOT WS_VISIBLE
+    PUSHBUTTON      "...",IDC_FILEOPEN,195,27,12,12,NOT WS_TABSTOP
+END
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// REGISTRY
+//
+
+#ifdef USE_WIN32_COM
+1 TYPELIB "XCCom.tlb"
+#endif

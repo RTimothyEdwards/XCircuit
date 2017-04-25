@@ -1,0 +1,48 @@
+% XCircuit Font encoding (XFE) file
+name:     Courier
+file:     courier.lps
+family:   Courier
+weight:	  normal
+shape:	  normal
+type:     PostScript
+encoding: Standard
+Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar
+Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar
+Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar
+Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar 
+Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar
+Cr::nullchar Cr::nullchar 
+Cr::space Cr::exclam Cr::quote Cr::pound Cr::dollar Cr::percent Cr::ampersand
+Cr::apostrophe Cr::lparen Cr::rparen Cr::asterisk Cr::plus Cr::comma Cr::minus
+Cr::period Cr::slash Cr::zero Cr::one Cr::two Cr::three Cr::four Cr::five
+Cr::six Cr::seven Cr::eight Cr::nine Cr::colon Cr::semi Cr::less Cr::equal
+Cr::more Cr::question Cr::at Cr::A Cr::B Cr::C Cr::D Cr::E Cr::F Cr::G Cr::H
+Cr::I Cr::J Cr::K Cr::L Cr::M Cr::N Cr::O Cr::P Cr::Q Cr::R Cr::S Cr::T Cr::U
+Cr::V Cr::W Cr::X Cr::Y Cr::Z Cr::lbracket Cr::backslash Cr::rbracket Cr::caret
+Cr::underscore Cr::apostrophe Cr::a Cr::b Cr::c Cr::d Cr::e Cr::f Cr::g Cr::h
+Cr::i Cr::j Cr::k Cr::l Cr::m Cr::n Cr::o Cr::p Cr::q Cr::r Cr::s Cr::t Cr::u
+Cr::v Cr::w Cr::x Cr::y Cr::z Cr::lbrace Cr::vbar Cr::rbrace Cr::tilde Cr::nullchar
+Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar
+Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar
+Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar
+Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar
+Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar
+Cr::nullchar Cr::nullchar Cr::nullchar Cr::upexclam Cr::cent
+Cr::lb Cr::aslash Cr::yen Cr::itf Cr::sy1 Cr::sy2 Cr::apos2 Cr::lqt Cr::lgqt
+Cr::lsang Cr::rsang Cr::fi Cr::fl Cr::nullchar Cr::minus Cr::dag Cr::ddag Cr::dot
+Cr::nullchar Cr::para Cr::bullet Cr::comma2 Cr::rqt2 Cr::rqt Cr::rgqt Cr::dots
+Cr::perzer Cr::nullchar Cr::uqest Cr::nullchar Cr::grave Cr::acute Cr::hat Cr::tilchar
+Cr::bar Cr::uu Cr::dot Cr::umlaut Cr::nullchar Cr::circ Cr::cedilla Cr::nullchar 
+Cr::uml2 Cr::ced2 Cr::vee Cr::emdash Cr::nullchar Cr::nullchar Cr::nullchar
+Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar
+Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar
+Cr::nullchar Cr::AE Cr::nullchar Cr::ordfem Cr::nullchar Cr::nullchar 
+Cr::nullchar Cr::nullchar Cr::Lslash Cr::Oslash Cr::OE Cr::ordmasc Cr::nullchar
+Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::ae Cr::nullchar
+Cr::nullchar Cr::nullchar Cr::onesup Cr::nullchar Cr::nullchar Cr::lslash
+Cr::osl Cr::oe Cr::sset Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar
+
+derived:   Courier-Bold         bold     normal     PostScript
+derived:   Courier-Italic       normal   italic     PostScript
+derived:   Courier-BoldItalic   bold     italic     PostScript
+

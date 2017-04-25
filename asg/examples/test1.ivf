@@ -1,0 +1,21 @@
+MX sn7474.gates{
+MP{nclr IN;nset IN;clock IN;d IN;q OUT;qbar OUT;}
+MH{
+HS{w;x;y;z;}
+HA{x<=(NOT(((d AND nclr AND y))) AFTER 30)}
+HA{y<=(NOT(((clock AND x AND z))) AFTER 30)}
+HA{z<=(NOT(((clock AND nclr AND w))) AFTER 30)}
+HA{w<=(NOT(((z AND x AND nset))) AFTER 30)}
+HA{q<=(NOT(((nset AND z AND qbar))) AFTER 30)}
+HA{qbar<=(NOT(((y AND nclr AND q))) AFTER 30)}}}
+
+MF{
+FS{clock d nclr nset q qbar }
+FS{ w x y z }
+FG NAND.1{NAND 0 I 3 d nclr y 1 x }
+FG NAND.2{NAND 0 I 3 x clock z 1 y }
+FG NAND.3{NAND 0 I 3 clock nclr w 1 z }
+FG NAND.4{PMOS 0 I 3 z nset x 1 w }
+FG NAND.5{NAND 0 I 3 qbar z nset 1 q }
+FG NAND.6{NAND 0 I 3 nclr q y 1 qbar }}
+

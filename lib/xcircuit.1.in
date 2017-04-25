@@ -1,0 +1,1332 @@
+.TH XCircuit 1 "January 5, 2000" "X11R6"
+.SH NAME
+xcircuit - Draw circuit schematics or almost anything; make
+circuit netlists from schematics.
+.SH SYNOPSIS
+.B xcircuit [\fIfilename\fP[,...]] 
+.SH DESCRIPTION
+The program xcircuit is a generic drawing program tailored
+especially for making publication-quality renderings of 
+circuit diagrams (hence the name).  The output is pure
+PostScript, and the graphical interface attempts to maintain
+as much consistency as possible between the X11 window
+rendering and the final printer output.
+.sp
+\fIxcircuit\fP is mouse, menu, and keyboard\-driven, with the emphasis
+on single-character keyboard macros.
+.SH OPTIONS
+.TP 8
+.B \fIfilename\fP[,...]
+Begin running xcircuit by loading in the PostScript file
+filename.  If filename does not have a .ps extension,
+xcircuit will attempt to look for both the filename
+as entered and, upon failure, with the .ps extension.
+The file must be in xcircuit format.  \fIfilename\fP
+may also be a comma-separated list of files.
+
+.SH BASIC ELEMENTS
+There are five drawing elements.  These are as follows:  
+.TP 3
+.B a)
+polygon (multiple lines which may or may not be closed and filled)
+.TP 3
+.B b)
+arc (ellipse segment which may be closed and/or filled as above)
+.TP 3
+.B c)
+label (any text)
+.TP 3
+.B d)
+curve (based on the PostScript "curveto" algorithm)
+.TP 3
+.B e)
+object instance (see below)
+.PP
+There are two composite elements, which are:
+.TP 3
+.B f)
+path (a connected series of polygons, arcs, and curves)
+.TP 3
+.B g)
+object (something containing polygons, arcs, labels, 
+curves, paths, and instances of other objects)
+
+.SH MOUSE BUTTONS
+The mouse button system, the object library, and the paged buffer
+system are loosely based on the
+Caltech circuit-simulation program "log" (either "analog" or "diglog").
+.sp
+The general idea is to make the most commonly-used functions the
+easiest to perform, and (to the extent possible) to scale (inversely)
+the complexity of performing a function with the frequency of that task.
+Because this program is tailored to circuit drawing, the most common
+functions are drawing lines and moving object instances.  The next most
+common function is selection of elements singly or in groups.
+.sp
+Mouse button 1 can be tapped to start a connected chain of lines, the
+most common drawing function.  In addition, button 1
+has a function called "grab", which occurs after the button has
+been continually pressed for a short length of time (about 1/5 second).
+As the name implies, "grab" grabs hold of an element which can then
+be moved around the screen.
+.sp
+Button 2 can be used to select an item if tapped, and if pressed
+and held down, a box will be drawn and everything inside that box
+selected when the button is released.  In all other cases, button 2
+will complete a command.  For users who have only two mouse buttons
+and do not emulate the middle mouse button with the combination of
+buttons 1 and 3, use the combination of the Shift key and mouse
+button 1 to emulate mouse button 2.
+.sp
+Button 3 will normally abort a command.  During editing of an arc,
+spline, or polygon, button 3 will revert back to the previous form,
+or abort if there is no remaining edit history.
+.sp
+All other commands are 
+available from the pulldown menus and/or from the keyboard using
+single-key macros (with easy-to-remember mnemonics).
+Keyboard commands are quicker, since they act on the present cursor
+position, whereas menu commands require an extra step.
+
+.SH BUILT-IN LIBRARY
+The library is intended to provide a convenient way to store and
+retrieve elements of a picture which will be used more than once.
+For the application of circuit drawing, a built-in library provides
+basic objects such as transistors, amplifiers, resistors, capacitors,
+arrows, circles, power and ground symbols, and the like.  This file
+is a composite of several library files (such as "builtins.lps",
+"analog.lps", and "digital.lps") which are called by the startup
+script
+PYTHON ("xcstartup.py")
+TCL ("xcstartup.tcl")
+NOINTERP ("startup.script")
+The program first looks for the startup script in
+the current directory, and then searches in the directory given by
+the environment variable "XCIRCUIT_LIB_DIR", and finally, in the
+hard-coded global directory (LIBDIR) if it could not find it elsewhere.
+Thus each user can add to or modify the file of builtins to reflect
+personal taste.  Since the PostScript output contains all object
+definitions, these changes to the built-in functions are inherently
+transferrable.  Xcircuit will automatically resolve conflicts between
+objects having the same name but different contents.
+.sp
+The library is accesible from the pull-down menu or with the "l"
+keyboard macro.  When inside the library, clicking the first mouse
+button on an object "grabs" that object and returns the graphics
+state immediately to the page being edited, so that the object
+will be placed when the mouse button is released.
+
+.SH ZOOMING
+Xcircuit has unconstrained zooming and snap-to positioning.  Objects
+scale completely:  line widths and text sizes will increase/decrease
+proportionally with the zoom, as well as dot/dash spacing and all
+other features.  Xcircuit does have a minimum integer grid in
+coordinate space, which translates to 0.005 inches at an output scale
+of 1.  The maximum zoom scale gives a screen size translating to
+about 100 by 100 inches at an output scale of 1.  The effective
+scale can be varied by changing the output scale (reached from the
+"File/Write" menu selection) in order to fit a drawing to a page or
+to get a grid matched to a specific dimension.  A separate scale
+parameter changes the scale of the reported position relative to
+the output scale (as it will appear on a printed page).
+
+.SH SNAP-TO GRID
+The snap-to grid is an all-important feature for circuit drawing,
+wherein it is critical that elements line up properly with one another.
+In \fIxcircuit\fP, there is no way to get off the snap-to grid except by
+turning the snap function off and physically pushing elements off
+the grid.  Generally, it is most convenient to leave the snap functon
+on and use key macros "+" and "-" to double/halve it as necessary.
+In any case, objects can always be returned to the snap grid with
+the "snap" function (key macro "S").
+
+.SH SELECTION MECHANISM
+Objects are selected using a variety of search methods.  The
+select box (formed by holding down mouse button 2 and dragging
+the pointer) uses the simplest method, searching for
+curve/polygon segment endpoints, arc centers, and label
+and object bounding boxes falling within the select box frame.
+General object selection is more complicated.  Polygons, Arcs,
+and Curves are selected by their outer edges, not the interiors.
+Currently this is also true for filled instances of those types.
+A line is selected if the pointer is in a
+region describing a box around it, which is adusted according
+to the scale (zoom factor).  Every object has an
+associated bounding box, which is rectangular but may be rotated
+with respect to the top level window.  An object instance is
+selected if the pointer falls within its bounding box.  Each
+label also has a bounding box carefully calculated from the width
+of the text string.
+.sp
+Often the selection mechanism will find multiple elements in
+range of the pointer.  In this case, each object in turn will be
+presented, colored in blue (or the specified "querycolor" in the
+defaults file), and the user has the option of accepting the 
+highlighted element for selection using the mouse button 1, or
+rejecting it with mouse button 3.  When all the elements under
+consideration have been accepted or rejected, the program
+proceeds to execute whatever function was in progress.  This
+selection method takes a little while to get used to, but is
+sensible and seems to work well.
+
+.SH COLOR
+Color in xcircuit is implemented with the idea of "color inheritance".
+Every page has a "default color" of black.  All elements which have
+color value "Inherit" will inherit the default color, black.  If an
+object instance is painted blue (for instance), all components in
+that object which have color value "Inherit" will inherit its color,
+blue.  The reason for this is that it allows different object
+instances to be painted different colors (such as if one part of
+a circuit is highlighted for emphasis), while making it possible for
+object instances to be multicolored, if necessary.  Changing the
+color of an object instance will have no observable effect on the 
+drawing if none of the components of the object inherit that color.
+An object may have both normally colored components and components
+which inherit their color, in which case only those components with
+the "Inherit" value will change color when the color of the object
+instance is changed.
+
+.SH SCHEMATIC CAPTURE
+XCircuit implements a sophisticated schematic capture.  Unlike
+virtually all schematic capture software currently available,
+xcircuit allows the designer to draw the circuit in a "natural"
+way, making use both of schematic hierarchies and simple
+hierarchies created simply by grouping elements together.  If
+the chosen netlist format is hierarchical (like SPICE), both
+hierarchical forms will be retained in the output.  For element
+grouping, input/output ports connecting into to the group will
+be determined automatically, from context.  A schematic capture
+tutorial is available from the xcircuit website,
+.br
+http://opencircuitdesign.com/xcircuit/tutorial/tutorial2.html.
+.br
+
+Netlist types currently available are "SPICE", "sim", and "PCB".
+
+.SH KEYBOARD COMMANDS
+.br
+.PP
+\fBBasic keyboard commands:\fP
+.TP 12
+.B Z
+Zoom in by a factor of 3/2.  If this key is pressed while a
+selection box is active (created with the middle mouse
+button), then acts like Zoom Box function.
+.TP 12
+.B z
+Zoom out by a factor of 3/2.
+.TP 12
+.B p
+Pan the screen so that the point under the mouse is brought
+to the center of the program window.  This function can also
+be conveniently performed by clicking on the scrollbars.
+The scrollbars cannot be moved continuously due to the slow
+time for screen refresh.
+.TP 12
+.B cursors
+The arrow keys perform a pan of one-half window size in the
+direction of the arrow pressed.
+.TP 12
+.B l
+Go to the Library of built-in objects.  From the library,
+use mouse button1 to grab an object and bring it back to
+the edit screen, or button3 to return without selecting 
+an object instance.  While in the library screen, the
+zoom and pan functions can be used to move around.
+.TP 12
+.B >
+Push into an on-screen object in order to edit that object
+.TP 12
+.B <
+Return from editing an object.  Object pushes and pops can
+be stacked indefinitely.
+.TP 12
+.B space
+Refresh the screen.
+.TP 12
+.B digits 0-9
+Switch to one of the first ten editing pages.  Pages greater
+than 10 can be reached from the "Window/Goto Page" menu
+selection.
+.TP 12
+.B + and -
+Change snap-to grid spacing by a factor of two up or down.
+.TP 12
+.B | : and _
+(Bar, colon, and underline) Change style on the currently
+selected object to dashed, dotted, and solid, respectively.
+.TP 12
+.B h or ?
+Print a help page summary of commands
+.PP
+.sp
+\fBCommands to create elements:\fP
+.TP 4
+.B a
+Arc.  Center is fixed at the initial position of the cursor.
+The mouse position changes the radius of the circle.
+In snap-to mode the arc boundry will pass through the snap point
+closest to the cursor.  Mouse button 1 cycles from controlling
+the radius to controlling the starting point, the ending point,
+and separately controlling the minor axis to create ellipse.
+Mouse button 2 completes the arc.
+.TP 4
+.B b
+Box.  This is a convenience function for generating rectangular
+closed polygons.  Creates a rectangle with one corner fixed at
+the position of the cursor.  Subsequent movement of the cursor
+defines the point diametrically opposed.  Mouse buttons 1 or 2
+complete the box.
+.TP 4
+.B s
+Spline curve.  The first endpoint is defined by the initial cursor
+position.  Mouse position adjusts the other endpoint of the curve.
+Mouse button 1 cycles from controlling position of the endpoint
+to controlling positions of the curve control points and the curve
+starting point.  Mouse button 2 completes the curve.
+.TP 4
+.B t
+Text.  Text starts out justified according to the styles chosen
+in the pull-down menu.  Text can be rejustified using the menu
+or by typing the numbers on the keypad (\fBshift-keypad-1\fP through
+\fBshift-keypad-9\fP).  The position of the keys on the keypad
+matches the justification.  Subscripts, superscripts, font
+changes, text size changes, underlining, and overlining are all
+available from the pull-down menu.  Text edit mode recognizes
+\fBHome\fP and \fBEnd\fP keys to move to the beginning and end
+of the string, respectively.  If the X11 environment maps
+control key sequences to character encodings (such as ISO-Latin1),
+these may be used to insert non-ASCII text.  Another method of
+inserting non-ASCII characters is the use of the backslash
+character, which duplicates the action of the
+Text/Insert/Character menu button.
+.TP 4
+.B M, m
+Make object.  Takes all the elements currently selected and
+compiles them into an object.  The object is then placed in the
+user library.  The elements just selected are deleted from the
+screen and replaced by the new object.  The center point of the
+resulting object is chosen as the closest snap-to point to the
+center of the object's bounding box;  if another center is desired,
+then the object can be edited using the ">" command and its contents
+moved with respect to its origin.  \fINote:\fP  Objects cannot have
+the same name as PostScript commands or have the same name as any
+other object in memory.  If such a name is found, an underscore ("_")
+will be prepended to the name as many times as is necessary to
+differentiate it from all other known objects.
+The name also cannot contain special PostScript characters such as
+slash; any such characters found will be replaced with underscores.
+.sp
+.PP
+\fBMajor editing commands:\fP
+.TP 4
+.B d
+Delete.  Select the nearest element or elements and delete it/them.
+.TP 4
+.B u
+Undelete.  Xcircuit saves up to 10 delete events to be recovered.
+Delete events are stored in order of occurrence, and the most
+recent delete event is the first to be recovered.
+When multiple elements are deleted at the same time, all of them
+are stored as one delete event, and restored together.
+.TP 4
+.B x
+Deselect. Elements which have been selected can be deselected on
+a per-item basis.  In order not to be too confusing, deselect does
+not query if multiple items are found under the cursor; it just
+deselects them all.
+.TP 4
+.B c
+Copy.  Make a copy of the object(s) nearest the cursor.  Object
+is automatically grabbed for moving to a new position.  The 
+next button1 or button2 press will place the element.  Button2
+will end the copy, and button1 will continue the copy function.
+.TP 4
+.B e
+Edit.  The action of Edit is dependent on the type of element
+selected.  These are detailed below:
+.TP 12
+.B Label
+Returns to text editing mode, starting with the cursor
+at the end of the string.  Mode is like regular text entry
+except that Button 3 returns text to its original string.
+.TP 12
+.B Polygon
+Grabs one point of a polygon for repositioning.  Button 1 cycles
+between points, button 2 accepts the new polygon, and button 3
+returns to the previous state, unless there is no remaining edit
+history, in which case it aborts the command.
+Key macros available during polygon edit are:
+.sp
+"x"---Breaks the polygon at the given point.
+.sp
+"e"---Moves edit position to the next point.
+.sp
+"i" or "Insert"---Inserts a new point at the position.
+.sp
+"d" or "Delete"---Deletes the current edit point.
+.sp
+There are four modes for polygon editing; see the
+"\fBPolygon Edit\fP" section below for details.
+.TP 12
+.B Arc
+Allows resizing of the radius.  Mouse button 1 or the "e" key
+will cycle between control of the radius, the endpoint angles,
+and the ellipse minor axis.  Mouse button 2 accepts the new
+arc.  Button 3 returns to the previous editing state,
+unless there is no remaining edit history, in which case it
+aborts the command.
+.TP 12
+.B Curve
+Allows repositioning of one end of the curve.
+Originally, the starting angle of the curve is kept fixed.
+Mouse button 1 or the "e" key cycles between the four
+control points of the curve, allowing control over the
+angle of the curve at its endpoint and the shape of the
+curve.  Mouse button 2 accepts the new curve.  Button 3
+reverts back to the previous edit state
+unless there is no remaining edit history, in which case
+it terminates the command.
+.TP 12
+.B Object instance
+Object instances have no properties to change
+except scale, and do not respond to the "edit" command.
+Scale can be changed by selecting "Options/Other/Object Size"
+from the menu.
+.sp
+.PP
+\fBMinor editing commands:\fP
+.TP 4
+.B R
+Rotate the selected element(s) or element under the cursor
+counterclockwise in 15 degree intervals.
+.TP 4
+.B r
+Rotate the selected element(s) or element under the cursor
+clockwise in 15 degree intervals.
+.TP 4
+.B O
+Rotate the selected element(s) or element under the cursor
+counterclockwise by 5 degree intervals.  This is currently
+the smallest angle resolution available to xcircuit.
+.TP 4
+.B o
+Rotate the selected element(s) or element under the cursor
+clockwise by 5 degree intervals.
+.TP 4
+.B f
+Flip an element around a vertical axis defined by an object's
+origin for an object instance, or across an axis defined by
+the pointer position for arcs, polygons, and curves.
+.TP 4
+.B F
+Flip an element around a horizontal axis defined
+similarly to the "f" command.
+.TP 4
+.B X
+If two elements are selected, their order is exchanged
+(this is only relevant if one element occludes another).
+If one element is selected, it is raised up one in the
+stack, and if it is already on top of the stack, it is
+shuffled to the bottom.
+.TP 4
+.B S
+Snap the nearest object to the snap-to grid.  For
+curves the control and endpoints are snapped; for polygons, each
+point is snapped; for arcs, the centerpoint is snapped; for labels
+and object instances, the designated point of origin is snapped.
+.TP 4
+.B j
+Join polygons together.  This only makes sense if it is possible
+to make a single continuous (open or closed) polygon from the
+selected parts.  Otherwise a warning will be posted and the parts
+will remain separate.
+.TP 4
+.B A
+Attach an element to a polygon, arc, or curve.
+The element to be attached must be the one currently grabbed
+(either by a "drag", copy command, or edit command).
+Until it is released, it will be forced to align
+its center (object, arc), endpoint (polygon, curve), or
+position (label) with the closest polygon, arc, or curve.
+Note that this is a very powerful tool for generating, for
+example, lines tangent to a curve, or objects arranged in
+a circle or along a line.
+.sp
+.PP
+\fBLibrary editing commands:\fP
+.TP 4
+.B D
+Delete.  The selected objects will be deleted from the library
+unless other library objects or pages contain references to that
+object.  \fBNote:\fP Unlike deleting object instances with the
+"\fBd\fP" command, this command deletes the actual object and
+releases all memory associated with that object, so the
+object cannot be undeleted.
+.TP 4
+.B C
+Copy.  Makes a copy of an object from either library page and
+places the new copy in the user library.  The new object will
+be renamed to avoid naming conflicts.
+.TP 4
+.B M
+Move.  If one object has been selected, it is moved to the
+position of the cursor.  If two objects have been selected,
+their positions in the library are exchanged.
+.TP 4
+.B E
+Edit label.  Edit the object name whose label is under the
+cursor.  After editing, the object name will be checked for
+conflicts with other object names, and altered if necessary.
+.TP 4
+.B H
+Hide object.  If the object is a sub-instance of another object,
+but is not meant to be used by itself, it can be "hidden" so
+that it will not appear by itself on the library page.
+.sp
+.SH MENU COMMANDS
+.sp
+.TP 4
+.B Write Postscript (W)
+This command brings up a popup menu with a number of options.
+First, it gives the name of the file if one exists, or else it
+gives the default name of the buffer (usually \fBPage\fP \fIn\fP,
+where \fIn\fP is the number of the buffer).
+Next, it gives a preview of the picture scale and output
+styles, which include Landscape/Portrait orientation and
+Encapulated/Unencapsulated (full page) PostScript modes.
+The former allows adjustment of the nominal size of the picture
+when drawn in PostScript.  The default scale is 1.00, which
+makes the text scale of 1.0 about 14 points on the PostScript
+page.  The width and height of the resulting 
+picture are also given, in inches, and any of the three
+values can be changed.  The values of the other two will
+be updated accordingly.  Pages which have the same name
+will be grouped together into a single file, allowing
+multiple pages to be stored in the same PostScript file.
+However, as Encapsulated PostScript does not make sense
+for this kind of file, it is not an option.
+.sp
+The \fBWrite File\fP button writes the current page to an
+output file.  If the page has a name other than the default,
+the file will automatically be saved under that name.  Otherwise,
+it is necessary to change the name of the buffer.  If a file of
+that name already exists on the disk, the button will read
+\fBOverwrite File\fP.
+.TP 4
+.B Read PostScript
+Reads in a file of Xcircuit format.  The
+file name is requested by a popup prompt, and an extension
+of ".ps" will be added if necessary.  The file is read
+into the current page, which is cleared first if anything
+is in it.  If the file is a multiple-page file, the current
+page will be overwritten with the first page from the file,
+but other pages will be loaded into empty buffers.
+LGF Xcircuit can also read "lgf"-format files from
+LGF the Chipmunk CAD tools programs "analog" and "diglog".
+.TP 4
+.B Import PostScript
+Acts like "Read PostScript" except that the page is not
+reset first, so graphics are added on top of existing
+graphics on the page.
+.TP 4
+.B Clear Page
+Clears the current page of all elements and resets the
+name.  The contents cannot be recovered.
+.TP 4
+.B Alt Color
+Switches between the two xcircuit color schemes.  The
+color schemes can be redefined through XDefaults
+(see below).  The default color schemes are black-on-white
+and white-on-black.  The latter is less straining to the
+eyes, but the former matches the black ink on white paper
+PostScript output.  Any color scheme other than black-on-white
+is not recommended for drawings with color, as the actual
+output does not match the observed xcircuit screen.
+.TP 4
+.B Grid
+Turns the grid lines on and off.
+.TP 4
+.B Axes
+Turns the axis lines on and off.  The axes mark the 
+origin (0,0) of the page.  On the top level (TopObject),
+the origin has no particular relevance, since encapsulated
+output will define its own boundaries, and full-page
+(unencapsulated) output will be centered on the output
+page, not according to the Xcircuit coordinate system.
+.TP 4
+.B Grid spacing
+Changes the spacing of the grid lines.
+Default spacing is 1/6 inch, which is about
+the width of the letter 'W' in default text scale.
+.TP 4
+.B Grid type/display
+This is a submenu allowing the coordinates and coordinate
+grid to be specified in alternate units.  Listing of 
+coordinates in the top window can be in default fractional
+inches, decimal inches, or centimeters.  Default spacing
+of grid lines is either one-quarter inch or one-half
+centimeter.  Selecting an A:B scale With option
+"\fBDrawing Scale\fP" causes all listed coordinates to be
+multiplied by the scale.  \fINote:\fP Xcircuit will make
+an attempt to keep objects on the snap/grid spacing when
+switching between inch and centimeter scales.  In order
+to do this, it will change the output scale by the ratio
+of 2.54 to 2.5, thus keeping a closer correspondence between
+inches and centimeters.  To get true centimeters on the
+output page, the output scale (from the "File/Write Xcircuit PS")
+can be reset to 1.0 at the expense of having all objects
+intended for the inch grid displaced off of the snap grid.
+.TP 4
+.B Snap-to
+Turns the snap-to grid on and off.  When the grid
+is on, movement and placement of elements is restricted
+to points on the snap-to grid.
+.TP 4
+.B Snap spacing
+Determines the spacing of the points in the
+snap-to grid.  Default is 1/12 inch, which is half
+the grid line spacing.
+.TP 4
+.B Linewidth
+Controls the default linewidth against which
+all linewidths in the drawing are scaled.
+.TP 4
+.B Polygon Edit
+The options in this submenu control how the position of
+lines are affected when a point in a polygon is selected
+for editing.  "\fBRhomboid-X\fP" mode moves adjoining
+points as necessary to keep all horizontal lines horizontal;
+"\fBRhomboid-Y\fP" mode acts similarly to keep all vertical
+lines vertical.  "\fBRhomboid-A\fP" is similar to Manhattan
+mode but also tracks non-Manhattan lines.
+The default mode is "\fBManhattan Box Edit\fP",
+which is a combination of Rhomboid-X and Rhomboid-Y.  In
+"\fBNormal\fP" mode, only the point being edited can be moved.
+.TP 4
+.B \fPArc/Box/Curve\fB Border
+The options under this menu determine the
+border style of arcs, polygons, and curves.  If an element
+is selected, it will be modified;  otherwise, if
+no objects are selected, the style chosen is made
+default for all subsequent arcs, polygons, and curves.
+Elements may be drawn with or without borders (but
+for obvious reasons cannot be made both borderless
+and unfilled, which would be invisible)
+The borders may be closed or unclosed.  For an arc,
+closed means that a chord is drawn connecting the two
+endpoints, if the beginning and ending angles do not
+complete a full circle.  Borders may be solid, dashed,
+dotted, and of varying width.
+.TP 4
+.B \fPArc/Box/Curve\fB Fill
+The options under this menu determine the
+fill style of arcs, polygons, and curves.  
+Fill style may be solid, empty, or one of 7 stipple
+patterns varying from light to dark, which are drawn
+both in xcircuit and PostScript as stipple patterns.
+Stipples can be transparent or opaque.
+\fIWarning\fP:  Transparent
+stipples are NOT inherent to PostScript and the hacks
+necessary to implement them cause slow rendering on
+a printer or PostScript previewer.  Due to the
+device-dependent nature of the routines, patterns
+will look abnormally large on PostScript previewers.
+This transparancy feature has been added with the
+expectation that most circuit schematics will not
+rely heavily upon halftoning.  Complicated color
+patterns can be created using transparent colored,
+stippled elements on top of solid-color elements. 
+\fINote\fP: Ordering of elements is according to
+order created.  A different ordering can be achieved
+using the "\fBX\fP" (exchange) command.  This method
+is not especially easy to work with, and hopefully
+something better will be implemented in the future.
+.TP 4
+.B \fPArc/Box/Curve\fB Color
+See the COLOR section above for a discussion of color
+inheritance.  This menu shows all the colors available
+to xcircuit with the option of adding more colors.
+Currently the entry style for colors is by name or by
+RGB content in the X11 style of #rrggbb where rr, gg,
+and bb are hex values ranging from 00 to FF.  The only
+limit to the number of colors is the X Server's colormap
+depth.  If the colormap is full, xcircuit attempts to
+allocate the closest possible color to the one requested.
+.TP 4
+.B Zoom Box
+This zoom feature requests the user to create a box
+(using either mouse button 1 or 2, expanding the box
+while holding down the button).  When the button is
+released, the view will zoom to the area of that box.
+.TP 4
+.B Full View
+This zoom feature calculates the bounding box
+of the entire picture and adjusts the scale to make
+it fit comfortably inside the program window.
+.SH TEXT FEATURES
+Xcircuit's ability to handle text is arguably the
+most complicated part of the program, and also of
+the PostScript output.  Careful attention to text
+justification and style is the key to a good drawing.
+.TP 4
+.B Text Size
+Alters the size of the labels.  The value is
+a scale, with a default of 1.0 which translates to
+14 points on the PostScript page if the default page
+scale of 1 is used.  If a label is selected, only that
+label is affected.  If a label is being edited, scale
+changes starting at the edit position.  Otherwise, it
+becomes the default size for all subsequent labels.  Size
+affects the entire text string.  Text size can be changed
+anywhere inside of a string.  However, text sizes inside
+a string are all given relative to the label size, not as
+an absolute point size.  Sizes of subscripts and superscripts
+are given relative to the natural size of the subscript or
+superscript (2/3 the size of the text for which it is a
+modifier).
+.TP 4
+.B \fPText\fB Font
+Standard printer fonts Times-Roman, Helvetica,
+Courier, and Symbol, are readily available.
+"User-defined" fonts can also be added; however,
+support is currently limited, and requires a font
+object (.lps) file and encoding (.xfe) file,
+examples of which are found in the fonts subdirectory
+of the xcircuit library directory.
+.TP 4
+.B \fPText\fB Style
+Four standard font styles are available, 
+matching the standard printer font variations:  Normal,
+Italic (or oblique), Bold, and BoldItalic.
+PostScript matrix manipulation allows slanted versions
+of any font, such as Symbol, for which none is otherwise
+available.
+.TP 4
+.B \fPText\fB Insert
+The Insert menu allows insertion of special characters 
+which are otherwise not (necessarily) allowed from the
+keyboard.  These include tab-stop, tab-forward, tab-backward,
+kern, half-space, quarter-space, and "Character".  The latter
+option brings up a page showing the 256-character encoding
+vector for the font, allowing point-and-click entry of any
+character in the font.  "Kern" instructions allow characters
+to be offset vertically or horizontally relative to the rest
+of the text.
+.TP 4
+.B \fPText\fB Encoding
+Two standard font encodings are available by default,
+Standard (Adobe) Encoding, and ISO-Latin1 encoding.
+ISO-Latin2 and ISO-Latin5 encodings exist in the
+library directory, but require the use of the program
+"ogonkify" (not included) to produce correct output on
+a printer.
+.TP 4
+.B Super and Subscripts
+Superscript and subscript are
+designed to closely match those in TeX output, though
+they lack the proper context-dependent kerning and
+other fancy features of TeX.  A superscript following
+a subscript results in a superscripted subscript.
+To get a superscript on top of a subscript, use the
+backspace character (see below).
+The Normalscript style is the way to get
+out of a sub or superscript and return to the normal
+size and position.
+Quick super/sub/normalscripting is available from the
+keypad with the "\fB+\fP" (plus), "\fB-\fP" (minus),
+and "\fBEnter\fP" keys, respectively.
+.TP 4
+.B Overline and Underline
+Overlining and underlining styles
+remain in effect until the next occurrence of a style
+or font change.  Overlining is
+lower if all the characters are lowercase and do not
+include the "tall" lowercase characters.  Overlining
+or underlining can be stopped at any time using the No
+Line style.  Over and Underlining is *always* preferable
+to using a line.  PostScript will adjust the over or
+underline to the text size and extent and actually grab
+the "_" character and compute its thickness in order to
+draw the line.
+.TP 4
+.B Tabbing
+From version 2.3, xcircuit allows embedded tab stops.
+Tab stops must be defined before using tab-forward or
+tab-backward.  The "Tab" keyboard key inserts an
+embedded tab-forward instruction into a label.  Tab-stop
+and tab-backward can be inserted using the Text->Insert
+menu.  A tab-forward instruction moves the cursor
+to the first defined tab stop forward of the current
+position.  A tab-backward instruction moves the cursor
+to the first defined tab stop backward of the current
+position.  If no appropriate tab stop exists, the
+instruction has no effect.
+.TP 4
+.B Backspace
+The use of the backspace character is deprecated from
+xcircuit version 2.3.  The effect of an embedded backspace
+is more reliably produced using tab-stop and tab-backward.
+.TP 4
+.B Halfspace and Quarterspace
+These options allow fine control over spacing, particularly
+useful when writing equations.
+.TP 4
+.B Justification
+Text justification always starts with the
+default, chosen from the options in the menu, but may
+be changed at any time using the numbers on the keypad.
+The position of the keys on the keypad reflect the
+point of justification: 1, 4, and 7 are right-justified,
+7, 8, and 9 are bottom justified, 5 is centered in both
+directions.  Since the letters drawn by xcircuit are
+optimized for the Helvetica font, correct justification
+is the main way to get text to come out on the PostScript
+page in the desired way, relative to objects or boxes or
+whatever.
+.SH .XCIRCUITRC FILE
+Certain parameters of the xcircuit program can be
+initialized from a file called \fB.xcircuitrc\fP, which
+is first searched for in the current directory, and then
+in the user's home directory as defined by the environment
+variable $HOME.
+PYTHON The XCircuitrc file is written in
+PYTHON Python (see www.python.org), with certain commands whose
+PYTHON main purpose is to transfer data structures between
+PYTHON the Python interpreter and XCircuit.
+PYTHON These commands are as follows:
+PYTHON .TP 6
+PYTHON .B library("\fIlibname\fP" [, \fInum\fP])
+PYTHON Loads a library named \fIlibname\fP (with or without .lps
+PYTHON extension) into the set of built-in objects.  \fInum\fP,
+PYTHON if specified, puts the specified library onto library page 
+PYTHON \fInum\fP (starts at 1).
+PYTHON .TP 6
+PYTHON .B override("library")
+PYTHON Causes the default libraries defined in "builtins.lps"
+PYTHON \fInot\fP to be loaded.
+PYTHON .TP 6
+PYTHON .B override("colors")
+PYTHON Causes the default colors \fInot\fP to be loaded; this will
+PYTHON not override the allocation of black and white, however,
+PYTHON for obvious reasons.
+PYTHON .TP 6
+PYTHON .B font("\fIfontname\fP")
+PYTHON Adds a font named \fIfontname\fP (as recognized by a
+PYTHON printer) to the menu of selectable fonts.
+PYTHON .TP 6 
+PYTHON .B color("\fIcolorname\fP")
+PYTHON Adds a color named \fIcolorname\fP (standard X11
+PYTHON conventions) to the menu of selectable colors.
+PYTHON .TP 6
+PYTHON .B bind("\fIkey\fP", "\fIfunction\fP")
+PYTHON Binds the key (or button) named \fIkey\fP to the function named
+PYTHON \fIfunction\fP.  If only one argument is given, it can be
+PYTHON either a key name or a function name, and bind() returns
+PYTHON the associated binding(s).  If no argument is given, then
+PYTHON bind() returns a dictionary of all key bindings.
+PYTHON Valid function names are listed in section "KEY BINDINGS" below.
+PYTHON .TP 6
+PYTHON .B unbind("\fIkey\fP", "\fIfunction\fP")
+PYTHON Unbinds the key (or button) named \fIkey\fP from the function named
+PYTHON \fIfunction\fP.
+PYTHON Valid function names are listed in section "KEY BINDINGS" below.
+PYTHON .TP 6
+PYTHON .B set("\fItype\fP", "\fIvalue\fP")
+PYTHON Sets internal xcircuit variables, where \fItype\fP can be one of:
+PYTHON .sp
+PYTHON \fBboxedit\fP
+PYTHON .sp
+PYTHON Where \fIvalue\fP is one of "manhattan", "rhomboid-x", "rhomboid-y",
+PYTHON or "normal".  Determines the default way manhattan-aligned polygon
+PYTHON edges are manupulated during edits.
+PYTHON .sp
+PYTHON \fBlinewidth\fP
+PYTHON .sp
+PYTHON Where \fIvalue\fP is a real number indicating the default
+PYTHON width of lines.
+PYTHON .sp
+PYTHON set("\fBbeep\fP", "on"|"off")
+PYTHON .sp
+PYTHON Where \fIvalue\fP can be \fBon\fP or \fBoff\fP, depending on 
+PYTHON whether or not you want the machine beeping at you when it
+PYTHON gives critical warnings.
+PYTHON .sp
+PYTHON set("\fBcolorscheme\fP", "normal"|"inverse")
+PYTHON .sp
+PYTHON Where \fIvalue\fP is \fBinverse\fP to swap the two color schemes
+PYTHON and make the second scheme appear as default.
+PYTHON .sp
+PYTHON \fIh\fP = newelement("\fIname\fP")
+PYTHON .sp
+PYTHON Creates a new element and returns a handle (pointer) \fIh\fP to it which
+PYTHON can be used to get and set element attributes.  Valid names are
+PYTHON "Arc", "Spline", "Polygon", "Object Instance", "Label", and "Path".
+PYTHON .sp
+PYTHON \fId\fP = getattr(\fIh\fP)
+PYTHON .sp
+PYTHON Creates a dictionary \fId\fP of attributes for the element with handle
+PYTHON \fIh\fP.  Dictionary keys depend on the element.
+PYTHON .sp
+PYTHON setattr(\fIh\fP, \fId\fP)
+PYTHON .sp
+PYTHON Applies the dictionary \fId\fP key:value pairs to the element pointed to
+PYTHON by handle \fIh\fP.
+PYTHON .sp
+PYTHON \fId\fP = getpage(\fIvalue\fP)
+PYTHON .sp
+PYTHON Returns a dictionary \fId\fP containing information about the page \fIvalue\fP.
+PYTHON If \fIvalue\fP is not specified, returns information about the current page.
+PYTHON The dictionary includes a list "\fIparts\fP" of handles to every element drawn
+PYTHON on the indicated page.
+PYTHON .sp
+PYTHON \fId\fP = getlibrary(\fIname\fP)
+PYTHON .sp
+PYTHON Returns a dictionary of objects for the indicated library,
+PYTHON referenced by \fIname\fP, or by page number.  The dictionary contains a
+PYTHON list "\fIobjects\fP" of names of every object in the library.
+PYTHON .sp
+PYTHON \fId\fP = getobject(\fIname\fP)
+PYTHON .sp
+PYTHON Returns a dictionary containing all information about an object, which
+PYTHON is referenced by \fIname\fP.  The dictionary contains keys "\fIname\fP",
+PYTHON containing the object name, "\fIwidth\fP" and "\fIheight\fP", a
+PYTHON list "\fIparts\fP" containing handles to each element comprising the
+PYTHON object, and a list "\fIparameters\fP" containing all the parameters
+PYTHON defined for the object and their default values.
+PYTHON .sp
+PYTHON zoom(\fIfactor\fP)
+PYTHON .sp
+PYTHON Zooms by amount \fIfactor\fP.  Values greater than 1 indicate a zoom in;
+PYTHON values less than 1 indicate a zoom out.
+PYTHON .sp
+PYTHON pan(\fIposition\fP)
+PYTHON .sp
+PYTHON Centers the screen on the (user) coordinate \fIposition\fP, which can be
+PYTHON either a (X,Y) tuple or two integers X, Y.
+PYTHON .sp
+PYTHON refresh()
+PYTHON .sp
+PYTHON Refreshes the screen.  The screen is automatically refreshed after every
+PYTHON Python command, but the \fBrefresh()\fP function can be used along with the
+PYTHON \fBpause()\fP function for animation effects. 
+PYTHON .sp
+PYTHON pause(\fIdelay\fP)
+PYTHON .sp
+PYTHON Pauses for \fIdelay\fP seconds (is a floating-point number).  Useful in
+PYTHON conjunction with \fBrefresh()\fP for animation effects.
+PYTHON .sp
+PYTHON \fIt\fP = getcursor()
+PYTHON .sp
+PYTHON Returns a tuple \fIt\fP containing the current X and Y position of the cursor.
+PYTHON .sp
+PYTHON .sp
+PYTHON \fIt\fP = getwindow()
+PYTHON .sp
+PYTHON Returns a tuple \fIt\fP containing the current window width and height.
+PYTHON .sp
+PYTHON popupprompt(\fIprompt\fP, \fIfunction\fP)
+PYTHON .sp
+PYTHON Generates a popup window with text entry.  \fIprompt\fP will be printed above
+PYTHON the text entry window.  Python function \fIfunction\fP (referenced by name)
+PYTHON will be called when clicking the "Okay" button or pressing the Return key
+PYTHON ends the text entry.  The function will be passed the contents of the text
+PYTHON window as its (only) parameter.
+PYTHON .sp
+PYTHON filepopup(\fIprompt\fP, \fIfunction\fP)
+PYTHON .sp
+PYTHON Operates exactly like \fBpopupprompt()\fP, except that the window is a file
+PYTHON browser instead of a simple text entry window.
+PYTHON .sp
+PYTHON .sp
+PYTHON simplepopup(\fIprompt\fP, \fIfunction\fP)
+PYTHON .sp
+PYTHON Operates exactly like \fBpopupprompt()\fP, except that there is no text entry
+PYTHON window, only a prompt string and the choice of "Okay" and "Cancel".
+PYTHON .sp
+PYTHON newbutton(\fIparent\fP, \fIname\fP, \fIfunction\fP)
+PYTHON .sp
+PYTHON Generates a new menu button under the menu cascade labeled \fIparent\fP.
+PYTHON The new button will display the label \fIname\fP, and pushing the button
+PYTHON will call the Python function \fIfunction\fP.
+PYTHON .sp
+PYTHON page(\fInumber\fP)
+PYTHON .sp
+PYTHON Go to the page numbered \fInumber\fP.
+PYTHON .sp
+PYTHON reset()
+PYTHON .sp
+PYTHON Erases the current page unconditionally, unless dependencies such as a link
+PYTHON to a symbol exist.
+
+NOINTERP Commands are:
+NOINTERP .TP 6
+NOINTERP .B library \fIlibname\fP
+NOINTERP Loads a library named \fIlibname\fP (with or without .lps
+NOINTERP extension) into the set of built-in objects.
+NOINTERP .TP 6
+NOINTERP .B override default library
+NOINTERP Causes the default libraries defined in "builtins.lps"
+NOINTERP \fInot\fP to be loaded.
+NOINTERP .TP 6
+NOINTERP .B override default colors
+NOINTERP Causes the default colors \fInot\fP to be loaded; this will
+NOINTERP not override the allocation of black and white, however,
+NOINTERP for obvious reasons.
+NOINTERP .TP 6
+NOINTERP .B font \fIfontname\fP
+NOINTERP Adds a font named \fIfontname\fP (as recognized by a
+NOINTERP printer) to the menu of selectable fonts.
+NOINTERP .TP 6 
+NOINTERP .B color \fIcolorname\fP
+NOINTERP Adds a color named \fIcolorname\fP (standard X11
+NOINTERP conventions) to the menu of selectable colors.
+NOINTERP .TP 6
+NOINTERP .B set \fItype\fP \fIvalue\fP
+NOINTERP Sets internal xcircuit variables, where \fItype\fP can be one of:
+NOINTERP .sp
+NOINTERP \fBboxedit\fP
+NOINTERP .sp
+NOINTERP Where \fIvalue\fP is one of "manhattan", "rhomboid-x", "rhomboid-y",
+NOINTERP or "normal".  Determines the default way manhattan-aligned polygon
+NOINTERP edges are manupulated during edits.
+NOINTERP .sp
+NOINTERP \fBlinewidth\fP
+NOINTERP .sp
+NOINTERP Where \fIvalue\fP is a real number indicating the default
+NOINTERP width of lines.
+NOINTERP .sp
+NOINTERP \fBbeep\fP
+NOINTERP .sp
+NOINTERP Where \fIvalue\fP can be \fBon\fP or \fBoff\fP, depending on 
+NOINTERP whether or not you want the machine beeping at you when it
+NOINTERP gives critical warnings.
+NOINTERP .sp
+NOINTERP \fBcolorscheme\fP
+NOINTERP .sp
+NOINTERP Where \fIvalue\fP is \fBinverse\fP to swap the two color schemes
+NOINTERP and make the second scheme appear as default.
+
+TCL The startup file is written in Tcl.  The command-line interface can
+TCL be found in the online documentation on the website
+TCL .sp
+TCL \fBhttp://www.opencircuitdesign.com/xcircuit/\fP.
+TCL .sp
+
+.SH CRASH RECOVERY
+XCircuit implements a crash recovery system by which a copy of the current
+file is made every 15 minutes (see Xdefaults, below, for changing this
+value).  XCircuit deletes this file upon a normal exit.  If, however,
+XCircuit crashes or is terminated by Control-C or other sudden death,
+the backup copy will remain.  On startup, XCircuit checks the /tmp
+directory for any XCircuit backup files belonging to the user.  If one
+is found, XCircuit will prompt the user for recovery.  Note that the
+backup is unique in that it contains a copy of the entire user space at
+the time of the crash.  Filenames may get overwritten, as the backup
+will treat all pages as belonging to the same file.
+
+.SH KEY BINDINGS
+As noted above, keys can be bound and unbound through command-line
+functions "bind" and "unbind".  Default key bindings are used throughout
+this manual page.  Key names use the notation of
+/usr/X11R6/include/keysymdef.h, but with the notation "XK_" being
+optional, and including the addition of prefixes "Shift_", "Control_",
+"Capslock_", and "Alt_", which may be used in any combination.  Note
+that "Shift_" is not used for ASCII characters (e.g., "A" is used
+instead of "Shift_a") unless used in combination with other special
+keys (such as "Control_Shift_A" to distinguish from "Control_a",
+should that be desired).  "Button1", "Button2", and "Button3" are
+also valid names indicating functions attached to the mouse buttons
+in normal drawing mode.  Valid functions which may be bound are as
+follows, with their default values given:
+.br
+.sp
+
+   Function name        Function performed         Default key binding
+   ---------------------------------------------------------------------
+   "Page",              change page,               Number keys 1-9 and 0
+   "Justify",           change text justification, Keypad keys 1-9
+   "Superscript",       set text superscript,      Keypad +
+   "Subscript",         set text subscript,        Keypad -
+   "Normalscript",      cancel sub/superscript,    Keypad Enter
+   "Nextfont",          change to next font,       Alt-f
+   "Boldfont",          change to bold font,       Alt-b
+   "Italicfont",        change to italic font,     Alt-i
+   "Normalfont",        cancel italic/bold,        Alt-n
+   "Underline",         generate underline,        Alt-u
+   "Overline",          generate overline,         Alt-o
+   "ISO Encoding",      change to ISO encoding,    Alt-e
+   "Return",            embedded return character, Alt-Enter
+   "Halfspace",         embedded half-space,       Alt-h
+   "Quarterspace",      embedded quarter-space,    Alt-q
+   "Special",           special character,         Alt-c
+   "Parameter",         embedded parameter,        Alt-p
+   "Edit Break",        break at point,            x
+   "Edit Delete",       delete point,              d, Delete
+   "Edit Insert",       insert point,              i, Insert
+   "Edit Next",         go to next point,          e
+   "Attach",            attach line to object,     A
+   "Next Library",      go to next library,        l
+   "Library Directory", library directory,         L
+   "Library Move",      arrange library objects,   M
+   "Library Copy",      get object in copy mode,   c
+   "Library Edit",      edit library name,         E
+   "Library Delete",    delete library object,     D
+   "Library Duplicate", duplicate object,          C
+   "Library Hide",      hide library object,       H
+   "Page Directory ",   page directory,            P
+   "Library Pop",       return from library,       <
+   "Help",              generate help screen,      h, ?
+   "Redraw",            redraw the window,         space
+   "View",              fit page to window,        v
+   "Zoom In",           zoom in,                   Z
+   "Zoom Out",          zoom out,                  z
+   "Pan",               center pan,                p
+   "Double Snap",       increase snap space,       +
+   "Halve Snap",        decrease snap space,       -
+   "Pan Left",          pan left one-half page,    Left arrow
+   "Pan Right",         pan right one-half page,   Right arrow
+   "Pan Up",            pan up one-half page,      Up arrow
+   "Pan Down",          pan down one-half page,    Down arrow
+   "Write",             popup output window,       W
+   "Rotate",            Rotate,                    r,R,o,O
+   "Flip X",            Flip horizontal,           f
+   "Flip Y",            Flip vertical,             F
+   "Snap",              Snap to grid,              S
+   "Pop",               Return from object edit,   <
+   "Push",              Edit object,               >
+   "Delete",            Delete element,            d
+   "Select",            Select element,            Select
+   "Box",               Create box,                b
+   "Arc",               Create arc,                a
+   "Text",              Create label,              t
+   "Exchange",          Exchange vertical order,   X
+   "Copy",              Copy element,              c
+   "Join",              Join into path,            j
+   "Unjoin",            Split path into elements,  J
+   "Spline",            Create spline,             s
+   "Edit",              Edit element,              e
+   "Undelete",          Undelete last deleted,     u
+   "Select Save",       Make object from selected, M,m
+   "Unselect",          Unselect element,          x
+   "Dashed",            Set line style to dashed,  |
+   "Dotted",            Set line style to dotted,  :
+   "Solid",             Set line style to solid,   _
+   "Prompt",            Execute from command line, %
+   "Dot",               Place dot at location,     .
+   "Exit",		Exit xcircuit		   Ctrl-Alt-q
+   "Netlist",		Generate a netlist,	   Alt-q
+   "Swap",		Swap schematic, symbol,	   /
+   "Pin Label",		Create pin label,	   T
+   "Info Label",	Create info label,	   I
+   "Connectivity",	Show wire connectivity,	   Alt-w
+   "Sim",		Generate sim netlist,	   Alt-s
+   "SPICE",		Generate SPICE netlist,	   Alt-S
+   "PCB",		Generate PCB netlist,	   Alt-p
+   "SPICE Flat"		Generate flattened SPICE,  Alt-f
+   ------------------------------------------------------------------
+.br
+.sp
+2-Button mouse users may find it useful to forego the Shift-Button1
+combination and instead put the following commands in the startup
+script:
+.br
+.sp
+bind('Escape', 'Cancel')
+.br
+unbind('Button3', Cancel')
+.br
+bind('Button3', 'Finish')
+.br
+.sp
+This will move the 3rd mouse button bindings to the "Escape" key, and
+duplicate the 2nd mouse button bindings onto the 3rd.
+.br
+.sp
+.SH X DEFAULTS
+The color scheme of xcircuit has a default setup, but accepts 
+alternate color schemes using the following keywords which can be put
+in the X Defaults (.Xdefaults, .Xresources) file, such as:
+.sp
+.EX 0
+  !
+.br
+  ! Sample X defaults for xcircuit, black-on-white version
+.br
+  !
+.br
+  xcircuit*foreground     : Black
+.br
+  xcircuit*background     : White
+.br
+  xcircuit*gridcolor      : Gray85
+.br
+  xcircuit*snapcolor      : Orange
+.br
+  xcircuit*selectcolor    : Blue
+.br
+  xcircuit*querycolor     : Green
+.br
+  xcircuit*axescolor      : NavajoWhite3
+.br
+  xcircuit*offbuttoncolor : Gray30
+.br
+  xcircuit*auxiliarycolor : MediumOrchid1
+.EE
+.sp
+Two color schemes are supported at a time, ostensibly for those people
+who prefer the lessened eye strain of a white-on-black scheme.  The
+names of the secondary colors are the same as those for the primary
+colors, but followed by "2", e.g., "xcircuit*foreground2".
+.sp
+.sp
+One other resource defines the number of minutes between automatic saves
+to the temporary file (in case of a crash or emergency Ctrl-C exit):
+.sp
+.EX 0
+  xcircuit.timeout		: 15
+.EE
+.sp
+Xcircuit also recognizes the core resources, such as width and height:
+.sp
+.EX 0
+  xcircuit.width		: 600
+.br
+  xcircuit.height		: 500
+.EE
+.sp
+All xcircuit foreground and background colors are taken from the
+Xdefaults foreground and background.  To get, for instance, white-on-black
+menus and buttons with a black-on-white drawing area, use the following:
+.sp
+.EX 0
+  xcircuit*foreground		: White
+.br
+  xcircuit*background		: DarkSlateGray
+.br
+  xcircuit.foreground		: Black
+.br
+  xcircuit.background		: White
+.br
+This will ensure that only the drawing area is black-on-white, but all other
+windows will appear in the less eye-straining white-on-black.
+.br
+Five different fonts can be specified in the Xdefaults.  \fihelpfont\fp is
+the style of fonts on the help popup window.  \fifilefont\fp is the style
+of fonts in the list of files in the file selection popup window.  \fitextfont\fp
+is the style of font for entering text in the popup dialog boxes.  \fititlefont\fp
+is the style of font for the cascade menu titles.  All other fonts take the
+type \fifont\fp. For example:
+.br
+  xcircuit*font           : *times-bold-r-normal--14*
+.br
+  xcircuit*helpfont	  : *times-medium-r-normal--12*
+.br
+  xcircuit*filefont	  : *times-medium-r-normal--14*
+.br
+  xcircuit*textfont	  : *courier-medium-r-normal--14*
+.br
+  xcircuit*titlefont	  : *times-bold-r-normal--18*
+.SH FILES
+The file path used by xcircuit to find library files is system-dependent
+(i.e., can be changed at compile time), and can be overridden in many
+ways (in .xcircuitrc or by the XCIRCUIT_LIB_DIR environment variable),
+but by default is:
+.sp
+.TP 28
+.B LIBDIR
+.sp
+.TP 15 
+.B xcircps2.pro
+PostScript prolog appended to each file
+.TP 15 
+PYTHON .B xcstartup.py
+TCL .B xcstartup.tcl
+NOINTERP .B startup.script
+This startup script contains commands of the type
+PYTHON \fBlibrary\fP("\fIname\fP", \fInumber\fP
+TCL \fBlibrary\fP \fIname\fP \fInumber\fP
+NOINTERP \fBlibrary\fP \fIname\fP \fInumber\fP
+which cause the designated library \fIname\fP to be immediately loaded
+into library page \fInumber\fP.  The startup script is also responsible
+for loading fonts, and may also be used to load colors on the color
+palette, set other options, and execute commands.
+.TP 15
+.B generic.lps, analog.lps, digital.lps, avlsi.lps, analoglib2.lps
+Files containing pre-compiled circuit elements.  The \fB.lps\fP extension
+is unique for xcircuit libraries.
+.TP 15
+.B fonts
+This subdirectory contains font definition files for xcircuit's
+vector-drawn fonts.  Characters are defined by xcircuit objects and
+stored in a \fB.lps\fP library.  The encoding scheme and other font
+information is stored in a \fB.xfe\fP ("xcircuit font encoding")
+file.
+.TP 15
+.B ~/.xcircuitrc \fPor\fB ./xcircuitrc
+Personal xcircuit initializer;  commands are outlined above.
+Libraries listed in this file will be appended to the builtin libraries.
+.SH ENVIRONMENT VARIABLES
+\fBxcircuit\fP understands the following environment variables:
+.sp
+.TP 15
+.B TMPDIR
+Directory for temporary (e.g., backup) files (defaults to TEMP_DIR).
+
+.TP 15
+.B XCIRCUIT_LIB_DIR
+Directory where xcircuit libraries and startup files can be found
+(defaults to BUILTINS_DIR).
+
+.TP 15
+.B XAPPLRESDIR
+Directory where the xcircuit application defaults can be found
+(defaults to RESOURCES_DIR)
+
+.TP 15
+.B HOME
+Directory where xcircuit will look for startup files, after searching the
+current directory.
+
+.TP 15
+.B HOST, HOSTNAME, USER
+Environment variables which xcircuit uses to fill in header information
+in the PostScript output (HOST and HOSTNAME are equivalent).
+
+.SH BUGS
+PostScript printers have device-dependent limits on the number of
+statements within a "def" definition.  If an object definition has an
+unusually large number of components, xcircuit will flag a warning when
+writing the file.  However, there is no way to ensure that a file will be
+accepted by a given printer.  The best way to avoid the problem is to make
+sure that large drawings make good use of hierarchically nested user-defined
+objects.  Note that printer errors arising from this problem have not been
+observed in practice, and given the typical size of on-board memory on most
+modern laser printers, probably never will be.
+.sp
+A list of bugs can be found in the Manifest file in the source directory.
+.SH ONLINE TUTORIAL
+Look for the xcircuit online tutorial at
+.sp
+http://opencircuitdesign.com/xcircuit/tutorial/tutorial.html
+.SH SEE ALSO
+xfig(1), another powerful freeware drawing program worthy of mention
+(see www.xfig.org). 
+Another schematic capture package worth noting is "gschem" from the
+gEDA package (see www.geda.seul.org).
+.SH NOTES
+PostScript is a registered trademark of Adobe Systems Incorporated.
+.br
+XCircuit Copyright (c) 2002 Tim Edwards.  XCircuit is freely distributed
+under a generous public license.  See the source distribution for details.
+.br
+Xw widget set Copyright (c) 1988 by Hewlett-Packard Company and the
+Massachusetts Institute of Technology.
+.SH AUTHOR
+Tim Edwards <tim@opencircuitdesign.com>.  Thanks to Tomas Rokicki for
+the PostScript routine which manufactures a Symbol-Oblique font.
+Thanks to Dave Gillespie and John Lazzaro for the program "analog"
+on which the graphical interface of xcircuit is (roughly) based.
+Thanks to many beta-testers, some of whom were kind enough to send
+patches.  Most contributors have been named in the Manifest file in
+the source distribution.

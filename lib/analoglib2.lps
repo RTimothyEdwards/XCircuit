@@ -1,0 +1,372 @@
+%! PostScript set of library objects for XCircuit
+%  Version: 3.2
+%  Library name is: analoglib2
+%  Author: R. Timothy Edwards <tim@khachaturian>
+%
+
+% Depend analoglib2::Transformer analog::inductor
+% Depend analoglib2::Vsource analog::source
+% Depend analoglib2::Isource generic::arrowhead analog::source
+% Depend analoglib2::ACsource analoglib2::sinusoid analog::source
+% Depend analoglib2::NPN generic::arrowhead
+% Depend analoglib2::PNP generic::arrowhead
+
+% XCircuitLib library objects
+/analoglib2::Capacitor {
+<< /value (1.0) /units (p) /@index (?) /p_jst 20 /p_rot 0 /pkg (AXIAL_400) >> begingate
+1 1.00 0 -64 0 -6 2 polygon
+1 1.00 0 64 0 6 2 polygon
+1 1.00 -32 6 32 6 2 polygon
+1 1.00 -32 -6 32 -6 2 polygon
+1.000 0.000 0.000 scb
+(1) {/Times-Roman cf} 2 9 0 1.00 0 64 pinlabel
+(2) {/Times-Roman cf} 2 13 0 1.00 0 -64 pinlabel
+0.180 0.545 0.341 scb
+mark units value ( %p1 %p2 ) @index (spice:C) {/Times-Roman cf} ctmk 4 0 1.00 -208 -160 
+infolabel
+(sim:c %p1 %p2) {/Times-Roman cf} 2 4 0 1.00 -208 -208 infolabel
+sce
+mark (F) units {hS} value {/Times-Roman cf} ctmk p_jst p_rot 1.00 48 0 label
+0.180 0.545 0.341 scb
+mark @index (pcb:C) {/Times-Roman cf} ctmk 20 0 1.00 -208 -256 infolabel
+endgate
+} def
+
+1.00 270 << /p_jst 17 /p_rot 90 >> /analoglib2::Capacitor libinst
+
+/analoglib2::Polarized {
+<< /value (1.0) /units (p) /@index (?) /p_jst 20 /p_rot 0 /pkg (AXIAL_400) >> begingate
+1 1.00 0 -64 0 -6 2 polygon
+1 1.00 0 64 0 6 2 polygon
+1 1.00 -32 6 32 6 2 polygon
+1 1.00 0 -80 74 66.00 114.00 xcarc
+1.000 0.000 0.000 scb
+(1) {/Times-Roman cf} 2 9 0 1.00 0 64 pinlabel
+(2) {/Times-Roman cf} 2 13 0 1.00 0 -64 pinlabel
+0.180 0.545 0.341 scb
+mark units value ( %p1 %p2 ) @index (spice:C) {/Times-Roman cf} ctmk 4 0 1.00 -208 -160 
+infolabel
+(sim:e %p1 %p2) {/Times-Roman cf} 2 4 0 1.00 -208 -208 infolabel
+sce
+mark (F) units {hS} value {/Times-Roman cf} ctmk p_jst p_rot 1.00 48 0 label
+0.180 0.545 0.341 scb
+mark @index (pcb:C) {/Times-Roman cf} ctmk 20 0 1.00 -208 -256 infolabel
+endgate
+} def
+
+1.00 270 << /p_jst 17 /p_rot 90 >> /analoglib2::Polarized libinst
+
+/analoglib2::Resistor {
+<< /value (1.0) /units (k) /@index (?) /p_jst 20 /p_rot 0 /pkg (AXIAL_400) >> begingate
+1 1.00 0 64 0 36 2 polygon
+1 1.00 0 -64 0 -36 2 polygon
+1 1.00 0 -36 14 -30 -14 -18 14 -6 -14 6 14 18 -14 30 0 36 8 polygon
+1.000 0.000 0.000 scb
+(1) {/Times-Roman cf} 2 9 0 1.00 0 64 pinlabel
+(2) {/Times-Roman cf} 2 13 0 1.00 0 -64 pinlabel
+0.180 0.545 0.341 scb
+mark units value ( %p1 %p2 ) @index (spice:R) {/Times-Roman cf} ctmk 4 0 1.00 -208 -160 
+infolabel
+(sim:r %p1 %p2) {/Times-Roman cf} 2 4 0 1.00 -208 -208 infolabel
+sce
+mark (W) {/Symbol cf} units {hS} value {/Times-Roman cf} ctmk p_jst p_rot 1.00 32 0 label
+0.180 0.545 0.341 scb
+mark @index (pcb:R) {/Times-Roman cf} ctmk 20 0 1.00 -208 -256 infolabel
+endgate
+} def
+
+1.00 270 << /p_jst 17 /p_rot 90 >> /analoglib2::Resistor libinst
+
+/analoglib2::Inductor {
+<< /value (1.0) /units (m) /@index (?) /p_jst 20 /p_rot 0 >> begingate
+1 1.00 20 -28 20 -44 0 -48 0 -24 spline
+1 1.00 -20 -20 -20 -32 0 -28 0 -24 spline
+1 1.00 20 32 20 16 0 12 0 36 spline
+1 1.00 20 12 20 -4 0 -8 0 16 spline
+1 1.00 20 -8 20 -24 0 -28 0 -4 spline
+1 1.00 -20 20 -20 8 0 12 0 16 spline
+1 1.00 -20 0 -20 -12 0 -8 0 -4 spline
+1 1.00 0 -48 0 -64 2 polygon
+1 1.00 0 36 0 48 2 polygon
+1.000 0.000 0.000 scb
+(1) {/Times-Roman cf} 2 9 0 1.00 0 48 pinlabel
+(2) {/Times-Roman cf} 2 13 0 1.00 0 -64 pinlabel
+0.180 0.545 0.341 scb
+mark units value ( %p1 %p2 ) @index (spice:L) {/Times-Roman cf} ctmk 4 0 1.00 -208 -160 
+infolabel
+(sim:l %p1 %p2) {/Times-Roman cf} 2 4 0 1.00 -208 -208 infolabel
+sce
+mark (H) units {hS} value {/Times-Roman cf} ctmk p_jst p_rot 1.00 32 0 label
+0.180 0.545 0.341 scb
+mark @index (pcb:L) {/Times-Roman cf} ctmk 20 0 1.00 -208 -256 infolabel
+endgate
+} def
+
+1.00 270 << /p_jst 17 /p_rot 90 >> /analoglib2::Inductor libinst
+
+/analog::inductor {
+begingate
+1 1.00 20 -28 20 -44 0 -48 0 -24 spline
+1 1.00 -20 -20 -20 -32 0 -28 0 -24 spline
+1 1.00 20 32 20 16 0 12 0 36 spline
+1 1.00 20 12 20 -4 0 -8 0 16 spline
+1 1.00 20 -8 20 -24 0 -28 0 -4 spline
+1 1.00 -20 20 -20 8 0 12 0 16 spline
+1 1.00 -20 0 -20 -12 0 -8 0 -4 spline
+1 1.00 0 -48 0 -64 2 polygon
+1 1.00 0 36 0 48 2 polygon
+1.000 0.000 0.000 scb
+(l.1) {/Times-Roman cf} 2 9 0 1.00 0 48 pinlabel
+(l.2) {/Times-Roman cf} 2 13 0 1.00 0 -64 pinlabel
+0.180 0.545 0.341 scb
+(spice:L%i %pl.1 %pl.2 1.0U) {/Times-Roman cf} 2 0 0 1.00 -208 -160 infolabel
+(sim:l %pl.1 %pl.2) {/Times-Roman cf} 2 0 0 1.00 -208 -208 infolabel
+endgate
+} def
+
+/analoglib2::Transformer {
+<< /@index (?) >> begingate
+1.00 0 -48 0 analog::inductor
+1 1.00 -16 48 -16 -64 2 polygon
+1 1.00 0 48 0 -64 2 polygon
+1.00 180 32 -16 analog::inductor
+1.000 0.000 0.000 scb
+(1) {/Times-Roman cf} 2 25 0 1.00 -48 48 pinlabel
+(2) {/Times-Roman cf} 2 29 0 1.00 -48 -64 pinlabel
+(3) {/Times-Roman cf} 2 25 0 1.00 32 48 pinlabel
+(4) {/Times-Roman cf} 2 29 0 1.00 32 -64 pinlabel
+0.180 0.545 0.341 scb
+mark @index (pcb:T) {/Times-Roman cf} ctmk 20 0 1.00 -96 -160 infolabel
+endgate
+} def
+
+/analog::source {
+% hidden
+begingate
+1 1.00 0 0 32 0.00 360.00 xcarc
+1 1.00 0 32 0 64 2 polygon
+1 1.00 0 -32 0 -64 2 polygon
+endgate
+} def
+
+/analoglib2::Vsource {
+<< /value (5) /p_jst 20 /p_rot 0 >> begingate
+1.00 0 0 0 analog::source
+(+) {/Symbol cf} 2 5 p_rot 1.00 0 14 label
+(-) {/Symbol cf} 2 5 p_rot 1.00 0 -22 label
+1.000 0.000 0.000 scb
+(v.p) {/Times-Roman cf} 2 9 0 1.00 0 64 pinlabel
+(v.m) {/Times-Roman cf} 2 13 0 1.00 0 -64 pinlabel
+0.180 0.545 0.341 scb
+mark value (spice:V%i %pv.p %pv.m ) {/Times-Roman cf} ctmk 20 0 1.00 -96 -160 
+infolabel
+sce
+mark (V) {hS} value {/Times-Roman cf} ctmk p_jst p_rot 1.00 48 0 label
+endgate
+} def
+
+1.00 270 << /p_jst 17 /p_rot 90 >> /analoglib2::Vsource libinst
+
+/generic::arrowhead {
+% trivial
+begingate
+8 -28 beginpath
+3 -18 3 -15 0 0 curveto
+-3 -15 -3 -18 -8 -28 curveto
+-2 -26 2 -26 8 -28 curveto
+249 1.00 endpath
+endgate
+} def
+
+/analoglib2::Isource {
+<< /value (1) /units (m) /p_jst 20 /p_rot 0 >> begingate
+1.00 0 0 0 analog::source
+1 0.75 0 20 0 -8 2 polygon
+0.80 180 0 -20 generic::arrowhead
+1.000 0.000 0.000 scb
+(i.p) {/Times-Roman cf} 2 9 0 1.00 0 64 pinlabel
+(i.m) {/Times-Roman cf} 2 13 0 1.00 0 -64 pinlabel
+0.180 0.545 0.341 scb
+mark units value (spice:I%i %pi.p %pi.m ) {/Times-Roman cf} ctmk 20 0 1.00 -96 -160 
+infolabel
+sce
+mark (A) units {hS} value {/Times-Roman cf} ctmk p_jst p_rot 1.00 48 0 label
+endgate
+} def
+
+1.00 270 << /p_jst 17 /p_rot 90 >> /analoglib2::Isource libinst
+
+/analoglib2::sinusoid {
+% hidden
+begingate
+1 0.80 0 -48 0 48 -16 0 16 0 spline
+endgate
+} def
+
+/analoglib2::ACsource {
+<< /value (5) /offset (0) /freq (1) /units (k) /p_jst 20 /p_rot 0 >> begingate
+1.00 0 0 0 analog::source
+1.000 0.000 0.000 scb
+(s.p) {/Times-Roman cf} 2 9 0 1.00 0 64 pinlabel
+(s.m) {/Times-Roman cf} 2 13 0 1.00 0 -64 pinlabel
+0.180 0.545 0.341 scb
+mark (\)) units freq ( ) value ( ) offset (spice:V%i %ps.p %ps.m SIN\()
+{/Times-Roman cf} ctmk 20 0 1.00 -336 -160 infolabel
+sce
+mark (Hz) units {hS} freq {CR} (offset) {ss} (V) {hS} offset {CR} (p-p)
+{ss} (V) {hS} value {/Times-Roman cf} ctmk p_jst p_rot 1.00 48 0 label
+1.00 p_rot 0 0 analoglib2::sinusoid
+endgate
+} def
+
+1.00 270 << /p_jst 17 /p_rot 90 >> /analoglib2::ACsource libinst
+
+/analoglib2::nMOS {
+<< /width (3) /length (2) /model (nmos) /@index (?) /p_jst 20 /p_rot 0 >> begingate
+1 1.00 0 -64 0 -28 -32 -28 -32 28 0 28 0 64 6 polygon
+1 1.00 -44 -28 -44 28 2 polygon
+1 1.00 -44 0 -64 0 2 polygon
+1.000 0.000 0.000 scb
+(G) {/Times-Roman cf} 2 7 0 1.00 -64 0 pinlabel
+(S) {/Times-Roman cf} 2 13 0 1.00 0 -64 pinlabel
+(D) {/Times-Roman cf} 2 9 0 1.00 0 64 pinlabel
+0.180 0.545 0.341 scb
+mark length ( L=) width ( W=) model ( %pD %pG %pS GND ) @index (spice:M) {/Times-Roman cf} 
+ctmk 4 0 1.00 -244 -139 infolabel
+mark ( %x %y) width ( ) length (sim:n %pG %pD %pS ) {/Times-Roman cf} ctmk 4 0 1.00 
+-244 -187 infolabel
+sce
+mark length (=) {Tf} (L) {hS} {CR} width (=) {Ts} (W) {/Times-Roman cf} ctmk p_jst
+p_rot 1.00 16 0 label
+endgate
+} def
+
+1.00 270 << /p_jst 17 /p_rot 90 >> /analoglib2::nMOS libinst
+
+/analoglib2::pMOS {
+<< /width (3) /length (2) /model (pmos) /@index (?) /p_jst 20 /p_rot 0 >> begingate
+1 1.00 -44 -28 -44 28 2 polygon
+1 1.00 -60 0 -64 0 2 polygon
+1 1.00 0 -64 0 -28 -32 -28 -32 28 0 28 0 64 6 polygon
+1 1.00 -52 0 8 0.00 360.00 xcarc
+1.000 0.000 0.000 scb
+(S) {/Times-Roman cf} 2 9 0 1.00 0 64 pinlabel
+(D) {/Times-Roman cf} 2 13 0 1.00 0 -64 pinlabel
+(G) {/Times-Roman cf} 2 7 0 1.00 -64 0 pinlabel
+0.180 0.545 0.341 scb
+mark length ( L=) width ( W=) model ( %pD %pG %pS Vdd ) @index (spice:M) {/Times-Roman cf} 
+ctmk 4 0 1.00 -196 -139 infolabel
+mark ( %x %y) width ( ) length (sim:p %pG %pD %pS ) {/Times-Roman cf} ctmk 4 0 1.00 
+-196 -187 infolabel
+sce
+mark length (=) {Tf} (L) {hS} {CR} width (=) {Ts} (W) {/Times-Roman cf} ctmk p_jst
+p_rot 1.00 16 0 label
+endgate
+} def
+
+1.00 270 << /p_jst 17 /p_rot 90 >> /analoglib2::pMOS libinst
+
+/analoglib2::nMOS4 {
+<< /width (3) /length (2) /model (nmos) /@index (?) /p_jst 20 /p_rot 0 >> begingate
+1 1.00 0 -64 0 -28 -32 -28 -32 28 0 28 0 64 6 polygon
+1 1.00 -44 -28 -44 28 2 polygon
+1 1.00 -44 0 -64 0 2 polygon
+1.000 0.000 0.000 scb
+(G) {/Times-Roman cf} 2 7 0 1.00 -64 0 pinlabel
+(S) {/Times-Roman cf} 2 13 0 1.00 0 -64 pinlabel
+(D) {/Times-Roman cf} 2 9 0 1.00 0 64 pinlabel
+(B) {/Times-Roman cf} 2 4 0 1.00 32 0 pinlabel
+0.180 0.545 0.341 scb
+mark length ( L=) width ( W=) model ( %pD %pG %pS %pB ) @index (spice:M) {/Times-Roman cf} 
+ctmk 4 0 1.00 -244 -139 infolabel
+mark ( %x %y) width ( ) length (sim:n %pG %pD %pS ) {/Times-Roman cf} ctmk 4 0 1.00 
+-244 -187 infolabel
+sce
+mark length (/) width (W/L=) {/Times-Roman cf} ctmk p_jst p_rot 1.00 16 32 label
+1 1.00 -32 0 32 0 2 polygon
+endgate
+} def
+
+1.00 270 << /p_jst 17 /p_rot 90 >> /analoglib2::nMOS4 libinst
+
+/analoglib2::pMOS4 {
+<< /width (3) /length (2) /model (pmos) /@index (?) /p_jst 20 /p_rot 0 >> begingate
+1 1.00 -44 -28 -44 28 2 polygon
+1 1.00 -60 0 -64 0 2 polygon
+1 1.00 0 -64 0 -28 -32 -28 -32 28 0 28 0 64 6 polygon
+1 1.00 -52 0 8 0.00 360.00 xcarc
+1.000 0.000 0.000 scb
+(S) {/Times-Roman cf} 2 9 0 1.00 0 64 pinlabel
+(D) {/Times-Roman cf} 2 13 0 1.00 0 -64 pinlabel
+(G) {/Times-Roman cf} 2 7 0 1.00 -64 0 pinlabel
+(B) {/Times-Roman cf} 2 4 0 1.00 32 0 pinlabel
+0.180 0.545 0.341 scb
+mark length ( L=) width ( W=) model ( %pD %pG %pS %pB ) @index (spice:M) {/Times-Roman cf} 
+ctmk 4 0 1.00 -196 -139 infolabel
+mark ( %x %y) width ( ) length (sim:p %pG %pD %pS ) {/Times-Roman cf} ctmk 4 0 1.00 
+-196 -187 infolabel
+sce
+mark length (/) width (W/L=) {/Times-Roman cf} ctmk p_jst p_rot 1.00 16 32 label
+1 1.00 -32 0 32 0 2 polygon
+endgate
+} def
+
+1.00 270 << /p_jst 17 /p_rot 90 >> /analoglib2::pMOS4 libinst
+
+/analoglib2::NPN {
+<< /model (npn) /@index (?) >> begingate
+1 1.00 -48 0 -64 0 2 polygon
+1 1.00 -48 48 -48 -48 2 polygon
+1 1.00 0 48 -48 22 2 polygon
+1 1.00 0 48 0 64 2 polygon
+1 1.00 0 -48 -48 -22 2 polygon
+1 1.00 0 -48 0 -64 2 polygon
+1.00 120 0 -48 generic::arrowhead
+1.000 0.000 0.000 scb
+(C) {/Times-Roman cf} 2 9 0 1.00 0 64 pinlabel
+(B) {/Times-Roman cf} 2 7 0 1.00 -64 0 pinlabel
+(E) {/Times-Roman cf} 2 13 0 1.00 0 -64 pinlabel
+0.180 0.545 0.341 scb
+mark model ( %pC %pB %pE ) @index (spice:Q) {/Times-Roman cf} ctmk 4 0 1.00 -244 -139 
+infolabel
+(sim:b %pB %pE %pC) {/Times-Roman cf} 2 4 0 1.00 -244 -187 infolabel
+endgate
+} def
+
+/analoglib2::PNP {
+<< /model (pnp) /@index (?) >> begingate
+1 1.00 -48 0 -64 0 2 polygon
+1 1.00 -48 48 -48 -48 2 polygon
+1 1.00 0 48 -48 22 2 polygon
+1 1.00 0 48 0 64 2 polygon
+1 1.00 0 -48 -48 -22 2 polygon
+1 1.00 0 -48 0 -64 2 polygon
+1.00 240 -48 22 generic::arrowhead
+1.000 0.000 0.000 scb
+(C) {/Times-Roman cf} 2 13 0 1.00 0 -64 pinlabel
+(B) {/Times-Roman cf} 2 7 0 1.00 -64 0 pinlabel
+(E) {/Times-Roman cf} 2 9 0 1.00 0 64 pinlabel
+0.180 0.545 0.341 scb
+mark model ( %pC %pB %pE ) @index (spice:Q) {/Times-Roman cf} ctmk 4 0 1.00 -244 -139 
+infolabel
+endgate
+} def
+
+/analoglib2::Diode {
+<< /@index (?) >> begingate
+248 1.00 -18 -16 0 16 18 -16 3 polygon
+1 1.00 0 -48 0 -16 2 polygon
+1 1.00 0 48 0 16 2 polygon
+1 1.00 -18 16 18 16 2 polygon
+1.000 0.000 0.000 scb
+(1) {/Times-Roman cf} 2 9 0 1.00 0 48 pinlabel
+(2) {/Times-Roman cf} 2 13 0 1.00 0 -48 pinlabel
+0.180 0.545 0.341 scb
+mark @index (pcb:D) {/Times-Roman cf} ctmk 20 0 1.00 -64 -144 infolabel
+mark ( %p2 %p1 diode) @index (spice:D) {/Times-Roman cf} ctmk 4 0 1.00 -64 -192 
+infolabel
+endgate
+} def
+
+
+% EndLib

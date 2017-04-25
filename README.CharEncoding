@@ -1,0 +1,126 @@
+-------------------------------------------------------------------
+Charater font encoding in xcircuit
+-------------------------------------------------------------------
+
+Xcircuit supports ISO-Latin2 encoding (Eastern Europe) since
+version 2.0a9.  This support was extended to ISO-Latin5
+(Turkish) in version 2.0a10 (6/14/1999), and Cyrillic (ISO-8859-5)
+in version 3.9.64 (3/29/2017).  Between 1999 and 2017, projects
+like fontforge made it much easier to obtain and use Type1
+PostScript fonts.  While the fonts are not generally available
+on printers, generally files are converted to PDF for printing,
+and ps2pdf takes care of inserting the proper font glyphs, and
+most Linux systems have URW fonts installed, or at least they
+are easy to obtain.
+
+In the latest version the above encodings can be reached simply
+by selecting Text->Encoding->(name of encoding).  As of this
+writing, Cyrillic fonts are not available in xcircuit drawn
+vector form, but are available from the font rendering engine
+if xcircuit is compiled with Cairo graphics.  Font encodings
+using standard glyph names (e.g., from URW fonts and others)
+are kept in text files in the runtime directories and are
+inserted into the output so that no further manipulation is
+needed to view the proper text characters.
+
+The instructions below are generally deprecated;  use of
+"ogonkify" works only on ISO-Latin-X encodings (not, for
+example, Cyrillic).  It is needed to generate the correct
+glyphs for sending PostScript output directly to a printer.
+However, as noted above, modern usage is generally to first
+convert to PDF format, for which ogonkify is not needed.
+
+Version 3.6.36 corrects a long-existing mistake in which only X11
+keysyms 0-255 are accepted as keyboard-entry.  By converting the
+X11 keysyms to keycodes, non-ASCII-encoded characters can be typed
+directly into XCircuit from the keyboard.  It would be nice,
+though, if XCircuit would auto-detect the expected encoding from
+the keysym and insert the proper font encoding switch, loading
+fonts if necessary.
+
+When creating text in an encoding other than PostScript "standard",
+be sure to select "Text->Encoding->(encoding name)" from the menu.
+This can be enabled by default simply by having a .xcircuitrc file
+in your home directory containing a line such as:
+
+          label encoding ISOLatin2
+
+-------------------------------------------------------------------
+
+1) The best practice is to convert all xcircuit output to PDF
+   using, typically, ps2pdf, and then ignore all the instruction
+   below, since the PDF file contains all font information needed
+   for printing.
+
+2) To get proper PostScript output on a printer (when sending
+   PostScript directly---this does not apply to PDF files!), you
+   will need to have the (separate) program "ogonkify", found at:
+
+	http://www.dcs.ed.ac.uk/home/jec/ogonkify/
+	ftp://ftp.dcs.ed.ac.uk/pub/jec/programs
+
+   "ogonkify" is necessary because PostScript does not contain
+   ISO-Latin2 encoding by default.  The accents such as the caron
+   and ogonek exist in the font definition, but the correct
+   alignments for putting them together need to be provided. 
+   Ogonkify does this best.
+
+3) Every file containing ISO-Latin2 text must be postprocessed
+   through "ogonkify" using the following command, before it will
+   print correctly on a PostScript printer:
+
+        ogonkify -e L2 -ATH file.ps | perl -ne \
+        's/StandardEncoding/ISOLatin2Encoding/g;\
+        s/ exch defi/ISO2 exch defi/g;print' > file.out.ps
+
+   Switches:  -A does Courier, -T does Times-Roman, and -H does
+   Helvetica; use only what's necessary to keep the output file
+   smaller.  "-e L2" signifies Latin2 encoding; this is not
+   strictly necessary as ogonkify defaults to L2.  All other
+   Latin encodings require the -e switch. 
+
+   Note that the output is piped through a couple of perl
+   commands.  This may seem overly complicated;  the first
+   substitution corrects a bug in ogonkify output (which may
+   disappear from releases of ogonkify in the future).  The
+   second substitution allows xcircuit to specify the ISO-Latin2
+   encodings separately from ISO-Latin1 and Adobe Standard
+   encodings, so that any and all encodings can be "mixed and
+   matched" in the same file and even the same label. 
+
+4) In a nutshell:  xcircuit defines each ISO-Latin2 font name as
+   the original name followed by the string "ISO2".  Xcircuit
+   can then load the file and interpret the font encodings
+   unambiguously.  However, the new ISO-Latin2 font names are not
+   defined by PostScript.  Running "ogonkify" in the manner shown
+   above will add a true PostScript definition for each of the
+   ISO-Latin2 fonts.  Without "ogonkify", a PostScript printer
+   or interpreter will either produce an error or else substitute
+   a default font for the unrecognized one.
+
+5) The "ogonkification" of the file will not affect xcircuit's
+   ability to read it back into the program.  xcircuit will
+   continue to display the ISO-Latin2 text correctly regardless of
+   whether or not the file has been run through "ogonkify".
+   However, the header material inserted by "ogonkify" will be
+   lost every time xcircuit writes the file back out.
+
+6) Other ISO-LatinX encodings:  Currently ISO-Latin5 is supported,
+   and additional encodings will be created as I get requests for
+   them.  Follow the instructions above for ISO-Latin2, but replace
+   all occurences of "2" with "5".
+
+   e.g., 
+
+        ogonkify -e L5 -ATH file.ps | perl -ne \
+        's/StandardEncoding/ISOLatin5Encoding/g;\
+        s/ exch defi/ISO5 exch defi/g;print' > file.out.ps
+
+   and add lines
+
+	% times_romaniso5.xfe loadfontencoding
+	% courieriso5.xfe loadfontencoding
+	% helveticaiso5.xfe loadfontencoding
+
+   to psfiles/builtins.lps (or /usr/local/lib/xcircuit-2.0/builtins.lps, if
+   already installed).

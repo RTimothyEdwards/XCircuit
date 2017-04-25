@@ -1,0 +1,82 @@
+
+MX add4.add4_str{
+MP{c0 IN;a[3:0] IN;b[3:0] IN;c4 OUT;s[3:0] OUT;}
+MH{
+HS{c1;c2;c3;g0;
+g1;g2;g3;p0;p1;
+p2;p3;}
+HA{s[0:0]<=((c0 XOR p0))}
+HA{s[1:1]<=((c1 XOR p1))}
+HA{s[2:2]<=((c2 XOR p2))}
+HA{s[3:3]<=((c3 XOR p3))}
+HC block4{clab4.clab4_str a[3:3];b[3:3];c0;g2;p2;g1;p1;g0;p0;c4;g3;p3;}
+HC block3{clab3.clab3_str a[2:2];b[2:2];c0;g1;p1;g0;p0;c3;g2;p2;}
+HC block2{clab2.clab2_str a[1:1];b[1:1];c0;g0;p0;c2;g1;p1;}
+HC block1{clab1.clab1_str a[0:0];b[0:0];c0;c1;g0;p0;}}}
+
+M_ clab1.clab1_str{
+MP{a IN;b IN;c0 IN;c1 OUT;g0 OUT;p0 OUT;}
+MH{
+HS{}
+HA{g0<=((a AND b))}
+HA{p0<=((a XOR b))}
+HA{c1<=((g0 OR ((p0 AND c0))))}}}
+
+M_ clab2.clab2_str{
+MP{a IN;b IN;c0 IN;g0 IN;p0 IN;c2 OUT;g1 OUT;p1 OUT;}
+MH{
+HS{}
+HA{g1<=((a AND b))}
+HA{p1<=((a XOR b))}
+HA{c2<=((g1 OR ((p1 AND g0)) OR ((p1 AND p0 AND c0))))}}}
+
+M_ clab3.clab3_str{
+MP{a IN;b IN;c0 IN;g1 IN;p1 IN;g0 IN;p0 IN;c3 OUT;g2 OUT;p2 OUT;}
+MH{
+HS{}
+HA{g2<=((a AND b))}
+HA{p2<=((a XOR b))}
+HA{c3<=((g2 OR ((p2 AND g1)) OR ((p2 AND p1 AND g0)) OR ((p2 AND p1 AND p0 AND c0))))}}}
+
+M_ clab4.clab4_str{
+MP{a IN;b IN;c0 IN;g2 IN;p2 IN;g1 IN;p1 IN;g0 IN;p0 IN;c4 OUT;g3 OUT;p3 OUT;}
+MH{
+HS{}
+HA{g3<=((a AND b))}
+HA{p3<=((a XOR b))}
+HA{c4<=((g3 OR ((p3 AND g2)) OR ((p3 AND p2 AND g1)) OR ((p3 AND p2 AND p1 AND g0)) OR ((p3 AND p2 AND p1 AND p0 AND c0))))}}}
+
+MF{
+FS{a_0 a_1 a_2 a_3 b_0 b_1 b_2 b_3 c0 c4 s_0 s_1 s_2 s_3 }
+FS{c1 c2 c3 g0 g1 g2 g3 p0 p1 p2 p3 }
+FS{b1/_5 }
+FS{b2/_12 b2/_13 }
+FS{b3/_20 b3/_21 b3/_22 }
+FS{b4/_29 b4/_30 b4/_31 b4/_32 }
+FG b1/XOR.5{XOR 0 I 2 c0 p0 1 s_0 }
+FG b1a/AND.1{AND 0 I 2 a_0 b_0 1 g0 }
+FG b1a/XOR.1{XOR 0 I 2 a_0 b_0 1 p0 }
+FG b1/AND.2{AND 0 I 2 p0 c0 1 b1/_5 }
+FG b1/OR.1{OR 0 I 2 g0 b1/_5 1 c1 }
+FG b2/XOR.6{XOR 0 I 2 c1 p1 1 s_1 }
+FG b2a/AND.3{AND 0 I 2 a_1 b_1 1 g1 }
+FG b2a/XOR.2{XOR 0 I 2 a_1 b_1 1 p1 }
+FG b2/AND.4{AND 0 I 2 p1 g0 1 b2/_12 }
+FG b2/AND.5{AND 0 I 3 p1 p0 c0 1 b2/_13 }
+FG b2/OR.2{OR 0 I 3 g1 b2/_12 b2/_13 1 c2 }
+FG b3/XOR.7{XOR 0 I 2 c2 p2 1 s_2 }
+FG b3a/AND.6{AND 0 I 2 a_2 b_2 1 g2 }
+FG b3a/XOR.3{XOR 0 I 2 a_2 b_2 1 p2 }
+FG b3/AND.7{AND 0 I 2 p2 g1 1 b3/_20 }
+FG b3/AND.9{AND 0 I 4 p2 p1 p0 c0 1 b3/_22 }
+FG b3/AND.8{AND 0 I 3 p2 p1 g0 1 b3/_21 }
+FG b3/OR.3{OR 0 I 4 g2 b3/_20 b3/_21 b3/_22 1 c3 }
+FG b4/XOR.8{XOR 0 I 2 c3 p3 1 s_3 }
+FG b4a/AND.10{AND 0 I 2 a_3 b_3 1 g3 }
+FG b4a/XOR.4{XOR 0 I 2 a_3 b_3 1 p3 }
+FG b4/AND.11{AND 0 I 2 p3 g2 1 b4/_29 }
+FG b4b/OR.4{OR 0 I 5 g3 b4/_29 b4/_30 b4/_31 b4/_32 1 c4 }
+FG b4/AND.13{AND 0 I 4 p3 p2 p1 g0 1 b4/_31 }
+FG b4/AND.14{AND 0 I 5 p3 p2 p1 p0 c0 1 b4/_32 }
+FG b4/AND.12{AND 0 I 3 p3 p2 g1 1 b4/_30 }
+}

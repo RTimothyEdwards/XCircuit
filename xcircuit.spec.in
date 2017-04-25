@@ -1,0 +1,43 @@
+Name:           xcircuit
+Version:        %VERSION%
+Release:        1
+Summary:        Electronic circuit schematic drawing program
+Group:          Applications/Engineering
+License:        GPL
+URL:            http://opencircuitdesign.com/xcircuit/index.html
+Source:         http://opencircuitdesign.com/xcircuit/archive/%{name}-%{version}.tgz
+BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+BuildRequires:  libX11-devel, libXt-devel, tcl-devel, tk-devel
+Requires:       libX11, libXt, tcl, tk
+
+%description
+Xcircuit is a general-purpose drawing program and also a specific-purpose
+CAD program for circuit schematic drawing and schematic capture. The output
+format is PostScript.
+
+%prep
+%setup -q
+
+%build
+%configure \
+  --with-tcl=%{_libdir} \
+  --with-tk=%{_libdir} \
+  --with-tclincls=%{_includedir} \
+  --with-tkincls=%{_includedir} \
+  --with-tcllibs=%{_libdir} \
+  --with-tklibs=%{_libdir}
+make
+
+%install
+rm -rf $RPM_BUILD_ROOT
+make install DESTDIR=$RPM_BUILD_ROOT
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%files
+%defattr(-,root,root,-)
+%doc CHANGES COPYRIGHT README README.* TODO VERSION
+%{_bindir}/xcircuit
+/usr/lib/xcircuit-3.7/*
+

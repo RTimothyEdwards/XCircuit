@@ -1,0 +1,41 @@
+%! PostScript set of library objects for XCircuit
+%  Version: 3.2
+%  Library name is: avlsi
+%  Author: R. Timothy Edwards <tim@stravinsky.jhuapl.edu>
+
+% XCircuitLib library built-in objects
+
+/avlsi::samp {
+% trivial
+begingate
+0 1.0 -80 -80 -80 80 80 0 3 polygon
+0 -40 0 -80 wire
+(-) {/Symbol cf} 1 5 0 1.0 -61 42 label
+(+) {/Symbol cf} 1 5 0 1.0 -61 -50 label
+1 0 0 scb
+(in.m) {/Times-Roman cf} 1 7 0 1.0 -80 48 pinlabel
+(in.p) {/Times-Roman cf} 1 7 0 1.0 -80 -48 pinlabel
+(out) {/Times-Roman cf} 1 4 0 1.0 80 0 pinlabel
+(bias) {/Times-Roman cf} 1 13 0 1.0 0 -80 pinlabel
+sce
+endgate
+} def
+
+/avlsi::wramp {
+% trivial
+begingate
+0 1.0 -80 -80 -80 80 48 24 48 -24 4 polygon
+0 -80 0 -45 wire
+48 0 80 0 wire
+(-) {/Symbol cf} 1 5 0 1.0 -61 42 label
+(+) {/Symbol cf} 1 5 0 1.0 -61 -50 label
+1 0 0 scb
+(in.m) {/Times-Roman cf} 1 7 0 1.0 -80 48 pinlabel
+(in.p) {/Times-Roman cf} 1 7 0 1.0 -80 -48 pinlabel
+(out) {/Times-Roman cf} 1 4 0 1.0 80 0 pinlabel
+(bias) {/Times-Roman cf} 1 13 0 1.0 0 -80 pinlabel
+sce
+endgate
+} def
+
+% EndLib

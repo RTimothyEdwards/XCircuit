@@ -1,0 +1,49 @@
+% XCircuit Font encoding (XFE) file
+name:     CourierISO2
+% file:     courier.lps
+file:	  courieriso2.lps
+family:	  Courier
+weight:	  normal
+shape:    normal
+type:     PostScript
+encoding: ISOLatin2
+Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar
+Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar
+Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar
+Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar 
+Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar
+Cr::nullchar Cr::nullchar 
+Cr::space Cr::exclam Cr::quote Cr::pound Cr::dollar Cr::percent Cr::ampersand
+Cr::apostrophe Cr::lparen Cr::rparen Cr::asterisk Cr::plus Cr::comma Cr::minus
+Cr::period Cr::slash Cr::zero Cr::one Cr::two Cr::three Cr::four Cr::five
+Cr::six Cr::seven Cr::eight Cr::nine Cr::colon Cr::semi Cr::less Cr::equal
+Cr::more Cr::question Cr::at Cr::A Cr::B Cr::C Cr::D Cr::E Cr::F Cr::G Cr::H
+Cr::I Cr::J Cr::K Cr::L Cr::M Cr::N Cr::O Cr::P Cr::Q Cr::R Cr::S Cr::T Cr::U
+Cr::V Cr::W Cr::X Cr::Y Cr::Z Cr::lbracket Cr::backslash Cr::rbracket Cr::caret
+Cr::underscore Cr::apostrophe Cr::a Cr::b Cr::c Cr::d Cr::e Cr::f Cr::g Cr::h
+Cr::i Cr::j Cr::k Cr::l Cr::m Cr::n Cr::o Cr::p Cr::q Cr::r Cr::s Cr::t Cr::u
+Cr::v Cr::w Cr::x Cr::y Cr::z Cr::lbrace Cr::vbar Cr::rbrace Cr::tilde Cr::nullchar
+Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar
+Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar
+Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar
+Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar
+Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar Cr::nullchar
+Cr::nullchar Cr::nullchar Cr::nullchar
+Cr::Aogonek Cr::uu Cr::Lslash Cr::sy2 Cr::Lcaron Cr::Sacute Cr::sy1
+Cr::umlaut Cr::Scaron Cr::Scedil Cr::Tcaron Cr::Zacute Cr::dash Cr::Zcaron
+Cr::Zdot Cr::circ Cr::aogonek Cr::ced2 Cr::lslash Cr::acute Cr::lcaron
+Cr::sacute Cr::vee Cr::cedilla Cr::scaron Cr::scedil Cr::tcaron Cr::zacute
+Cr::uml2 Cr::zcaron Cr::zdot Cr::Racute Cr::Aacute Cr::Acircum Cr::Abreve
+Cr::Adier Cr::Lacute Cr::Cacute Cr::Ccedil Cr::Ccaron Cr::Eacute Cr::Eogonek
+Cr::Edier Cr::Ecaron Cr::Iacute Cr::Icircum Cr::Dcaron Cr::Eth Cr::Nacute
+Cr::Ncaron Cr::Oacute Cr::Ocircum Cr::Ouml2 Cr::Odier Cr::times Cr::Rcaron
+Cr::Ucirc Cr::Uacute Cr::Uuml2 Cr::Udier Cr::Yacute Cr::Tcedil Cr::sset
+Cr::racute Cr::aacute Cr::acircum Cr::abreve Cr::adier Cr::lacute Cr::cacute
+Cr::ccedil Cr::ecaron Cr::eacute Cr::eogonek Cr::edier Cr::ecaron Cr::iacute
+Cr::icircum Cr::dcaron Cr::dbar Cr::nacute Cr::ncaron Cr::oacute Cr::ocircum
+Cr::ouml2 Cr::odier Cr::divide Cr::rcaron Cr::ucirc Cr::uacute Cr::uuml2
+Cr::udier Cr::yacute Cr::togonek Cr::dotacc
+
+derived:   Courier-BoldISO2       bold     normal     PostScript
+derived:   Courier-ItalicISO2     normal   italic     PostScript
+derived:   Courier-BoldItalicISO2 bold     italic     PostScript

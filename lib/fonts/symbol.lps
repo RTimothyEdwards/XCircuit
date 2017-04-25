@@ -1,0 +1,1506 @@
+%! PostScript set of library objects for XCircuit
+%  Library name is: Sy
+%  Version: 2.0
+%
+
+% XCircuitLib library built-in objects
+/Sy::nullchar {
+% 0 0 26 32 bbox
+begingate
+0  1.00 0 0 0 32 24 32 24 0 4 polygon
+endgate
+} def
+
+/Sy::space {
+% 0 0 16 26 bbox
+begingate
+endgate
+} def
+
+/Sy::exclam {
+% 4 1 5 25 bbox
+begingate
+1  1.00 5 2 1 0.00 360.00 xcarc
+241  1.00 7 25 5 7 4 25 5 26 6 26 7 25 6 polygon
+endgate
+} def
+
+/Sy::forall {
+% 3 0 24 26 bbox
+begingate
+1  1.00 3 26 14 0 25 26 3 polygon
+1  1.00 8 16 20 16 2 polygon
+endgate
+} def
+
+/Sy::pound {
+% 3 0 19 26 bbox
+begingate
+1  1.00 4 17 20 17 2 polygon
+1  1.00 13 0 17 26 2 polygon
+1  1.00 6 0 10 26 2 polygon
+1  1.00 3 9 19 9 2 polygon
+endgate
+} def
+
+/Sy::every {
+% 3 0 20 26 bbox
+begingate
+1  1.00 3 0 21 0 21 26 3 26 4 polygon
+1  1.00 5 14 21 14 2 polygon
+endgate
+} def
+
+/Sy::percent {
+% 3 0 17 26 bbox
+begingate
+1  1.00 10 24 8 26 6 26 4 24 3 20 5 18 7 18 9 20 10 24 13 24 17 26 3 0 
+12 polygon
+1  1.00 13 0 11 2 12 6 14 8 16 8 18 6 17 2 15 0 13 0 9 polygon
+endgate
+} def
+
+/Sy::ampersand {
+% 3 0 22 26 bbox
+begingate
+1  1.00 13 6 7 20 8 24 11 26 14 26 16 24 16 20 14 18 6 14 3 10 3 4 6 1 11 0 
+14 1 18 4 20 8 21 12 17 polygon
+1  1.00 23 12 19 12 2 polygon
+1  1.00 13 6 16 2 19 0 21 0 23 2 5 polygon
+endgate
+} def
+
+/Sy::backe {
+% 3 0 16 18 bbox
+begingate
+1  1.00 5 10 17 10 2 polygon
+1  1.00 3 1 6 0 11 0 15 2 17 6 17 12 15 16 11 18 6 18 3 17 10 polygon
+endgate
+} def
+
+/Sy::lparen {
+% 4 -5 8 32 bbox
+begingate
+1  1.00 10 -5 6 0 4 6 4 16 6 22 10 27 6 polygon
+endgate
+} def
+
+/Sy::rparen {
+% 4 -5 8 32 bbox
+begingate
+1  1.00 4 -5 8 0 10 6 10 16 8 22 4 27 6 polygon
+endgate
+} def
+
+/Sy::asterisk {
+% 4 8 10 8 bbox
+begingate
+1  1.00 8 8 8 16 2 polygon
+1  1.00 4 10 12 14 2 polygon
+1  1.00 4 14 12 10 2 polygon
+endgate
+} def
+
+/Sy::plus {
+% 4 4 18 16 bbox
+begingate
+1  1.00 12 4 12 20 2 polygon
+1  1.00 4 12 20 12 2 polygon
+endgate
+} def
+
+/Sy::comma {
+% 4 -4 6 8 bbox
+% hidden
+begingate
+241  1.00 6 2 2 0.00 360.00 xcarc
+1  1.00 8 2 8 0 7 -2 5 -4 4 polygon
+endgate
+} def
+
+/Sy::minus {
+% 4 12 20 0 bbox
+begingate
+1  1.00 4 12 22 12 2 polygon
+endgate
+} def
+
+/Sy::period {
+% 4 0 6 4 bbox
+begingate
+241  1.00 6 2 2 0.00 360.00 xcarc
+endgate
+} def
+
+/Sy::slash {
+% 4 0 12 26 bbox
+begingate
+1  1.00 4 0 14 26 2 polygon
+endgate
+} def
+
+/Sy::zero {
+% 4 0 20 26 bbox
+begingate
+1  1.00 10 0 6 4 4 10 4 16 6 22 10 26 16 26 20 22 22 16 22 10 20 4 16 0 10 0 
+13 polygon
+endgate
+} def
+
+/Sy::one {
+% 4 0 10 28 bbox
+begingate
+1  1.00 8 0 8 28 4 24 3 polygon
+1  1.00 4 0 12 0 2 polygon
+endgate
+} def
+
+/Sy::two {
+% 4 0 22 26 bbox
+begingate
+1  1.00 22 0 4 0 20 12 22 16 22 20 20 24 16 26 12 26 8 24 6 22 10 polygon
+1  1.00 22 0 24 4 2 polygon
+endgate
+} def
+
+/Sy::three {
+% 4 0 18 26 bbox
+begingate
+1  1.00 4 4 6 2 10 0 14 0 18 2 20 6 20 10 16 15 12 14 9 polygon
+1  1.00 16 15 18 16 20 20 18 24 14 26 10 26 6 24 7 polygon
+endgate
+} def
+
+/Sy::four {
+% 4 0 20 26 bbox
+begingate
+1  1.00 18 0 18 26 4 8 4 6 22 6 5 polygon
+endgate
+} def
+
+/Sy::five {
+% 4 0 19 26 bbox
+begingate
+1  1.00 4 2 8 0 13 0 17 2 19 6 19 10 17 14 13 16 9 17 5 17 7 26 21 26 
+12 polygon
+endgate
+} def
+
+/Sy::six {
+% 4 0 18 26 bbox
+begingate
+1  1.00 18 26 14 26 10 24 6 20 4 14 4 6 6 2 10 0 14 0 18 2 20 6 20 12 18 16 
+14 18 10 18 6 16 4 14 17 polygon
+endgate
+} def
+
+/Sy::seven {
+% 3 0 17 26 bbox
+begingate
+1  1.00 8 0 18 26 4 26 3 24 4 polygon
+endgate
+} def
+
+/Sy::eight {
+% 4 0 20 26 bbox
+% hidden
+begingate
+1  1.00 10 0 6 2 4 4 4 8 8 12 18 16 20 20 20 22 16 26 10 26 6 22 6 20 8 16 
+18 12 22 8 22 4 20 2 16 0 10 0 19 polygon
+endgate
+} def
+
+/Sy::nine {
+% 4 0 20 26 bbox
+begingate
+1  1.00 8 0 13 1 18 4 21 8 22 12 22 18 20 24 16 26 10 26 6 24 4 20 4 14 6 10 
+10 8 16 8 20 10 22 14 17 polygon
+endgate
+} def
+
+/Sy::colon {
+% 6 4 6 18 bbox
+begingate
+241  1.00 8 20 2 0.00 360.00 xcarc
+241  1.00 8 6 2 0.00 360.00 xcarc
+endgate
+} def
+
+/Sy::semi {
+% 6 -6 6 24 bbox
+begingate
+241  1.00 8 16 2 0.00 360.00 xcarc
+1.00 0 2 -2 Sy::comma
+endgate
+} def
+
+/Sy::less {
+% 4 6 18 12 bbox
+begingate
+1  1.00 20 6 4 12 20 18 3 polygon
+endgate
+} def
+
+/Sy::equal {
+% 6 10 18 4 bbox
+begingate
+1  1.00 6 10 22 10 2 polygon
+1  1.00 6 14 22 14 2 polygon
+endgate
+} def
+
+/Sy::more {
+% 4 6 18 12 bbox
+begingate
+1  1.00 4 6 20 12 4 18 3 polygon
+endgate
+} def
+
+/Sy::question {
+% 5 0 15 28 bbox
+begingate
+1  1.00 5 25 8 28 14 28 18 24 18 20 12 14 10 10 10 8 8 polygon
+241  1.00 10 2 2 0.00 360.00 xcarc
+1  1.00 6 24 1 0.00 360.00 xcarc
+endgate
+} def
+
+/Sy::approx {
+% 4 10 18 10 bbox
+begingate
+1  1.00 4 10 20 10 2 polygon
+1  1.00 4 14 20 14 2 polygon
+1  1.00 4 18 6 20 10 20 14 18 18 18 20 20 6 polygon
+endgate
+} def
+
+/Sy::Alpha {
+% 2 0 26 26 bbox
+begingate
+1  1.00 4 0 14 26 24 0 3 polygon
+1  1.00 8 8 20 8 2 polygon
+1  1.00 2 0 6 0 2 polygon
+1  1.00 20 0 26 0 2 polygon
+endgate
+} def
+
+/Sy::Beta {
+% 4 0 21 26 bbox
+begingate
+1  1.00 6 0 6 26 2 polygon
+1  1.00 4 0 17 0 21 2 23 6 23 8 21 12 17 14 7 polygon
+1  1.00 4 26 14 26 19 24 21 20 21 18 17 14 6 14 7 polygon
+endgate
+} def
+
+/Sy::Xi {
+% 2 0 26 26 bbox
+begingate
+1  1.00 4 0 24 26 2 polygon
+1  1.00 4 26 24 0 2 polygon
+1  1.00 2 26 8 26 2 polygon
+1  1.00 20 0 26 0 2 polygon
+1  1.00 2 0 8 0 2 polygon
+1  1.00 20 26 26 26 2 polygon
+endgate
+} def
+
+/Sy::Delta {
+% 4 0 22 26 bbox
+begingate
+1  1.00 4 0 24 0 2 polygon
+1  1.00 4 0 14 26 24 0 3 polygon
+endgate
+} def
+
+/Sy::Epsilon {
+% 4 0 20 26 bbox
+begingate
+1  1.00 20 0 4 0 2 polygon
+1  1.00 6 13 18 13 2 polygon
+1  1.00 6 0 6 26 2 polygon
+1  1.00 4 26 20 26 2 polygon
+1  1.00 20 26 21 22 2 polygon
+1  1.00 20 0 22 4 2 polygon
+1  1.00 18 17 18 10 2 polygon
+endgate
+} def
+
+/Sy::Phi {
+% 4 0 26 26 bbox
+begingate
+1  1.00 16 0 16 26 2 polygon
+1  1.00 12 4 8 6 6 8 4 12 4 14 6 18 8 20 12 22 20 22 24 20 26 18 28 14 28 12 
+26 8 24 6 20 4 12 4 17 polygon
+1  1.00 12 0 20 0 2 polygon
+1  1.00 12 26 20 26 2 polygon
+endgate
+} def
+
+/Sy::Gamma {
+% 4 0 20 26 bbox
+begingate
+1  1.00 6 0 6 26 2 polygon
+1  1.00 4 26 20 26 2 polygon
+1  1.00 20 26 22 22 2 polygon
+1  1.00 4 0 10 0 2 polygon
+endgate
+} def
+
+/Sy::Eta {
+% 4 0 22 26 bbox
+begingate
+1  1.00 6 0 6 26 2 polygon
+1  1.00 22 0 22 26 2 polygon
+1  1.00 6 14 22 14 2 polygon
+1  1.00 4 26 10 26 2 polygon
+1  1.00 4 0 10 0 2 polygon
+1  1.00 24 26 18 26 2 polygon
+1  1.00 24 0 18 0 2 polygon
+endgate
+} def
+
+/Sy::Iota {
+% 4 0 6 26 bbox
+begingate
+1  1.00 6 0 6 26 2 polygon
+1  1.00 4 0 8 0 2 polygon
+1  1.00 4 26 8 26 2 polygon
+endgate
+} def
+
+/Sy::altTheta {
+% 4 0 22 26 bbox
+begingate
+1  1.00 4 18 6 16 6 8 8 4 12 0 16 0 20 2 22 8 22 20 20 24 16 26 12 26 10 24 
+10 22 12 20 18 20 22 18 24 16 18 polygon
+endgate
+} def
+
+/Sy::Kappa {
+% 2 0 24 26 bbox
+begingate
+1  1.00 4 0 4 26 2 polygon
+1  1.00 22 26 4 12 2 polygon
+1  1.00 22 0 7 14 2 polygon
+1  1.00 2 26 8 26 2 polygon
+1  1.00 2 0 8 0 2 polygon
+1  1.00 24 0 18 0 2 polygon
+1  1.00 24 26 18 26 2 polygon
+endgate
+} def
+
+/Sy::Lambda {
+% 2 0 26 26 bbox
+begingate
+1  1.00 4 0 14 26 24 0 3 polygon
+1  1.00 20 0 26 0 2 polygon
+1  1.00 2 0 8 0 2 polygon
+endgate
+} def
+
+/Sy::Mu {
+% 2 0 30 26 bbox
+begingate
+1  1.00 4 0 4 26 16 0 28 26 28 0 5 polygon
+1  1.00 2 0 8 0 2 polygon
+1  1.00 30 0 24 0 2 polygon
+1  1.00 28 26 30 26 2 polygon
+1  1.00 2 26 4 26 2 polygon
+endgate
+} def
+
+/Sy::Nu {
+% 2 0 26 26 bbox
+begingate
+1  1.00 4 0 4 26 24 0 24 26 4 polygon
+1  1.00 2 0 8 0 2 polygon
+1  1.00 26 26 20 26 2 polygon
+1  1.00 2 26 4 26 2 polygon
+endgate
+} def
+
+/Sy::Omicron {
+% 4 0 28 26 bbox
+begingate
+1  1.00 18 0 12 0 6 4 4 10 4 16 6 22 12 26 18 26 24 22 9 polygon
+1  1.00 18 0 24 4 26 10 26 16 24 22 5 polygon
+endgate
+} def
+
+/Sy::Pi {
+% 4 0 24 26 bbox
+begingate
+1  1.00 8 0 8 26 2 polygon
+1  1.00 22 0 22 26 2 polygon
+1  1.00 4 26 26 26 2 polygon
+1  1.00 6 0 10 0 2 polygon
+1  1.00 20 0 24 0 2 polygon
+endgate
+} def
+
+/Sy::Theta {
+% 4 0 33 26 bbox
+begingate
+1  1.00 13 13 25 13 2 polygon
+1.00 0 4 0 Sy::Omicron
+1  1.00 13 15 13 11 2 polygon
+1  1.00 25 15 25 11 2 polygon
+endgate
+} def
+
+/Sy::Rho {
+% 4 0 19 26 bbox
+begingate
+1  1.00 6 0 6 26 2 polygon
+1  1.00 4 26 17 26 21 22 21 18 17 14 6 14 6 polygon
+1  1.00 4 0 10 0 2 polygon
+endgate
+} def
+
+/Sy::Sigma {
+% 4 0 22 26 bbox
+begingate
+1  1.00 24 4 24 0 4 0 16 14 4 26 24 26 24 22 7 polygon
+endgate
+} def
+
+/Sy::Tau {
+% 4 0 20 26 bbox
+begingate
+1  1.00 13 0 13 26 2 polygon
+1  1.00 4 22 4 26 22 26 22 22 4 polygon
+1  1.00 10 0 16 0 2 polygon
+endgate
+} def
+
+/Sy::GrY {
+% 2 0 26 26 bbox
+begingate
+1  1.00 4 26 14 14 14 0 3 polygon
+1  1.00 24 26 14 14 2 polygon
+1  1.00 2 26 8 26 2 polygon
+1  1.00 20 26 26 26 2 polygon
+1  1.00 12 0 16 0 2 polygon
+endgate
+} def
+
+/Sy::altSigma {
+% 4 -6 18 24 bbox
+begingate
+1  1.00 8 -4 12 -6 16 -6 18 -4 18 -2 16 0 10 0 6 2 4 6 4 10 6 14 10 16 16 16 
+20 18 14 polygon
+endgate
+} def
+
+/Sy::Omega {
+% 4 0 28 26 bbox
+begingate
+1  1.00 6 2 7 0 14 0 14 3 10 4 6 8 4 12 4 16 6 20 10 24 14 26 20 26 24 24 28 20 
+30 16 30 12 28 8 24 4 20 3 20 0 27 0 28 2 22 polygon
+endgate
+} def
+
+/Sy::Chi {
+% 4 0 22 26 bbox
+begingate
+1  1.00 4 0 24 0 2 polygon
+1  1.00 4 26 24 26 2 polygon
+1  1.00 8 14 20 14 2 polygon
+1  1.00 8 16 8 12 2 polygon
+1  1.00 20 16 20 12 2 polygon
+1  1.00 4 4 4 0 2 polygon
+1  1.00 24 4 24 0 2 polygon
+1  1.00 24 26 24 22 2 polygon
+1  1.00 4 26 4 22 2 polygon
+endgate
+} def
+
+/Sy::Psi {
+% 4 0 26 26 bbox
+begingate
+1  1.00 16 0 16 26 2 polygon
+1  1.00 4 26 6 24 6 20 4 16 4 14 6 10 10 8 22 8 26 10 28 14 28 16 26 20 26 24 
+28 26 14 polygon
+1  1.00 14 26 18 26 2 polygon
+1  1.00 14 0 18 0 2 polygon
+endgate
+} def
+
+/Sy::Zeta {
+% 4 0 20 26 bbox
+begingate
+1  1.00 4 22 4 26 22 26 4 0 21 0 22 4 6 polygon
+endgate
+} def
+
+/Sy::lbracket {
+% 4 -2 8 30 bbox
+begingate
+1  1.00 10 -2 4 -2 4 28 10 28 4 polygon
+endgate
+} def
+
+/Sy::therefore {
+% 3 7 16 12 bbox
+begingate
+1  1.00 4 8 1 0.00 360.00 xcarc
+1  1.00 16 8 1 0.00 360.00 xcarc
+1  1.00 10 18 1 0.00 360.00 xcarc
+endgate
+} def
+
+/Sy::rbracket {
+% 4 -2 8 30 bbox
+begingate
+1  1.00 4 -2 10 -2 10 28 4 28 4 polygon
+endgate
+} def
+
+/Sy::perp {
+% 4 8 18 14 bbox
+begingate
+1  1.00 4 8 20 8 2 polygon
+1  1.00 12 8 12 22 2 polygon
+endgate
+} def
+
+/Sy::underscore {
+% 2 0 24 0 bbox
+begingate
+1  1.00 2 0 24 0 2 polygon
+endgate
+} def
+
+/Sy::upneg {
+% 22 32 20 0 bbox
+begingate
+1  1.00 22 32 40 32 2 polygon
+endgate
+} def
+
+/Sy::alpha {
+% 4 0 21 16 bbox
+begingate
+1  1.00 23 0 21 2 18 13 14 16 10 16 6 14 4 10 4 6 6 2 10 0 14 0 17 3 21 15 
+13 polygon
+endgate
+} def
+
+/Sy::beta {
+% 3 -6 17 32 bbox
+begingate
+1  1.00 3 0 3 21 5 24 9 26 13 26 15 24 16 20 14 17 11 15 7 15 10 polygon
+1  1.00 11 15 15 14 18 9 17 3 13 0 9 0 5 2 7 polygon
+1  1.00 3 -6 3 0 2 polygon
+endgate
+} def
+
+/Sy::chi {
+% 0 -5 17 21 bbox
+begingate
+1  1.00 0 -5 14 16 2 polygon
+1  1.00 0 14 2 16 4 14 12 -4 14 -4 15 -2 6 polygon
+endgate
+} def
+
+/Sy::delta {
+% 3 0 17 26 bbox
+begingate
+1  1.00 12 17 9 16 5 14 3 10 3 6 5 2 9 0 13 0 17 3 18 7 17 11 15 14 7 22 7 24 
+9 26 11 26 13 24 17 polygon
+endgate
+} def
+
+/Sy::epsilon {
+% 4 0 13 16 bbox
+begingate
+1  1.00 15 3 14 2 11 0 7 0 4 2 4 6 6 8 11 8 6 9 4 12 4 14 7 16 11 16 14 14 
+14 polygon
+endgate
+} def
+
+/Sy::phi {
+% 4 -6 18 28 bbox
+begingate
+1  1.00 12 -6 12 22 2 polygon
+1  1.00 10 0 6 2 4 6 4 10 6 14 10 16 14 16 18 14 20 10 20 6 18 2 14 0 10 0 
+13 polygon
+endgate
+} def
+
+/Sy::gamma {
+% 4 -6 16 22 bbox
+begingate
+1  1.00 4 14 6 16 8 16 10 12 14 0 14 -4 12 -6 12 -2 16 6 18 12 18 16 11 polygon
+endgate
+} def
+
+/Sy::eta {
+% 4 -6 17 22 bbox
+begingate
+1  1.00 4 14 6 16 8 14 8 0 4 polygon
+1  1.00 8 12 12 15 15 16 18 15 19 12 19 -6 6 polygon
+endgate
+} def
+
+/Sy::iota {
+% 4 0 6 16 bbox
+begingate
+1  1.00 4 16 4 2 6 0 8 2 4 polygon
+endgate
+} def
+
+/Sy::altphi {
+% 6 -6 19 22 bbox
+begingate
+1  1.00 14 -6 14 12 16 16 18 16 21 15 23 12 23 6 21 2 17 0 12 0 8 2 6 6 6 12 
+8 16 10 16 15 polygon
+endgate
+} def
+
+/Sy::kappa {
+% 3 0 18 16 bbox
+begingate
+1  1.00 8 10 17 0 2 polygon
+1  1.00 14 0 19 0 2 polygon
+1  1.00 5 8 13 14 17 16 18 16 4 polygon
+1  1.00 5 0 5 16 3 16 3 polygon
+endgate
+} def
+
+/Sy::lambda {
+% 4 0 19 26 bbox
+begingate
+1  1.00 4 0 12 15 2 polygon
+1  1.00 5 24 7 26 10 24 17 2 19 0 21 2 6 polygon
+endgate
+} def
+
+/Sy::mu {
+% 4 -6 18 22 bbox
+begingate
+1  1.00 4 -6 4 16 2 polygon
+1  1.00 4 2 8 0 12 0 16 4 4 polygon
+1  1.00 16 16 16 2 18 0 20 2 4 polygon
+endgate
+} def
+
+/Sy::nu {
+% 4 0 18 16 bbox
+begingate
+1  1.00 4 14 6 16 8 14 12 0 18 10 20 14 20 16 7 polygon
+endgate
+} def
+
+/Sy::omicron {
+% 4 0 18 16 bbox
+begingate
+1  1.00 10 0 6 2 4 6 4 10 6 14 10 16 14 16 18 14 20 10 20 6 18 2 14 0 10 0 
+13 polygon
+endgate
+} def
+
+/Sy::pi {
+% 4 0 19 17 bbox
+begingate
+1  1.00 16 16 16 2 18 0 20 2 4 polygon
+1  1.00 4 1 6 0 8 4 8 16 4 polygon
+1  1.00 4 15 5 16 20 16 21 17 4 polygon
+endgate
+} def
+
+/Sy::theta {
+% 4 0 18 26 bbox
+begingate
+1  1.00 10 0 6 3 4 8 4 18 6 23 10 26 14 26 18 23 20 18 20 8 18 3 14 0 10 0 
+13 polygon
+1  1.00 4 14 20 14 2 polygon
+endgate
+} def
+
+/Sy::rho {
+% 4 -6 16 22 bbox
+begingate
+1  1.00 4 -6 4 10 6 14 10 16 14 16 16 14 18 10 18 6 16 2 12 0 8 0 4 4 
+12 polygon
+endgate
+} def
+
+/Sy::sigma {
+% 4 0 20 16 bbox
+begingate
+1  1.00 10 0 6 2 4 6 4 10 6 14 10 16 14 16 18 14 20 10 20 6 18 2 14 0 10 0 
+13 polygon
+1  1.00 14 16 19 15 2 polygon
+1  1.00 20 15 22 16 2 polygon
+endgate
+} def
+
+/Sy::tau {
+% 4 0 16 17 bbox
+begingate
+1  1.00 4 14 6 16 16 16 18 17 4 polygon
+1  1.00 10 16 10 2 12 0 14 0 16 2 5 polygon
+endgate
+} def
+
+/Sy::upsilon {
+% 4 0 18 16 bbox
+begingate
+1  1.00 4 14 6 16 8 14 8 4 10 0 16 0 18 2 20 6 20 12 18 16 10 polygon
+endgate
+} def
+
+/Sy::altomega {
+% 4 0 24 16 bbox
+begingate
+1  1.00 4 14 6 16 26 16 3 polygon
+1  1.00 10 16 6 10 6 6 8 2 10 0 14 0 16 4 16 8 8 polygon
+1  1.00 16 4 20 0 24 0 26 4 26 10 24 16 6 polygon
+endgate
+} def
+
+/Sy::omega {
+% 4 0 22 16 bbox
+begingate
+1  1.00 8 16 6 14 4 10 4 6 6 2 8 0 12 0 14 4 15 10 14 12 13 10 14 4 16 0 20 0 
+22 2 24 6 24 10 22 14 20 16 19 polygon
+endgate
+} def
+
+/Sy::xi {
+% 6 -6 16 32 bbox
+begingate
+1  1.00 10 26 8 26 6 24 8 22 13 21 17 22 14 23 9 21 6 17 7 14 14 11 18 12 14 13 
+10 12 6 8 6 2 10 0 18 0 20 -2 20 -4 16 -6 10 -6 22 polygon
+endgate
+} def
+
+/Sy::psi {
+% 4 -6 21 28 bbox
+begingate
+1  1.00 14 -6 14 22 2 polygon
+1  1.00 4 14 6 16 8 14 8 12 6 8 6 4 10 0 18 0 21 2 23 6 22 12 20 15 12 polygon
+endgate
+} def
+
+/Sy::zeta {
+% 4 -6 16 32 bbox
+begingate
+1  1.00 8 26 6 26 4 24 6 22 12 21 17 22 13 23 9 20 6 16 4 10 4 2 8 0 16 0 18 -2 
+18 -4 14 -6 8 -6 17 polygon
+endgate
+} def
+
+/Sy::lbrace {
+% 4 -4 8 32 bbox
+begingate
+1  1.00 10 -4 8 -4 6 -2 6 10 4 12 6 14 6 26 8 28 10 28 9 polygon
+endgate
+} def
+
+/Sy::vbar {
+% 6 -2 0 30 bbox
+begingate
+1  1.00 6 -2 6 28 2 polygon
+endgate
+} def
+
+/Sy::rbrace {
+% 4 -4 8 32 bbox
+begingate
+1  1.00 4 -4 6 -4 8 -2 8 10 10 12 8 14 8 26 6 28 4 28 9 polygon
+endgate
+} def
+
+/Sy::tilde {
+% 4 12 18 2 bbox
+begingate
+1  1.00 4 12 6 14 10 14 14 12 18 12 20 14 6 polygon
+endgate
+} def
+
+/Sy::Upsilon {
+% 4 0 22 26 bbox
+begingate
+1  1.00 14 0 14 12 12 18 10 22 6 26 4 26 6 polygon
+1  1.00 14 12 20 24 22 26 24 24 4 polygon
+1  1.00 12 0 16 0 2 polygon
+endgate
+} def
+
+/Sy::prime {
+% 6 22 6 10 bbox
+begingate
+0  1.00 10 32 6 22 8 32 3 polygon
+endgate
+} def
+
+/Sy::leq {
+% 4 4 18 14 bbox
+begingate
+1  1.00 20 8 4 13 20 18 3 polygon
+1  1.00 4 4 20 4 2 polygon
+endgate
+} def
+
+/Sy::aslash {
+% 4 0 16 26 bbox
+begingate
+1  1.00 4 0 18 26 2 polygon
+endgate
+} def
+
+/Sy::infty {
+% 4 6 20 10 bbox
+begingate
+1  1.00 20 6 16 6 10 16 6 16 4 12 4 10 6 6 10 6 16 16 20 16 10 polygon
+1  1.00 20 16 22 12 22 10 20 6 4 polygon
+endgate
+} def
+
+/Sy::itf {
+% 2 -6 14 32 bbox
+begingate
+1  1.00 2 -4 4 -6 6 -4 10 24 12 26 14 24 6 polygon
+1  1.00 4 18 14 18 2 polygon
+endgate
+} def
+
+/Sy::rarrow {
+% 6 8 30 8 bbox
+begingate
+1  1.00 6 12 34 12 2 polygon
+1  1.00 24 8 34 12 24 16 3 polygon
+endgate
+} def
+
+/Sy::larrow {
+% 6 10 30 8 bbox
+begingate
+1.00 -1 40 2 Sy::rarrow
+endgate
+} def
+
+/Sy::uarrow {
+% 6 2 10 28 bbox
+begingate
+1.00 90 22 -4 Sy::rarrow
+endgate
+} def
+
+/Sy::lrarrow {
+% 6 12 34 8 bbox
+begingate
+1.00 0 4 4 Sy::rarrow
+1.00 -1 40 4 Sy::rarrow
+endgate
+} def
+
+/Sy::darrow {
+% 8 -2 10 28 bbox
+begingate
+1.00 270 0 32 Sy::rarrow
+endgate
+} def
+
+/Sy::degree {
+% 8 20 10 8 bbox
+begingate
+1  1.00 12 24 4 0.00 360.00 xcarc
+endgate
+} def
+
+/Sy::pm {
+% 4 6 18 10 bbox
+begingate
+1  1.00 12 8 12 16 2 polygon
+1  1.00 4 12 20 12 2 polygon
+1  1.00 4 6 20 6 2 polygon
+endgate
+} def
+
+/Sy::dprime {
+% 5 22 12 10 bbox
+begingate
+1.00 0 5 0 Sy::prime
+1.00 0 -1 0 Sy::prime
+endgate
+} def
+
+/Sy::geq {
+% 8 6 18 14 bbox
+begingate
+1.00 -1 28 2 Sy::leq
+endgate
+} def
+
+/Sy::times {
+% 4 6 14 12 bbox
+begingate
+1  1.00 4 6 16 18 2 polygon
+1  1.00 4 18 16 6 2 polygon
+endgate
+} def
+
+/Sy::prop {
+% 4 6 18 10 bbox
+begingate
+1  1.00 20 6 16 6 10 16 6 16 4 12 4 10 6 6 10 6 16 16 20 16 10 polygon
+endgate
+} def
+
+/Sy::deriv {
+% 5 0 17 26 bbox
+begingate
+1  1.00 9 24 12 26 16 25 19 22 20 16 20 6 18 2 14 0 11 0 7 2 5 6 5 10 8 14 
+12 16 15 16 18 14 20 10 17 polygon
+endgate
+} def
+
+/Sy::bullet {
+% 5 8 10 8 bbox
+begingate
+241  1.00 9 12 4 0.00 360.00 xcarc
+endgate
+} def
+
+/Sy::div {
+% 4 4 18 16 bbox
+begingate
+1  1.00 4 12 20 12 2 polygon
+241  1.00 12 18 2 0.00 360.00 xcarc
+241  1.00 12 6 2 0.00 360.00 xcarc
+endgate
+} def
+
+/Sy::neq {
+% 4 8 18 12 bbox
+begingate
+1  1.00 4 8 20 20 2 polygon
+1.00 0 -2 2 Sy::equal
+endgate
+} def
+
+/Sy::teq {
+% 4 6 18 8 bbox
+begingate
+1  1.00 4 10 20 10 2 polygon
+1  1.00 4 14 20 14 2 polygon
+1  1.00 4 6 20 6 2 polygon
+endgate
+} def
+
+/Sy::sim {
+% 6 8 18 6 bbox
+begingate
+1.00 0 2 0 Sy::tilde
+1.00 0 2 -4 Sy::tilde
+endgate
+} def
+
+/Sy::dots {
+% 6 1 34 4 bbox
+begingate
+1.00 0 2 1 Sy::period
+1.00 0 16 1 Sy::period
+1.00 0 30 1 Sy::period
+endgate
+} def
+
+/Sy::longvbar {
+% 10 -8 2 36 bbox
+begingate
+1  1.00 10 -8 10 28 2 polygon
+endgate
+} def
+
+/Sy::lang {
+% 8 -4 10 30 bbox
+begingate
+1  1.00 16 -4 8 11 16 26 3 polygon
+endgate
+} def
+
+/Sy::rang {
+% 8 -4 10 30 bbox
+begingate
+1  1.00 8 -4 16 11 8 26 3 polygon
+endgate
+} def
+
+/Sy::int {
+% 8 -4 18 36 bbox
+begingate
+1  1.00 8 0 8 -2 10 -4 12 -4 14 -2 16 0 16 26 18 30 20 32 22 32 24 30 24 28 
+12 polygon
+endgate
+} def
+
+/Sy::diamond {
+% 3 0 20 26 bbox
+begingate
+241  1.00 12 0 3 13 12 26 21 13 12 0 5 polygon
+endgate
+} def
+
+/Sy::heart {
+% 4 0 26 24 bbox
+begingate
+26 14 beginpath
+22 18 6 -38.66 168.69 arc
+10 18 6 11.31 219.81 arc
+26 13 16 0 2 polyc
+241  1.00 endpath
+endgate
+} def
+
+/Sy::club {
+% 5 0 27 25 bbox
+begingate
+22 4 beginpath
+25 9 5 -120.96 120.96 arc
+21 17 18 11 2 polyc
+17 20 5 -30.96 210.96 arc
+13 13 17 11 2 polyc
+10 9 5 59.04 300.96 arc
+22 5 17 8 20 0 15 0 18 8 5 polyc
+241  1.00 endpath
+endgate
+} def
+
+/Sy::spade {
+% 4 0 24 25 bbox
+begingate
+5 12 beginpath
+9 9 5 140.19 348.69 arc
+16 8 15 8 17 0 13 0 15 8 5 polyc
+21 9 5 191.31 398.66 arc
+5 12 15 25 2 polyc
+241  1.00 endpath
+endgate
+} def
+
+/Sy::del {
+% 6 0 22 26 bbox
+begingate
+1.00 -181 2 26 Sy::Delta
+endgate
+} def
+
+/Sy::hbar {
+% 0 16 44 0 bbox
+begingate
+1  1.00 0 16 44 16 2 polygon
+endgate
+} def
+
+/Sy::return {
+% 2 4 18 24 bbox
+begingate
+1  1.00 20 28 20 8 2 8 3 polygon
+1  1.00 2 8 12 12 2 polygon
+1  1.00 2 8 12 4 2 polygon
+endgate
+} def
+
+/Sy::aleph {
+% 4 0 26 26 bbox
+begingate
+1  1.00 4 26 6 22 22 5 24 0 4 polygon
+1  1.00 4 0 8 1 6 4 5 8 5 11 7 14 10 16 7 polygon
+1  1.00 14 14 19 18 21 20 3 polygon
+1  1.00 18 26 19 23 23 19 3 polygon
+endgate
+} def
+
+/Sy::Ifraktur {
+% 3 0 22 27 bbox
+begingate
+1  1.00 4 4 7 3 10 0 14 0 18 1 21 3 23 7 23 12 19 19 22 27 18 26 12 26 9 27 
+5 26 3 22 5 19 9 18 17 polygon
+endgate
+} def
+
+/Sy::Rfraktur {
+% 3 0 25 27 bbox
+begingate
+1  1.00 4 2 5 0 7 0 9 2 10 13 9 23 7 27 5 27 3 24 3 21 5 19 6 17 12 polygon
+1  1.00 9 23 14 27 17 26 22 21 10 13 5 polygon
+1  1.00 13 15 16 13 18 8 21 2 23 0 26 2 6 polygon
+endgate
+} def
+
+/Sy::weiers {
+% 4 0 26 21 bbox
+begingate
+1  1.00 12 21 7 18 5 14 5 11 8 4 8 1 6 0 4 2 4 4 6 8 10 15 15 18 20 20 23 19 
+24 16 22 11 16 6 12 5 10 6 10 8 11 10 21 polygon
+endgate
+} def
+
+/Sy::circmult {
+% 3 3 26 26 bbox
+begingate
+1  1.00 16 16 13 0.00 360.00 xcarc
+1.00 0 6 4 Sy::times
+endgate
+} def
+
+/Sy::circplus {
+% 3 3 26 26 bbox
+begingate
+1  1.00 16 16 13 0.00 360.00 xcarc
+1.00 0 4 4 Sy::plus
+endgate
+} def
+
+/Sy::circslash {
+% 3 3 26 26 bbox
+begingate
+1  1.00 16 16 13 0.00 360.00 xcarc
+1  1.00 3 3 29 29 2 polygon
+endgate
+} def
+
+/Sy::intersect {
+% 3 2 26 27 bbox
+begingate
+1  1.00 16 16 13 0.00 180.00 xcarc
+1  1.00 3 16 3 2 2 polygon
+1  1.00 29 16 29 2 2 polygon
+endgate
+} def
+
+/Sy::union {
+% 3 2 26 27 bbox
+begingate
+1.00 -181 0 31 Sy::intersect
+endgate
+} def
+
+/Sy::propsup {
+% 3 3 27 26 bbox
+begingate
+1.00 270 1 32 Sy::intersect
+endgate
+} def
+
+/Sy::reflsup {
+% 3 0 27 30 bbox
+begingate
+1  1.00 3 0 30 0 2 polygon
+1.00 0 0 1 Sy::propsup
+endgate
+} def
+
+/Sy::notsub {
+% 2 0 27 32 bbox
+begingate
+1.00 90 31 0 Sy::intersect
+1  1.00 25 32 7 0 2 polygon
+endgate
+} def
+
+/Sy::propsub {
+% 2 3 27 26 bbox
+begingate
+1.00 90 31 0 Sy::intersect
+endgate
+} def
+
+/Sy::reflsub {
+% 2 0 27 30 bbox
+begingate
+1.00 0 0 1 Sy::propsub
+1  1.00 2 0 29 0 2 polygon
+endgate
+} def
+
+/Sy::element {
+% 2 3 27 26 bbox
+begingate
+1.00 0 0 0 Sy::propsub
+1  1.00 2 16 29 16 2 polygon
+endgate
+} def
+
+/Sy::notelement {
+% 2 0 27 32 bbox
+begingate
+1.00 0 0 0 Sy::element
+1  1.00 23 32 10 0 2 polygon
+endgate
+} def
+
+/Sy::angle {
+% 2 0 23 23 bbox
+begingate
+1  1.00 3 0 25 0 2 polygon
+1  1.00 2 0 24 23 2 polygon
+endgate
+} def
+
+/Sy::copy {
+% 3 3 26 26 bbox
+begingate
+1  1.00 16 16 13 0.00 360.00 xcarc
+1  1.00 16 16 9 49.40 315.00 xcarc
+endgate
+} def
+
+/Sy::rights {
+% 3 3 26 26 bbox
+begingate
+1  1.00 16 16 13 0.00 360.00 xcarc
+1  1.00 11 8 11 25 15 25 3 polygon
+1  1.00 11 15 16 15 21 8 3 polygon
+1  1.00 15 20 5 270.00 450.00 xcarc
+endgate
+} def
+
+/Sy::trade {
+% 2 21 17 7 bbox
+begingate
+1  1.00 2 28 8 28 2 polygon
+1  1.00 5 28 5 21 2 polygon
+1  1.00 11 28 11 21 2 polygon
+1  1.00 11 28 15 21 19 28 19 21 4 polygon
+endgate
+} def
+
+/Sy::product {
+% 3 0 26 29 bbox
+begingate
+1  1.00 3 29 29 29 2 polygon
+1  1.00 6 28 6 0 2 polygon
+1  1.00 3 0 9 0 2 polygon
+1  1.00 26 29 26 0 2 polygon
+1  1.00 23 0 29 0 2 polygon
+endgate
+} def
+
+/Sy::sqrt {
+% 2 0 20 30 bbox
+begingate
+1  1.00 2 12 4 13 7 0 19 30 22 30 5 polygon
+endgate
+} def
+
+/Sy::sum {
+% 4 0 23 29 bbox
+begingate
+1  1.00 27 4 25 0 4 0 14 14 4 29 25 29 27 25 7 polygon
+endgate
+} def
+
+/Sy::lozenge {
+% 4 0 18 30 bbox
+begingate
+1.00 0 4 4 Sy::rang
+1.00 0 -4 4 Sy::lang
+endgate
+} def
+
+/Sy::cdot {
+% 5 11 6 4 bbox
+begingate
+1.00 0 1 11 Sy::period
+endgate
+} def
+
+/Sy::up {
+% 5 5 12 18 bbox
+begingate
+1.00 270 -1 27 Sy::less
+endgate
+} def
+
+/Sy::down {
+% 5 5 12 18 bbox
+begingate
+1.00 90 23 1 Sy::less
+endgate
+} def
+
+/Sy::lognot {
+% 4 11 16 5 bbox
+begingate
+1  1.00 4 16 20 16 20 11 3 polygon
+endgate
+} def
+
+/Sy::dlarrow {
+% 3 9 24 10 bbox
+begingate
+1  1.00 13 19 3 14 13 9 3 polygon
+1  1.00 7 16 27 16 2 polygon
+1  1.00 7 12 27 12 2 polygon
+endgate
+} def
+
+/Sy::drarrow {
+% 3 8 24 10 bbox
+begingate
+1.00 -1 30 -1 Sy::dlarrow
+endgate
+} def
+
+/Sy::duparrow {
+% 4 2 10 24 bbox
+begingate
+1.00 270 -5 29 Sy::dlarrow
+endgate
+} def
+
+/Sy::ddownarrow {
+% 4 2 10 24 bbox
+begingate
+1.00 90 23 -1 Sy::dlarrow
+endgate
+} def
+
+/Sy::dlrarrow {
+% 2 11 28 10 bbox
+begingate
+1  1.00 20 21 30 16 20 11 3 polygon
+1.00 0 -1 2 Sy::dlarrow
+endgate
+} def
+
+/Sy::lparentop {
+% 6 -4 8 29 bbox
+begingate
+1  1.00 6 -4 6 11 7 19 10 25 14 29 5 polygon
+endgate
+} def
+
+/Sy::lparenbot {
+% 6 3 8 29 bbox
+begingate
+1.00 -181 0 32 Sy::lparentop
+endgate
+} def
+
+/Sy::lbracktop {
+% 6 -4 8 29 bbox
+begingate
+1  1.00 6 -4 6 29 14 29 3 polygon
+endgate
+} def
+
+/Sy::lbrackbot {
+% 6 3 8 29 bbox
+begingate
+1.00 -181 0 32 Sy::lbracktop
+endgate
+} def
+
+/Sy::lbracetop {
+% 6 -6 8 29 bbox
+begingate
+1  1.00 6 -6 6 24 7 27 10 29 14 29 5 polygon
+endgate
+} def
+
+/Sy::lvbrace {
+% 2 -8 4 36 bbox
+begingate
+1  1.00 6 36 6 15 4 13 2 12 4 11 6 9 6 -8 7 polygon
+endgate
+} def
+
+/Sy::lbracebot {
+% 6 3 8 36 bbox
+begingate
+1.00 -181 0 26 Sy::lbracetop
+endgate
+} def
+
+/Sy::inttop {
+% 9 -4 10 30 bbox
+begingate
+1  1.00 12 29 11 24 11 -4 9 -4 10 24 12 29 15 30 18 29 19 27 9 polygon
+1  1.00 18 26 1 0.00 360.00 xcarc
+endgate
+} def
+
+/Sy::vint {
+% 9 -4 2 36 bbox
+begingate
+240  1.00 9 -4 9 36 11 36 11 -4 4 polygon
+endgate
+} def
+
+/Sy::intbot {
+% 1 2 10 30 bbox
+begingate
+1.00 180 20 32 Sy::inttop
+endgate
+} def
+
+/Sy::lvbar {
+% 6 -8 0 36 bbox
+begingate
+1  1.00 6 -8 6 36 2 polygon
+endgate
+} def
+
+/Sy::rvbar {
+% -3 -4 28 36 bbox
+begingate
+1.00 0 5 0 Sy::lvbar
+endgate
+} def
+
+/Sy::rbracktop {
+% 3 -2 8 29 bbox
+begingate
+1.00 -1 17 0 Sy::lbracktop
+endgate
+} def
+
+/Sy::rbrackbot {
+% 3 3 8 29 bbox
+begingate
+1.00 180 17 32 Sy::lbracktop
+endgate
+} def
+
+/Sy::rbracetop {
+% 3 0 8 29 bbox
+begingate
+1.00 -1 12 0 Sy::lbracetop
+endgate
+} def
+
+/Sy::rvbrace {
+% -3 0 28 32 bbox
+begingate
+1.00 -1 12 0 Sy::lvbrace
+endgate
+} def
+
+/Sy::rbracebot {
+% 3 3 8 29 bbox
+begingate
+1.00 180 12 36 Sy::lbracetop
+endgate
+} def
+
+/Sy::rparentop {
+% 3 0 8 29 bbox
+begingate
+1.00 -1 17 0 Sy::lparentop
+endgate
+} def
+
+/Sy::rparenbot {
+% 3 3 8 29 bbox
+begingate
+1.00 180 17 32 Sy::lparentop
+endgate
+} def
+
+% EndLib

@@ -1,0 +1,1760 @@
+
+** and2m05p.lpe extracted by xCalibre v9.1_1.1 **
+
+** Version: $LSILogic: and2m05p.iclib2,v 9.0.1.6 2002/07/18 14:38:53 rchiang Exp $
+
+.SUBCKT AND2M05P Z A B VDD VSS 
+
+* devices:
+m0 8 11 7 VDD pm_hp l=0.118744u w=0.926776u ad=0.156347p as=0.697362p
++ pd=0.348111u ps=3.88u
+m1 9 12 8 VDD pm_hp l=0.118237u w=0.910208u ad=0.35608p as=0.153552p pd=1.43203u
++ ps=0.341888u
+m2 10 13 9 VDD pm_hp l=0.117864u w=1.02521u ad=0.331912p as=0.401069p pd=1.685u
++ ps=1.61296u
+m3 3 11 2 VSS nm_hp l=0.115u w=0.595u ad=0.0820299p as=0.23205p pd=0.275106u
++ ps=1.375u
+m4 4 12 3 VSS nm_hp l=0.119905u w=0.605355u ad=0.292388p as=0.0834575p
++ pd=1.40001u ps=0.279894u
+m5 5 13 4 VSS nm_hp l=0.120619u w=0.670208u ad=0.223637p as=0.323712p pd=1.33u
++ ps=1.54999u
+
+* resistors:
+r6 37 2 40 $[mnc]
+r7 VSS 4 40 $[mnc]
+r8 VSS 4 40 $[mnc]
+r9 Z 5 40 $[mnc]
+r10 VDD 7 40 $[mpc]
+r11 VDD 7 40 $[mpc]
+r12 37 8 40 $[mpc]
+r13 VDD 9 40 $[mpc]
+r14 VDD 9 40 $[mpc]
+r15 Z 10 40 $[mpc]
+r16 A 11 14 $[mpolyc]
+r17 B 12 14 $[mpolyc]
+r18 37 13 14 $[mpolyc]
+
+* lumped capacitances:
+cp1 VDD VSS 0.351161f
+cp2 2 VSS 0.0283066f
+cp3 4 VSS 0.0523448f
+cp4 5 VSS 0.0320563f
+cp5 7 VSS 0.0721056f
+cp6 8 VSS 0.0290149f
+cp7 9 VSS 0.0753449f
+cp8 10 VSS 0.0239399f
+cp9 11 VSS 0.376099f
+cp10 12 VSS 0.458626f
+cp11 13 VSS 0.339844f
+cp12 37 VSS 0.428433f
+cp13 A VSS 0.144954f
+cp14 B VSS 0.118711f
+cp15 Z VSS 0.196733f
+
+.ENDS
+
+
+** and2m10p.lpe extracted by xCalibre v9.1_1.1 **
+
+** Version: $LSILogic: and2m10p.iclib2,v 9.0.1.5 2002/06/20 18:41:49 kensz Exp $
+
+.SUBCKT AND2M10P Z A B VDD VSS 
+
+* devices:
+m0 21 37 20 VDD pm_hp l=0.116519u w=1.95228u ad=0.332862p as=0.701075p pd=0.385u
++ ps=2.615u
+m1 22 37 21 VDD pm_hp l=0.116519u w=1.95228u ad=0.399462p as=0.332862p pd=0.385u
++ ps=0.385u
+m2 23 37 22 VDD pm_hp l=0.116519u w=1.95228u ad=0.332862p as=0.399462p pd=0.385u
++ ps=0.385u
+m3 24 37 23 VDD pm_hp l=0.116519u w=1.95228u ad=0.399462p as=0.332862p pd=0.385u
++ ps=0.385u
+m4 25 37 24 VDD pm_hp l=0.116519u w=1.95228u ad=0.332862p as=0.399462p pd=0.385u
++ ps=0.385u
+m5 26 37 25 VDD pm_hp l=0.116519u w=1.95228u ad=0.399462p as=0.332862p pd=0.385u
++ ps=0.385u
+m6 27 37 26 VDD pm_hp l=0.116519u w=1.95228u ad=0.332862p as=0.399462p pd=0.385u
++ ps=0.385u
+m7 28 37 27 VDD pm_hp l=0.116519u w=1.95228u ad=0.399462p as=0.332862p pd=0.385u
++ ps=0.385u
+m8 29 37 28 VDD pm_hp l=0.116519u w=1.95228u ad=0.332862p as=0.399462p pd=0.385u
++ ps=0.385u
+m9 30 37 29 VDD pm_hp l=0.116519u w=1.95228u ad=0.399462p as=0.332862p pd=0.385u
++ ps=0.385u
+m10 31 38 30 VDD pm_hp l=0.116519u w=1.95228u ad=0.332862p as=0.399462p
++ pd=0.385u ps=0.385u
+m11 32 39 31 VDD pm_hp l=0.116519u w=1.95228u ad=0.399462p as=0.332862p
++ pd=0.385u ps=0.385u
+m12 33 39 32 VDD pm_hp l=0.116519u w=1.95228u ad=0.332862p as=0.399462p
++ pd=0.385u ps=0.385u
+m13 34 40 33 VDD pm_hp l=0.116519u w=1.95228u ad=0.399462p as=0.332862p
++ pd=0.385u ps=0.385u
+m14 35 40 34 VDD pm_hp l=0.116519u w=1.95228u ad=0.428612p as=0.399462p
++ pd=0.485u ps=0.385u
+m15 36 41 35 VDD pm_hp l=0.116519u w=1.95228u ad=0.6915p as=0.428612p pd=2.605u
++ ps=0.485u
+m16 3 37 2 VSS nm_hp l=0.117852u w=1.29021u ad=0.215075p as=0.454812p pd=0.38u
++ ps=1.95u
+m17 4 37 3 VSS nm_hp l=0.117852u w=1.29021u ad=0.247737p as=0.215075p pd=0.365u
++ ps=0.38u
+m18 5 37 4 VSS nm_hp l=0.117852u w=1.29021u ad=0.215075p as=0.247737p pd=0.38u
++ ps=0.365u
+m19 6 37 5 VSS nm_hp l=0.117852u w=1.29021u ad=0.25715p as=0.215075p pd=0.38u
++ ps=0.38u
+m20 7 37 6 VSS nm_hp l=0.117852u w=1.29021u ad=0.216727p as=0.25715p
++ pd=0.384383u ps=0.38u
+m21 8 37 7 VSS nm_hp l=0.117943u w=1.29435u ad=0.261568p as=0.217423p
++ pd=0.385617u ps=0.385617u
+m22 9 37 8 VSS nm_hp l=0.117852u w=1.29021u ad=0.216727p as=0.260731p
++ pd=0.384383u ps=0.384383u
+m23 10 37 9 VSS nm_hp l=0.117943u w=1.29435u ad=0.261568p as=0.217423p
++ pd=0.385617u ps=0.385617u
+m24 11 37 10 VSS nm_hp l=0.117852u w=1.29021u ad=0.222814p as=0.260731p
++ pd=0.345562u ps=0.384383u
+m25 12 37 11 VSS nm_hp l=0.118569u w=1.32334u ad=0.348887p as=0.228536p
++ pd=0.832275u ps=0.354437u
+m26 13 38 12 VSS nm_hp l=0.117829u w=1.30021u ad=0.2613p as=0.342787p pd=0.44u
++ ps=0.817724u
+m27 14 39 13 VSS nm_hp l=0.117829u w=1.30021u ad=0.252675p as=0.2613p pd=0.38u
++ ps=0.44u
+m28 15 39 14 VSS nm_hp l=0.117829u w=1.30021u ad=0.238725p as=0.252675p
++ pd=0.365u ps=0.38u
+m29 16 40 15 VSS nm_hp l=0.117829u w=1.30021u ad=0.299337p as=0.238725p pd=0.78u
++ ps=0.365u
+m30 17 40 16 VSS nm_hp l=0.117829u w=1.30021u ad=0.235325p as=0.299337p
++ pd=0.365u ps=0.78u
+m31 18 41 17 VSS nm_hp l=0.117829u w=1.30021u ad=0.458712p as=0.235325p pd=1.96u
++ ps=0.365u
+
+* resistors:
+r32 VSS 2 40 $[mnc]
+r33 VSS 2 40 $[mnc]
+r34 Z 3 40 $[mnc]
+r35 VSS 4 40 $[mnc]
+r36 VSS 4 40 $[mnc]
+r37 Z 5 40 $[mnc]
+r38 VSS 6 40 $[mnc]
+r39 VSS 6 40 $[mnc]
+r40 Z 7 40 $[mnc]
+r41 VSS 8 40 $[mnc]
+r42 VSS 8 40 $[mnc]
+r43 Z 9 40 $[mnc]
+r44 VSS 10 40 $[mnc]
+r45 VSS 10 40 $[mnc]
+r46 Z 11 40 $[mnc]
+r47 VSS 12 40 $[mnc]
+r48 VSS 12 40 $[mnc]
+r49 141 13 40 $[mnc]
+r50 139 14 40 $[mnc]
+r51 141 15 40 $[mnc]
+r52 VSS 16 40 $[mnc]
+r53 141 17 40 $[mnc]
+r54 139 18 40 $[mnc]
+r55 VDD 20 40 $[mpc]
+r56 VDD 20 40 $[mpc]
+r57 Z 21 40 $[mpc]
+r58 VDD 22 40 $[mpc]
+r59 VDD 22 40 $[mpc]
+r60 Z 23 40 $[mpc]
+r61 VDD 24 40 $[mpc]
+r62 VDD 24 40 $[mpc]
+r63 Z 25 40 $[mpc]
+r64 VDD 26 40 $[mpc]
+r65 VDD 26 40 $[mpc]
+r66 Z 27 40 $[mpc]
+r67 VDD 28 40 $[mpc]
+r68 VDD 28 40 $[mpc]
+r69 Z 29 40 $[mpc]
+r70 VDD 30 40 $[mpc]
+r71 VDD 30 40 $[mpc]
+r72 139 31 40 $[mpc]
+r73 VDD 32 40 $[mpc]
+r74 VDD 32 40 $[mpc]
+r75 139 33 40 $[mpc]
+r76 VDD 34 40 $[mpc]
+r77 VDD 34 40 $[mpc]
+r78 139 35 40 $[mpc]
+r79 VDD 36 40 $[mpc]
+r80 VDD 36 40 $[mpc]
+r81 139 37 14 $[mpolyc]
+r82 B 38 14 $[mpolyc]
+r83 A 39 14 $[mpolyc]
+r84 B 40 14 $[mpolyc]
+r85 A 41 14 $[mpolyc]
+
+* lumped capacitances:
+cp1 VDD VSS 1.77416f
+cp2 2 VSS 0.0669776f
+cp3 3 VSS 0.0367983f
+cp4 4 VSS 0.0685088f
+cp5 5 VSS 0.0372035f
+cp6 6 VSS 0.0698596f
+cp7 7 VSS 0.0380034f
+cp8 8 VSS 0.070147f
+cp9 9 VSS 0.037995f
+cp10 10 VSS 0.072258f
+cp11 11 VSS 0.0301182f
+cp12 12 VSS 0.101874f
+cp13 13 VSS 0.0581621f
+cp14 14 VSS 0.0391833f
+cp15 15 VSS 0.0401044f
+cp16 16 VSS 0.0518607f
+cp17 17 VSS 0.0549393f
+cp18 18 VSS 0.0303713f
+cp19 20 VSS 0.0670358f
+cp20 21 VSS 0.0390511f
+cp21 22 VSS 0.0753915f
+cp22 23 VSS 0.0398222f
+cp23 24 VSS 0.0756207f
+cp24 25 VSS 0.0611674f
+cp25 26 VSS 0.0756207f
+cp26 27 VSS 0.0398222f
+cp27 28 VSS 0.0756207f
+cp28 29 VSS 0.0312145f
+cp29 30 VSS 0.0876255f
+cp30 31 VSS 0.0363787f
+cp31 32 VSS 0.0727265f
+cp32 33 VSS 0.0318193f
+cp33 34 VSS 0.0711524f
+cp34 35 VSS 0.0436748f
+cp35 36 VSS 0.0714809f
+cp36 37 VSS 2.18688f
+cp37 38 VSS 0.58226f
+cp38 39 VSS 0.844982f
+cp39 40 VSS 0.840807f
+cp40 41 VSS 0.41454f
+cp41 Z VSS 1.11933f
+cp42 139 VSS 1.22948f
+cp43 B VSS 0.425553f
+cp44 141 VSS 0.400358f
+cp45 A VSS 0.382799f
+
+.ENDS
+
+
+** and2m12p.lpe extracted by xCalibre v9.1_1.1 **
+
+** Version: $LSILogic: and2m12p.iclib2,v 9.0.1.5 2002/06/25 06:56:51 tvarga Exp $
+
+.SUBCKT AND2M12P Z A B VDD VSS 
+
+* devices:
+m0 23 41 22 VDD pm_hp l=0.116656u w=1.75521u ad=0.284512p as=0.635312p pd=0.38u
++ ps=2.415u
+m1 24 41 23 VDD pm_hp l=0.116656u w=1.75521u ad=0.351512p as=0.284512p pd=0.365u
++ ps=0.38u
+m2 25 41 24 VDD pm_hp l=0.116656u w=1.75521u ad=0.284512p as=0.351512p pd=0.38u
++ ps=0.365u
+m3 26 41 25 VDD pm_hp l=0.116656u w=1.75521u ad=0.351512p as=0.284512p pd=0.365u
++ ps=0.38u
+m4 27 41 26 VDD pm_hp l=0.116656u w=1.75521u ad=0.284512p as=0.351512p pd=0.38u
++ ps=0.365u
+m5 28 41 27 VDD pm_hp l=0.116656u w=1.75521u ad=0.351512p as=0.284512p pd=0.365u
++ ps=0.38u
+m6 29 41 28 VDD pm_hp l=0.116656u w=1.75521u ad=0.284512p as=0.351512p pd=0.38u
++ ps=0.365u
+m7 30 41 29 VDD pm_hp l=0.116656u w=1.75521u ad=0.351512p as=0.284512p pd=0.365u
++ ps=0.38u
+m8 31 41 30 VDD pm_hp l=0.116656u w=1.75521u ad=0.284512p as=0.351512p pd=0.38u
++ ps=0.365u
+m9 32 41 31 VDD pm_hp l=0.116656u w=1.75521u ad=0.351512p as=0.284512p pd=0.365u
++ ps=0.38u
+m10 33 41 32 VDD pm_hp l=0.116656u w=1.75521u ad=0.284512p as=0.351512p pd=0.38u
++ ps=0.365u
+m11 34 41 33 VDD pm_hp l=0.116656u w=1.75521u ad=0.428912p as=0.284512p
++ pd=0.455u ps=0.38u
+m12 35 42 34 VDD pm_hp l=0.116656u w=1.75521u ad=0.284512p as=0.428912p pd=0.38u
++ ps=0.455u
+m13 36 43 35 VDD pm_hp l=0.116656u w=1.75521u ad=0.364412p as=0.284512p pd=0.38u
++ ps=0.38u
+m14 37 43 36 VDD pm_hp l=0.116656u w=1.75521u ad=0.284512p as=0.364412p pd=0.38u
++ ps=0.38u
+m15 38 44 37 VDD pm_hp l=0.116656u w=1.75521u ad=0.364412p as=0.284512p pd=0.38u
++ ps=0.38u
+m16 39 44 38 VDD pm_hp l=0.116656u w=1.75521u ad=0.288812p as=0.364412p
++ pd=0.385u ps=0.38u
+m17 40 45 39 VDD pm_hp l=0.116656u w=1.75521u ad=0.635312p as=0.288812p
++ pd=2.415u ps=0.385u
+m18 3 41 2 VSS nm_hp l=0.118152u w=1.17021u ad=0.197375p as=0.408012p pd=0.38u
++ ps=1.83u
+m19 4 41 3 VSS nm_hp l=0.118152u w=1.17021u ad=0.220737p as=0.197375p pd=0.365u
++ ps=0.38u
+m20 5 41 4 VSS nm_hp l=0.118152u w=1.17021u ad=0.197375p as=0.220737p pd=0.38u
++ ps=0.365u
+m21 6 41 5 VSS nm_hp l=0.118152u w=1.17021u ad=0.220737p as=0.197375p pd=0.365u
++ ps=0.38u
+m22 7 41 6 VSS nm_hp l=0.118152u w=1.17021u ad=0.197375p as=0.220737p pd=0.38u
++ ps=0.365u
+m23 8 41 7 VSS nm_hp l=0.118152u w=1.17021u ad=0.220737p as=0.197375p pd=0.365u
++ ps=0.38u
+m24 9 41 8 VSS nm_hp l=0.118152u w=1.17021u ad=0.197375p as=0.220737p pd=0.38u
++ ps=0.365u
+m25 10 41 9 VSS nm_hp l=0.118152u w=1.17021u ad=0.220737p as=0.197375p pd=0.365u
++ ps=0.38u
+m26 11 41 10 VSS nm_hp l=0.118152u w=1.17021u ad=0.197375p as=0.220737p pd=0.38u
++ ps=0.365u
+m27 12 41 11 VSS nm_hp l=0.118152u w=1.17021u ad=0.220737p as=0.197375p
++ pd=0.365u ps=0.38u
+m28 13 41 12 VSS nm_hp l=0.118152u w=1.17021u ad=0.211387p as=0.220737p
++ pd=0.365u ps=0.365u
+m29 14 41 13 VSS nm_hp l=0.118152u w=1.17021u ad=0.320337p as=0.211387p pd=0.91u
++ ps=0.365u
+m30 15 42 14 VSS nm_hp l=0.118152u w=1.17021u ad=0.2048p as=0.320337p pd=0.365u
++ ps=0.91u
+m31 16 43 15 VSS nm_hp l=0.118152u w=1.17021u ad=0.2048p as=0.2048p pd=0.365u
++ ps=0.365u
+m32 17 43 16 VSS nm_hp l=0.118152u w=1.17021u ad=0.217275p as=0.2048p pd=0.375u
++ ps=0.365u
+m33 18 44 17 VSS nm_hp l=0.118152u w=1.17021u ad=0.320125p as=0.217275p pd=0.91u
++ ps=0.375u
+m34 19 44 18 VSS nm_hp l=0.118152u w=1.17021u ad=0.197375p as=0.320125p pd=0.38u
++ ps=0.91u
+m35 20 45 19 VSS nm_hp l=0.118152u w=1.17021u ad=0.408012p as=0.197375p pd=1.83u
++ ps=0.38u
+
+* resistors:
+r36 VSS 2 40 $[mnc]
+r37 VSS 2 40 $[mnc]
+r38 Z 3 40 $[mnc]
+r39 VSS 4 40 $[mnc]
+r40 VSS 4 40 $[mnc]
+r41 Z 5 40 $[mnc]
+r42 VSS 6 40 $[mnc]
+r43 VSS 6 40 $[mnc]
+r44 Z 7 40 $[mnc]
+r45 VSS 8 40 $[mnc]
+r46 VSS 8 40 $[mnc]
+r47 Z 9 40 $[mnc]
+r48 VSS 10 40 $[mnc]
+r49 VSS 10 40 $[mnc]
+r50 Z 11 40 $[mnc]
+r51 VSS 12 40 $[mnc]
+r52 VSS 12 40 $[mnc]
+r53 Z 13 40 $[mnc]
+r54 VSS 14 40 $[mnc]
+r55 VSS 14 40 $[mnc]
+r56 155 15 40 $[mnc]
+r57 153 16 40 $[mnc]
+r58 155 17 40 $[mnc]
+r59 VSS 18 40 $[mnc]
+r60 155 19 40 $[mnc]
+r61 153 20 40 $[mnc]
+r62 VDD 22 40 $[mpc]
+r63 VDD 22 40 $[mpc]
+r64 Z 23 40 $[mpc]
+r65 VDD 24 40 $[mpc]
+r66 VDD 24 40 $[mpc]
+r67 Z 25 40 $[mpc]
+r68 VDD 26 40 $[mpc]
+r69 VDD 26 40 $[mpc]
+r70 Z 27 40 $[mpc]
+r71 VDD 28 40 $[mpc]
+r72 VDD 28 40 $[mpc]
+r73 Z 29 40 $[mpc]
+r74 VDD 30 40 $[mpc]
+r75 VDD 30 40 $[mpc]
+r76 Z 31 40 $[mpc]
+r77 VDD 32 40 $[mpc]
+r78 VDD 32 40 $[mpc]
+r79 Z 33 40 $[mpc]
+r80 VDD 34 40 $[mpc]
+r81 VDD 34 40 $[mpc]
+r82 153 35 40 $[mpc]
+r83 VDD 36 40 $[mpc]
+r84 VDD 36 40 $[mpc]
+r85 153 37 40 $[mpc]
+r86 VDD 38 40 $[mpc]
+r87 VDD 38 40 $[mpc]
+r88 153 39 40 $[mpc]
+r89 VDD 40 40 $[mpc]
+r90 VDD 40 40 $[mpc]
+r91 153 41 14 $[mpolyc]
+r92 B 42 14 $[mpolyc]
+r93 A 43 14 $[mpolyc]
+r94 B 44 14 $[mpolyc]
+r95 A 45 14 $[mpolyc]
+
+* lumped capacitances:
+cp1 VDD VSS 1.94455f
+cp2 2 VSS 0.0669294f
+cp3 3 VSS 0.0367983f
+cp4 4 VSS 0.0664982f
+cp5 5 VSS 0.0372005f
+cp6 6 VSS 0.0664982f
+cp7 7 VSS 0.0371777f
+cp8 8 VSS 0.0664982f
+cp9 9 VSS 0.0363705f
+cp10 10 VSS 0.0664982f
+cp11 11 VSS 0.0372005f
+cp12 12 VSS 0.0697293f
+cp13 13 VSS 0.0296194f
+cp14 14 VSS 0.108156f
+cp15 15 VSS 0.0628747f
+cp16 16 VSS 0.0395401f
+cp17 17 VSS 0.0415426f
+cp18 18 VSS 0.0591968f
+cp19 19 VSS 0.0474836f
+cp20 20 VSS 0.0309044f
+cp21 22 VSS 0.0669294f
+cp22 23 VSS 0.0382232f
+cp23 24 VSS 0.0738112f
+cp24 25 VSS 0.0389894f
+cp25 26 VSS 0.0738112f
+cp26 27 VSS 0.0389666f
+cp27 28 VSS 0.0738112f
+cp28 29 VSS 0.0401976f
+cp29 30 VSS 0.0738112f
+cp30 31 VSS 0.0389894f
+cp31 32 VSS 0.0746449f
+cp32 33 VSS 0.0316214f
+cp33 34 VSS 0.0864697f
+cp34 35 VSS 0.0355994f
+cp35 36 VSS 0.0704575f
+cp36 37 VSS 0.030572f
+cp37 38 VSS 0.0694666f
+cp38 39 VSS 0.0303905f
+cp39 40 VSS 0.0701144f
+cp40 41 VSS 2.59583f
+cp41 42 VSS 0.598906f
+cp42 43 VSS 0.853775f
+cp43 44 VSS 0.850337f
+cp44 45 VSS 0.454421f
+cp45 Z VSS 1.32967f
+cp46 153 VSS 1.18339f
+cp47 B VSS 0.328543f
+cp48 155 VSS 0.361829f
+cp49 A VSS 0.338686f
+
+.ENDS
+
+
+** and2m1p.lpe extracted by xCalibre v9.1_1.1 **
+
+** Version: $LSILogic: and2m1p.iclib2,v 9.0.1.5 2002/06/20 18:50:42 kensz Exp $
+
+.SUBCKT AND2M1P Z A B VDD VSS 
+
+* devices:
+m0 8 11 7 VDD pm_hp l=0.117448u w=1.19521u ad=0.201062p as=0.417762p pd=0.38u
++ ps=1.855u
+m1 9 12 8 VDD pm_hp l=0.117448u w=1.19521u ad=0.301859p as=0.201062p
++ pd=0.573131u ps=0.38u
+m2 10 13 9 VDD pm_hp l=0.116666u w=1.74521u ad=0.551512p as=0.440766p pd=2.405u
++ ps=0.836869u
+m3 3 11 2 VSS nm_hp l=0.119762u w=0.785208u ad=0.135287p as=0.258712p pd=0.35u
++ ps=1.445u
+m4 4 12 3 VSS nm_hp l=0.119762u w=0.785208u ad=0.261162p as=0.135287p
++ pd=0.914864u ps=0.35u
+m5 5 13 4 VSS nm_hp l=0.118209u w=1.15021u ad=0.370037p as=0.382562p pd=1.81u
++ ps=1.34013u
+
+* resistors:
+r6 38 2 40 $[mnc]
+r7 VSS 4 40 $[mnc]
+r8 VSS 4 40 $[mnc]
+r9 Z 5 40 $[mnc]
+r10 VDD 7 40 $[mpc]
+r11 VDD 7 40 $[mpc]
+r12 38 8 40 $[mpc]
+r13 VDD 9 40 $[mpc]
+r14 VDD 9 40 $[mpc]
+r15 Z 10 40 $[mpc]
+r16 A 11 14 $[mpolyc]
+r17 B 12 14 $[mpolyc]
+r18 38 13 14 $[mpolyc]
+
+* lumped capacitances:
+cp1 VDD VSS 0.479219f
+cp2 2 VSS 0.0339761f
+cp3 3 VSS 0.0206746f
+cp4 4 VSS 0.0805333f
+cp5 5 VSS 0.0360938f
+cp6 7 VSS 0.0837751f
+cp7 8 VSS 0.0355503f
+cp8 9 VSS 0.0889938f
+cp9 10 VSS 0.0343166f
+cp10 11 VSS 0.40561f
+cp11 12 VSS 0.485111f
+cp12 13 VSS 0.409236f
+cp13 A VSS 0.0990763f
+cp14 38 VSS 0.491529f
+cp15 B VSS 0.11438f
+cp16 Z VSS 0.227802f
+
+.ENDS
+
+
+** and2m2p.lpe extracted by xCalibre v9.1_1.1 **
+
+** Version: $LSILogic: and2m2p.iclib2,v 9.0.1.5 2002/06/20 18:49:41 kensz Exp $
+
+.SUBCKT AND2M2P Z A B VDD VSS 
+
+* devices:
+m0 9 13 8 VDD pm_hp l=0.116666u w=1.74521u ad=0.293987p as=0.632262p
++ pd=0.335311u ps=2.405u
+m1 10 13 9 VDD pm_hp l=0.117041u w=1.76799u ad=0.348317p as=0.297825p
++ pd=0.716275u ps=0.339688u
+m2 11 14 10 VDD pm_hp l=0.116734u w=1.74935u ad=0.303886p as=0.344645p
++ pd=0.357712u ps=0.708724u
+m3 12 15 11 VDD pm_hp l=0.1167u w=1.74728u ad=0.63p as=0.303526p pd=2.4u
++ ps=0.357288u
+m4 3 13 2 VSS nm_hp l=0.117764u w=1.33021u ad=0.220975p as=0.470412p pd=0.38u
++ ps=1.99u
+m5 4 13 3 VSS nm_hp l=0.117764u w=1.33021u ad=0.355725p as=0.220975p pd=0.755u
++ ps=0.38u
+m6 5 14 4 VSS nm_hp l=0.117764u w=1.33021u ad=0.1821p as=0.355725p pd=0.275u
++ ps=0.755u
+m7 6 15 5 VSS nm_hp l=0.117764u w=1.33021u ad=0.424937p as=0.1821p pd=1.99u
++ ps=0.275u
+
+* resistors:
+r8 VSS 2 40 $[mnc]
+r9 VSS 2 40 $[mnc]
+r10 Z 3 40 $[mnc]
+r11 VSS 4 40 $[mnc]
+r12 VSS 4 40 $[mnc]
+r13 46 6 40 $[mnc]
+r14 VDD 8 40 $[mpc]
+r15 VDD 8 40 $[mpc]
+r16 Z 9 40 $[mpc]
+r17 VDD 10 40 $[mpc]
+r18 VDD 10 40 $[mpc]
+r19 46 11 40 $[mpc]
+r20 VDD 12 40 $[mpc]
+r21 VDD 12 40 $[mpc]
+r22 46 13 14 $[mpolyc]
+r23 B 14 14 $[mpolyc]
+r24 A 15 14 $[mpolyc]
+
+* lumped capacitances:
+cp1 VDD VSS 0.558962f
+cp2 2 VSS 0.0939312f
+cp3 3 VSS 0.0338934f
+cp4 4 VSS 0.0466969f
+cp5 6 VSS 0.0283539f
+cp6 8 VSS 0.0953829f
+cp7 9 VSS 0.0318202f
+cp8 10 VSS 0.0627591f
+cp9 11 VSS 0.033193f
+cp10 12 VSS 0.0929633f
+cp11 13 VSS 0.651235f
+cp12 14 VSS 0.677715f
+cp13 15 VSS 0.508204f
+cp14 Z VSS 0.290201f
+cp15 46 VSS 0.414581f
+cp16 B VSS 0.134029f
+cp17 A VSS 0.153095f
+
+.ENDS
+
+
+** and2m4p.lpe extracted by xCalibre v9.1_1.1 **
+
+** Version: $LSILogic: and2m4p.iclib2,v 9.0.1.5 2002/06/20 18:47:18 kensz Exp $
+
+.SUBCKT AND2M4P Z A B VDD VSS 
+
+* devices:
+m0 11 17 10 VDD pm_hp l=0.116557u w=1.86521u ad=0.310087p as=0.668862p pd=0.38u
++ ps=2.525u
+m1 12 17 11 VDD pm_hp l=0.116557u w=1.86521u ad=0.380637p as=0.310087p pd=0.38u
++ ps=0.38u
+m2 13 17 12 VDD pm_hp l=0.116557u w=1.86521u ad=0.310087p as=0.380637p pd=0.38u
++ ps=0.38u
+m3 14 17 13 VDD pm_hp l=0.116557u w=1.86521u ad=0.380637p as=0.310087p pd=0.38u
++ ps=0.38u
+m4 15 18 14 VDD pm_hp l=0.116557u w=1.86521u ad=0.310087p as=0.380637p pd=0.38u
++ ps=0.38u
+m5 16 19 15 VDD pm_hp l=0.116557u w=1.86521u ad=0.668862p as=0.310087p pd=2.525u
++ ps=0.38u
+m6 3 17 2 VSS nm_hp l=0.118017u w=1.24228u ad=0.209687p as=0.439075p pd=0.385u
++ ps=1.905u
+m7 4 17 3 VSS nm_hp l=0.118017u w=1.24228u ad=0.249287p as=0.209687p pd=0.385u
++ ps=0.385u
+m8 5 17 4 VSS nm_hp l=0.118017u w=1.24228u ad=0.209687p as=0.249287p pd=0.385u
++ ps=0.385u
+m9 6 17 5 VSS nm_hp l=0.118017u w=1.24228u ad=0.34085p as=0.209687p pd=0.835u
++ ps=0.385u
+m10 7 18 6 VSS nm_hp l=0.118017u w=1.24228u ad=0.169962p as=0.34085p pd=0.275u
++ ps=0.835u
+m11 8 19 7 VSS nm_hp l=0.118017u w=1.24228u ad=0.53805p as=0.169962p pd=2.135u
++ ps=0.275u
+
+* resistors:
+r12 VSS 2 40 $[mnc]
+r13 VSS 2 40 $[mnc]
+r14 Z 3 40 $[mnc]
+r15 VSS 4 40 $[mnc]
+r16 VSS 4 40 $[mnc]
+r17 Z 5 40 $[mnc]
+r18 VSS 6 40 $[mnc]
+r19 VSS 6 40 $[mnc]
+r20 62 8 40 $[mnc]
+r21 VDD 10 40 $[mpc]
+r22 VDD 10 40 $[mpc]
+r23 Z 11 40 $[mpc]
+r24 VDD 12 40 $[mpc]
+r25 VDD 12 40 $[mpc]
+r26 Z 13 40 $[mpc]
+r27 VDD 14 40 $[mpc]
+r28 VDD 14 40 $[mpc]
+r29 62 15 40 $[mpc]
+r30 VDD 16 40 $[mpc]
+r31 VDD 16 40 $[mpc]
+r32 62 17 14 $[mpolyc]
+r33 B 18 14 $[mpolyc]
+r34 A 19 14 $[mpolyc]
+
+* lumped capacitances:
+cp1 VDD VSS 0.793447f
+cp2 2 VSS 0.0670167f
+cp3 3 VSS 0.0415182f
+cp4 4 VSS 0.073124f
+cp5 5 VSS 0.0317776f
+cp6 6 VSS 0.0484275f
+cp7 8 VSS 0.0307134f
+cp8 10 VSS 0.0669584f
+cp9 11 VSS 0.0525539f
+cp10 12 VSS 0.0716035f
+cp11 13 VSS 0.0303499f
+cp12 14 VSS 0.0821127f
+cp13 15 VSS 0.040096f
+cp14 16 VSS 0.0592826f
+cp15 17 VSS 1.0376f
+cp16 18 VSS 0.636199f
+cp17 19 VSS 0.498244f
+cp18 Z VSS 0.480911f
+cp19 62 VSS 0.573239f
+cp20 B VSS 0.100422f
+cp21 A VSS 0.122793f
+
+.ENDS
+
+
+** and2m8p.lpe extracted by xCalibre v9.1_1.1 **
+
+** Version: $LSILogic: and2m8p.iclib2,v 9.0.1.5 2002/06/20 18:46:25 kensz Exp $
+
+.SUBCKT AND2M8P Z A B VDD VSS 
+
+* devices:
+m0 17 29 16 VDD pm_hp l=0.116557u w=1.86521u ad=0.299887p as=0.679062p pd=0.38u
++ ps=2.525u
+m1 18 29 17 VDD pm_hp l=0.116557u w=1.86521u ad=0.390837p as=0.299887p pd=0.38u
++ ps=0.38u
+m2 19 29 18 VDD pm_hp l=0.116557u w=1.86521u ad=0.299887p as=0.390837p pd=0.38u
++ ps=0.38u
+m3 20 29 19 VDD pm_hp l=0.116557u w=1.86521u ad=0.390837p as=0.299887p pd=0.38u
++ ps=0.38u
+m4 21 29 20 VDD pm_hp l=0.116557u w=1.86521u ad=0.299887p as=0.390837p pd=0.38u
++ ps=0.38u
+m5 22 29 21 VDD pm_hp l=0.116557u w=1.86521u ad=0.385737p as=0.299887p pd=0.38u
++ ps=0.38u
+m6 23 29 22 VDD pm_hp l=0.116557u w=1.86521u ad=0.520537p as=0.385737p pd=0.61u
++ ps=0.38u
+m7 24 29 23 VDD pm_hp l=0.116557u w=1.86521u ad=0.467704p as=0.520537p
++ pd=0.540951u ps=0.61u
+m8 25 30 24 VDD pm_hp l=0.116656u w=1.75521u ad=0.293862p as=0.440121p pd=0.38u
++ ps=0.509049u
+m9 26 31 25 VDD pm_hp l=0.116656u w=1.75521u ad=0.355062p as=0.293862p pd=0.38u
++ ps=0.38u
+m10 27 31 26 VDD pm_hp l=0.116656u w=1.75521u ad=0.461562p as=0.355062p
++ pd=0.575u ps=0.38u
+m11 28 32 27 VDD pm_hp l=0.116656u w=1.75521u ad=0.625962p as=0.461562p
++ pd=2.415u ps=0.575u
+m12 3 29 2 VSS nm_hp l=0.118017u w=1.24228u ad=0.209687p as=0.439075p pd=0.385u
++ ps=1.905u
+m13 4 29 3 VSS nm_hp l=0.118017u w=1.24228u ad=0.249287p as=0.209687p pd=0.385u
++ ps=0.385u
+m14 5 29 4 VSS nm_hp l=0.118017u w=1.24228u ad=0.209687p as=0.249287p pd=0.385u
++ ps=0.385u
+m15 6 29 5 VSS nm_hp l=0.118017u w=1.24228u ad=0.249287p as=0.209687p pd=0.385u
++ ps=0.385u
+m16 7 29 6 VSS nm_hp l=0.118017u w=1.24228u ad=0.209687p as=0.249287p pd=0.385u
++ ps=0.385u
+m17 8 29 7 VSS nm_hp l=0.118017u w=1.24228u ad=0.249287p as=0.209687p pd=0.385u
++ ps=0.385u
+m18 9 29 8 VSS nm_hp l=0.118017u w=1.24228u ad=0.230775p as=0.249287p pd=0.42u
++ ps=0.385u
+m19 10 29 9 VSS nm_hp l=0.118017u w=1.24228u ad=0.285607p as=0.230775p
++ pd=0.501661u ps=0.42u
+m20 11 30 10 VSS nm_hp l=0.115u w=1.135u ad=0.264762p as=0.260943p pd=0.484978u
++ ps=0.458339u
+m21 12 31 11 VSS nm_hp l=0.118152u w=1.17021u ad=0.253037p as=0.272975p pd=0.45u
++ ps=0.500022u
+m22 13 31 12 VSS nm_hp l=0.118152u w=1.17021u ad=0.315223p as=0.253037p
++ pd=0.540633u ps=0.45u
+m23 14 32 13 VSS nm_hp l=0.115u w=1.135u ad=0.44265p as=0.305739p pd=1.915u
++ ps=0.524367u
+
+* resistors:
+r24 VSS 2 40 $[mnc]
+r25 VSS 2 40 $[mnc]
+r26 Z 3 40 $[mnc]
+r27 VSS 4 40 $[mnc]
+r28 VSS 4 40 $[mnc]
+r29 Z 5 40 $[mnc]
+r30 VSS 6 40 $[mnc]
+r31 VSS 6 40 $[mnc]
+r32 Z 7 40 $[mnc]
+r33 VSS 8 40 $[mnc]
+r34 VSS 8 40 $[mnc]
+r35 Z 9 40 $[mnc]
+r36 VSS 10 40 $[mnc]
+r37 VSS 10 40 $[mnc]
+r38 113 11 40 $[mnc]
+r39 111 12 40 $[mnc]
+r40 113 13 40 $[mnc]
+r41 VSS 14 40 $[mnc]
+r42 VSS 14 40 $[mnc]
+r43 VDD 16 40 $[mpc]
+r44 VDD 16 40 $[mpc]
+r45 Z 17 40 $[mpc]
+r46 VDD 18 40 $[mpc]
+r47 VDD 18 40 $[mpc]
+r48 Z 19 40 $[mpc]
+r49 VDD 20 40 $[mpc]
+r50 VDD 20 40 $[mpc]
+r51 Z 21 40 $[mpc]
+r52 VDD 22 40 $[mpc]
+r53 VDD 22 40 $[mpc]
+r54 Z 23 40 $[mpc]
+r55 VDD 24 40 $[mpc]
+r56 VDD 24 40 $[mpc]
+r57 111 25 40 $[mpc]
+r58 VDD 26 40 $[mpc]
+r59 VDD 26 40 $[mpc]
+r60 111 27 40 $[mpc]
+r61 VDD 28 40 $[mpc]
+r62 VDD 28 40 $[mpc]
+r63 111 29 14 $[mpolyc]
+r64 B 30 14 $[mpolyc]
+r65 A 31 14 $[mpolyc]
+r66 B 32 14 $[mpolyc]
+
+* lumped capacitances:
+cp1 VDD VSS 1.41855f
+cp2 2 VSS 0.0670167f
+cp3 3 VSS 0.0339461f
+cp4 4 VSS 0.0523969f
+cp5 5 VSS 0.0284561f
+cp6 6 VSS 0.052626f
+cp7 7 VSS 0.0278551f
+cp8 8 VSS 0.0529962f
+cp9 9 VSS 0.0305014f
+cp10 10 VSS 0.0833849f
+cp11 11 VSS 0.0449052f
+cp12 12 VSS 0.0466324f
+cp13 13 VSS 0.0344949f
+cp14 14 VSS 0.075112f
+cp15 16 VSS 0.0669584f
+cp16 17 VSS 0.0351186f
+cp17 18 VSS 0.0546883f
+cp18 19 VSS 0.0304703f
+cp19 20 VSS 0.054862f
+cp20 21 VSS 0.0300126f
+cp21 22 VSS 0.0571222f
+cp22 23 VSS 0.0398241f
+cp23 24 VSS 0.0575249f
+cp24 25 VSS 0.0468614f
+cp25 26 VSS 0.0727373f
+cp26 27 VSS 0.0511403f
+cp27 28 VSS 0.0732119f
+cp28 29 VSS 1.79882f
+cp29 30 VSS 0.53576f
+cp30 31 VSS 0.745306f
+cp31 32 VSS 0.345019f
+cp32 Z VSS 0.863828f
+cp33 111 VSS 0.701749f
+cp34 B VSS 0.352914f
+cp35 113 VSS 0.237335f
+cp36 A VSS 0.11993f
+
+.ENDS
+
+
+** and3m05p.lpe extracted by xCalibre v9.1_1.1 **
+
+** Version: $LSILogic: and3m05p.iclib2,v 9.0.1.5 2002/07/18 14:39:04 rchiang Exp $
+
+.SUBCKT AND3M05P Z A B C VDD VSS 
+
+* devices:
+m0 9 13 8 VDD pm_hp l=0.115u w=1.005u ad=0.226125p as=0.39195p pd=0.45u
++ ps=1.785u
+m1 10 14 9 VDD pm_hp l=0.115u w=1.005u ad=0.226125p as=0.226125p pd=0.45u
++ ps=0.45u
+m2 11 15 10 VDD pm_hp l=0.115u w=1.005u ad=0.226125p as=0.226125p pd=0.45u
++ ps=0.45u
+m3 12 16 11 VDD pm_hp l=0.115u w=1.005u ad=0.396975p as=0.226125p pd=1.795u
++ ps=0.45u
+m4 3 13 2 VSS nm_hp l=0.119677u w=0.647426u ad=0.1221p as=0.298675p pd=0.39u
++ ps=1.575u
+m5 4 14 3 VSS nm_hp l=0.119677u w=0.647426u ad=0.118987p as=0.1221p pd=0.375u
++ ps=0.39u
+m6 5 15 4 VSS nm_hp l=0.119677u w=0.647426u ad=0.341486p as=0.118987p
++ pd=1.54531u ps=0.375u
+m7 6 16 5 VSS nm_hp l=0.120619u w=0.670208u ad=0.223637p as=0.353502p pd=1.33u
++ ps=1.59969u
+
+* resistors:
+r8 46 2 40 $[mnc]
+r9 VSS 5 40 $[mnc]
+r10 VSS 5 40 $[mnc]
+r11 Z 6 40 $[mnc]
+r12 46 8 40 $[mpc]
+r13 VDD 9 40 $[mpc]
+r14 VDD 9 40 $[mpc]
+r15 46 10 40 $[mpc]
+r16 VDD 11 40 $[mpc]
+r17 VDD 11 40 $[mpc]
+r18 Z 12 40 $[mpc]
+r19 A 13 14 $[mpolyc]
+r20 B 14 14 $[mpolyc]
+r21 C 15 14 $[mpolyc]
+r22 46 16 14 $[mpolyc]
+
+* lumped capacitances:
+cp1 VDD VSS 0.636591f
+cp2 2 VSS 0.0290607f
+cp3 5 VSS 0.0721881f
+cp4 6 VSS 0.0391547f
+cp5 8 VSS 0.0322457f
+cp6 9 VSS 0.0807842f
+cp7 10 VSS 0.0387073f
+cp8 11 VSS 0.085382f
+cp9 12 VSS 0.0314358f
+cp10 13 VSS 0.371906f
+cp11 14 VSS 0.467658f
+cp12 15 VSS 0.415995f
+cp13 16 VSS 0.36607f
+cp14 46 VSS 0.53657f
+cp15 A VSS 0.12523f
+cp16 B VSS 0.13926f
+cp17 C VSS 0.10389f
+cp18 Z VSS 0.256418f
+
+.ENDS
+
+
+** and3m1p.lpe extracted by xCalibre v9.1_1.1 **
+
+** Version: $LSILogic: and3m1p.iclib2,v 9.0.1.6 2002/07/18 14:39:06 rchiang Exp $
+
+.SUBCKT AND3M1P Z A B C VDD VSS 
+
+* devices:
+m0 9 13 8 VDD pm_hp l=0.117238u w=1.30521u ad=0.242981p as=0.417312p
++ pd=0.348342u ps=1.965u
+m1 10 14 9 VDD pm_hp l=0.11751u w=1.31763u ad=0.221833p as=0.245294p
++ pd=0.351658u ps=0.351658u
+m2 11 15 10 VDD pm_hp l=0.117238u w=1.30521u ad=0.287866p as=0.219741p
++ pd=0.534848u ps=0.348342u
+m3 12 16 11 VDD pm_hp l=0.116666u w=1.74521u ad=0.551512p as=0.384909p pd=2.405u
++ ps=0.715151u
+m4 3 13 2 VSS nm_hp l=0.118449u w=0.850355u ad=0.129287p as=0.314662p pd=0.305u
++ ps=1.595u
+m5 4 14 3 VSS nm_hp l=0.118449u w=0.850355u ad=0.104087p as=0.129287p pd=0.245u
++ ps=0.305u
+m6 5 15 4 VSS nm_hp l=0.118449u w=0.850355u ad=0.301834p as=0.104087p
++ pd=0.961919u ps=0.245u
+m7 6 16 5 VSS nm_hp l=0.118166u w=1.16521u ad=0.374612p as=0.413591p pd=1.825u
++ ps=1.31808u
+
+* resistors:
+r8 45 2 40 $[mnc]
+r9 VSS 5 40 $[mnc]
+r10 VSS 5 40 $[mnc]
+r11 Z 6 40 $[mnc]
+r12 45 8 40 $[mpc]
+r13 VDD 9 40 $[mpc]
+r14 VDD 9 40 $[mpc]
+r15 45 10 40 $[mpc]
+r16 VDD 11 40 $[mpc]
+r17 VDD 11 40 $[mpc]
+r18 Z 12 40 $[mpc]
+r19 A 13 14 $[mpolyc]
+r20 B 14 14 $[mpolyc]
+r21 C 15 14 $[mpolyc]
+r22 45 16 14 $[mpolyc]
+
+* lumped capacitances:
+cp1 VDD VSS 0.51545f
+cp2 2 VSS 0.0287003f
+cp3 3 VSS 0.0204619f
+cp4 4 VSS 0.0144722f
+cp5 5 VSS 0.0838524f
+cp6 6 VSS 0.0265267f
+cp7 8 VSS 0.0340576f
+cp8 9 VSS 0.0785224f
+cp9 10 VSS 0.0331284f
+cp10 11 VSS 0.0841101f
+cp11 12 VSS 0.0249463f
+cp12 13 VSS 0.421279f
+cp13 14 VSS 0.589448f
+cp14 15 VSS 0.547472f
+cp15 16 VSS 0.407897f
+cp16 A VSS 0.124394f
+cp17 45 VSS 0.686422f
+cp18 B VSS 0.123534f
+cp19 C VSS 0.144458f
+cp20 Z VSS 0.210486f
+
+.ENDS
+
+
+** and3m2p.lpe extracted by xCalibre v9.1_1.1 **
+
+** Version: $LSILogic: and3m2p.iclib2,v 9.0.1.5 2002/06/20 18:48:37 kensz Exp $
+
+.SUBCKT AND3M2P Z A B C VDD VSS 
+
+* devices:
+m0 10 15 9 VDD pm_hp l=0.116666u w=1.74521u ad=0.282187p as=0.632262p pd=0.38u
++ ps=2.405u
+m1 11 15 10 VDD pm_hp l=0.116666u w=1.74521u ad=0.362937p as=0.282187p pd=0.38u
++ ps=0.38u
+m2 12 16 11 VDD pm_hp l=0.116666u w=1.74521u ad=0.406162p as=0.362937p pd=0.525u
++ ps=0.38u
+m3 13 17 12 VDD pm_hp l=0.116666u w=1.74521u ad=0.486912p as=0.406162p pd=0.525u
++ ps=0.525u
+m4 14 18 13 VDD pm_hp l=0.116666u w=1.74521u ad=0.551512p as=0.486912p pd=2.405u
++ ps=0.525u
+m5 3 15 2 VSS nm_hp l=0.118166u w=1.16521u ad=0.196637p as=0.406062p pd=0.38u
++ ps=1.825u
+m6 4 15 3 VSS nm_hp l=0.118166u w=1.16521u ad=0.329962p as=0.196637p pd=0.905u
++ ps=0.38u
+m7 5 16 4 VSS nm_hp l=0.118166u w=1.16521u ad=0.246987p as=0.329962p pd=0.43u
++ ps=0.905u
+m8 6 17 5 VSS nm_hp l=0.118166u w=1.16521u ad=0.165062p as=0.246987p pd=0.285u
++ ps=0.43u
+m9 7 18 6 VSS nm_hp l=0.118166u w=1.16521u ad=0.674062p as=0.165062p pd=2.355u
++ ps=0.285u
+
+* resistors:
+r10 VSS 2 40 $[mnc]
+r11 VSS 2 40 $[mnc]
+r12 Z 3 40 $[mnc]
+r13 VSS 4 40 $[mnc]
+r14 VSS 4 40 $[mnc]
+r15 55 7 40 $[mnc]
+r16 VDD 9 40 $[mpc]
+r17 VDD 9 40 $[mpc]
+r18 Z 10 40 $[mpc]
+r19 VDD 11 40 $[mpc]
+r20 VDD 11 40 $[mpc]
+r21 55 12 40 $[mpc]
+r22 VDD 13 40 $[mpc]
+r23 VDD 13 40 $[mpc]
+r24 55 14 40 $[mpc]
+r25 55 15 14 $[mpolyc]
+r26 C 16 14 $[mpolyc]
+r27 B 17 14 $[mpolyc]
+r28 A 18 14 $[mpolyc]
+
+* lumped capacitances:
+cp1 VDD VSS 0.683924f
+cp2 2 VSS 0.0742825f
+cp3 3 VSS 0.0378567f
+cp4 4 VSS 0.0484689f
+cp5 7 VSS 0.0370081f
+cp6 9 VSS 0.0669337f
+cp7 10 VSS 0.0286857f
+cp8 11 VSS 0.075655f
+cp9 12 VSS 0.0430763f
+cp10 13 VSS 0.0930873f
+cp11 14 VSS 0.040152f
+cp12 15 VSS 0.649459f
+cp13 16 VSS 0.557927f
+cp14 17 VSS 0.575231f
+cp15 18 VSS 0.460976f
+cp16 Z VSS 0.228263f
+cp17 55 VSS 0.519969f
+cp18 C VSS 0.107776f
+cp19 B VSS 0.13741f
+cp20 A VSS 0.116509f
+
+.ENDS
+
+
+** and3m4p.lpe extracted by xCalibre v9.1_1.1 **
+
+** Version: $LSILogic: and3m4p.iclib2,v 9.0.1.5 2002/06/25 06:53:39 tvarga Exp $
+
+.SUBCKT AND3M4P Z A B C VDD VSS 
+
+* devices:
+m0 12 19 11 VDD pm_hp l=0.11669u w=1.72021u ad=0.2785p as=0.622512p pd=0.38u
++ ps=2.38u
+m1 13 19 12 VDD pm_hp l=0.11669u w=1.72021u ad=0.357125p as=0.2785p pd=0.38u
++ ps=0.38u
+m2 14 19 13 VDD pm_hp l=0.11669u w=1.72021u ad=0.2785p as=0.357125p pd=0.38u
++ ps=0.38u
+m3 15 19 14 VDD pm_hp l=0.11669u w=1.72021u ad=0.357125p as=0.2785p pd=0.38u
++ ps=0.38u
+m4 16 20 15 VDD pm_hp l=0.11669u w=1.72021u ad=0.3796p as=0.357125p pd=0.5u
++ ps=0.38u
+m5 17 21 16 VDD pm_hp l=0.11669u w=1.72021u ad=0.357125p as=0.3796p pd=0.38u
++ ps=0.5u
+m6 18 22 17 VDD pm_hp l=0.11669u w=1.72021u ad=0.543887p as=0.357125p pd=2.38u
++ ps=0.38u
+m7 3 19 2 VSS nm_hp l=0.118201u w=1.13314u ad=0.19025p as=0.3966p pd=0.375u
++ ps=1.8u
+m8 4 19 3 VSS nm_hp l=0.118201u w=1.13314u ad=0.21785p as=0.19025p pd=0.375u
++ ps=0.375u
+m9 5 19 4 VSS nm_hp l=0.118201u w=1.13314u ad=0.191057p as=0.21785p pd=0.377155u
++ ps=0.375u
+m10 6 19 5 VSS nm_hp l=0.118252u w=1.13521u ad=0.329839p as=0.191406p
++ pd=0.954602u ps=0.377844u
+m11 7 20 6 VSS nm_hp l=0.118267u w=1.13021u ad=0.203875p as=0.328386p pd=0.365u
++ ps=0.950397u
+m12 8 21 7 VSS nm_hp l=0.118267u w=1.13021u ad=0.190187p as=0.203875p pd=0.34u
++ ps=0.365u
+m13 9 22 8 VSS nm_hp l=0.118267u w=1.13021u ad=0.489862p as=0.190187p pd=2.02u
++ ps=0.34u
+
+* resistors:
+r14 VSS 2 40 $[mnc]
+r15 Z 3 40 $[mnc]
+r16 VSS 4 40 $[mnc]
+r17 VSS 4 40 $[mnc]
+r18 Z 5 40 $[mnc]
+r19 VSS 6 40 $[mnc]
+r20 VSS 6 40 $[mnc]
+r21 68 9 40 $[mnc]
+r22 VDD 11 40 $[mpc]
+r23 VDD 11 40 $[mpc]
+r24 Z 12 40 $[mpc]
+r25 VDD 13 40 $[mpc]
+r26 VDD 13 40 $[mpc]
+r27 Z 14 40 $[mpc]
+r28 VDD 15 40 $[mpc]
+r29 VDD 15 40 $[mpc]
+r30 68 16 40 $[mpc]
+r31 VDD 17 40 $[mpc]
+r32 VDD 17 40 $[mpc]
+r33 68 18 40 $[mpc]
+r34 68 19 14 $[mpolyc]
+r35 C 20 14 $[mpolyc]
+r36 B 21 14 $[mpolyc]
+r37 A 22 14 $[mpolyc]
+
+* lumped capacitances:
+cp1 VDD VSS 0.860845f
+cp2 2 VSS 0.0647564f
+cp3 3 VSS 0.033657f
+cp4 4 VSS 0.0595684f
+cp5 5 VSS 0.0313281f
+cp6 6 VSS 0.0485204f
+cp7 9 VSS 0.0368949f
+cp8 11 VSS 0.0669228f
+cp9 12 VSS 0.0348794f
+cp10 13 VSS 0.0546883f
+cp11 14 VSS 0.0283784f
+cp12 15 VSS 0.0754251f
+cp13 16 VSS 0.0382087f
+cp14 17 VSS 0.0836821f
+cp15 18 VSS 0.0400116f
+cp16 19 VSS 1.03962f
+cp17 20 VSS 0.579237f
+cp18 21 VSS 0.58947f
+cp19 22 VSS 0.456138f
+cp20 Z VSS 0.47425f
+cp21 68 VSS 0.51157f
+cp22 C VSS 0.122544f
+cp23 B VSS 0.144857f
+cp24 A VSS 0.116581f
+
+.ENDS
+
+
+** and3m8p.lpe extracted by xCalibre v9.1_1.1 **
+
+** Version: $LSILogic: and3m8p.iclib2,v 9.0.1.4 2002/06/20 18:52:35 kensz Exp $
+
+.SUBCKT AND3M8P Z A B C VDD VSS 
+
+* devices:
+m0 19 33 18 VDD pm_hp l=0.116666u w=1.74521u ad=0.282187p as=0.632262p pd=0.38u
++ ps=2.405u
+m1 20 33 19 VDD pm_hp l=0.116666u w=1.74521u ad=0.350112p as=0.282187p pd=0.365u
++ ps=0.38u
+m2 21 33 20 VDD pm_hp l=0.116666u w=1.74521u ad=0.282187p as=0.350112p pd=0.38u
++ ps=0.365u
+m3 22 33 21 VDD pm_hp l=0.116666u w=1.74521u ad=0.350112p as=0.282187p pd=0.365u
++ ps=0.38u
+m4 23 33 22 VDD pm_hp l=0.116666u w=1.74521u ad=0.282187p as=0.350112p pd=0.38u
++ ps=0.365u
+m5 24 33 23 VDD pm_hp l=0.116666u w=1.74521u ad=0.332687p as=0.282187p pd=0.365u
++ ps=0.38u
+m6 25 34 24 VDD pm_hp l=0.116666u w=1.74521u ad=0.315218p as=0.332687p
++ pd=0.377724u ps=0.365u
+m7 26 35 25 VDD pm_hp l=0.116631u w=1.74314u ad=0.325763p as=0.314844p
++ pd=0.377276u ps=0.377276u
+m8 27 36 26 VDD pm_hp l=0.116666u w=1.74521u ad=0.317037p as=0.32615p pd=0.38u
++ ps=0.377724u
+m9 28 36 27 VDD pm_hp l=0.116666u w=1.74521u ad=0.328087p as=0.317037p pd=0.38u
++ ps=0.38u
+m10 29 37 28 VDD pm_hp l=0.116666u w=1.74521u ad=0.317037p as=0.328087p pd=0.38u
++ ps=0.38u
+m11 30 38 29 VDD pm_hp l=0.116666u w=1.74521u ad=0.332687p as=0.317037p
++ pd=0.365u ps=0.38u
+m12 31 39 30 VDD pm_hp l=0.116666u w=1.74521u ad=0.282187p as=0.332687p pd=0.38u
++ ps=0.365u
+m13 32 39 31 VDD pm_hp l=0.116666u w=1.74521u ad=0.632262p as=0.282187p
++ pd=2.405u ps=0.38u
+m14 3 33 2 VSS nm_hp l=0.11818u w=1.16021u ad=0.1959p as=0.404112p pd=0.38u
++ ps=1.82u
+m15 4 33 3 VSS nm_hp l=0.11818u w=1.16021u ad=0.226925p as=0.1959p pd=0.38u
++ ps=0.38u
+m16 5 33 4 VSS nm_hp l=0.11818u w=1.16021u ad=0.1959p as=0.226925p pd=0.38u
++ ps=0.38u
+m17 6 33 5 VSS nm_hp l=0.11818u w=1.16021u ad=0.226925p as=0.1959p pd=0.38u
++ ps=0.38u
+m18 7 33 6 VSS nm_hp l=0.11818u w=1.16021u ad=0.1959p as=0.226925p pd=0.38u
++ ps=0.38u
+m19 8 33 7 VSS nm_hp l=0.11818u w=1.16021u ad=0.323862p as=0.1959p pd=0.84u
++ ps=0.38u
+m20 9 34 8 VSS nm_hp l=0.11818u w=1.16021u ad=0.167162p as=0.323862p pd=0.29u
++ ps=0.84u
+m21 10 35 9 VSS nm_hp l=0.11818u w=1.16021u ad=0.1756p as=0.167162p pd=0.305u
++ ps=0.29u
+m22 11 36 10 VSS nm_hp l=0.11818u w=1.16021u ad=0.1959p as=0.1756p pd=0.38u
++ ps=0.305u
+m23 12 36 11 VSS nm_hp l=0.11818u w=1.16021u ad=0.2206p as=0.1959p pd=0.385u
++ ps=0.38u
+m24 13 37 12 VSS nm_hp l=0.11818u w=1.16021u ad=0.14185p as=0.2206p pd=0.245u
++ ps=0.385u
+m25 14 38 13 VSS nm_hp l=0.11818u w=1.16021u ad=0.357612p as=0.14185p pd=0.9u
++ ps=0.245u
+m26 15 39 14 VSS nm_hp l=0.11818u w=1.16021u ad=0.1959p as=0.357612p pd=0.38u
++ ps=0.9u
+m27 16 39 15 VSS nm_hp l=0.11818u w=1.16021u ad=0.404112p as=0.1959p pd=1.82u
++ ps=0.38u
+
+* resistors:
+r28 VSS 2 40 $[mnc]
+r29 VSS 2 40 $[mnc]
+r30 Z 3 40 $[mnc]
+r31 VSS 4 40 $[mnc]
+r32 VSS 4 40 $[mnc]
+r33 Z 5 40 $[mnc]
+r34 VSS 6 40 $[mnc]
+r35 VSS 6 40 $[mnc]
+r36 Z 7 40 $[mnc]
+r37 VSS 8 40 $[mnc]
+r38 VSS 8 40 $[mnc]
+r39 124 11 40 $[mnc]
+r40 VSS 14 40 $[mnc]
+r41 VSS 14 40 $[mnc]
+r42 Z 15 40 $[mnc]
+r43 VSS 16 40 $[mnc]
+r44 VSS 16 40 $[mnc]
+r45 VDD 18 40 $[mpc]
+r46 VDD 18 40 $[mpc]
+r47 Z 19 40 $[mpc]
+r48 VDD 20 40 $[mpc]
+r49 VDD 20 40 $[mpc]
+r50 Z 21 40 $[mpc]
+r51 VDD 22 40 $[mpc]
+r52 VDD 22 40 $[mpc]
+r53 Z 23 40 $[mpc]
+r54 VDD 24 40 $[mpc]
+r55 VDD 24 40 $[mpc]
+r56 124 25 40 $[mpc]
+r57 VDD 26 40 $[mpc]
+r58 VDD 26 40 $[mpc]
+r59 124 27 40 $[mpc]
+r60 VDD 28 40 $[mpc]
+r61 VDD 28 40 $[mpc]
+r62 124 29 40 $[mpc]
+r63 VDD 30 40 $[mpc]
+r64 VDD 30 40 $[mpc]
+r65 Z 31 40 $[mpc]
+r66 VDD 32 40 $[mpc]
+r67 VDD 32 40 $[mpc]
+r68 124 33 14 $[mpolyc]
+r69 C 34 14 $[mpolyc]
+r70 B 35 14 $[mpolyc]
+r71 A 36 14 $[mpolyc]
+r72 B 37 14 $[mpolyc]
+r73 C 38 14 $[mpolyc]
+r74 124 39 14 $[mpolyc]
+
+* lumped capacitances:
+cp1 VDD VSS 1.56329f
+cp2 2 VSS 0.066909f
+cp3 3 VSS 0.0329567f
+cp4 4 VSS 0.053738f
+cp5 5 VSS 0.0311139f
+cp6 6 VSS 0.0589038f
+cp7 7 VSS 0.0343163f
+cp8 8 VSS 0.0845744f
+cp9 9 VSS 0.0313892f
+cp10 10 VSS 0.0295062f
+cp11 11 VSS 0.0355657f
+cp12 12 VSS 0.0272432f
+cp13 13 VSS 0.0374993f
+cp14 14 VSS 0.0743539f
+cp15 15 VSS 0.040173f
+cp16 16 VSS 0.0772047f
+cp17 18 VSS 0.0669662f
+cp18 19 VSS 0.0343023f
+cp19 20 VSS 0.0537532f
+cp20 21 VSS 0.0292001f
+cp21 22 VSS 0.0537718f
+cp22 23 VSS 0.02742f
+cp23 24 VSS 0.0961625f
+cp24 25 VSS 0.0541043f
+cp25 26 VSS 0.0806768f
+cp26 27 VSS 0.0474487f
+cp27 28 VSS 0.0809222f
+cp28 29 VSS 0.0503317f
+cp29 30 VSS 0.0980707f
+cp30 31 VSS 0.031499f
+cp31 32 VSS 0.0712853f
+cp32 33 VSS 1.5824f
+cp33 34 VSS 0.702386f
+cp34 35 VSS 0.71486f
+cp35 36 VSS 0.956247f
+cp36 37 VSS 0.736203f
+cp37 38 VSS 0.695164f
+cp38 39 VSS 0.722612f
+cp39 Z VSS 1.54225f
+cp40 124 VSS 1.26666f
+cp41 C VSS 0.572138f
+cp42 B VSS 0.269761f
+cp43 A VSS 0.135527f
+
+.ENDS
+
+
+** and4m05p.lpe extracted by xCalibre v9.1_1.1 **
+
+** Version: $LSILogic: and4m05p.iclib2,v 9.0.1.6 2002/07/18 14:39:13 rchiang Exp $
+
+.SUBCKT AND4M05P Z A B C D VDD VSS 
+
+* devices:
+m0 10 15 9 VDD pm_hp l=0.117328u w=1.09278u ad=0.200462p as=0.395712p pd=0.395u
++ ps=1.795u
+m1 11 16 10 VDD pm_hp l=0.117328u w=1.09278u ad=0.219162p as=0.200462p pd=0.395u
++ ps=0.395u
+m2 12 17 11 VDD pm_hp l=0.117328u w=1.09278u ad=0.200462p as=0.219162p pd=0.395u
++ ps=0.395u
+m3 13 18 12 VDD pm_hp l=0.117328u w=1.09278u ad=0.244587p as=0.200462p
++ pd=0.48183u ps=0.395u
+m4 14 19 13 VDD pm_hp l=0.117479u w=1.02778u ad=0.420562p as=0.230038p pd=1.86u
++ ps=0.45317u
+m5 3 15 2 VSS nm_hp l=0.119204u w=0.717426u ad=0.112125p as=0.330525p pd=0.32u
++ ps=1.645u
+m6 4 16 3 VSS nm_hp l=0.119204u w=0.717426u ad=0.113737p as=0.112125p pd=0.325u
++ ps=0.32u
+m7 5 17 4 VSS nm_hp l=0.119204u w=0.717426u ad=0.0958125p as=0.113737p pd=0.275u
++ ps=0.325u
+m8 6 18 5 VSS nm_hp l=0.119204u w=0.717426u ad=0.367823p as=0.0958125p
++ pd=1.58982u ps=0.275u
+m9 7 19 6 VSS nm_hp l=0.120619u w=0.670208u ad=0.223637p as=0.343614p pd=1.33u
++ ps=1.48518u
+
+* resistors:
+r10 53 2 40 $[mnc]
+r11 VSS 6 40 $[mnc]
+r12 VSS 6 40 $[mnc]
+r13 Z 7 40 $[mnc]
+r14 VDD 9 40 $[mpc]
+r15 53 10 40 $[mpc]
+r16 VDD 11 40 $[mpc]
+r17 VDD 11 40 $[mpc]
+r18 53 12 40 $[mpc]
+r19 VDD 13 40 $[mpc]
+r20 VDD 13 40 $[mpc]
+r21 Z 14 40 $[mpc]
+r22 A 15 14 $[mpolyc]
+r23 B 16 14 $[mpolyc]
+r24 C 17 14 $[mpolyc]
+r25 D 18 14 $[mpolyc]
+r26 53 19 14 $[mpolyc]
+
+* lumped capacitances:
+cp1 VDD VSS 0.755985f
+cp2 2 VSS 0.0370352f
+cp3 4 VSS 0.00742427f
+cp4 5 VSS 0.00382252f
+cp5 6 VSS 0.0534347f
+cp6 7 VSS 0.0397901f
+cp7 9 VSS 0.0872681f
+cp8 10 VSS 0.0304373f
+cp9 11 VSS 0.0684828f
+cp10 12 VSS 0.0314364f
+cp11 13 VSS 0.0816418f
+cp12 14 VSS 0.0317797f
+cp13 15 VSS 0.372691f
+cp14 16 VSS 0.498733f
+cp15 17 VSS 0.531127f
+cp16 18 VSS 0.519558f
+cp17 19 VSS 0.423686f
+cp18 53 VSS 0.689956f
+cp19 A VSS 0.129825f
+cp20 B VSS 0.129243f
+cp21 C VSS 0.0974697f
+cp22 D VSS 0.122331f
+cp23 Z VSS 0.241547f
+
+.ENDS
+
+
+** and4m1p.lpe extracted by xCalibre v9.1_1.1 **
+
+** Version: $LSILogic: and4m1p.iclib2,v 9.0.1.4 2002/06/20 18:49:38 kensz Exp $
+
+.SUBCKT AND4M1P Z A B C D VDD VSS 
+
+* devices:
+m0 10 15 9 VDD pm_hp l=0.117032u w=1.43521u ad=0.236462p as=0.511362p pd=0.38u
++ ps=2.095u
+m1 11 16 10 VDD pm_hp l=0.117032u w=1.43521u ad=0.290862p as=0.236462p pd=0.38u
++ ps=0.38u
+m2 12 17 11 VDD pm_hp l=0.117032u w=1.43521u ad=0.281962p as=0.290862p pd=0.445u
++ ps=0.38u
+m3 13 18 12 VDD pm_hp l=0.117032u w=1.43521u ad=0.332148p as=0.281962p
++ pd=0.502483u ps=0.445u
+m4 14 19 13 VDD pm_hp l=0.116675u w=1.73521u ad=0.658962p as=0.401577p pd=2.525u
++ ps=0.607517u
+m5 3 15 2 VSS nm_hp l=0.118972u w=0.935208u ad=0.14375p as=0.380962p pd=0.31u
++ ps=1.765u
+m6 4 16 3 VSS nm_hp l=0.118972u w=0.935208u ad=0.137162p as=0.14375p pd=0.31u
++ ps=0.31u
+m7 5 17 4 VSS nm_hp l=0.118972u w=0.935208u ad=0.129937p as=0.137162p pd=0.31u
++ ps=0.31u
+m8 6 18 5 VSS nm_hp l=0.118972u w=0.935208u ad=0.353809p as=0.129937p
++ pd=1.05134u ps=0.31u
+m9 7 19 6 VSS nm_hp l=0.118194u w=1.15521u ad=0.371562p as=0.43704p pd=1.815u
++ ps=1.29866u
+
+* resistors:
+r10 54 2 40 $[mnc]
+r11 VSS 6 40 $[mnc]
+r12 VSS 6 40 $[mnc]
+r13 Z 7 40 $[mnc]
+r14 VDD 9 40 $[mpc]
+r15 VDD 9 40 $[mpc]
+r16 54 10 40 $[mpc]
+r17 VDD 11 40 $[mpc]
+r18 VDD 11 40 $[mpc]
+r19 54 12 40 $[mpc]
+r20 VDD 13 40 $[mpc]
+r21 VDD 13 40 $[mpc]
+r22 Z 14 40 $[mpc]
+r23 A 15 14 $[mpolyc]
+r24 B 16 14 $[mpolyc]
+r25 C 17 14 $[mpolyc]
+r26 D 18 14 $[mpolyc]
+r27 54 19 14 $[mpolyc]
+
+* lumped capacitances:
+cp1 VDD VSS 0.668808f
+cp2 2 VSS 0.0288445f
+cp3 4 VSS 0.00425421f
+cp4 5 VSS 0.00736845f
+cp5 6 VSS 0.0535487f
+cp6 7 VSS 0.0418897f
+cp7 9 VSS 0.0836126f
+cp8 10 VSS 0.0309527f
+cp9 11 VSS 0.0761958f
+cp10 12 VSS 0.037819f
+cp11 13 VSS 0.0868835f
+cp12 14 VSS 0.031722f
+cp13 15 VSS 0.420047f
+cp14 16 VSS 0.577185f
+cp15 17 VSS 0.564959f
+cp16 18 VSS 0.533858f
+cp17 19 VSS 0.469582f
+cp18 54 VSS 0.656012f
+cp19 A VSS 0.125542f
+cp20 B VSS 0.131007f
+cp21 C VSS 0.0967615f
+cp22 D VSS 0.128138f
+cp23 Z VSS 0.229475f
+
+.ENDS
+
+
+** and4m2p.lpe extracted by xCalibre v9.1_1.1 **
+
+** Version: $LSILogic: and4m2p.iclib2,v 9.0.1.4 2002/06/20 19:29:06 kensz Exp $
+
+.SUBCKT AND4M2P Z A B C D VDD VSS 
+
+* devices:
+m0 11 17 10 VDD pm_hp l=0.116656u w=1.75521u ad=0.283662p as=0.636162p pd=0.38u
++ ps=2.415u
+m1 12 17 11 VDD pm_hp l=0.116656u w=1.75521u ad=0.364837p as=0.283662p pd=0.38u
++ ps=0.38u
+m2 13 18 12 VDD pm_hp l=0.116656u w=1.75521u ad=0.284512p as=0.364837p pd=0.38u
++ ps=0.38u
+m3 14 19 13 VDD pm_hp l=0.116656u w=1.75521u ad=0.364412p as=0.284512p pd=0.38u
++ ps=0.38u
+m4 15 20 14 VDD pm_hp l=0.116656u w=1.75521u ad=0.460812p as=0.364412p pd=0.585u
++ ps=0.38u
+m5 16 21 15 VDD pm_hp l=0.116656u w=1.75521u ad=0.635312p as=0.460812p pd=2.415u
++ ps=0.585u
+m6 3 17 2 VSS nm_hp l=0.118152u w=1.17021u ad=0.197375p as=0.408012p pd=0.38u
++ ps=1.83u
+m7 4 17 3 VSS nm_hp l=0.118152u w=1.17021u ad=0.326575p as=0.197375p pd=0.915u
++ ps=0.38u
+m8 5 18 4 VSS nm_hp l=0.118152u w=1.17021u ad=0.2282p as=0.326575p pd=0.395u
++ ps=0.915u
+m9 6 19 5 VSS nm_hp l=0.118152u w=1.17021u ad=0.191312p as=0.2282p pd=0.33u
++ ps=0.395u
+m10 7 20 6 VSS nm_hp l=0.118152u w=1.17021u ad=0.316162p as=0.191312p pd=0.55u
++ ps=0.33u
+m11 8 21 7 VSS nm_hp l=0.118152u w=1.17021u ad=0.376137p as=0.316162p pd=1.83u
++ ps=0.55u
+
+* resistors:
+r12 VSS 2 40 $[mnc]
+r13 VSS 2 40 $[mnc]
+r14 Z 3 40 $[mnc]
+r15 VSS 4 40 $[mnc]
+r16 VSS 4 40 $[mnc]
+r17 63 8 40 $[mnc]
+r18 VDD 10 40 $[mpc]
+r19 VDD 10 40 $[mpc]
+r20 Z 11 40 $[mpc]
+r21 VDD 12 40 $[mpc]
+r22 VDD 12 40 $[mpc]
+r23 63 13 40 $[mpc]
+r24 VDD 14 40 $[mpc]
+r25 VDD 14 40 $[mpc]
+r26 63 15 40 $[mpc]
+r27 VDD 16 40 $[mpc]
+r28 VDD 16 40 $[mpc]
+r29 63 17 14 $[mpolyc]
+r30 D 18 14 $[mpolyc]
+r31 C 19 14 $[mpolyc]
+r32 B 20 14 $[mpolyc]
+r33 A 21 14 $[mpolyc]
+
+* lumped capacitances:
+cp1 VDD VSS 0.805408f
+cp2 2 VSS 0.0744319f
+cp3 3 VSS 0.0381096f
+cp4 4 VSS 0.0484689f
+cp5 8 VSS 0.0295542f
+cp6 10 VSS 0.0668804f
+cp7 11 VSS 0.031473f
+cp8 12 VSS 0.0539689f
+cp9 13 VSS 0.0374769f
+cp10 14 VSS 0.0712234f
+cp11 15 VSS 0.0449856f
+cp12 16 VSS 0.0934304f
+cp13 17 VSS 0.634257f
+cp14 18 VSS 0.612393f
+cp15 19 VSS 0.611031f
+cp16 20 VSS 0.561056f
+cp17 21 VSS 0.380966f
+cp18 Z VSS 0.218002f
+cp19 63 VSS 0.610683f
+cp20 D VSS 0.123016f
+cp21 C VSS 0.139425f
+cp22 B VSS 0.108584f
+cp23 A VSS 0.129863f
+
+.ENDS
+
+
+** and4m4p.lpe extracted by xCalibre v9.1_1.1 **
+
+** Version: $LSILogic: and4m4p.iclib2,v 9.0.1.5 2002/06/20 18:50:40 kensz Exp $
+
+.SUBCKT AND4M4P Z A B C D VDD VSS 
+
+* devices:
+m0 13 21 12 VDD pm_hp l=0.116656u w=1.75521u ad=0.284512p as=0.635312p pd=0.38u
++ ps=2.415u
+m1 14 21 13 VDD pm_hp l=0.116656u w=1.75521u ad=0.364412p as=0.284512p pd=0.38u
++ ps=0.38u
+m2 15 21 14 VDD pm_hp l=0.116656u w=1.75521u ad=0.284512p as=0.364412p pd=0.38u
++ ps=0.38u
+m3 16 21 15 VDD pm_hp l=0.116656u w=1.75521u ad=0.364412p as=0.284512p pd=0.38u
++ ps=0.38u
+m4 17 22 16 VDD pm_hp l=0.116656u w=1.75521u ad=0.284512p as=0.364412p pd=0.38u
++ ps=0.38u
+m5 18 23 17 VDD pm_hp l=0.116656u w=1.75521u ad=0.364412p as=0.284512p pd=0.38u
++ ps=0.38u
+m6 19 24 18 VDD pm_hp l=0.116656u w=1.75521u ad=0.314612p as=0.364412p pd=0.415u
++ ps=0.38u
+m7 20 25 19 VDD pm_hp l=0.116656u w=1.75521u ad=0.635312p as=0.314612p pd=2.415u
++ ps=0.415u
+m8 3 21 2 VSS nm_hp l=0.118152u w=1.17021u ad=0.197375p as=0.408012p pd=0.38u
++ ps=1.83u
+m9 4 21 3 VSS nm_hp l=0.118152u w=1.17021u ad=0.22925p as=0.197375p pd=0.38u
++ ps=0.38u
+m10 5 21 4 VSS nm_hp l=0.118152u w=1.17021u ad=0.197375p as=0.22925p pd=0.38u
++ ps=0.38u
+m11 6 21 5 VSS nm_hp l=0.118152u w=1.17021u ad=0.322087p as=0.197375p pd=0.9u
++ ps=0.38u
+m12 7 22 6 VSS nm_hp l=0.118152u w=1.17021u ad=0.1374p as=0.322087p pd=0.235u
++ ps=0.9u
+m13 8 23 7 VSS nm_hp l=0.118152u w=1.17021u ad=0.28495p as=0.1374p pd=0.495u
++ ps=0.235u
+m14 9 24 8 VSS nm_hp l=0.118152u w=1.17021u ad=0.219687p as=0.28495p pd=0.38u
++ ps=0.495u
+m15 10 25 9 VSS nm_hp l=0.118152u w=1.17021u ad=0.376137p as=0.219687p pd=1.83u
++ ps=0.38u
+
+* resistors:
+r16 VSS 2 40 $[mnc]
+r17 VSS 2 40 $[mnc]
+r18 Z 3 40 $[mnc]
+r19 VSS 4 40 $[mnc]
+r20 VSS 4 40 $[mnc]
+r21 Z 5 40 $[mnc]
+r22 VSS 6 40 $[mnc]
+r23 VSS 6 40 $[mnc]
+r24 77 10 40 $[mnc]
+r25 VDD 12 40 $[mpc]
+r26 VDD 12 40 $[mpc]
+r27 Z 13 40 $[mpc]
+r28 VDD 14 40 $[mpc]
+r29 VDD 14 40 $[mpc]
+r30 Z 15 40 $[mpc]
+r31 VDD 16 40 $[mpc]
+r32 VDD 16 40 $[mpc]
+r33 77 17 40 $[mpc]
+r34 VDD 18 40 $[mpc]
+r35 VDD 18 40 $[mpc]
+r36 77 19 40 $[mpc]
+r37 VDD 20 40 $[mpc]
+r38 VDD 20 40 $[mpc]
+r39 77 21 14 $[mpolyc]
+r40 D 22 14 $[mpolyc]
+r41 C 23 14 $[mpolyc]
+r42 B 24 14 $[mpolyc]
+r43 A 25 14 $[mpolyc]
+
+* lumped capacitances:
+cp1 VDD VSS 0.976713f
+cp2 2 VSS 0.0669337f
+cp3 3 VSS 0.0399503f
+cp4 4 VSS 0.0728176f
+cp5 5 VSS 0.0326792f
+cp6 6 VSS 0.0483475f
+cp7 10 VSS 0.0296893f
+cp8 12 VSS 0.0669337f
+cp9 13 VSS 0.0426534f
+cp10 14 VSS 0.0697763f
+cp11 15 VSS 0.0259259f
+cp12 16 VSS 0.0741454f
+cp13 17 VSS 0.0296032f
+cp14 18 VSS 0.0731667f
+cp15 19 VSS 0.0321976f
+cp16 20 VSS 0.0917249f
+cp17 21 VSS 1.04403f
+cp18 22 VSS 0.671622f
+cp19 23 VSS 0.660961f
+cp20 24 VSS 0.596943f
+cp21 25 VSS 0.452201f
+cp22 Z VSS 0.481297f
+cp23 77 VSS 0.70876f
+cp24 D VSS 0.103867f
+cp25 C VSS 0.129789f
+cp26 B VSS 0.102416f
+cp27 A VSS 0.133726f
+
+.ENDS
+
+
+** and4m8p.lpe extracted by xCalibre v9.1_1.1 **
+
+** Version: $LSILogic: and4m8p.iclib2,v 9.0.1.4 2002/06/20 18:50:20 kensz Exp $
+
+.SUBCKT AND4M8P Z A B C D VDD VSS 
+
+* devices:
+m0 22 39 21 VDD pm_hp l=0.116481u w=1.96021u ad=0.39465p as=0.654612p pd=0.38u
++ ps=2.64u
+m1 23 39 22 VDD pm_hp l=0.116481u w=1.96021u ad=0.332175p as=0.39465p pd=0.38u
++ ps=0.38u
+m2 24 40 23 VDD pm_hp l=0.116481u w=1.96021u ad=0.39465p as=0.332175p pd=0.38u
++ ps=0.38u
+m3 25 40 24 VDD pm_hp l=0.116481u w=1.96021u ad=0.635362p as=0.39465p pd=2.62u
++ ps=0.38u
+m4 27 41 26 VDD pm_hp l=0.116666u w=1.74521u ad=0.585712p as=0.632262p pd=0.735u
++ ps=2.405u
+m5 28 42 27 VDD pm_hp l=0.116666u w=1.74521u ad=0.362937p as=0.585712p pd=0.38u
++ ps=0.735u
+m6 29 42 28 VDD pm_hp l=0.116666u w=1.74521u ad=0.282187p as=0.362937p pd=0.38u
++ ps=0.38u
+m7 30 43 29 VDD pm_hp l=0.116666u w=1.74521u ad=0.362937p as=0.282187p pd=0.38u
++ ps=0.38u
+m8 31 44 30 VDD pm_hp l=0.116666u w=1.74521u ad=0.329212p as=0.362937p pd=0.435u
++ ps=0.38u
+m9 32 44 31 VDD pm_hp l=0.116666u w=1.74521u ad=0.362937p as=0.329212p pd=0.38u
++ ps=0.435u
+m10 33 44 32 VDD pm_hp l=0.116666u w=1.74521u ad=0.282187p as=0.362937p pd=0.38u
++ ps=0.38u
+m11 34 45 33 VDD pm_hp l=0.116666u w=1.74521u ad=0.362937p as=0.282187p pd=0.38u
++ ps=0.38u
+m12 35 45 34 VDD pm_hp l=0.116666u w=1.74521u ad=0.333487p as=0.362937p pd=0.44u
++ ps=0.38u
+m13 36 45 35 VDD pm_hp l=0.116666u w=1.74521u ad=0.362937p as=0.333487p pd=0.38u
++ ps=0.44u
+m14 37 46 36 VDD pm_hp l=0.116666u w=1.74521u ad=0.282187p as=0.362937p pd=0.38u
++ ps=0.38u
+m15 38 46 37 VDD pm_hp l=0.116666u w=1.74521u ad=0.632262p as=0.282187p
++ pd=2.405u ps=0.38u
+m16 3 39 2 VSS nm_hp l=0.117796u w=1.31521u ad=0.311262p as=0.573362p pd=0.49u
++ ps=2.145u
+m17 4 39 3 VSS nm_hp l=0.117796u w=1.31521u ad=0.241272p as=0.311262p
++ pd=0.411295u ps=0.49u
+m18 5 40 4 VSS nm_hp l=0.117616u w=1.30692u ad=0.262162p as=0.239753p pd=0.385u
++ ps=0.408705u
+m19 6 40 5 VSS nm_hp l=0.117616u w=1.30692u ad=0.438262p as=0.262162p pd=1.995u
++ ps=0.385u
+m20 8 41 7 VSS nm_hp l=0.118209u w=1.15021u ad=0.194061p as=0.604862p
++ pd=0.376355u ps=2.86u
+m21 9 42 8 VSS nm_hp l=0.118004u w=1.14192u ad=0.225037p as=0.192664p pd=0.385u
++ ps=0.373645u
+m22 10 42 9 VSS nm_hp l=0.118004u w=1.14192u ad=0.264877p as=0.225037p
++ pd=0.503175u ps=0.385u
+m23 11 43 10 VSS nm_hp l=0.118209u w=1.15021u ad=0.241325p as=0.266798p pd=0.41u
++ ps=0.506825u
+m24 12 44 11 VSS nm_hp l=0.118209u w=1.15021u ad=0.194425p as=0.241325p pd=0.38u
++ ps=0.41u
+m25 13 44 12 VSS nm_hp l=0.118209u w=1.15021u ad=0.2246p as=0.194425p pd=0.38u
++ ps=0.38u
+m26 14 44 13 VSS nm_hp l=0.118209u w=1.15021u ad=0.194425p as=0.2246p pd=0.38u
++ ps=0.38u
+m27 15 45 14 VSS nm_hp l=0.118209u w=1.15021u ad=0.2246p as=0.194425p pd=0.38u
++ ps=0.38u
+m28 16 45 15 VSS nm_hp l=0.118209u w=1.15021u ad=0.21115p as=0.2246p pd=0.41u
++ ps=0.38u
+m29 17 45 16 VSS nm_hp l=0.118209u w=1.15021u ad=0.2246p as=0.21115p pd=0.38u
++ ps=0.41u
+m30 18 46 17 VSS nm_hp l=0.118209u w=1.15021u ad=0.194425p as=0.2246p pd=0.38u
++ ps=0.38u
+m31 19 46 18 VSS nm_hp l=0.118209u w=1.15021u ad=0.400212p as=0.194425p pd=1.81u
++ ps=0.38u
+
+* resistors:
+r32 152 2 40 $[mnc]
+r33 151 3 40 $[mnc]
+r34 152 4 40 $[mnc]
+r35 154 5 40 $[mnc]
+r36 152 6 40 $[mnc]
+r37 VSS 7 40 $[mnc]
+r38 VSS 7 40 $[mnc]
+r39 157 8 40 $[mnc]
+r40 154 9 40 $[mnc]
+r41 157 10 40 $[mnc]
+r42 VSS 11 40 $[mnc]
+r43 VSS 11 40 $[mnc]
+r44 Z 12 40 $[mnc]
+r45 VSS 13 40 $[mnc]
+r46 VSS 13 40 $[mnc]
+r47 Z 14 40 $[mnc]
+r48 VSS 15 40 $[mnc]
+r49 VSS 15 40 $[mnc]
+r50 Z 16 40 $[mnc]
+r51 VSS 17 40 $[mnc]
+r52 VSS 17 40 $[mnc]
+r53 Z 18 40 $[mnc]
+r54 VSS 19 40 $[mnc]
+r55 151 21 40 $[mpc]
+r56 VDD 22 40 $[mpc]
+r57 VDD 22 40 $[mpc]
+r58 151 23 40 $[mpc]
+r59 VDD 24 40 $[mpc]
+r60 VDD 24 40 $[mpc]
+r61 151 25 40 $[mpc]
+r62 VDD 26 40 $[mpc]
+r63 VDD 26 40 $[mpc]
+r64 151 27 40 $[mpc]
+r65 VDD 28 40 $[mpc]
+r66 VDD 28 40 $[mpc]
+r67 151 29 40 $[mpc]
+r68 VDD 30 40 $[mpc]
+r69 VDD 30 40 $[mpc]
+r70 Z 31 40 $[mpc]
+r71 VDD 32 40 $[mpc]
+r72 VDD 32 40 $[mpc]
+r73 Z 33 40 $[mpc]
+r74 VDD 34 40 $[mpc]
+r75 VDD 34 40 $[mpc]
+r76 Z 35 40 $[mpc]
+r77 VDD 36 40 $[mpc]
+r78 VDD 36 40 $[mpc]
+r79 Z 37 40 $[mpc]
+r80 VDD 38 40 $[mpc]
+r81 VDD 38 40 $[mpc]
+r82 A 39 14 $[mpolyc]
+r83 B 40 14 $[mpolyc]
+r84 D 41 14 $[mpolyc]
+r85 C 42 14 $[mpolyc]
+r86 D 43 14 $[mpolyc]
+r87 151 44 14 $[mpolyc]
+r88 151 45 14 $[mpolyc]
+r89 151 46 14 $[mpolyc]
+
+* lumped capacitances:
+cp1 VDD VSS 1.88539f
+cp2 2 VSS 0.0733921f
+cp3 3 VSS 0.0517399f
+cp4 4 VSS 0.0595972f
+cp5 5 VSS 0.0403998f
+cp6 6 VSS 0.0411972f
+cp7 7 VSS 0.0727517f
+cp8 8 VSS 0.0360192f
+cp9 9 VSS 0.0387512f
+cp10 10 VSS 0.0267839f
+cp11 11 VSS 0.0602358f
+cp12 12 VSS 0.0316335f
+cp13 13 VSS 0.0654892f
+cp14 14 VSS 0.0334395f
+cp15 15 VSS 0.0682219f
+cp16 16 VSS 0.0355611f
+cp17 17 VSS 0.0650075f
+cp18 18 VSS 0.036368f
+cp19 19 VSS 0.0690729f
+cp20 21 VSS 0.0413738f
+cp21 22 VSS 0.0846182f
+cp22 23 VSS 0.0502937f
+cp23 24 VSS 0.0756185f
+cp24 25 VSS 0.0362481f
+cp25 26 VSS 0.0774668f
+cp26 27 VSS 0.0627529f
+cp27 28 VSS 0.0728926f
+cp28 29 VSS 0.034799f
+cp29 30 VSS 0.0750678f
+cp30 31 VSS 0.0310642f
+cp31 32 VSS 0.0710903f
+cp32 33 VSS 0.0312666f
+cp33 34 VSS 0.0711433f
+cp34 35 VSS 0.0351933f
+cp35 36 VSS 0.0703017f
+cp36 37 VSS 0.0367407f
+cp37 38 VSS 0.0712393f
+cp38 39 VSS 0.714853f
+cp39 40 VSS 0.715523f
+cp40 41 VSS 0.470212f
+cp41 42 VSS 0.769196f
+cp42 43 VSS 0.580036f
+cp43 44 VSS 1.04419f
+cp44 45 VSS 1.06122f
+cp45 46 VSS 0.703884f
+cp46 151 VSS 1.43567f
+cp47 152 VSS 0.454536f
+cp48 A VSS 0.123952f
+cp49 154 VSS 0.35775f
+cp50 B VSS 0.106251f
+cp51 D VSS 0.379062f
+cp52 157 VSS 0.224034f
+cp53 C VSS 0.133522f
+cp54 Z VSS 1.09684f
+
+.ENDS
+
+

@@ -1,0 +1,991 @@
+/*-------------------------------------------------------------------------*/
+/* cairo.c --- mainly cairo versions of the UDraw... stuff in functions.c  */
+/* Copyright (c) 2002  Tim Edwards, Johns Hopkins University        	   */
+/*-------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------*/
+/* originally written by Tim Edwards, 8/13/93    			   */
+/* All cairo graphics library modifications by Erik van der Wal, May 2014  */
+/*-------------------------------------------------------------------------*/
+
+#ifdef HAVE_CAIRO
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <stdint.h>
+#include <assert.h>
+#include <math.h>
+#include <limits.h>
+
+#ifndef XC_WIN32
+#include <X11/Intrinsic.h>
+#endif
+
+#ifdef TCL_WRAPPER 
+#include <tk.h>
+#endif /* TCL_WRAPPER */
+
+#include "xcircuit.h"
+#include "colordefs.h"
+#include "prototypes.h"
+
+extern XCWindowData *areawin;
+extern int *appcolors;
+extern Globaldata xobjs;
+extern short fontcount;
+extern fontinfo *fonts;
+extern Display *dpy;
+
+static void xc_cairo_strokepath(short style, float width);
+
+/*----------------------------------------------------------------------------*/
+
+void xc_cairo_set_matrix(const Matrix *xcm)
+{
+   cairo_matrix_t m = {
+	 .xx = xcm->a, .xy = xcm->b, .x0 = xcm->c,
+	 .yx = xcm->d, .yy = xcm->e, .y0 = xcm->f
+   };
+   cairo_set_matrix(areawin->cr, &m);
+};
+
+/*----------------------------------------------------------------------*/
+/* Set the color, based on the given color index                        */
+/*----------------------------------------------------------------------*/
+
+void xc_cairo_set_color(unsigned long coloridx)
+{
+   unsigned short r, g, b;
+   double red, green, blue;
+   xc_get_color_rgb(coloridx, &r, &g, &b);
+   cairo_set_source_rgb(areawin->cr, r / 65535., g / 65535., b / 65535.);
+}
+
+/*----------------------------------------------------------------------------*/
+
+void UDrawLine(XPoint *pt1, XPoint *pt2)
+{
+   if (!areawin->redraw_ongoing) {
+      areawin->redraw_needed = True;
+      return;
+   }
+
+   cairo_save(areawin->cr);
+  
+   cairo_set_line_width(areawin->cr, xobjs.pagelist[areawin->page]->wirewidth);
+   cairo_set_dash(areawin->cr, NULL, 0, 0.);
+   cairo_set_line_cap(areawin->cr, CAIRO_LINE_CAP_ROUND);
+   cairo_set_line_join(areawin->cr, CAIRO_LINE_JOIN_BEVEL);
+
+   cairo_move_to(areawin->cr, pt1->x, pt1->y);
+   cairo_line_to(areawin->cr, pt2->x, pt2->y);
+   cairo_stroke(areawin->cr);
+
+   cairo_restore(areawin->cr);
+} 
+
+/*----------------------------------------------------------------------*/
+/* Add circle at given point to indicate that the point is a parameter.	*/
+/* The circle is divided into quarters.  For parameterized y-coordinate	*/
+/* the top and bottom quarters are drawn.  For parameterized x-		*/
+/* coordinate, the left and right quarters are drawn.  A full circle	*/
+/* indicates either both x- and y-coordinates are parameterized, or	*/
+/* else any other kind of parameterization (presently, not used).	*/
+/*									*/
+/* (note that the two angles in XDrawArc() are 1) the start angle,	*/
+/* measured in absolute 64th degrees from 0 (3 o'clock), and 2) the	*/
+/* path length, in relative 64th degrees (positive = counterclockwise,	*/
+/* negative = clockwise)).						*/
+/*----------------------------------------------------------------------*/
+
+void UDrawCircle(XPoint *upt, u_char which)
+{
+   XPoint wpt;
+
+   if (!areawin->redraw_ongoing) {
+      areawin->redraw_needed = True;
+      return;
+   }
+
+   cairo_save(areawin->cr);
+   cairo_identity_matrix(areawin->cr);
+
+   user_to_window(*upt, &wpt);
+   cairo_set_line_width(areawin->cr, .75);
+   cairo_set_dash(areawin->cr, NULL, 0, 0.);
+   cairo_set_line_cap(areawin->cr, CAIRO_LINE_CAP_BUTT);
+   cairo_set_line_join(areawin->cr, CAIRO_LINE_JOIN_MITER);
+
+   /* TODO: angles might be mirrored or turning the wrong way */
+   switch(which) {
+      case P_POSITION_X:
+	 cairo_arc(areawin->cr, wpt.x, wpt.y, 4., M_PI * -.25, M_PI * .25);
+	 cairo_arc(areawin->cr, wpt.x, wpt.y, 4., M_PI * .75, M_PI * 1.25);
+	 break;
+      case P_POSITION_Y:
+	 cairo_arc(areawin->cr, wpt.x, wpt.y, 4., M_PI * .25, M_PI * .75);
+	 cairo_arc(areawin->cr, wpt.x, wpt.y, 4., M_PI * 1.25, M_PI * 1.75);
+	 break;
+      default:
+	 cairo_arc(areawin->cr, wpt.x, wpt.y, 4., 0., M_PI * 2.);
+	 break;
+   }
+
+   cairo_restore(areawin->cr);
+}
+
+/*----------------------------------------------------------------------*/
+/* Add "X" at string origin						*/
+/*----------------------------------------------------------------------*/
+
+void UDrawXAt(XPoint *wpt)
+{
+   if (!areawin->redraw_ongoing) {
+      areawin->redraw_needed = True;
+      return;
+   }
+
+   cairo_save(areawin->cr);
+   cairo_identity_matrix(areawin->cr);
+
+   cairo_set_dash(areawin->cr, NULL, 0, 0.);
+   cairo_set_line_width(areawin->cr, .75);
+
+   cairo_move_to(areawin->cr, wpt->x - 3., wpt->y - 3.);
+   cairo_line_to(areawin->cr, wpt->x + 3., wpt->y + 3.);
+   cairo_move_to(areawin->cr, wpt->x + 3., wpt->y - 3.);
+   cairo_line_to(areawin->cr, wpt->x - 3., wpt->y + 3.);
+   cairo_stroke(areawin->cr);
+
+   cairo_restore(areawin->cr);
+}
+
+void UDrawXLine(XPoint opt, XPoint cpt)
+{
+   XPoint upt, vpt;
+   double dashes[] = {4., 4.};
+
+   if (!areawin->redraw_ongoing) {
+      areawin->redraw_needed = True;
+      return;
+   }
+
+   cairo_save(areawin->cr);
+   cairo_identity_matrix(areawin->cr);
+
+   xc_cairo_set_color(AUXCOLOR);
+   cairo_set_dash(areawin->cr, dashes, sizeof(dashes) / sizeof(double), 0.);
+   cairo_set_line_width(areawin->cr, .75);
+
+   user_to_window(cpt, &upt);
+   user_to_window(opt, &vpt);
+   cairo_move_to(areawin->cr, vpt.x, vpt.y);
+   cairo_line_to(areawin->cr, upt.x, upt.y);
+   cairo_stroke(areawin->cr);
+
+   cairo_set_dash(areawin->cr, NULL, 0, 0.);
+   cairo_move_to(areawin->cr, upt.x - 3., upt.y - 3.);
+   cairo_line_to(areawin->cr, upt.x + 3., upt.y + 3.);
+   cairo_move_to(areawin->cr, upt.x + 3., upt.y - 3.);
+   cairo_line_to(areawin->cr, upt.x - 3., upt.y + 3.);
+   cairo_stroke(areawin->cr);
+
+   cairo_restore(areawin->cr);
+}
+
+/*-------------------------------------------------------------------------*/
+
+void UDrawBox(XPoint origin, XPoint corner)
+{
+   XPoint worig, wcorn;
+   double r, g, b, a;
+   
+   if (!areawin->redraw_ongoing) {
+      areawin->redraw_needed = True;
+      return;
+   }
+
+   user_to_window(origin, &worig);
+   user_to_window(corner, &wcorn);
+
+   cairo_save(areawin->cr);
+   cairo_identity_matrix(areawin->cr);
+
+   cairo_set_line_width(areawin->cr, 1.0);
+   cairo_set_dash(areawin->cr, NULL, 0, 0.);
+   cairo_set_line_cap(areawin->cr, CAIRO_LINE_CAP_SQUARE);
+   cairo_set_line_join(areawin->cr, CAIRO_LINE_JOIN_MITER);
+
+   cairo_move_to(areawin->cr, worig.x + .5, worig.y + .5);
+   cairo_line_to(areawin->cr, worig.x + .5, wcorn.y + .5);
+   cairo_line_to(areawin->cr, wcorn.x + .5, wcorn.y + .5);
+   cairo_line_to(areawin->cr, wcorn.x + .5, worig.y + .5);
+   cairo_close_path(areawin->cr);
+
+   xc_cairo_set_color(AUXCOLOR);
+   cairo_pattern_get_rgba(cairo_get_source(areawin->cr), &r, &g, &b, &a);
+   cairo_set_source_rgba(areawin->cr, r, g, b, .1 * a);
+   cairo_fill_preserve(areawin->cr);
+   cairo_set_source_rgba(areawin->cr, r, g, b, a);
+   cairo_stroke(areawin->cr);
+
+   cairo_restore(areawin->cr);
+}
+
+/*----------------------------------------------------------------------*/
+/* Draw a box indicating the dimensions of the edit element that most	*/
+/* closely reach the position "corner".					*/
+/*----------------------------------------------------------------------*/
+
+float UDrawRescaleBox(XPoint *corner)
+{
+   XPoint newpoints[5];
+   float newscale;
+
+   if (!areawin->redraw_ongoing) {
+      areawin->redraw_needed = True;
+      /* No return here, since the return value might be needed? */
+   }
+
+   if (areawin->selects == 0)
+      return 0.;
+
+   newscale = UGetRescaleBox(corner, newpoints);
+
+   if (areawin->redraw_ongoing) {
+      int i;
+      cairo_save(areawin->cr);
+      xc_cairo_set_color(AUXCOLOR);
+      cairo_set_dash(areawin->cr, NULL, 0, 0.);
+      cairo_set_line_cap(areawin->cr, CAIRO_LINE_CAP_ROUND);
+      cairo_set_line_join(areawin->cr, CAIRO_LINE_JOIN_BEVEL);
+      cairo_move_to(areawin->cr, newpoints[0].x, newpoints[0].y);
+      for (i = 1; i < 4; i++)
+         cairo_line_to(areawin->cr, newpoints[i].x, newpoints[i].y);
+      xc_cairo_strokepath(0, 1);
+      cairo_restore(areawin->cr);
+   }
+   
+   return newscale;
+}
+
+/*-------------------------------------------------------------------------*/
+
+void UDrawBBox()
+{
+   XPoint	origin;
+   XPoint	worig, wcorn, corner;
+   objinstptr	bbinst = areawin->topinstance;
+
+   if (!areawin->redraw_ongoing) {
+      areawin->redraw_needed = True;
+      return;
+   }
+
+   if ((!areawin->bboxon) || (checkforbbox(topobject) != NULL)) return;
+
+   origin = bbinst->bbox.lowerleft;
+   corner.x = origin.x + bbinst->bbox.width;
+   corner.y = origin.y + bbinst->bbox.height;
+
+   /* Include any schematic labels in the bounding box.	*/
+   extendschembbox(bbinst, &origin, &corner);
+
+   user_to_window(origin, &worig);
+   user_to_window(corner, &wcorn);
+
+   cairo_save(areawin->cr);
+   cairo_identity_matrix(areawin->cr);
+
+   xc_cairo_set_color(BBOXCOLOR);
+   cairo_set_line_width(areawin->cr, 1.0);
+   cairo_set_dash(areawin->cr, NULL, 0, 0.);
+   cairo_set_line_cap(areawin->cr, CAIRO_LINE_CAP_SQUARE);
+   cairo_set_line_join(areawin->cr, CAIRO_LINE_JOIN_MITER);
+
+   cairo_move_to(areawin->cr, worig.x + .5, worig.y + .5);
+   cairo_line_to(areawin->cr, worig.x + .5, wcorn.y + .5);
+   cairo_line_to(areawin->cr, wcorn.x + .5, wcorn.y + .5);
+   cairo_line_to(areawin->cr, wcorn.x + .5, worig.y + .5);
+   cairo_close_path(areawin->cr);
+   cairo_stroke(areawin->cr);
+
+   cairo_restore(areawin->cr);
+}
+
+/*----------------------------------------------------------------------*/
+/* Main recursive object instance drawing routine.			*/
+/*    context is the instance information passed down from above	*/
+/*    theinstance is the object instance to be drawn			*/
+/*    level is the level of recursion 					*/
+/*    passcolor is the inherited color value passed to object		*/
+/*    passwidth is the inherited linewidth value passed to the object	*/
+/*    stack contains graphics context information			*/
+/*----------------------------------------------------------------------*/
+
+void UDrawObject(objinstptr theinstance, short level, int passcolor,
+		float passwidth, pushlistptr *stack)
+{
+   genericptr	*areagen;
+   float	tmpwidth;
+   int		defaultcolor = passcolor;
+   int		curcolor = passcolor;
+   int		thispart;
+   short	savesel;
+   XPoint 	bboxin[2], bboxout[2];
+   u_char	xm, ym;
+   objectptr	theobject = theinstance->thisobject;
+
+   if (!areawin->redraw_ongoing) {
+      areawin->redraw_needed = True;
+      return;
+   }
+
+   /* Save the number of selections and set it to zero while we do the	*/
+   /* object drawing.							*/
+
+   savesel = areawin->selects;
+   areawin->selects = 0;
+
+   /* All parts are given in the coordinate system of the object, unless */
+   /* this is the top-level object, in which they will be interpreted as */
+   /* relative to the screen.						 */
+
+   UPushCTM();
+
+   if (level != 0)
+       UPreMultCTM(DCTM, theinstance->position, theinstance->scale,
+			theinstance->rotation);
+
+   if (theinstance->style & LINE_INVARIANT)
+      passwidth /= fabs(theinstance->scale);
+
+   /* do a quick test for intersection with the display window */
+
+   bboxin[0].x = theobject->bbox.lowerleft.x;
+   bboxin[0].y = theobject->bbox.lowerleft.y;
+   bboxin[1].x = theobject->bbox.lowerleft.x + theobject->bbox.width;
+   bboxin[1].y = theobject->bbox.lowerleft.y + theobject->bbox.height; 
+   if (level == 0)
+      extendschembbox(theinstance, &(bboxin[0]), &(bboxin[1]));
+   UTransformbyCTM(DCTM, bboxin, bboxout, 2);
+
+   xm = (bboxout[0].x < bboxout[1].x) ? 0 : 1;  
+   ym = (bboxout[0].y < bboxout[1].y) ? 0 : 1;  
+
+   if (bboxout[xm].x < areawin->width && bboxout[ym].y < areawin->height &&
+       bboxout[1 - xm].x > 0 && bboxout[1 - ym].y > 0) {       
+
+     /* make parameter substitutions */
+     psubstitute(theinstance);
+
+     /* draw all of the elements */
+   
+     tmpwidth = UTopTransScale(passwidth);
+     cairo_set_line_width(areawin->cr, tmpwidth);
+     cairo_set_dash(areawin->cr, NULL, 0, 0.);
+     cairo_set_line_cap(areawin->cr, CAIRO_LINE_CAP_ROUND);
+     cairo_set_line_join(areawin->cr, CAIRO_LINE_JOIN_BEVEL);
+
+     /* guard against plist being regenerated during a redraw by the	*/
+     /* expression parameter mechanism (should that be prohibited?)	*/
+
+     for (thispart = 0; thispart < theobject->parts; thispart++) {
+       areagen = theobject->plist + thispart;
+       if ((*areagen)->type & DRAW_HIDE) continue;
+
+       if (defaultcolor != DOFORALL) {
+	  if ((*areagen)->color != curcolor) {
+	     if ((*areagen)->color == DEFAULTCOLOR)
+		curcolor = defaultcolor;
+	     else
+		curcolor = (*areagen)->color;
+
+	     XcTopSetForeground(curcolor);
+	  }
+       }
+
+       switch(ELEMENTTYPE(*areagen)) {
+	  case(POLYGON):
+	     if (level == 0 || !((TOPOLY(areagen))->style & BBOX))
+                UDrawPolygon(TOPOLY(areagen), passwidth);
+	     break;
+   
+	  case(SPLINE):
+             UDrawSpline(TOSPLINE(areagen), passwidth);
+	     break;
+   
+	  case(ARC):
+             UDrawArc(TOARC(areagen), passwidth);
+	     break;
+
+	  case(PATH):
+	     UDrawPath(TOPATH(areagen), passwidth);
+	     break;
+
+	  case(GRAPHIC):
+	     UDrawGraphic(TOGRAPHIC(areagen));
+	     break;
+   
+          case(OBJINST):
+             UDrawObject(TOOBJINST(areagen), level + 1, curcolor, passwidth, stack);
+	     break;
+   
+  	  case(LABEL): 
+	     if (level == 0 || TOLABEL(areagen)->pin == False)
+                UDrawString(TOLABEL(areagen), curcolor, theinstance);
+	     else if ((TOLABEL(areagen)->justify & PINVISIBLE) && areawin->pinpointon)
+                UDrawString(TOLABEL(areagen), curcolor, theinstance);
+	     else if (TOLABEL(areagen)->justify & PINVISIBLE)
+                UDrawStringNoX(TOLABEL(areagen), curcolor, theinstance);
+	     else if (level == 1 && TOLABEL(areagen)->pin &&
+			TOLABEL(areagen)->pin != INFO && areawin->pinpointon)
+		UDrawXDown(TOLABEL(areagen));
+	     break;
+       }
+     }
+
+     /* restore the color passed to the object, if different from current color */
+
+     if ((defaultcolor != DOFORALL) && (passcolor != curcolor))
+	XTopSetForeground(passcolor);
+   }
+
+   /* restore the selection list (if any) */
+   areawin->selects = savesel;
+   UPopCTM();
+}
+
+/*-------------------------------------------------------------------------*/
+
+static void xc_cairo_strokepath(short style, float width)
+{
+   float tmpwidth;
+
+   if (!(style & CLIPMASK) || (areawin->showclipmasks == TRUE)) {
+      if (style & FILLED || (!(style & FILLED) && style & OPAQUE)) {
+         if ((style & FILLSOLID) == FILLSOLID)
+	    cairo_fill_preserve(areawin->cr);
+	 else {
+	    double red, green, blue, alpha;
+	    cairo_pattern_get_rgba(cairo_get_source(areawin->cr),
+		  &red, &green, &blue, &alpha);
+            if (!(style & FILLED))
+	       cairo_set_source_rgba(areawin->cr, 1., 1., 1., alpha);
+	    else {
+	       double m = (1 + ((style & FILLSOLID) >> 5)) / 8.;
+	       if (style & OPAQUE) {
+		  double n = (1. - m); 
+		  cairo_set_source_rgba(areawin->cr, m * red + n, 
+			m * green + n, m * blue + n, alpha);
+	       }
+	       else
+		  cairo_set_source_rgba(areawin->cr, red, green, blue,
+			m * alpha);
+	    }
+	    cairo_fill_preserve(areawin->cr);
+	    cairo_set_source_rgba(areawin->cr, red, green, blue, alpha);
+         }
+      }
+      if (!(style & NOBORDER)) {
+	 cairo_set_line_width(areawin->cr, width);
+	 cairo_set_line_join(areawin->cr, (style & SQUARECAP) ? 
+	       CAIRO_LINE_JOIN_MITER : CAIRO_LINE_JOIN_BEVEL);
+         if (style & (DASHED | DOTTED)) {
+            double dashes[2] = {4.0 * width, 4.0 * width};
+	    if (style & DOTTED)
+	       dashes[0] = width;
+	    cairo_set_dash(areawin->cr, dashes, 2, 0.0);
+	    cairo_set_line_width(areawin->cr, width);
+	    cairo_set_line_cap(areawin->cr, CAIRO_LINE_CAP_BUTT);
+         }
+         else {
+	    cairo_set_dash(areawin->cr, NULL, 0, 0.0);
+	    cairo_set_line_cap(areawin->cr, (style & SQUARECAP) ? 
+	          CAIRO_LINE_CAP_SQUARE : CAIRO_LINE_CAP_ROUND);
+	 }
+
+         /* draw the spline and close off if so specified */
+         if (!(style & UNCLOSED))
+	    cairo_close_path(areawin->cr);
+	 cairo_stroke_preserve(areawin->cr);
+      }
+   }
+   if (style & CLIPMASK)
+      cairo_clip_preserve(areawin->cr);
+   cairo_new_path(areawin->cr); // clear preserved paths
+}
+
+/*-------------------------------------------------------------------------*/
+
+void UDrawPolygon(polyptr thepoly, float passwidth)
+{
+   int i;
+   
+   if (!areawin->redraw_ongoing) {
+      areawin->redraw_needed = True;
+      return;
+   }
+
+   if (thepoly->number) {
+      cairo_move_to(areawin->cr, thepoly->points[0].x, thepoly->points[0].y);
+      for (i = 1; i < thepoly->number; i++)
+         cairo_line_to(areawin->cr, thepoly->points[i].x, thepoly->points[i].y);
+      xc_cairo_strokepath(thepoly->style, thepoly->width * passwidth);
+   }
+}
+
+/*-------------------------------------------------------------------------*/
+
+void UDrawArc(arcptr thearc, float passwidth)
+{
+   XPoint tmppoints[RSTEPS + 2];
+   float scaledwidth;
+
+   if (!areawin->redraw_ongoing) {
+      areawin->redraw_needed = True;
+      return;
+   }
+
+   scaledwidth = thearc->width * passwidth;
+
+   if (abs(thearc->radius) == thearc->yaxis)
+      cairo_arc(areawin->cr, thearc->position.x, thearc->position.y,
+	    abs(thearc->radius), thearc->angle1 * M_PI / 180.0,
+	    thearc->angle2 * M_PI / 180.0);
+   else {
+      // perform elliptical arc, as described in cairo manual
+      cairo_save(areawin->cr);
+      cairo_translate(areawin->cr, thearc->position.x, thearc->position.y);
+      cairo_scale(areawin->cr, abs(thearc->radius), thearc->yaxis);
+      cairo_arc(areawin->cr, 0.0, 0.0, 1.0, thearc->angle1 * M_PI / 180.0,
+	    thearc->angle2 * M_PI / 180.0);
+      cairo_restore(areawin->cr);
+   }
+   xc_cairo_strokepath(thearc->style, thearc->width * passwidth);
+   if (thearc->cycle != NULL) {
+      UDrawXLine(thearc->position, areawin->save);
+   }
+}
+
+/*-------------------------------------------------------------------------*/
+
+void UDrawPath(pathptr thepath, float passwidth)
+{
+   genericptr	*genpath;
+   polyptr	thepoly;
+   splineptr	thespline;
+   Boolean	draweditlines = FALSE;
+   
+   if (!areawin->redraw_ongoing) {
+      areawin->redraw_needed = True;
+      return;
+   }
+
+   /* First pass---check for any splines that are being edited.  If	*/
+   /* any one is, then draw all control points for all splines in the	*/
+   /* path.								*/
+
+   for (genpath = thepath->plist; genpath < thepath->plist + thepath->parts;
+	  genpath++) {
+      if (ELEMENTTYPE(*genpath) == SPLINE) {
+	 thespline = TOSPLINE(genpath);
+	 if (thespline->cycle != NULL) {
+	    draweditlines = TRUE;
+	    break;
+         }
+      }
+   }
+
+   /* Draw first point */
+   if (thepath->parts) {
+      genpath = thepath->plist;
+      switch(ELEMENTTYPE(*genpath)) {
+	 case POLYGON:
+	    thepoly = TOPOLY(genpath);
+	    cairo_move_to(areawin->cr, thepoly->points[0].x,
+		  thepoly->points[0].y);
+	    break;
+	 case SPLINE:
+	    thespline = TOSPLINE(genpath);
+	    cairo_move_to(areawin->cr, thespline->ctrl[0].x,
+		  thespline->ctrl[0].y);
+	    break;
+      }
+   }
+   /* Draw all other points */         
+   for (genpath = thepath->plist; genpath < thepath->plist + thepath->parts;
+	  genpath++) {
+      int i;
+      switch(ELEMENTTYPE(*genpath)) {
+	 case POLYGON:
+	    thepoly = TOPOLY(genpath);
+	    for (i = 1; i < thepoly->number; i++)
+	       cairo_line_to(areawin->cr, thepoly->points[i].x,
+		     thepoly->points[i].y);
+	    break;
+	 case SPLINE:
+	    thespline = TOSPLINE(genpath);
+	    cairo_curve_to(areawin->cr, thespline->ctrl[1].x,
+		  thespline->ctrl[1].y, thespline->ctrl[2].x,
+		  thespline->ctrl[2].y, thespline->ctrl[3].x,
+		  thespline->ctrl[3].y);
+	    break;
+      }
+   }
+   xc_cairo_strokepath(thepath->style, thepath->width * passwidth);
+   /* Finally draw the edit lines */ 
+   if (draweditlines) {
+      for (genpath = thepath->plist; genpath < thepath->plist + thepath->parts;
+	    genpath++) {
+         if (ELEMENTTYPE(*genpath) == SPLINE) {
+	    thespline = TOSPLINE(genpath);
+	    UDrawXLine(thespline->ctrl[0], thespline->ctrl[1]);  
+	    UDrawXLine(thespline->ctrl[3], thespline->ctrl[2]);
+         }
+      }
+   }
+}
+
+/*-------------------------------------------------------------------------*/
+
+void UDrawSpline(splineptr thespline, float passwidth)
+{
+   if (!areawin->redraw_ongoing) {
+      areawin->redraw_needed = True;
+      return;
+   }
+
+   cairo_move_to(areawin->cr, thespline->ctrl[0].x, thespline->ctrl[0].y);
+   cairo_curve_to(areawin->cr, thespline->ctrl[1].x, thespline->ctrl[1].y,
+         thespline->ctrl[2].x, thespline->ctrl[2].y,
+	 thespline->ctrl[3].x, thespline->ctrl[3].y);
+   xc_cairo_strokepath(thespline->style, thespline->width * passwidth);
+   if (thespline->cycle != NULL) {
+      UDrawXLine(thespline->ctrl[0], thespline->ctrl[1]);  
+      UDrawXLine(thespline->ctrl[3], thespline->ctrl[2]);
+   }
+}
+
+/*-------------------------------------------------------------------------*/
+
+void UDrawGraphic(graphicptr gp)
+{
+   if (!areawin->redraw_ongoing) {
+      areawin->redraw_needed = True;
+      return;
+   }
+
+   cairo_save(areawin->cr);
+   cairo_translate(areawin->cr,
+	 gp->position.x, 
+	 gp->position.y);
+   cairo_rotate(areawin->cr, gp->rotation * M_PI / -180.);
+   cairo_scale(areawin->cr, gp->scale, -gp->scale);
+   cairo_set_source_surface(areawin->cr, gp->source,
+	 - cairo_image_surface_get_width(gp->source) / 2., 
+	 - cairo_image_surface_get_height(gp->source) / 2.);
+   cairo_paint(areawin->cr);
+   cairo_restore(areawin->cr);
+}
+
+/*----------------------------*/
+/* Draw the grids, axis, etc. */
+/*----------------------------*/
+
+void draw_grids(void)
+{
+   double spc, spc2, spc3;
+   cairo_matrix_t m = {
+	 .xx = 1., .yx = 0., .xy = 0., .yy = -1., 
+	 .x0 = -areawin->pcorner.x * areawin->vscale,
+	 .y0 = areawin->height + areawin->pcorner.y * areawin->vscale
+   };
+
+   if (!areawin->redraw_ongoing) {
+      areawin->redraw_needed = True;
+      return;
+   }
+
+   cairo_save(areawin->cr);
+
+   /* draw lines for grid */
+   spc = xobjs.pagelist[areawin->page]->gridspace * areawin->vscale;
+   if (areawin->gridon && spc > 8) {
+      double x, y;
+      int ix, iy;
+      /* find bottom-right point on the grid */
+      double xbegin = areawin->width;
+      double ybegin = areawin->height;
+      cairo_set_matrix(areawin->cr, &m);
+      cairo_scale(areawin->cr, spc, spc);
+      cairo_device_to_user(areawin->cr, &xbegin, &ybegin);
+      xbegin = floor(xbegin);
+      ybegin = ceil(ybegin);
+      ix = xbegin;
+      iy = ybegin;
+      cairo_user_to_device(areawin->cr, &xbegin, &ybegin);
+      cairo_identity_matrix(areawin->cr);
+      /* draw the grid */
+      xc_cairo_set_color(GRIDCOLOR);
+      cairo_set_line_width(areawin->cr, 1.);
+      for (x = xbegin; x >= 0.; x -= spc, ix--) {
+	 if (!ix && areawin->axeson) continue; /* do not draw main axis */
+         cairo_move_to(areawin->cr, floor(x) + .5, .5);
+         cairo_line_to(areawin->cr, floor(x) + .5, areawin->height + .5);
+      }
+      for (y = ybegin; y >= 0.; y -= spc, iy++) {
+	 if (!iy && areawin->axeson) continue; /* do not draw main axis */
+         cairo_move_to(areawin->cr, .5, floor(y) + .5);
+         cairo_line_to(areawin->cr, areawin->width + .5, floor(y) + .5);
+      }
+      cairo_stroke(areawin->cr);
+   }
+
+
+   if (areawin->axeson) {
+      /* find main axis */
+      double x = 0, y = 0;
+      cairo_set_matrix(areawin->cr, &m);
+      cairo_user_to_device(areawin->cr, &x, &y);
+      cairo_identity_matrix(areawin->cr);
+      /* draw the grid */
+      xc_cairo_set_color(AXESCOLOR);
+      cairo_set_line_width(areawin->cr, 1.);
+      cairo_move_to(areawin->cr, floor(x) + .5, .5);
+      cairo_line_to(areawin->cr, floor(x) + .5, areawin->height + .5);
+      cairo_move_to(areawin->cr, .5, floor(y) + .5);
+      cairo_line_to(areawin->cr, areawin->width + .5, floor(y) + .5);
+      cairo_stroke(areawin->cr);
+   }
+
+   /* bounding box goes beneath everything except grid/axis lines */
+   UDrawBBox();
+
+   /* draw a little red dot at each snap-to point */
+   spc2 = xobjs.pagelist[areawin->page]->snapspace * areawin->vscale;
+   if (areawin->snapto && spc2 > 8) {
+      double x, y;
+      /* find bottom-right point on the grid */
+      double xbegin = areawin->width;
+      double ybegin = areawin->height;
+      cairo_set_matrix(areawin->cr, &m);
+      cairo_scale(areawin->cr, spc2, spc2);
+      cairo_device_to_user(areawin->cr, &xbegin, &ybegin);
+      xbegin = floor(xbegin);
+      ybegin = ceil(ybegin);
+      cairo_user_to_device(areawin->cr, &xbegin, &ybegin);
+      cairo_identity_matrix(areawin->cr);
+      /* draw the grid */
+      xc_cairo_set_color(SNAPCOLOR);
+      cairo_set_line_width(areawin->cr, 1.);
+      cairo_set_line_cap(areawin->cr, CAIRO_LINE_CAP_ROUND);
+      for (x = xbegin; x >= 0.; x -= spc2) {
+      	 for (y = ybegin; y >= 0.; y -= spc2) {
+            cairo_move_to(areawin->cr, floor(x) + .5, floor(y) + .5);
+            cairo_close_path(areawin->cr);
+         }
+      }
+      cairo_stroke(areawin->cr);
+   }
+
+   /* Draw major snap points */
+   spc3 = spc * 20.;
+   if (spc > 4.) {
+      double x, y;
+      /* find bottom-right point on the grid */
+      double xbegin = areawin->width;
+      double ybegin = areawin->height;
+      cairo_set_matrix(areawin->cr, &m);
+      cairo_scale(areawin->cr, spc3, spc3);
+      cairo_device_to_user(areawin->cr, &xbegin, &ybegin);
+      xbegin = floor(xbegin);
+      ybegin = ceil(ybegin);
+      cairo_user_to_device(areawin->cr, &xbegin, &ybegin);
+      cairo_identity_matrix(areawin->cr);
+      /* draw the grid */
+      xc_cairo_set_color(GRIDCOLOR);
+      cairo_set_line_width(areawin->cr, 3.);
+      cairo_set_line_cap(areawin->cr, CAIRO_LINE_CAP_ROUND);
+      for (x = xbegin; x >= 0.; x -= spc3) {
+      	 for (y = ybegin; y >= 0.; y -= spc3) {
+            cairo_move_to(areawin->cr, floor(x) + .5, floor(y) + .5);
+            cairo_close_path(areawin->cr);
+         }
+      }
+      cairo_stroke(areawin->cr);
+   }
+   cairo_restore(areawin->cr);
+}
+
+/*---------------------------------------------------------------------*/
+/* draw a single character at 0, 0 using current transformation matrix */
+/*---------------------------------------------------------------------*/
+
+float UDrawChar(u_char code, short styles, short ffont, int groupheight,
+	int passcolor, float passwidth)
+{
+   objectptr drawchar;
+   XPoint alphapts[2];
+   float localwidth;
+   objinst charinst;
+
+   if (!areawin->redraw_ongoing) {
+      areawin->redraw_needed = True;
+      /* No return here, since the return value might be needed? */
+   }
+
+   if ((ffont >= fontcount) || (fonts[ffont].encoding == NULL))
+      return 0;
+
+   alphapts[0].x = 0;
+   alphapts[0].y = 0;
+   charinst.type = OBJINST;
+   charinst.color = DEFAULTCOLOR;
+   charinst.rotation = 0;
+   charinst.scale = fonts[ffont].scale;
+   charinst.position = alphapts[0];
+   charinst.params = NULL;
+   
+   /* get proper font and character */
+
+   drawchar = fonts[ffont].encoding[(u_char)code];
+   charinst.thisobject = drawchar;
+
+   if (fonts[ffont].cairo_family) {
+      cairo_save(areawin->cr);
+      cairo_text_extents_t extents;
+      cairo_select_font_face(areawin->cr, fonts[ffont].cairo_family,
+	    fonts[ffont].slant, fonts[ffont].weight);
+   }
+
+   if (!fonts[ffont].cairo_family && (fonts[ffont].flags & 0x22) == 0x22) {
+      /* font is not a cairo font and it is derived and italic */
+      USlantCTM(DCTM, 0.25);  		/* premultiply by slanting function */
+   }
+
+   /* Draw glyph */
+   if (!(styles & 64) && areawin->redraw_ongoing) {
+      if (fonts[ffont].cairo_family) {
+	 cairo_set_font_size (areawin->cr, 40.); /* TODO: Why 40? */
+	 cairo_scale(areawin->cr, 1., -1.);
+	 cairo_move_to (areawin->cr, 0., 0.);
+	 cairo_show_text(areawin->cr, fonts[ffont].utf8encoding[code]);
+   	 cairo_new_path(areawin->cr);
+      }	
+      else
+	 UDrawObject(&charinst, SINGLE, passcolor, passwidth, NULL);
+   }
+
+   /* Determine character width */
+   if (fonts[ffont].cairo_family) {
+      /* Determine localwidth on a fixed font size of 100, to prevent hinting */
+      /* from destroying scale independance */
+      cairo_text_extents_t extents;
+      cairo_identity_matrix(areawin->cr);
+      cairo_set_font_size(areawin->cr, 100.);
+      cairo_text_extents(areawin->cr, fonts[ffont].utf8encoding[code],
+	    &extents);
+      localwidth = extents.x_advance * fonts[ffont].scale / 100. * 40.; /* TODO: Why 40? */
+      cairo_restore(areawin->cr);
+   }
+   else
+      localwidth = (drawchar->bbox.lowerleft.x + drawchar->bbox.width)
+	    * fonts[ffont].scale;
+
+   /* under- and overlines */
+   if (!(styles & 64)) {
+      if (styles & 8)
+         alphapts[0].y = alphapts[1].y = -6;
+      else if (styles & 16)
+         alphapts[0].y = alphapts[1].y = groupheight + 4;
+      if (styles & 24 && areawin->redraw_ongoing) {
+         alphapts[0].x = 0; alphapts[1].x = localwidth;
+	 cairo_set_line_width(areawin->cr, passwidth);
+	 cairo_move_to(areawin->cr, alphapts[0].x, alphapts[0].y);
+	 cairo_line_to(areawin->cr, alphapts[1].x, alphapts[1].y);
+	 cairo_stroke(areawin->cr);
+      }
+   }
+   return localwidth;
+}
+
+float xc_cairo_get_char_extents(const fontinfo *font, unsigned char c,
+      float *top, float *bottom)
+{
+   /* Determine localwidth on a fixed font size of 100, to */
+   /* prevent hinting from destroying scale independance */
+   cairo_text_extents_t extents;
+   cairo_save(areawin->cr);
+   cairo_identity_matrix(areawin->cr);
+   cairo_select_font_face(areawin->cr, font->cairo_family, font->slant,
+	 fonts->weight);
+   cairo_set_font_size(areawin->cr, 100.);
+   cairo_text_extents(areawin->cr, font->utf8encoding[c], &extents);
+   cairo_restore(areawin->cr);
+
+   if (top)
+      *top = -extents.y_bearing * 40. / 100.;
+   if (bottom)
+      *bottom = (extents.height - extents.y_bearing) * 40. / 100.;
+   return extents.x_advance * 40. / 100.; /* TODO: Why 40? */
+}	
+
+/*----------------------------------------------------------------------*/
+/* A light wrapper around cairo_surface_t, to a generalized xcImage     */
+/*----------------------------------------------------------------------*/
+
+/* caching for cairo_surface_t */
+static xcImage *xcImagePixel_oldimg = NULL;
+static uint32_t *xcImagePixel_data;
+static int xcImagePixel_width;
+static int xcImagePixel_height;
+
+static inline void xcImageCheckCache(xcImage *img)
+{
+   if (img != xcImagePixel_oldimg) {
+      xcImagePixel_oldimg = img;
+      xcImagePixel_data = (uint32_t*) cairo_image_surface_get_data(img);
+      xcImagePixel_width = cairo_image_surface_get_width(img);
+      xcImagePixel_height = cairo_image_surface_get_height(img);
+   }
+}
+
+xcImage *xcImageCreate(int width, int height)
+{
+   return cairo_image_surface_create(CAIRO_FORMAT_RGB24, width, height);
+}
+
+void xcImageDestroy(xcImage *img)
+{
+   cairo_surface_destroy(img);
+}
+
+int xcImageGetWidth(xcImage *img)
+{
+   xcImageCheckCache(img);
+   return xcImagePixel_width;
+}
+
+int xcImageGetHeight(xcImage *img)
+{
+   xcImageCheckCache(img);
+   return xcImagePixel_height;
+}
+
+void xcImagePutPixel(xcImage *img, int x, int y, u_char r, u_char g, u_char b)
+{
+   xcImageCheckCache(img);
+   xcImagePixel_data[y * xcImagePixel_width + x] = (r << 16) | (g << 8) | b;
+}
+
+void xcImageGetPixel(xcImage *img, int x, int y, u_char *r, u_char *g,
+      u_char *b)
+{
+   xcImageCheckCache(img);
+   uint32_t argb = xcImagePixel_data[y * xcImagePixel_width + x];
+   *r = argb >> 16;
+   *g = argb >> 8;
+   *b = argb;
+}
+
+#endif /* HAVE_CAIRO */

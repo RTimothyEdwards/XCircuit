@@ -1,0 +1,325 @@
+XCircuit v3.10
+-----------------------------------------------------------------------------
+
+An X11 drawing program [especially for circuit schematics]
+(c) 2017 Tim Edwards  (see copyright notice in ./COPYRIGHT)
+August 1993 -- April 2017
+-----------------------------------------------------------------------------
+
+Compilation/Installation notes:
+(Online version at http://opencircuitdesign.com/xcircuit/install.html)
+
+1) All compile-time features are set during the ./configure process.
+   Run "./configure --help" for a list of configure options.  For most
+   users, the relevant options are the following:
+
+   --with-cairo		Enable cairo graphics
+
+   --with-tcl		Configure xcircuit as an extension to Tcl/Tk.  Tcl
+			becomes the default interpreter.  Option is mutually
+			exclusive with "--with-python".  A feature of this
+			version is that the interpreter is available from
+			the calling terminal concurrently with the GUI.
+			Another feature of this version is that the graphics
+			are handled by Tk widgets instead of the troublesome
+			"Xw" widgets in the distribution.  As of version
+			3.1.7 where most of the bugs have been resolved,
+			use of this option is highly encouraged.
+
+   --with-python	Configure xcircuit with the embedded Python
+			interpreter.  Option "--with-python" is disabled
+			by default, and has no effect if "--with-tcl" has
+			been selected.  The python interface is less
+			well-developed than the Tcl interface.  If you do
+			not intend to make use of the interpreter
+			command-line interface, there is probably no reason
+			to select this.
+
+   --prefix=PREFIX	Location to install xcircuit.  Defaults to
+			/usr/local/.  The executable goes to /usr/local/bin/,
+			man pages to /usr/local/man/man1/, and everything
+			else to /usr/local/lib/xcircuit-VERSION/.  Defaults
+			can be separated by explicitly declaring
+			--exec-prefix=DIR, --mandir=DIR, and --libdir=DIR.
+
+   The following option is experimental at present and will be changed to
+   be enabled by default when the package is deemed stable:
+
+   --enable-asg		Configure XCircuit with the automatic schematic
+			generation (ASG) package.  This package allows
+			XCircuit to read SPICE decks and produce schematics
+			from them.  Future functions include reading EDIF
+			netlists (from Verilog and/or VHDL), and automatially
+			routing layouts.
+
+   The following options are probably not worth messing with:
+
+   --disable-lgf	Save space by not compiling the compatibility with
+			"analog" and "diglog" .lgf-format files.
+
+   --disable-schema	Don't compile the schematic capture system.  This
+			is a major feature of xcircuit, so disabling it is
+			not recommended.  However, you may do so if you
+			anticipate having no need for circuit netlists.
+
+   There are some other options which can be supplied to the "configure"
+   command-line which should only be needed in rare circumstances.  Most
+   users can ignore these.
+
+   --with-tcl=DIR	Tcl can be enabled with "--with-tcl" or
+			"--with-tcl=yes", and the Tcl library and include
+			directories will be automatically searched.  For
+			Tcl/Tk installations which cannot be found by the
+			automatic search, DIR should be the directory
+			containing "tclConfig.sh".
+
+   --with-tk=DIR	Enabling Tcl for XCircuit implies "--with-tk".
+			However, for Tk installations which cannot be
+			found by automatic search and which cannot be
+			found by specifying "--with-tcl=DIR", DIR should
+			point to the directory containing "tkConfig.sh".
+
+   --with-python=DIR	If the configure step cannot find a Python
+			interpreter, it can be explicitly referenced.
+			Requires the Python library (libpythonVERSION.a
+			or libpythonVERSION.so) and the python include
+			file Python.h.  The Python option uses the Python
+			language as an interpreter for xcircuit.
+
+   --disable-double-buffer
+			This option is almost wholly deprecated due to the
+			speed of modern processors.  However, if you have
+			problems with slow rendering, you might find it
+			useful.
+
+   --with-xpm=DIR	If the configure step cannot find the XPM package,
+			it can be explicitly referenced.  The XPM package
+			enables the toolbar and an icon when xcircuit is
+			iconified.
+
+   --with-gs=DIR	If the configure step cannot find ghostscript,
+			it can be explicitly referenced.  The Ghostscript
+			option allows any PostScript file to be rendered
+			on the xcircuit background and saved with the
+			xcircuit file.
+
+   NOTE:  When xcircuit went from "imake" to GNU make, the default install
+   directory changed from /usr/local/lib to /usr/local/share/.  Since all
+   the other CAD tools xcircuit works with install by default to
+   /usr/local/lib, xcircuit version 3.1 has reverted to /usr/local/lib for
+   reasons of compatibility.  See item (4) below, "uninstall".
+
+2) Compile with the usual GNU-compile steps:
+
+	./configure
+	make
+	make install
+
+   The final step must be done as root if you are installing to default
+   locations (/usr/local/lib and /usr/local/bin).  XCircuit can be run
+   in test mode before installation (see item (3), below).
+   For the Tcl/Tk version the make steps are the same, assuming that
+   Tcl/Tk libraries and include files can be found on the system.  If
+   you specifically *don't* want the Tcl/Tk version, then do:
+
+	./configure --without-tcl
+	make
+	make install
+
+   If you want to test before installing, do the following (csh/tcsh
+   version; see item (3) for changes to line 4 for bash/ksh/sh):
+
+	./configure
+	make
+	setenv XCIRCUIT_LIB_DIR ./lib
+	setenv XCIRCUIT_SRC_DIR ./lib/tcl
+	lib/tcl/xcircuit.sh
+
+   after which, if all goes well, you can do "make install".
+
+3) NOTE:  To test xcircuit before installation, set environment variable
+
+	setenv XCIRCUIT_LIB_DIR ./lib		(csh, tcsh)
+	setenv XCIRCUIT_SRC_DIR ./lib/tcl
+
+	export XCIRCUIT_LIB_DIR=./lib		(bash)
+	export XCIRCUIT_SRC_DIR=./lib/tcl
+
+   before running the xcircuit executable.
+
+4) Uninstall:
+   If you have compiled previous versions of xcircuit, the only thing you
+   need to do to uninstall these versions is to remove the directory tree
+   at /usr/local/share/xcircuit-(version) or /usr/local/lib/xcircuit-(version)
+   for any version numbers which are not current.
+
+5) HP/IRIX users:  If the "make" process dies with an error creating the man
+   page, something like
+
+      /usr/ccs/bin/m4:xcircuit.1.m4:911 more than 4096 chars of argument text
+
+   be sure to use GNU m4.  This can be done during the configure process
+   (using appropriate substitutions) with the following command:
+
+      M4=<path to GNU m4> ./configure [options]
+
+6) 64-bit system users: Proper compile may require specifically using
+   configure option "--x-libraries=" to point to 64-bit libraries.
+   This has been fixed for the AMD Opteron under Fedora Core;  other
+   64-bit systems are untested.
+
+7) aclocal problems: In case during the make process the system complains
+   about a missing or out of date aclocal, rebuild the configure file with:
+
+      autoreconf -fi
+
+   And restart the ./configure command
+
+-----------------------------------------------------------------------------
+
+Shared Python Library:
+
+   NOTE:  The XCircuit build will be *much* smaller if you have a shared
+   python library.  However, the build instructions as of Python-2.1c2
+   don't include instructions for building a shared library under linux.
+   Here's how you do it:
+	1) In the Makefile: set
+		LDLIBRARY=libpython2.1.so
+	2) Also in the Makefile:
+		Add a case for libpython$(VERSION).so which looks
+		exactly like the case statement for unixware:
+
+        	linux) \
+            	    $(LDSHARED) -o $@ $(LIBRARY_OBJS) \
+            	    ;; \ 
+
+	3) Make until error (can't find libpython2.1.so)
+	4) Copy or move libpython2.1.so to /usr/local/lib or /usr/lib
+	5) Run (as root!) ldconfig -v -n /usr/local/lib  (or whereever
+		you just put the shared library) and confirm that it
+		found libpython2.1.so.
+	6) Finish "make" (should run to normal completion).
+
+   On my system, this is the difference between a 4MB xcircuit executable
+   and a 1.5MB executable.  That's a big difference!  Of course, Python
+   purists would say I should be embedding xcircuit in python, not the
+   other way around, then what need do I have for a shared library,
+   anyway?
+
+   Python source (and other information relating to Python) can be found
+   at www.python.org.  The Python interpreter is recommended, as XCircuit
+   eventually will rely on Python to handle writing netlists, for
+   flexibility in formatting.
+
+-----------------------------------------------------------------------------
+
+Extras:
+
+   The file examples/.xcircuitrc shows how to make a home-directory file
+to alter the behavior of xcircuit on startup.  It shows how to change the
+color scheme, add new fonts, override the default libraries, and change
+the editing behavior for polygons.  Note that if xcircuit is built with
+embedded Python, the syntax for .xcircuitrc will be Python syntax, and
+may use any Python commands in addition to the commands which hook into
+xcircuit functions.  The file examples/test.py is a sample Python script
+which features use of Python to create animated graphics within the
+xcircuit window, shows how to access on-screen elements and change
+their properties, and contains convenience function definitions for
+manipulating xcircuit elements.
+
+   Other files in the examples directory show how xcircuit can be
+used to draw various things, from a simple circuit schematic
+(vcoblock.ps) to an entire publishable-quality page of music 
+(prelude.ps), plus an example of a fancy page border for slide
+presentations.
+
+   The files psfiles/signal.lps and psfiles/musiclib.lps are examples
+of alternate or additional object libraries.  The library file lgf.lps
+is used primarily by the lgf-to-ps conversion routines, but has some
+different circuit objects in it.
+
+   The file psfiles/fonttest.ps is a short PostScript program you can
+use to get your printer to give you the names of all the built-in fonts
+that it knows about, which is useful because if you add a font name to
+xcircuit, the spelling has to be exactly correct or else the printer
+won't recognize it.
+
+   The file examples/gettext.py is a sample Python script which adds
+a Python command called "gettext(filename)".  gettext(filename) reads
+in file "filename", which should be an ASCII text file, and turns it
+into a label in XCircuit positioned at the cursor position.
+
+-----------------------------------------------------------------------------
+
+X Resources:
+
+   The Tcl/Tk version of XCircuit does not use the X resources but
+picks up resources from the file "resource.tcl" in the run-time
+library path (e.g., /usr/local/lib/xcircuit-3.8/resource.tcl).  The
+resource names are the same as those described below but are specified
+using the Tk "option add" command.
+
+   The color scheme of xcircuit has a default setup, but accepts 
+alternate color schemes using the following keywords which can be put
+in the X Defaults (.Xdefaults, .Xresources) file:
+
+   Resource name	    Description				Default
+   -------------------      ----------------------------        -------
+   xcircuit*foreground	    color of buttons and popups;	White
+   xcircuit*background	    background of buttons & popups;	DarkSlateGray
+   xcircuit.foreground	    drawing area foreground;		White
+   xcircuit.background	    drawing area background;		Black
+   xcircuit*gridcolor	    color of the grid lines;		Gray40
+   xcircuit*snapcolor	    color of the snap-to points;	Red
+   xcircuit*selectcolor	    color of a selected object;		Gold
+   xcircuit*querycolor	    to differentiate multiple objects;  Turquoise
+   xcircuit*axescolor	    color of the x, y axes;		NavajoWhite4
+   xcircuit*offbuttoncolor  text color of an inoperable button; Gray70
+   xcircuit*auxiliarycolor  text cursor and other things	Green
+   xcircuit*barcolor	    color of panning bars		Tan
+
+A secondary color scheme (for example, black-on-white) can be specified by
+adding "2" to each of the above resource names.  For example:
+
+   xcircuit*foreground2	    color of every object drawn;	Black
+   xcircuit*background2	    screen background color;		White
+
+Other resources accepted by xcircuit are:
+
+   xcircuit*width	    width of the drawing area (pixels);	600
+   xcircuit*height	    height of the drawing area;		500
+
+Normally, you will want to put the defaults in /usr/lib/X11/app-defaults.
+If you do not have root access, you will want to have them in your own
+home .Xdefaults file.  If the file is not found by xcircuit, the program
+will use its default color schemes, the main one being black-on-white,
+and the alternate being white-on-dark-gray.
+
+-----------------------------------------------------------------------------
+
+Altering, Copying, and/or Redistributing XCircuit:
+
+   XCircuit is distributed under the GNU GPL (General Public Licence).  See
+   the file COPYRIGHT in the top-level directory for details.
+
+-----------------------------------------------------------------------------
+
+XCircuit Home Page: 
+     "http://opencircuitdesign.com/xcircuit/"
+
+Online tutorial:
+     "http://opencircuitdesign.com/xcircuit/tutorial/tutorial.html"
+
+Schematic capture tutorial:
+     "http://opencircuitdesign.com/xcircuit/tutorial/tutorial2.html"
+
+-----------------------------------------------------------------------------
+
+Contact address (check the website above for a current address):
+		R. Timothy Edwards
+		19412 Cissel Manor Road
+		Poolesville, MD 20837
+
+		Phone: (301) 528-5030	(home)
+
+-----------------------------------------------------------------------------

@@ -1,0 +1,414 @@
+%! PostScript set of library objects for XCircuit
+%  Library name is: TR
+%  Version: 2.0
+%
+
+% XCircuitLib font library
+/TR::Aogonek {
+% 4 -5 24 31 bbox
+begingate
+1.00 0 0 0 TR::A
+1.00 0 16 0 TR::ced2
+endgate
+} def
+
+/TR::Lcaron {
+% 4 0 20 27 bbox
+begingate
+1.00 0 9 -4 TR::apostrophe
+1.00 0 0 0 TR::L
+endgate
+} def
+
+/TR::Scedil {
+% 4 -6 22 32 bbox
+begingate
+1.00 0 0 0 TR::S
+1.00 0 4 0 TR::cedilla
+endgate
+} def
+
+/TR::Sacute {
+% 4 0 22 36 bbox
+begingate
+1.00 0 0 0 TR::S
+1.00 0 4 4 TR::acute
+endgate
+} def
+
+/TR::Scaron {
+% 4 0 22 34 bbox
+begingate
+1.00 0 0 0 TR::S
+1.00 0 4 2 TR::vee
+endgate
+} def
+
+/TR::Zacute {
+% 4 0 22 34 bbox
+begingate
+1.00 0 0 0 TR::Z
+1.00 0 2 2 TR::acute
+endgate
+} def
+
+/TR::Zcaron {
+% 4 0 22 34 bbox
+begingate
+1.00 0 4 2 TR::vee
+1.00 0 0 0 TR::Z
+endgate
+} def
+
+/TR::Zdot {
+% 4 0 22 35 bbox
+begingate
+1.00 0 0 0 TR::Z
+1.00 0 8 32 TR::period
+endgate
+} def
+
+/TR::aogonek {
+% 4 -5 19 21 bbox
+begingate
+1.00 0 0 0 TR::a
+1.00 0 9 0 TR::ced2
+endgate
+} def
+
+/TR::lcaron {
+% 3 0 7 27 bbox
+begingate
+1.00 0 0 0 TR::l
+1.00 0 4 -4 TR::apostrophe
+endgate
+} def
+
+/TR::sacute {
+% 4 0 16 24 bbox
+begingate
+1.00 0 0 0 TR::s
+1.00 0 0 -8 TR::acute
+endgate
+} def
+
+/TR::zacute {
+% 4 0 16 24 bbox
+begingate
+1.00 0 0 0 TR::z
+1.00 0 0 -8 TR::acute
+endgate
+} def
+
+/TR::zcaron {
+% 4 0 16 24 bbox
+begingate
+1.00 0 0 -8 TR::vee
+1.00 0 0 0 TR::z
+endgate
+} def
+
+/TR::zdot {
+% 4 0 16 25 bbox
+begingate
+1.00 0 4 22 TR::period
+1.00 0 0 0 TR::z
+endgate
+} def
+
+/TR::tcaron {
+% 4 0 14 27 bbox
+begingate
+1.00 0 0 0 TR::t
+1.00 0 8 -4 TR::apostrophe
+endgate
+} def
+
+/TR::scedil {
+% 4 -6 16 22 bbox
+begingate
+1.00 0 2 0 TR::cedilla
+1.00 0 0 0 TR::s
+endgate
+} def
+
+/TR::Rcaron {
+% 4 0 23 34 bbox
+begingate
+1.00 0 0 0 TR::R
+1.00 0 2 2 TR::vee
+endgate
+} def
+
+/TR::Racute {
+% 4 0 23 36 bbox
+begingate
+1.00 0 0 0 TR::R
+1.00 0 0 4 TR::acute
+endgate
+} def
+
+/TR::Abreve {
+% 4 0 24 32 bbox
+begingate
+1.00 0 0 0 TR::A
+1.00 0 4 0 TR::uu
+endgate
+} def
+
+/TR::Lacute {
+% 4 0 20 36 bbox
+begingate
+1.00 0 0 0 TR::L
+1.00 0 -4 4 TR::acute
+endgate
+} def
+
+/TR::Cacute {
+% 4 0 24 36 bbox
+begingate
+1.00 0 0 0 TR::C
+1.00 0 8 4 TR::acute
+endgate
+} def
+
+/TR::Ccaron {
+% 4 0 24 34 bbox
+begingate
+1.00 0 0 0 TR::C
+1.00 0 4 2 TR::vee
+endgate
+} def
+
+/TR::Eogonek {
+% 4 -5 22 31 bbox
+begingate
+1.00 0 0 0 TR::E
+1.00 0 14 0 TR::ced2
+endgate
+} def
+
+/TR::Ecaron {
+% 4 0 22 34 bbox
+begingate
+1.00 0 0 0 TR::E
+1.00 0 4 2 TR::vee
+endgate
+} def
+
+/TR::Dcaron {
+% 4 0 24 34 bbox
+begingate
+1.00 0 0 0 TR::D
+1.00 0 2 2 TR::vee
+endgate
+} def
+
+/TR::Ncaron {
+% 4 0 24 32 bbox
+begingate
+1.00 0 0 0 TR::N
+1.00 0 4 0 TR::vee
+endgate
+} def
+
+/TR::Nacute {
+% 4 0 24 32 bbox
+begingate
+1.00 0 0 0 TR::N
+1.00 0 4 0 TR::acute
+endgate
+} def
+
+/TR::Ouml2 {
+% 4 0 26 34 bbox
+begingate
+1.00 0 0 0 TR::O
+1.00 0 8 2 TR::uml2
+endgate
+} def
+
+/TR::Ucirc {
+% 4 0 25 38 bbox
+begingate
+1.00 0 0 0 TR::U
+1.00 0 7 4 TR::circ
+endgate
+} def
+
+/TR::Uuml2 {
+% 4 0 25 34 bbox
+begingate
+1.00 0 0 0 TR::U
+1.00 0 6 2 TR::uml2
+endgate
+} def
+
+/TR::Tcedil {
+% 4 -6 22 32 bbox
+begingate
+1.00 0 0 0 TR::T
+1.00 0 4 0 TR::cedilla
+endgate
+} def
+
+/TR::racute {
+% 4 0 12 24 bbox
+begingate
+1.00 0 0 0 TR::r
+1.00 0 0 -8 TR::acute
+endgate
+} def
+
+/TR::rcaron {
+% 4 0 12 24 bbox
+begingate
+1.00 0 0 0 TR::r
+1.00 0 0 -8 TR::vee
+endgate
+} def
+
+/TR::abreve {
+% 4 0 18 23 bbox
+begingate
+1.00 0 0 0 TR::a
+1.00 0 2 -9 TR::uu
+endgate
+} def
+
+/TR::lacute {
+% 3 0 7 36 bbox
+begingate
+1.00 0 0 0 TR::l
+1.00 0 -4 4 TR::acute
+endgate
+} def
+
+/TR::cacute {
+% 4 0 16 24 bbox
+begingate
+1.00 0 0 0 TR::c
+1.00 0 4 -8 TR::acute
+endgate
+} def
+
+/TR::ccaron {
+% 4 0 16 24 bbox
+begingate
+1.00 0 0 0 TR::c
+1.00 0 2 -8 TR::vee
+endgate
+} def
+
+/TR::eogonek {
+% 4 -5 18 21 bbox
+begingate
+1.00 0 6 0 TR::ced2
+1.00 0 0 0 TR::e
+endgate
+} def
+
+/TR::ecaron {
+% 4 0 18 24 bbox
+begingate
+1.00 0 0 0 TR::e
+1.00 0 2 -8 TR::vee
+endgate
+} def
+
+/TR::dcaron {
+% 4 0 22 27 bbox
+begingate
+1.00 0 0 0 TR::d
+1.00 0 14 -4 TR::apostrophe
+endgate
+} def
+
+/TR::dbar {
+% 4 0 18 26 bbox
+begingate
+1.00 0 0 0 TR::d
+1.00 0 6 -8 TR::bar
+endgate
+} def
+
+/TR::ncaron {
+% 4 0 16 24 bbox
+begingate
+1.00 0 0 0 TR::n
+1.00 0 0 -8 TR::vee
+endgate
+} def
+
+/TR::nacute {
+% 4 0 16 24 bbox
+begingate
+1.00 0 0 0 TR::n
+1.00 0 2 -8 TR::acute
+endgate
+} def
+
+/TR::ucirc {
+% 4 0 16 26 bbox
+begingate
+1.00 0 0 0 TR::u
+1.00 0 0 -8 TR::circ
+endgate
+} def
+
+/TR::uuml2 {
+% 4 0 16 24 bbox
+begingate
+1.00 0 0 0 TR::u
+1.00 0 0 -8 TR::uml2
+endgate
+} def
+
+/TR::tcedil {
+% 4 -6 11 32 bbox
+begingate
+1.00 0 0 0 TR::t
+1.00 0 0 0 TR::cedilla
+endgate
+} def
+
+/TR::togonek {
+% 4 -5 11 31 bbox
+begingate
+1.00 0 0 0 TR::t
+1.00 0 5 0 TR::ced2
+endgate
+} def
+
+/TR::ouml2 {
+% 4 0 16 24 bbox
+begingate
+1.00 0 0 0 TR::o
+1.00 0 0 -8 TR::uml2
+endgate
+} def
+
+/TR::scaron {
+% 4 0 16 24 bbox
+begingate
+1.00 0 0 0 TR::s
+1.00 0 0 -8 TR::vee
+endgate
+} def
+
+/TR::Tcaron {
+% 4 0 22 33 bbox
+begingate
+1.00 0 0 0 TR::T
+1.00 0 3 1 TR::vee
+endgate
+} def
+
+/TR::dotacc {
+% 8 30 3 3 bbox
+begingate
+1.00 0 4 30 TR::period
+endgate
+} def
+
+% EndLib

@@ -1,0 +1,425 @@
+# Makefile for VC++ compiler (modified from original Makefile.in)
+
+# Copyright (C) 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002,
+# 2003, 2004  Free Software Foundation, Inc.
+# This Makefile.in is free software; the Free Software Foundation
+# gives unlimited permission to copy and/or distribute it,
+# with or without modifications, as long as this notice is preserved.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY, to the extent permitted by law; without
+# even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.
+
+###########################
+# Configuration variables #
+###########################
+
+INSTALLDIR = D:\Software\XCircuit-tcl-dev
+TEMPDIR    = D:\Temp
+
+GSDIR      = C:\gs\gs8.15
+
+# Possible values: tcl, win32
+BUILD_TYPE = tcl
+
+# Additional settings for win32 build
+USE_WIN32_COM    = 0
+USE_WIN32_DOTNET = 0
+XCCOMDIR         = xccom2
+
+# Additional settings for tcl build
+TCLDIR     = D:\Software\Tcl
+TCLVERSION = 84
+
+####################################################################
+# End of configuration. DO NOT CHANGE ANYTHING AFTER THIS POINT!!! #
+####################################################################
+
+SOURCES = menudep.c $(xcircuit_SOURCES)
+
+MAKE = $(MAKE) -f Makefile.win32
+
+srcdir = .
+top_srcdir = .
+top_builddir = .
+mkinstalldirs = mkdir
+
+menudep_SOURCES = menudep.c
+menudep_OBJECTS = menudep.$(OBJEXT)
+menudep_LDADD = $(LDADD)
+xcircuit_OBJECTS = elements.$(OBJEXT) events.$(OBJEXT) \
+	filelist.$(OBJEXT) files.$(OBJEXT) flate.$(OBJEXT) \
+	fontfile.$(OBJEXT) formats.$(OBJEXT) functions.$(OBJEXT) \
+	graphic.$(OBJEXT) help.$(OBJEXT) keybindings.$(OBJEXT) \
+	libraries.$(OBJEXT) menucalls.$(OBJEXT) netlist.$(OBJEXT) \
+	ngspice.$(OBJEXT) opengl.$(OBJEXT) parameter.$(OBJEXT) \
+	python.$(OBJEXT) rcfile.$(OBJEXT) render.$(OBJEXT) \
+	schema.$(OBJEXT) selection.$(OBJEXT) text.$(OBJEXT) \
+	undo.$(OBJEXT) xcircuit.$(OBJEXT) $(WIN32_OBJECTS)
+DEFAULT_INCLUDES = -I. -I$(srcdir)
+COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
+	$(CPPFLAGS) $(CFLAGS)
+CCLD = $(CC)
+LINK = $(CCLD) $(CFLAGS) $(LDFLAGS) -Fe$@
+SOURCES = menudep.c $(xcircuit_SOURCES)
+DIST_SOURCES = menudep.c $(xcircuit_SOURCES)
+man1dir = $(mandir)
+MANS = $(man_MANS)
+DIST_SUBDIRS = $(SUBDIRS)
+DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
+distdir = $(PACKAGE)-$(VERSION)
+top_distdir = $(distdir)
+DIST_ARCHIVES = $(distdir).zip
+
+XC_CFLAGS   =
+XC_LIBS     =
+XC_OBJECT   =
+XC_INCLUDES =
+
+!if "$(BUILD_TYPE)" == "win32"
+WIN32_OBJECTS = xcwin32.$(OBJEXT) xtfuncs.$(OBJEXT) xtgui.$(OBJEXT) resources.res
+BUILTINS_DIR  = WinBuiltinsDir()
+STARTUP_FILE  = startup.script
+XC_CFLAGS     = -DHAVE_XPM -D_CRT_SECURE_NO_DEPRECATE
+!if "$(USE_WIN32_COM)" != "0"
+XC_CFLAGS = $(XC_CFLAGS) -DUSE_WIN32_COM
+XC_DEPEND = $(XCCOMDIR)\XCCom.lib
+XC_LIBS = $(XCCOMDIR)\XCCom.lib ole32.lib oleaut32.lib
+!if "$(USE_WIN32_DOTNET)" != "0"
+XC_CFLAGS = $(XC_CFLAGS) -DUSE_WIN32_DOTNET
+!endif
+!endif
+!else
+WIN32_OBJECTS = tclxcircuit.$(OBJEXT) tkSimple.$(OBJEXT) w32x11.$(OBJEXT)
+BUILTINS_DIR  = \"$(librarydir:\=/)\"
+SCRIPTS_DIR  = \"$(scriptsdir:\=/)\"
+STARTUP_FILE  = xcstartup.tcl
+XC_CFLAGS     = -DTCL_WRAPPER -D_CRT_SECURE_NO_DEPRECATE
+XC_INCLUDES   = -I$(TCLDIR)\include
+XC_LIBS       = $(TCLDIR)\lib\tcl$(TCLVERSION).lib $(TCLDIR)\lib\tk$(TCLVERSION).lib
+!endif
+
+
+# Override standard "make" target when compiling under TCL
+ALL_TARGET = all-recursive
+INSTALL_TARGET = install
+
+CC = cl
+CFLAGS = -Zi -DSPICE_EXEC=\"$(SPICE_EXEC:\=/)\" -DHAVE_PUTENV -DGS_EXEC=\"$(GS_EXEC:\=/)\" -DXC_WIN32 -DDOUBLEBUFFER $(XC_CFLAGS)
+CPP = cl
+CPPFLAGS =
+RM = del /q
+RMDIR = rmdir /s /q
+
+# Main compiler arguments
+DEFS = $(PATHNAMES)
+ECHO_C = echo
+ECHO_N = echo
+ECHO_T = echo
+EGREP = egrep
+EXEEXT = .exe
+EXTRA_LIB_SPECS =
+GS_EXEC = $(GSDIR)\bin\gswin32c.exe
+INC_SPECS = -I. $(XC_INCLUDES)
+INSTALL_DATA = copy /y
+INSTALL_PROGRAM = copy /y
+INSTALL_SCRIPT = copy /y
+INSTALL_STRIP_PROGRAM = copy /y
+INTERP_PATH = tcl
+LD = link
+LDDL_FLAGS =
+LDFLAGS =
+LIBS = 	ws2_32.lib gdi32.lib user32.lib kernel32.lib comdlg32.lib comctl32.lib $(XC_LIBS)
+#	imm32.lib shell32.lib comctl32.lib advapi32.lib
+
+LIB_SPECS =
+PP = pp.exe
+
+# Man page
+MAKEINFO = makeinfo
+OBJEXT = obj
+PACKAGE = xcircuit
+PACKAGE_NAME = xcircuit
+PATH_SEPARATOR = \\
+VERSION = 3.7
+REVISION = 21
+SHDLIB_EXT = .dll
+SHLIB_CFLAGS = /LD /ML
+SHLIB_LIB_SPECS =
+SPICE_EXEC = ngspice.exe
+SUBDIRS =
+TCL_LIB_DIR = $(TCLDIR)\lib
+WISH_EXE = $(TCLDIR)\bin\wish$(TCLVERSION).exe
+WRAPPER_SCRIPT =
+XCIRCUIT_TARGET = $(BUILD_TYPE)
+X_EXTRA_LIBS =
+prefix = $(INSTALLDIR)
+bindir = $(prefix)\bin
+datadir = $(prefix)
+exec_prefix = $(prefix)\bin
+includedir = $(prefix)\include
+libdir = $(prefix)\lib
+libexecdir = $(prefix)\bin
+mandir = $(prefix)\doc
+mkdir_p = mkdir
+
+# Temporary directory (if not overridden by environment variable TMPDIR)
+tmpdir = $(TEMPDIR)
+
+# Directories for app-defaults file and manual page
+PATHNAMES = -DPROG_VERSION=$(VERSION) \
+	-DPROG_REVISION=$(REVISION) \
+	-DCAD_DIR=\"$(prefix:\=/)\" \
+	-DTEMP_DIR=\"$(tmpdir:\=/)\" \
+	-DBUILTINS_DIR=$(BUILTINS_DIR) \
+	-DBUILTINS_FILE=\"$(BUILTINS_FILE)\" \
+	-DUSER_RC_FILE=\"$(USER_RC_FILE)\" \
+	-DPROLOGUE_DIR=$(BUILTINS_DIR) \
+	-DPROLOGUE_FILE=\"$(PROLOGUE_FILE)\" \
+	-DSTARTUP_FILE=\"$(STARTUP_FILE)\" \
+	-DLGF_LIB=\"$(LGF_LIB)\"
+
+xcircuit_SOURCES = elements.c events.c filelist.c files.c \
+	flate.c fontfile.c formats.c functions.c graphic.c \
+	help.c keybindings.c libraries.c menucalls.c \
+	netlist.c ngspice.c opengl.c parameter.c python.c \
+	rcfile.c render.c schema.c selection.c text.c undo.c \
+	tclxcircuit.c tkSimple.c xcircuit.c w32x11.c
+
+xcircuit_DEPEND = $(XC_DEPEND)
+xcircuit_LDADD =
+man_MANS = lib/xcircuit.1
+INCLUDES = $(INC_SPECS)
+
+# Library directory and files
+librarydir = $(datadir)\$(PACKAGE)-$(VERSION)
+scriptsdir = $(datadir)\$(PACKAGE)-$(VERSION)
+USER_RC_FILE = .xcircuitrc
+PROLOGUE_FILE = xcircps2.pro
+LGF_LIB = lgf.lps
+SIGNAL_LIB = signal.lps
+MUSIC_LIB = musiclib.lps
+FONTS_LPS = courier courieriso2 courieriso5 helvetica helveticaiso2 \
+	helveticaiso5 myfont symbol times_roman times_romaniso2 \
+	times_romaniso5
+
+FONTS_XFE = courier courieriso courieriso2 courieriso5 helvetica \
+	helveticaiso helveticaiso2 helveticaiso5 myfont symbol \
+	times_roman times_romaniso times_romaniso2 times_romaniso5
+
+SCRIPTS_PY = spice gettext pagebbox
+WRAPPER_INIT = xcircuit.tcl
+WRAPPER_OBJ = xcircuit$(SHDLIB_EXT)
+WRAPPER_SO = xcircuit.dll
+WRAPPER_SH = xcircuit.bat
+CONSOLE = tkcon.tcl
+CONSOLE_SCRIPT = console.tcl
+
+all: all-recursive
+
+.SUFFIXES:
+.SUFFIXES: .c .o .obj .rc .res
+
+.c.o:
+	$(COMPILE) -c $<
+
+.c.obj:
+	$(COMPILE) -c "$<"
+
+.rc.res:
+	rc -fo$@ $(XC_CFLAGS) /i$(XCCOMDIR) $<
+
+##################
+# Building rules #
+##################
+
+menudep$(EXEEXT): menudep.$(OBJEXT)
+	$(CC) -Fe$@ $**
+
+menudep.h: menudep$(EXEEXT) menus.h
+	.\menudep$(EXEEXT)
+
+xcwrap.obj: xcwrap.c menudep.h
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(DEFS) $(PATHNAMES) $(INCLUDES) \
+		xcwrap.c -c -Foxcwrap.$(OBJEXT)
+
+lib\tcl\xcircuit$(SHDLIB_EXT): xcwrap.$(OBJEXT) $(xcircuit_OBJECTS) $(xcircuit_DEPEND)
+	-$(RM) lib\xcircuit$(SHDLIB_EXT)
+	$(CC) $(CFLAGS) $(SHLIB_CFLAGS) -Fe$@ $(LDDL_FLAGS) xcwrap.$(OBJEXT) \
+		$(xcircuit_OBJECTS) $(xcircuit_LDADD) $(LDFLAGS) \
+		$(X_EXTRA_LIBS) $(EXTRA_LIBS) $(LIBS) $(EXTRA_LIB_SPECS) \
+		$(SHLIB_LIB_SPECS)
+
+xcircuit$(EXEEXT): $(xcircuit_OBJECTS) $(xcircuit_DEPEND)
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(DEFS) $(INCLUDES) $(xcircuit_OBJECTS) \
+		-Fe$@ $(LDFLAGS) $(LIBS) $(LIB_SPECS) $(EXTRA_LIB_SPECS) shell32.lib \
+		/link /SUBSYSTEM:CONSOLE
+
+xcircexec$(EXEEXT): xcircexec.$(OBJEXT)
+	-$(RM) .\xcircexec$(EXEEXT)
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(DEFS) $(PATHNAMES) $(INCLUDES) \
+		xcircexec.c -Fe$@ $(LDFLAGS) \
+		$(LIBS) $(LIB_SPECS) $(EXTRA_LIB_SPECS)
+
+xcircuit-win32$(EXEEXT): xcircuit-win32.c resources.res
+	$(CC) $(CFLAGS) $(CPPFLAGS) \
+		-DWISH_EXE=L\"$(WISH_EXE:\=/)\" \
+		-DBUILTINS_DIR=L$(BUILTINS_DIR) \
+		$(INCLUDES) xcircuit-win32.c resources.res \
+		-Fe$@ $(LDFLAGS) $(LIBS) $(LIB_SPECS) $(EXTRA_LIB_SPECS) shell32.lib advapi32.lib
+
+tcl:
+	@echo Making tcl library object
+	$(MAKE) lib\tcl\xcircuit$(SHDLIB_EXT)
+	$(MAKE) lib\$(INTERP_PATH)\$(WRAPPER_SH)
+	$(MAKE) lib\$(INTERP_PATH)\$(WRAPPER_INIT)
+	$(MAKE) xcircexec$(EXEEXT)
+	$(MAKE) xcircuit-win32$(EXEEXT)
+
+win32:
+	@echo Making win32
+!if "$(USE_WIN32_COM)" != "0"
+	cd $(XCCOMDIR) && $(MAKE) && cd ..
+!endif
+	$(MAKE) xcircuit$(EXEEXT)
+
+help.c: menudep.h
+menucalls.c: menudep.h
+rcfile.c: menudep.h
+schema.c: menudep.h
+xcircuit.c: menudep.h
+parameter.c: menudep.h
+python.c: menudep.h
+tclxcircuit.c: menudep.h
+resources.rc: lib/pixmaps/xcircuit.ico
+
+$(PP): pp.c
+	$(CC) -Zi pp.c
+
+lib\$(INTERP_PATH)\$(WRAPPER_SH): $(PP) lib\$(INTERP_PATH)\$(WRAPPER_SH).in
+	$(PP) $(PATHNAMES) -DXCLIBDIR=\"$(librarydir:\=/)\" \
+		-DWRAPPER_INIT=\"$(WRAPPER_INIT)\" -DCONSOLE=\"$(CONSOLE)\" \
+		-DCONSOLE_SCRIPT=\"$(CONSOLE_SCRIPT)\" \
+		-DTCLLIBDIR=\"$(TCL_LIB_DIR:\=/)\" \
+		-DWISH_EXE=\"$(WISH_EXE:\=/)\" \
+		lib/$(INTERP_PATH)/$(WRAPPER_SH).in > $@
+
+lib\$(INTERP_PATH)\$(WRAPPER_INIT): $(PP) lib\$(INTERP_PATH)\$(WRAPPER_INIT).in
+	$(PP) $(PATHNAMES) -DLIBDIR=\"$(librarydir:\=/)\" \
+		lib/$(INTERP_PATH)/$(WRAPPER_INIT).in > $@
+
+lib\xcircuit.1: $(PP) lib\xcircuit.1.in
+	$(PP) -DLIBDIR=\"$(libdir)\" \
+		-DSCRIPTSDIR=\"$(scriptsdir)\" \
+		-DLGF=1 -DPYTHON=0 -DTCL=1 -DNOINTERP=0 \
+		lib\xcircuit.1.in > $@
+
+install-data-local: lib/xcircuit.1
+	@echo "Installing library files"
+	$(mkinstalldirs) $(DESTDIR)$(librarydir)
+	cd lib
+	for %i in ($(PROLOGUE_FILE) *.lps) do $(INSTALL_DATA) %i $(DESTDIR)$(librarydir)
+	cd ..
+	cd lib\$(INTERP_PATH)
+	for %i in ($(STARTUP_FILE)) do $(INSTALL_DATA) %i $(DESTDIR)$(librarydir)
+	cd ..\..
+	@echo "Installing .lps font files"
+	$(mkinstalldirs) $(DESTDIR)$(librarydir)\fonts
+	for %i in ($(FONTS_LPS)) do $(INSTALL_DATA) lib\fonts\%i.lps $(DESTDIR)$(librarydir)\fonts
+	@echo "Installing .xfe font files"
+	for %i in ($(FONTS_XFE)) do $(INSTALL_DATA) lib\fonts\%i.xfe $(DESTDIR)$(librarydir)\fonts
+	@echo "Installing scripts (if option enabled)"
+
+# Note that MacOS/Fink uses SHDLIB_EXT = .dylib but Tcl expects .so anyway.
+# So we make a symbolic link if SHDLIB_EXT != .so
+
+install-tcl: xcircexec$(EXEEXT) lib/$(INTERP_PATH)/$(WRAPPER_OBJ) lib/$(INTERP_PATH)/$(WRAPPER_SH) lib/$(INTERP_PATH)/$(WRAPPER_INIT) xcircuit-win32$(EXEEXT)
+	if exist $(prefix) $(RMDIR) $(prefix)
+	@echo "Installing standard XCircuit library files"
+	$(MAKE) $(AM_MAKEFLAGS) install-data-local
+	@echo "Installing Tcl files"
+	cd lib\$(INTERP_PATH)
+	for %i in ($(WRAPPER_OBJ) *.tcl) do $(INSTALL_DATA) %i $(DESTDIR)$(librarydir)
+	cd ..\..
+	$(INSTALL_DATA) xcircexec$(EXEEXT) $(DESTDIR)$(librarydir)
+	@echo "Installing pixmap images"
+	$(mkinstalldirs) $(DESTDIR)$(librarydir)\pixmaps
+	cd lib\pixmaps
+	for %i in (*.gif *.xbm) do $(INSTALL_DATA) %i $(DESTDIR)$(librarydir)\pixmaps
+	cd ..\..
+	@echo "Installing shell script as xcircuit executable"
+	$(mkinstalldirs) $(DESTDIR)$(bindir)
+	$(INSTALL_DATA) lib\$(INTERP_PATH)\$(WRAPPER_SH) $(DESTDIR)$(bindir)
+	$(INSTALL_DATA) xcircuit-win32$(EXEEXT) $(DESTDIR)$(bindir)
+
+install-win32: xcircuit$(EXEEXT)
+	if exist $(prefix) $(RMDIR) $(prefix)
+	$(MAKE) $(AM_MAKEFLAGS) install-data-local "librarydir=$(prefix)"
+	$(INSTALL_DATA) xcircuit$(EXEEXT) $(DESTDIR)$(prefix)
+
+clean:
+	-$(RM) lib\$(INTERP_PATH)\$(WRAPPER_OBJ) lib\$(INTERP_PATH)\$(WRAPPER_SH)
+	-for %e in (ilk exp pdb lib) do @if exist lib\$(INTERP_PATH)\xcircuit.%e $(RM) lib\$(INTERP_PATH)\xcircuit.%e
+	-$(RM) lib\$(INTERP_PATH)\$(WRAPPER_INIT)
+	-for %f in (*.$(OBJEXT) xcircexec$(EXEEXT) lib\xcircuit.1 xcircuit$(EXEEXT) xcircuit.suo) do $(RM) %f
+	-for %e in (aps res) do $(RM) resources.%e
+	-for %e in (ilk exp pdb lib) do @if exist xcircexec.%e $(RM) xcircexec.%e
+	-for %e in (ilk exp pdb lib) do @if exist xcircuit.%e $(RM) xcircuit.%e
+	-for %e in (ilk exp pdb lib) do @if exist pp.%e $(RM) pp.%e
+	-for %e in (ilk exp pdb lib exe) do @if exist xcircuit-win32.%e $(RM) xcircuit-win32.%e
+	-$(RM) menudep$(EXEEXT) menudep.h
+	-$(RM) pp$(EXEEXT)
+	-$(RM) *.pdb
+	-$(RM) *~
+!if "$(BUILD_TYPE)" == "win32" && "$(USE_WIN32_COM)" != "0"
+	cd $(XCCOMDIR) && $(MAKE) clean && cd ..
+!endif
+
+$(ALL_TARGET):
+	$(MAKE) $(XCIRCUIT_TARGET)
+
+$(INSTALL_TARGET):
+	(MAKE) install-tcl
+
+examples: all
+!if "$(BUILD_TYPE)" == "win32" && "$(USE_WIN32_COM)" != "0"
+	cd $(XCCOMDIR) && $(MAKE) examples && cd ..
+!endif
+
+!if "$(BUILD_TYPE)" == "win32"
+xcircuit.h: xcwin32.h
+xcwin32.c: xcircuit.h
+!else
+xcircuit.h: tkwin32.h
+!endif
+elements.c: xcircuit.h
+events.c: xcircuit.h
+filelist.c: xcircuit.h
+files.c: xcircuit.h
+flate.c: xcircuit.h
+fontfile.c: xcircuit.h
+formats.c: xcircuit.h
+functions.c: xcircuit.h
+graphic.c: xcircuit.h
+help.c: xcircuit.h
+keybindings.c: xcircuit.h
+libraries.c: xcircuit.h
+menucalls.c: xcircuit.h
+netlist.c: xcircuit.h
+ngspice.c: xcircuit.h
+opengl.c: xcircuit.h
+parameter.c: xcircuit.h
+python.c: xcircuit.h
+rcfile.c: xcircuit.h
+render.c: xcircuit.h
+schema.c: xcircuit.h
+selection.c: xcircuit.h
+text.c: xcircuit.h
+undo.c: xcircuit.h
+xcircuit.c: xcircuit.h
+xtgui.c: xcircuit.h
+xtfuncs.c: xcircuit.h
+!if "$(BUILD_TYPE)" == "win32" && "$(USE_WIN32_COM)" != "0"
+resources.rc: $(XCCOMDIR)/XCCom.tlb
+!endif

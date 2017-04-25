@@ -1,0 +1,89 @@
+%! PostScript set of library objects for XCircuit
+%  Version: 3.6
+%  Library name is: quadparts
+%  Author: R. Timothy Edwards <tim@khachaturian.tim.linglan.net>
+%
+
+
+% XCircuitLib library objects
+/quadparts::quadnand {
+<</@vdd (VDD) /@gnd (GND) /@part (1) (lindex {1 2 3 4} 0) pop /@pinA (1) 
+(lindex {0 1 4 9 12} @part) pop /@pinB (2) (lindex {0 2 5 10 13} @part) pop /@pinO 
+(3) (lindex {0 3 6 8 11} @part) pop /@index (?) /@pkg (DIP14) >> begingate
+1 1.000 0 -48 -64 -48 -64 48 0 48 4 polygon
+1 1.000 56 0 8 0.000 360.000 xcarc
+1 1.000 0 0 48 -90.000 90.000 xcarc
+0.180 0.545 0.341 scb
+mark @vdd ( 14=) @gnd ( 7=) @index (pcb:U) {/Helvetica cf} ctmk 20 0 1.000 -80 
+-96 infolabel
+sce
+mark @part (7400-) {/Helvetica cf} ctmk 21 0 0.500 0 0 label
+1.000 0.000 0.000 scb
+mark @pinO {/Times-Roman cf} ctmk 4 0 1.000 64 0 pinlabel
+mark @pinA {/Times-Roman cf} ctmk 7 0 1.000 -64 32 pinlabel
+mark @pinB {/Times-Roman cf} ctmk 7 0 1.000 -64 -32 pinlabel
+0.000 0.000 1.000 scb
+mark @index (U) {/Times-Roman cf} ctmk 16 0 0.700 -64 64 label
+endgate
+} def
+
+<</@part (2) (lindex {1 2 3 4} 1) pop >> /quadparts::quadnand libinst
+<</@part (3) (lindex {1 2 3 4} 2) pop >> /quadparts::quadnand libinst
+<</@part (4) (lindex {1 2 3 4} 3) pop >> /quadparts::quadnand libinst
+
+/quadparts::quadnor {
+<</@vdd (VDD) /@gnd (GND) /@part (1) (lindex {1 2 3 4} 0) pop /@pinA (1) 
+(lindex {0 1 4 10 13} @part) pop /@pinB (2) (lindex {0 2 5 8 11} @part) pop /@pinO 
+(3) (lindex {0 3 6 9 12} @part) pop /@index (?) /@pkg (DIP14) >> begingate
+1 1.000 -64 48 -35 48 2 polygon
+1 1.000 -64 -48 -35 -48 2 polygon
+1 1.000 -128 0 80 -37.000 37.000 xcarc
+1 1.000 56 0 8 0.000 360.000 xcarc
+1 1.000 -35 -48 96 30.000 90.000 xcarc
+1 1.000 -35 48 96 270.000 330.000 xcarc
+0.180 0.545 0.341 scb
+mark @vdd ( 14=) @gnd ( 7=) @index (pcb:U) {/Helvetica cf} ctmk 20 0 1.000 -64 
+-96 infolabel
+sce
+mark @part (7402-) {/Helvetica cf} ctmk 21 0 0.500 0 0 label
+1.000 0.000 0.000 scb
+mark @pinO {/Times-Roman cf} ctmk 4 0 1.000 64 0 pinlabel
+mark @pinA {/Times-Roman cf} ctmk 7 0 1.000 -56 32 pinlabel
+mark @pinB {/Times-Roman cf} ctmk 7 0 1.000 -56 -32 pinlabel
+0.000 0.000 1.000 scb
+mark @index (U) {/Times-Roman cf} ctmk 16 0 0.700 -64 64 label
+endgate
+} def
+
+<</@part (2) (lindex {1 2 3 4} 1) pop >> /quadparts::quadnor libinst
+<</@part (3) (lindex {1 2 3 4} 2) pop >> /quadparts::quadnor libinst
+<</@part (4) (lindex {1 2 3 4} 3) pop >> /quadparts::quadnor libinst
+
+/quadparts::quador {
+<</@vdd (VDD) /@gnd (GND) /@part (1) (lindex {1 2 3 4} 0) pop /@pinA (1) 
+(lindex {0 1 4 9 12} @part) pop /@pinB (2) (lindex {0 2 5 10 13} @part) pop /@pinO 
+(3) (lindex {0 3 6 8 11} @part) pop /@index (?) /@pkg (DIP14) >> begingate
+1 1.000 -19 -48 96 30.000 90.000 xcarc
+1 1.000 -19 48 96 270.000 330.000 xcarc
+1 1.000 -112 0 80 -37.000 37.000 xcarc
+1 1.000 -48 48 -19 48 2 polygon
+1 1.000 -48 -48 -19 -48 2 polygon
+0.180 0.545 0.341 scb
+mark @vdd ( 14=) @gnd ( 7=) @index (pcb:U) {/Helvetica cf} ctmk 20 0 1.000 -64 
+-96 infolabel
+sce
+mark @part (7432-) {/Helvetica cf} ctmk 21 0 0.500 16 0 label
+1.000 0.000 0.000 scb
+mark @pinO {/Times-Roman cf} ctmk 4 0 1.000 64 0 pinlabel
+mark @pinA {/Times-Roman cf} ctmk 7 0 1.000 -40 32 pinlabel
+mark @pinB {/Times-Roman cf} ctmk 7 0 1.000 -40 -32 pinlabel
+0.000 0.000 1.000 scb
+mark @index (U) {/Times-Roman cf} ctmk 16 0 0.700 -48 64 label
+endgate
+} def
+
+<</@part (2) (lindex {1 2 3 4} 1) pop >> /quadparts::quador libinst
+<</@part (3) (lindex {1 2 3 4} 2) pop >> /quadparts::quador libinst
+<</@part (4) (lindex {1 2 3 4} 3) pop >> /quadparts::quador libinst
+
+% EndLib

@@ -1,0 +1,54 @@
+% XCircuit Font encoding (XFE) file
+name:     MyFont	% Font name
+file:     myfont.lps	% Font object file
+family:   MyFont
+weight:	  normal
+shape:	  normal
+scale:	  0.085
+type:     vectored	% Font type (PostScript or vectored)
+encoding: special	% Encoding (Standard, ISOLatin1, or special)
+my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar
+my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar
+my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar
+my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar
+my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar
+my::nullchar my::nullchar my::space    my::nullchar my::nullchar my::nullchar
+my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar
+my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar
+my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar
+my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar
+my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar my::A
+my::B	     my::C	  my::D        my::E        my::F        my::G
+my::H	     my::I	  my::J	       my::K        my::L	 my::M
+my::N	     my::O	  my::P	       my::Q	    my::R	 my::S
+my::T	     my::U	  my::V	       my::W	    my::X	 my::Y
+my::Z	     my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar
+my::nullchar my::a	  my::b	       my::c	    my::d	 my::e
+my::f	     my::g	  my::h	       my::i	    my::j	 my::k
+my::l        my::m        my::n        my::o        my::p        my::q
+my::r	     my::s	  my::t        my::u        my::v        my::w
+my::x        my::y	  my::z	       my::nullchar my::nullchar my::nullchar
+my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar
+my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar
+my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar
+my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar
+my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar
+my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar
+my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar
+my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar
+my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar
+my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar
+my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar
+my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar
+my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar
+my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar
+my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar
+my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar
+my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar
+my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar
+my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar
+my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar
+my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar my::nullchar
+my::nullchar my::nullchar my::nullchar my::nullchar
+
+derived:   MyFont-Slant    normal   italic    Special

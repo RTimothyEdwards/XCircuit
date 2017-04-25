@@ -1,0 +1,23 @@
+#-----------------------------------------#
+# xcircuitrc file for editing sheet music #
+# (TCL version)			  	  #
+#-----------------------------------------#
+
+# 1) Don't load any of the default libraries.
+#    Instead, load only "musiclib".
+library override
+library 1 load musiclib
+
+# 2) Load font Times-Roman and set the default font to Times-RomanISO
+loadfont Times-Roman
+# set fontfamily Times-Roman
+label family Times-Roman
+
+# 3) Set various parameters for music editing
+config boxedit rhomboidy
+config colorscheme inverse
+xcircuit::xschema disable
+
+# 4) Set Backspace = Delete
+bindkey "BackSpace" "Text Left" forget
+bindkey "BackSpace" "Text Delete"

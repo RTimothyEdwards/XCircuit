@@ -1,0 +1,6 @@
+*trying capacitor
+C19 B GND 36.1fF
+C20 C GND 36.1fF
+VB B GND 5
+VC C GND 0
+.end

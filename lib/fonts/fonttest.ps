@@ -1,0 +1,22 @@
+%!Adobe-Postscript
+%
+%  Print a list of all PostScript fonts resident on the printer
+%
+% To get the same list each printed in its own font, set "usefonts" to 1 below.
+%
+% Note:  This is NOT an xcircuit file!  The list of files returned may be
+%  used to give xcircuit the proper name for a font when using the "Add New
+%  Font" command.
+%
+/usefonts 0 def
+%
+/y 72 def
+/x 72 def
+/Times-Roman findfont 12 scalefont setfont
+FontDirectory {pop usefonts 1 eq {dup findfont 12 scalefont setfont} if
+50 string cvs x y moveto show y 15 add dup 690 gt {pop /y 72 def /x 300 def}
+{/y exch def} ifelse } forall
+/Times-Roman findfont 14 scalefont setfont
+305 700 moveto (Resident PostScript Fonts) dup stringwidth pop 2 div neg
+0 rmoveto show 
+showpage

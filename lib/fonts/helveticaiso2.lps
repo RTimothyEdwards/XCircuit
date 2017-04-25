@@ -1,0 +1,414 @@
+%! PostScript set of library objects for XCircuit
+%  Library name is: Hv
+%  Version: 2.0
+%
+
+% XCircuitLib font library
+/Hv::Aogonek {
+% 4 -5 24 31 bbox
+begingate
+1.00 0 0 0 Hv::A
+1.00 0 16 0 Hv::ced2
+endgate
+} def
+
+/Hv::Lcaron {
+% 4 0 20 27 bbox
+begingate
+1.00 0 12 0 Hv::apostrophe
+1.00 0 0 0 Hv::L
+endgate
+} def
+
+/Hv::Scedil {
+% 4 -6 22 32 bbox
+begingate
+1.00 0 0 0 Hv::S
+1.00 0 4 0 Hv::cedilla
+endgate
+} def
+
+/Hv::Sacute {
+% 4 0 22 36 bbox
+begingate
+1.00 0 0 0 Hv::S
+1.00 0 4 4 Hv::acute
+endgate
+} def
+
+/Hv::Scaron {
+% 4 0 22 34 bbox
+begingate
+1.00 0 0 0 Hv::S
+1.00 0 4 2 Hv::vee
+endgate
+} def
+
+/Hv::Zacute {
+% 4 0 22 34 bbox
+begingate
+1.00 0 0 0 Hv::Z
+1.00 0 2 2 Hv::acute
+endgate
+} def
+
+/Hv::Zcaron {
+% 4 0 22 34 bbox
+begingate
+1.00 0 4 2 Hv::vee
+1.00 0 0 0 Hv::Z
+endgate
+} def
+
+/Hv::Zdot {
+% 4 0 22 35 bbox
+begingate
+1.00 0 0 0 Hv::Z
+1.00 0 8 32 Hv::period
+endgate
+} def
+
+/Hv::aogonek {
+% 4 -5 19 21 bbox
+begingate
+1.00 0 0 0 Hv::a
+1.00 0 13 0 Hv::ced2
+endgate
+} def
+
+/Hv::lcaron {
+% 3 0 7 27 bbox
+begingate
+1.00 0 0 0 Hv::l
+1.00 0 4 0 Hv::apostrophe
+endgate
+} def
+
+/Hv::sacute {
+% 4 0 16 24 bbox
+begingate
+1.00 0 0 0 Hv::s
+1.00 0 0 -8 Hv::acute
+endgate
+} def
+
+/Hv::zacute {
+% 4 0 16 24 bbox
+begingate
+1.00 0 0 0 Hv::z
+1.00 0 0 -8 Hv::acute
+endgate
+} def
+
+/Hv::zcaron {
+% 4 0 16 24 bbox
+begingate
+1.00 0 0 -8 Hv::vee
+1.00 0 0 0 Hv::z
+endgate
+} def
+
+/Hv::zdot {
+% 4 0 16 25 bbox
+begingate
+1.00 0 6 22 Hv::period
+1.00 0 0 0 Hv::z
+endgate
+} def
+
+/Hv::tcaron {
+% 4 0 14 27 bbox
+begingate
+1.00 0 0 0 Hv::t
+1.00 0 12 0 Hv::apostrophe
+endgate
+} def
+
+/Hv::scedil {
+% 4 -6 16 22 bbox
+begingate
+1.00 0 2 0 Hv::cedilla
+1.00 0 0 0 Hv::s
+endgate
+} def
+
+/Hv::Rcaron {
+% 4 0 23 34 bbox
+begingate
+1.00 0 0 0 Hv::R
+1.00 0 2 2 Hv::vee
+endgate
+} def
+
+/Hv::Racute {
+% 4 0 23 36 bbox
+begingate
+1.00 0 0 0 Hv::R
+1.00 0 0 4 Hv::acute
+endgate
+} def
+
+/Hv::Abreve {
+% 4 0 24 32 bbox
+begingate
+1.00 0 0 0 Hv::A
+1.00 0 4 0 Hv::uu
+endgate
+} def
+
+/Hv::Lacute {
+% 4 0 20 36 bbox
+begingate
+1.00 0 0 0 Hv::L
+1.00 0 -4 4 Hv::acute
+endgate
+} def
+
+/Hv::Cacute {
+% 4 0 24 36 bbox
+begingate
+1.00 0 0 0 Hv::C
+1.00 0 8 4 Hv::acute
+endgate
+} def
+
+/Hv::Ccaron {
+% 4 0 24 34 bbox
+begingate
+1.00 0 0 0 Hv::C
+1.00 0 4 2 Hv::vee
+endgate
+} def
+
+/Hv::Eogonek {
+% 4 -5 22 31 bbox
+begingate
+1.00 0 0 0 Hv::E
+1.00 0 14 0 Hv::ced2
+endgate
+} def
+
+/Hv::Ecaron {
+% 4 0 22 34 bbox
+begingate
+1.00 0 0 0 Hv::E
+1.00 0 4 2 Hv::vee
+endgate
+} def
+
+/Hv::Dcaron {
+% 4 0 24 34 bbox
+begingate
+1.00 0 0 0 Hv::D
+1.00 0 2 2 Hv::vee
+endgate
+} def
+
+/Hv::Ncaron {
+% 4 0 24 32 bbox
+begingate
+1.00 0 0 0 Hv::N
+1.00 0 4 0 Hv::vee
+endgate
+} def
+
+/Hv::Nacute {
+% 4 0 24 32 bbox
+begingate
+1.00 0 0 0 Hv::N
+1.00 0 4 0 Hv::acute
+endgate
+} def
+
+/Hv::Ouml2 {
+% 4 0 26 34 bbox
+begingate
+1.00 0 0 0 Hv::O
+1.00 0 8 2 Hv::uml2
+endgate
+} def
+
+/Hv::Ucirc {
+% 4 0 25 38 bbox
+begingate
+1.00 0 0 0 Hv::U
+1.00 0 4 4 Hv::circ
+endgate
+} def
+
+/Hv::Uuml2 {
+% 4 0 25 34 bbox
+begingate
+1.00 0 0 0 Hv::U
+1.00 0 6 2 Hv::uml2
+endgate
+} def
+
+/Hv::Tcedil {
+% 4 -6 22 32 bbox
+begingate
+1.00 0 0 0 Hv::T
+1.00 0 4 0 Hv::cedilla
+endgate
+} def
+
+/Hv::racute {
+% 4 0 12 24 bbox
+begingate
+1.00 0 0 0 Hv::r
+1.00 0 0 -8 Hv::acute
+endgate
+} def
+
+/Hv::rcaron {
+% 4 0 12 24 bbox
+begingate
+1.00 0 0 0 Hv::r
+1.00 0 0 -8 Hv::vee
+endgate
+} def
+
+/Hv::abreve {
+% 4 0 18 23 bbox
+begingate
+1.00 0 0 0 Hv::a
+1.00 0 2 -9 Hv::uu
+endgate
+} def
+
+/Hv::lacute {
+% 3 0 7 36 bbox
+begingate
+1.00 0 0 0 Hv::l
+1.00 0 -4 4 Hv::acute
+endgate
+} def
+
+/Hv::cacute {
+% 4 0 16 24 bbox
+begingate
+1.00 0 0 0 Hv::c
+1.00 0 4 -8 Hv::acute
+endgate
+} def
+
+/Hv::ccaron {
+% 4 0 16 24 bbox
+begingate
+1.00 0 0 0 Hv::c
+1.00 0 2 -8 Hv::vee
+endgate
+} def
+
+/Hv::eogonek {
+% 4 -5 18 21 bbox
+begingate
+1.00 0 6 0 Hv::ced2
+1.00 0 0 0 Hv::e
+endgate
+} def
+
+/Hv::ecaron {
+% 4 0 18 24 bbox
+begingate
+1.00 0 0 0 Hv::e
+1.00 0 2 -8 Hv::vee
+endgate
+} def
+
+/Hv::dcaron {
+% 4 0 22 27 bbox
+begingate
+1.00 0 0 0 Hv::d
+1.00 0 20 0 Hv::apostrophe
+endgate
+} def
+
+/Hv::dbar {
+% 4 0 18 26 bbox
+begingate
+1.00 0 0 0 Hv::d
+1.00 0 8 -8 Hv::bar
+endgate
+} def
+
+/Hv::ncaron {
+% 4 0 16 24 bbox
+begingate
+1.00 0 0 0 Hv::n
+1.00 0 0 -8 Hv::vee
+endgate
+} def
+
+/Hv::nacute {
+% 4 0 16 24 bbox
+begingate
+1.00 0 0 0 Hv::n
+1.00 0 2 -8 Hv::acute
+endgate
+} def
+
+/Hv::ucirc {
+% 4 0 16 26 bbox
+begingate
+1.00 0 0 0 Hv::u
+1.00 0 2 -8 Hv::circ
+endgate
+} def
+
+/Hv::uuml2 {
+% 4 0 16 24 bbox
+begingate
+1.00 0 0 0 Hv::u
+1.00 0 4 -8 Hv::uml2
+endgate
+} def
+
+/Hv::tcedil {
+% 4 -6 11 32 bbox
+begingate
+1.00 0 0 0 Hv::t
+1.00 0 4 0 Hv::cedilla
+endgate
+} def
+
+/Hv::togonek {
+% 4 -5 11 31 bbox
+begingate
+1.00 0 0 0 Hv::t
+1.00 0 5 0 Hv::ced2
+endgate
+} def
+
+/Hv::ouml2 {
+% 4 0 16 24 bbox
+begingate
+1.00 0 0 0 Hv::o
+1.00 0 4 -8 Hv::uml2
+endgate
+} def
+
+/Hv::scaron {
+% 4 0 16 24 bbox
+begingate
+1.00 0 0 0 Hv::s
+1.00 0 0 -8 Hv::vee
+endgate
+} def
+
+/Hv::Tcaron {
+% 4 0 22 33 bbox
+begingate
+1.00 0 0 0 Hv::T
+1.00 0 3 1 Hv::vee
+endgate
+} def
+
+/Hv::dotacc {
+% 8 30 3 3 bbox
+begingate
+1.00 0 4 30 Hv::period
+endgate
+} def
+
+% EndLib

@@ -1,0 +1,50 @@
+% XCircuit Font encoding (XFE) file
+name:     Symbol
+file:     symbol.lps
+family:	  Symbol
+weight:	  normal
+shape:	  normal
+type:     PostScript
+encoding: Standard
+Sy::nullchar Sy::nullchar Sy::nullchar Sy::nullchar Sy::nullchar Sy::nullchar
+Sy::nullchar Sy::nullchar Sy::nullchar Sy::nullchar Sy::nullchar Sy::nullchar
+Sy::nullchar Sy::nullchar Sy::nullchar Sy::nullchar Sy::nullchar Sy::nullchar
+Sy::nullchar Sy::nullchar Sy::nullchar Sy::nullchar Sy::nullchar Sy::nullchar 
+Sy::nullchar Sy::nullchar Sy::nullchar Sy::nullchar Sy::nullchar Sy::nullchar
+Sy::nullchar Sy::nullchar 
+Sy::space Sy::exclam Sy::forall Sy::pound Sy::every Sy::percent Sy::ampersand
+Sy::backe Sy::lparen Sy::rparen Sy::asterisk Sy::plus Sy::comma Sy::minus
+Sy::period Sy::slash Sy::zero Sy::one Sy::two Sy::three Sy::four Sy::five
+Sy::six Sy::seven Sy::eight Sy::nine Sy::colon Sy::semi Sy::less Sy::equal
+Sy::more Sy::question Sy::approx Sy::Alpha Sy::Beta Sy::Xi Sy::Delta 
+Sy::Epsilon Sy::Phi Sy::Gamma Sy::Eta Sy::Iota Sy::altTheta Sy::Kappa
+Sy::Lambda Sy::Mu Sy::Nu Sy::Omicron Sy::Pi Sy::Theta Sy::Rho Sy::Sigma
+Sy::Tau Sy::GrY Sy::altSigma Sy::Omega Sy::Chi Sy::Psi Sy::Zeta Sy::lbracket
+Sy::therefore Sy::rbracket Sy::perp Sy::underscore Sy::upneg Sy::alpha
+Sy::beta Sy::chi Sy::delta Sy::epsilon Sy::phi Sy::gamma Sy::eta Sy::iota
+Sy::altphi Sy::kappa Sy::lambda Sy::mu Sy::nu Sy::omicron Sy::pi Sy::theta
+Sy::rho Sy::sigma Sy::tau Sy::upsilon Sy::altomega Sy::omega Sy::xi Sy::psi
+Sy::zeta Sy::lbrace Sy::vbar Sy::rbrace Sy::tilde
+Sy::nullchar Sy::nullchar Sy::nullchar Sy::nullchar Sy::nullchar Sy::nullchar
+Sy::nullchar Sy::nullchar Sy::nullchar Sy::nullchar Sy::nullchar Sy::nullchar
+Sy::nullchar Sy::nullchar Sy::nullchar Sy::nullchar Sy::nullchar Sy::nullchar
+Sy::nullchar Sy::nullchar Sy::nullchar Sy::nullchar Sy::nullchar Sy::nullchar
+Sy::nullchar Sy::nullchar Sy::nullchar Sy::nullchar Sy::nullchar Sy::nullchar
+Sy::nullchar Sy::nullchar Sy::nullchar Sy::nullchar
+Sy::Upsilon Sy::prime Sy::leq Sy::aslash Sy::infty Sy::itf Sy::club
+Sy::diamond Sy::heart Sy::spade Sy::lrarrow Sy::larrow Sy::uarrow Sy::rarrow 
+Sy::darrow Sy::degree Sy::pm Sy::dprime Sy::geq Sy::times Sy::prop Sy::deriv
+Sy::bullet Sy::div Sy::neq Sy::teq Sy::sim Sy::dots Sy::lvbar Sy::hbar
+Sy::return Sy::aleph Sy::Ifraktur Sy::Rfraktur Sy::weiers Sy::circmult
+Sy::circplus Sy::circslash Sy::intersect Sy::union Sy::propsup
+Sy::reflsup Sy::notsub Sy::propsub Sy::reflsub Sy::element Sy::notelement
+Sy::angle Sy::del Sy::rights Sy::copy Sy::trade Sy::product Sy::sqrt
+Sy::cdot Sy::lognot Sy::up Sy::down Sy::dlrarrow Sy::dlarrow Sy::duparrow
+Sy::drarrow Sy::ddownarrow Sy::lozenge Sy::lang Sy::rights Sy::copy
+Sy::trade Sy::sum Sy::lparentop Sy::lvbar Sy::lparenbot Sy::lbracktop
+Sy::lvbar Sy::lbrackbot Sy::lbracetop Sy::lvbrace Sy::lbracebot
+Sy::lvbar  Sy::nullchar Sy::rang Sy::int Sy::inttop Sy::vint Sy::intbot 
+Sy::rparentop Sy::rvbar Sy::rparenbot Sy::rbracktop Sy::rvbar Sy::rbrackbot
+Sy::rbracetop Sy::rvbrace Sy::rbracebot Sy::nullchar
+
+derived:   Symbol-Oblique      normal   italic     Special

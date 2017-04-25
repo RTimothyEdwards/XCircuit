@@ -1,0 +1,345 @@
+XCircuit v3.10
+-----------------------------------------------------------------------------
+
+An X11 drawing program [especially for circuit schematics]
+Copyright (c) 2017 Tim Edwards
+August 1993 -- April 2017
+-----------------------------------------------------------------------------
+
+This README file contains additional notes about the program which may or may
+not be of interest to anyone.
+-----------------------------------------------------------------------------
+
+ASG:
+
+   Versions beginning with 3.2 can be compiled with the ASG package,
+or "Automatic Schematic Generation".  The package is derived from SPAR,
+written by Stephen Frezza (currently at Gannon University).  SPAR is
+based on the same "corner-stitched tile" structures used by the EDA
+tool "magic", modified to encompass the probabilistic nature of auto-
+routing.  The ASG package currently supports (to a limited extent)
+reading of SPICE files, but will eventually support EDIF netlist output
+from Verilog (and possibly VHDL) for turning netlists into schematics.
+Also, the ASG package will handle constrained moving, re-routing networks
+in response to moving elements around the schematic drawing.
+
+Toolscript:
+
+   Versions beginning with 3.0 are part of a methodology known as
+"ScriptEDA", a call to put major open-source EDA tools into a similar
+framework under an interpreter, where most upper-level functions can be
+written as scripts.  My more narrowly-defined version of ScriptEDA is
+called "toolscript".  The rationale behind "toolscript" is to allow a
+single interpreter to launch multiple EDA tools, such that a
+single script can control multiple programs, bringing together layout
+tools, schematic capture, simulation, and so forth, in a highly
+integrated manner.  "Toolscript" requires that each EDA tool should be
+a shared-object library of routines, that each tool should have its
+own command namespace, that each tool should launch itself from a
+"start" command in its namespace, and that the "start" command
+should return control to the interpreter such that the interpreter is
+always available from the calling terminal.  Applications are encouraged
+to rely heavily on scripts for functions which do not require fast
+execution.  In particular, scripts should handle most input/output
+functions, so that users can easily change file formats to suit their
+needs.  The GUI for toolscript applications should be written in Tk,
+which integrates the graphics event loop with the interpreter, greatly
+simplifying handling of the interaction between the two.  To synchronize
+the GUI with commands called from the command-line, each program should
+have a "command tag" function which can associate a script procedure
+with each command.  These callback procedures can then be defined within
+the GUI script to update the GUI in response to commands.  Finally,
+each application should redefine "printf" output statements to call the
+corresponding output method for the intperpreter (e.g., "Tcl_Eval" for
+compatibility with the "tkcon" console).  This allows error and standard
+output to be handled independently.  Within "tkcon", stdout and stderr
+are printed in blue and red, respectively, making the program output
+easier to read.
+
+   The "toolscript" concept is ideally interpreter-independent.  However,
+due mostly to ease of implementation and syntactical issues, TCL has
+ended up as the only supported interpreter.  TCL calls are heavily
+embedded in the source code, making it somewhat difficult to simply
+add another interpreter.  While XCircuit can be compiled with the Python
+interpreter, it is embedded, not extended, and so does not follow the
+principles of "toolscript".
+
+Rationale:
+
+   This program was written with a number of things in mind.  The major
+point in writing it was that I found all of the drawing programs freely
+distributed at the usual X11 ftp sources (ftp.uu.net, export.lcs.mit.edu,
+etc.), which includes xpic and xfig, and even some other programs like
+idraw and commercial programs like framemaker, were lacking in some manner.
+Some of them, like xpic, are missing fundamental parts, while others, like
+xfig and framemaker, have a cumbersome user interface and require
+inordinately large amounts of time to create simple pictures.  The really
+powerful programs like Adobe Illustrator are, naturally, expensive.
+There has been a long-standing tradition of making MacDraw lookalikes which
+I find particularly disturbing, since a number of features of that GUI are
+fundamentally screwed up, including the dependence on a black-and-white color
+scheme for things such as grid lines and edit points which can make the screen
+cluttered and difficult to work with.  I have chosen to freely ignore all such
+standards in cases where they seem to hinder rather than help the user.
+   Disclaimers:  The above comments refer to versions of the abovementioned
+programs available as of 1993 and do not necessarily reflect the programs'
+current status.  Particularly the latest (from 1995 or so) version of xfig 
+is quite good, though it continues to have a "MacDraw" feel to it.  XCircuit's
+schematic capture has always been secondary to its use for drawing, and
+users may prefer programs such as "gschem" (by Ales Hvezda, part of gEDA)
+that are more in keeping with "normal" standards for EDA software.  Because
+such programs exist, XCircuit's schematic capture, like its basic drawing
+functions, often deviate from the norm to explore radical ideas.  Among
+XCircuit's "radical ideas" are automatic port finding, its parameterization
+method, embedded output formatting directives, and (a recent addition)
+automatic schematic (re)generation.
+
+The principles of XCircuit are as follows:
+
+A) Structural backbone
+   1) There are six drawing elements which are considered "primary".  
+      These are as follows:  
+
+      a) polygon (multiple lines which may or may not be closed and filled)
+      b) arc (ellipse segment which may be closed and/or filled as above)
+      c) label (any text)
+      d) curve (based on the PostScript "curveto" algorithm)
+      e) graphic (graphic image, e.g., from a PPM file)
+      f) object instance (see below)
+
+   2) There are two drawing elements which are considered "secondary", which
+      is to say, contain instances of primary elements.  These are:
+
+      a) path (a connected series of polygons, arcs, and/or curves)
+      b) object (something containing polygons, arcs, labels, 
+		 curves, paths, and instances of other objects)
+
+      Each object is instanced by a primary element called the "object
+      instance", a self-contained unit which allows an object to be scaled, 
+      rotated, and translated within another object.  Since objects contain
+      object instances and object instances point to objects, there is a
+      two-step recursion which is central to the concept of xcircuit.
+
+   3) There is one primary object instance called the TopObject, which is
+      the program window, and its associated object, which is whatever
+      appears on the screen.  TopObject is a pointer, so that any object
+      in memory may be the top object, allowing a push/pop edit stack.
+      All other objects are organized in an array of pointers called the
+      Library.  The Library is filled on startup with the contents of a
+      Library file, and is expanded whenever a new object is created.
+      
+      Actually, there are many different TopObjects, called "pages",
+      which can be switched between at will by typing the number of
+      the page, 1 through 9 and 0 for page 10, or through the "Page"
+      menu command, which allows access to as many pages as are
+      defined.  The "load" and "save" commands act only on the
+      present page (unless multiple pages are loaded at a time), as
+      do all the drawing commands.
+
+   4) All elements allocate memory as they are created and release the
+      memory as they are destroyed, so the only limit on the number of
+      elements in a drawing is the memory of the workstation.
+
+B) Input/Output
+
+   1) All input and output is in PostScript, albeit a version of PostScript
+      with extremely restricted syntax:  xcircuit is in no sense a PS
+      interpreter!  The primary element types are defined as procedures
+      in the PostScript prologue;  all secondary elements are defined as
+      "def" structures in PostScript, the only restriction being that no
+      definition can be called before it is defined.
+
+   2) Output can be encapsulated or non-encapsulated ("full page"), and
+      can have multiple pages.  All pages which declare the same
+      "filename" on the "output properties" window will be saved to
+      the same file.
+
+   3) The current state of the program is captured from time to time
+      (default 10 minutes or 20 "significant" changes to the drawing)
+      in a temporary file.  If XCircuit crashes, work can be recovered
+      by running "xcircuit" without arguments (i.e., without a specific
+      filename on the command line).  This method makes the filename
+      transparent to the user, but the file can be found (on most
+      systems) as /tmp/XC??? where ??? is a randomly-generated number
+      that uniquely identifies the file.
+
+   4) Text is vector-drawn, in order to best match the flexibility of
+      PostScript, which unlike X11 allows text to be scaled to any size
+      and rotated to any orientation (modern font renderers can do this,
+      but are not good at fast on-the-fly rendering needed for a drawing
+      The quality of the vector-drawn text on the screen is relatively
+      poor;  however, the end product of xcircuit is the PostScript file,
+      which does not suffer from those limitations.  Text vectors are
+      xcircuit elements read from an xcircuit library file, with
+      encoding information read from a separate file.
+
+   5) X11 does not have any capability for generalized curves (splines).
+      Therefore, splines are constructed by an N-segment approximation
+      which internally looks like a polygon.  The PostScript output is a 
+      smooth curve instead of the approximation.
+
+   6) X11 does not have any capability for generalized ellipses (ellipses
+      under any rotation).  Similarly to the splines, arcs are constructed
+      by an N-segment approximation.
+
+   7) Implementing all arcs and curves as N-segment approximation allows
+      the possibility of general paths, or sequences of polygons, arc
+      sections, and curves which form a path that can be bordered, closed
+      and/or filled like an individual arc, curve, or polygon.
+
+   8) Other than the qualitative appearance of the text, the screen output
+      of xcircuit is meant to be the closest possible match to the
+      rendering of the PostScript output.  A PostScript hack allows
+      stipple pattern fills to be effectively "transparent" (something
+      that PostScript does not do naturally).  However, the effect is
+      *extremely* device-dependent because it overrides the printer's
+      halftoning operators.  One effect of this is that halftoning
+      will look abnormally large when viewed at screen resolutions,
+      e.g., with GhostScript.
+
+C) User Interface
+
+   1) The mouse button system and the object library are based on the
+      Caltech circuit-simulation program "log" (either "analog" or "diglog").
+      As is usual for most applications, mouse button 1 is used to select
+      things or cycle between selections, button 2 usually terminates a
+      command, and button 3 will abort a command.  In addition, button 1
+      has a function called "hold", which occurs after the button has
+      been continually pressed for a short length of time (about 1/5 second).
+      As the name implies, "hold" grabs hold of an element which can then
+      be moved around the screen.
+
+      Because this program is tailored to circuit drawing, the most common
+      functions are drawing lines and moving object instances.  Therefore,
+      these two functions are made directly available from the mouse
+      button 1 (after a "tap" or a "hold", respectively).  The next most
+      common function is selection of elements singly or in groups.
+      Button 2 can be used to select an item if tapped, and if pressed
+      and held down, a box will be drawn and everything inside that box
+      selected when the button is released.  All other commands are 
+      available from the pulldown menus and/or from the keyboard as
+      single-key macros.  Keyboard macros are quicker, since they act
+      on the present cursor position, whereas menu commands require an
+      extra step.
+
+      From version 3.4, buttons and keys are handled identically by the
+      interface, with the "hold" function becoming a modifier like "shift"
+      or "control".   All XCircuit functions can be arbitrarily bound to
+      any button or key.  The button 1 binding corresponds to the drawing
+      mode.  If button 1 is bound to function "Wire", then it works as
+      described above.  If it is bound to "Arc", then button 1 can be
+      used to draw arcs, while the other functions remain the same.
+
+   2) The libraries are intended to provide a convenient way to store and
+      retrieve elements of a picture which will be used more than once.
+      For the application of circuit drawing, a built-in library provides
+      basic objects such as transistors, amplifiers, resistors, capacitors,
+      arrows, circles, power and ground symbols, and the like.  This file
+      ("builtins.lps") is loaded on startup;  the program first looks in
+      the current directory, and then searches in a given global directory
+      (something like ~cad/lib/xcircuit/) if it could not find it initially.
+      Thus each user can add to or modify the file of builtins to reflect
+      personal taste.  Since the PostScript output contains all object
+      definitions, these changes to the built-in functions are inherently
+      transferrable.  The program checks objects with the same name for
+      equivalence of their contents, and changes names as necessary to
+      avoid conflicts.
+
+      An additional library, the user library, contains all of the
+      objects which are created (using the "make object" command)
+      during a session or objects which are loaded from a file but
+      do not belong to the built-in library.  The user library can
+      be saved by itself and reloaded later either into the user
+      library or into the built-in library.  This is the way to
+      create a personalized built-in library set.
+
+   3) In the non-TCL-based version of XCircuit, the special file
+      "startup.script" can be edited to include lines such as the
+      following:
+
+		filename loadlibrary
+
+      The loadlibrary command will automatically include another
+      library file.  This method makes it convenient to divide up
+      libraries into separate files according to (for instance)
+      function (digital, analog, clip art, etc.), and use the
+      loadlibrary commands to choose which ones will be loaded
+      on startup.  Caveat:  If the order of loading is such that
+      an object contains an instance of another object which has
+      not yet been loaded, xcircuit will complain.
+
+      In the TCL-based version of XCircuit, the equivalent file is
+      "xcstartup.tcl" and the syntax is:
+
+	library n load filename
+
+      where "filename" is the name of the library file (e.g.,
+      "digital.lps"), and "n" is the library page number.  By
+      specifying the same page as an existing library, a set of
+      objects can be appended to that library.  "n" may also refer
+      to a library by name.
+
+      By default, libraries have the extension ".lps".  As they
+      contain only macros, they cannot be displayed with any
+      PostScript interpreter.
+
+   4) Xcircuit has a strict sense of zooming and snap-to grid.  Objects
+      scale absolutely;  line widths and text sizes will increase/decrease
+      proportionally with the zoom, as well as dot/dash spacing and all
+      other features.  Xcircuit does have a minimum integer grid in
+      coordinate space, which translates to 0.005 inches at an output scale
+      of 1.  The maximum zoom scale gives a screen size translating to
+      about 100 by 100 inches at an output scale of 1.  The effective
+      scale can be varied by changing the output scale (reached from the
+      "File/Write" menu selection) in order to fit a drawing to a page or
+      to get a grid matched to a specific dimension.  A separate scale
+      parameter changes the scale of the reported position relative to
+      the output scale (as it will appear on a printed page).
+
+   5) The snap-to grid is an all-important feature for circuit drawing,
+      wherein it is critical that wires line up properly with one another.
+      In xcircuit, there is no way to get off the snap-to grid except by
+      turning the snap function off and physically pushing elements off
+      the grid.  In any case, objects can always be returned to the snap
+      grid with the "snap" function (key 'S').
+
+D) Schematic Capture
+
+      XCircuit implements a sophisticated schematic capture.  Unlike
+      virtually all schematic capture software currently available,
+      xcircuit allows the designer to draw the circuit in a "natural"
+      way, making use both of schematic hierarchies and simple
+      hierarchies created simply by grouping elements together.  If
+      the chosen netlist format is hierarchical (like SPICE), both
+      hierarchical forms will be retained in the output.  For element
+      grouping, input/output ports connecting into to the group will
+      be determined automatically, from context.
+
+      Individual networks can be queried (key 'Alt-W') to highlight
+      the entire visible part of the network, with the network name
+      printed in the message window. 
+
+      Any schematic can cover multiple pages.  One page is marked as
+      "primary" and the others marked as "secondary".  Netlists are
+      generated in the primary page object only, but incorporate
+      information from all the schematic pages.  All pages which have
+      the same "page label" are considered to be part of the same
+      schematic.
+
+-----------------------------------------------------------------------------
+
+Xcircuit reference:
+   Local:  See the xcircuit manpage ("man xcircuit")
+   Online: http://opencircuitdesign.com/xcircuit/features.html
+
+-----------------------------------------------------------------------------
+
+Online tutorials: See
+   Standard:          http://opencircuitdesign.com/xcircuit/tutorial/tutorial.html
+   Schematic capture: http://opencircuitdesign.com/xcircuit/tutorial/tutorial2.html
+
+-----------------------------------------------------------------------------
+
+Things to do: See the file "TODO"
+	  
+-----------------------------------------------------------------------------
