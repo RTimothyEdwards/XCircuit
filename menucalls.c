@@ -630,6 +630,7 @@ void setcolorscheme(Boolean boolvalue)
    colorlist[RATSNESTCOLOR].color.pixel = appdata.ratsnestcolor;
    colorlist[BBOXCOLOR].color.pixel = appdata.bboxpix;
    colorlist[CLIPMASKCOLOR].color.pixel = appdata.clipcolor;
+   colorlist[FIXEDBBOXCOLOR].color.pixel = appdata.fixedbboxpix;
 
    /* Fill in pixel information */
 

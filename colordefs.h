@@ -9,7 +9,7 @@
 /* And ApplicationDataPtr in xcircuit.h					   */
 /*-------------------------------------------------------------------------*/
 
-#define NUMBER_OF_COLORS	17
+#define NUMBER_OF_COLORS	18
 
 #define BACKGROUND		0
 #define FOREGROUND		1
@@ -31,6 +31,7 @@
 #define INFOLABELCOLOR		14
 #define RATSNESTCOLOR		15
 #define CLIPMASKCOLOR		16
+#define FIXEDBBOXCOLOR		17
 
 #define DEFAULTCOLOR	-1		/* Inherits color of parent */
 #define DOFORALL	-2		/* All elements inherit same color */

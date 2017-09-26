@@ -389,8 +389,9 @@ int quitcheck(xcWidget w, caddr_t clientdata, caddr_t calldata)
    }
    else {
       free(promptstr);
-      quit(w, NULL);
-      return 1;
+      quit(w, NULL);				// preparation for quit
+      Tcl_Eval(xcinterp, "quitnocheck");	// actual quit
+      return 1;					// not reached
    }
 }
 

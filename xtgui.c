@@ -152,6 +152,8 @@ static XtResource resources[] = {
 
   { "bboxcolor", "BBoxColor", XtRPixel, sizeof(Pixel),
       XtOffset(ApplicationDataPtr, bboxpix), XtRString, "greenyellow"},
+  { "fixedbboxcolor", "FixedBBoxColor", XtRPixel, sizeof(Pixel),
+      XtOffset(ApplicationDataPtr, fixedbboxpix), XtRString, "Pink"},
   { "clipcolor", "ClipColor", XtRPixel, sizeof(Pixel),
       XtOffset(ApplicationDataPtr, clipcolor), XtRString, "powderblue"},
 

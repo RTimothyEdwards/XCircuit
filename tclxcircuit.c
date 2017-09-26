@@ -9312,17 +9312,9 @@ int loadrcfile()
       addnewcolorentry(xc_alloccolor("Tan"));
       addnewcolorentry(xc_alloccolor("Brown"));
       addnewcolorentry(xc_alloccolor("#d20adc"));
+      addnewcolorentry(xc_alloccolor("Pink"));
    }  
      
-   /* These colors must be enabled whether or not colors are overridden, */
-   /* because they are needed by the schematic capture system.           */
-      
-   // addnewcolorentry(xc_getlayoutcolor(LOCALPINCOLOR));
-   // addnewcolorentry(xc_getlayoutcolor(GLOBALPINCOLOR));
-   // addnewcolorentry(xc_getlayoutcolor(INFOLABELCOLOR));
-   // addnewcolorentry(xc_getlayoutcolor(RATSNESTCOLOR));
-   // addnewcolorentry(xc_getlayoutcolor(BBOXCOLOR));
-      
    if ((result != TCL_OK) || !(flags & KEYOVERRIDE)) {
       default_keybindings();
    }
@@ -9681,6 +9673,10 @@ void build_app_database(Tk_Window tkwind)
    if ((xcuid = Tk_GetOption(tkwind, "bboxcolor", "Color")) == NULL)
       xcuid = "greenyellow";
    appdata.bboxpix = xc_alloccolor((char *)xcuid);
+
+   if ((xcuid = Tk_GetOption(tkwind, "fixedbboxcolor", "Color")) == NULL)
+      xcuid = "pink";
+   appdata.fixedbboxpix = xc_alloccolor((char *)xcuid);
 
    if ((xcuid = Tk_GetOption(tkwind, "clipcolor", "Color")) == NULL)
       xcuid = "powderblue";

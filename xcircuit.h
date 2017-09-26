@@ -499,6 +499,7 @@ enum loadmodes {IMPORT = 1, PSBKGROUND, SCRIPT, RECOVER,
 #define BBOX 512
 #define SQUARECAP 1024
 #define CLIPMASK  2048
+#define FIXEDBBOX 4096
 
 /*----------------------------------------------------------------------*/
 /* Box edit styles							*/
@@ -1202,7 +1203,7 @@ typedef struct {
    Pixel	globalcolor, localcolor, infocolor, ratsnestcolor;
 
    /* non-schematic layout color(s) */
-   Pixel	bboxpix, clipcolor;
+   Pixel	fixedbboxpix, bboxpix, clipcolor;
 
    /* color scheme 1 */
    Pixel	fg, bg;

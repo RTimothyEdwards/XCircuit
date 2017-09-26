@@ -507,6 +507,7 @@ void loadrcfile()
    addnewcolorentry(xc_getlayoutcolor(INFOLABELCOLOR));
    addnewcolorentry(xc_getlayoutcolor(RATSNESTCOLOR));
    addnewcolorentry(xc_getlayoutcolor(BBOXCOLOR));
+   addnewcolorentry(xc_getlayoutcolor(FIXEDBBOXCOLOR));
 
 
    /* Add the default key bindings */

@@ -2701,7 +2701,7 @@ void printpos(short xval, short yval)
       polyptr lwire = (eventmode == BOX_MODE) ?  TOPOLY(ENDPART) : TOPOLY(EDITPART);
       if ((eventmode == EPOLY_MODE) && (lwire->number > 2)) {
 	 /* sanity check on edit cycle */
-	 cycle = lwire->cycle->number;
+	 cycle = (lwire->cycle) ? lwire->cycle->number : -1;
 	 if (cycle < 0 || cycle >= lwire->number) {
 	    advancecycle((genericptr *)(&lwire), 0);
 	    cycle = 0;

@@ -4553,6 +4553,37 @@ Boolean objectread(FILE *ps, objectptr localdata, short offx, short offy,
 	    sscanf(++lineptr, "%hd %hd %hd %hd",
 		&localdata->bbox.lowerleft.x, &localdata->bbox.lowerleft.y,
 		&localdata->bbox.width, &localdata->bbox.height);
+
+	    // If this is *not* a FONTLIB, then the font character symbols
+	    // are being edited as a normal library, so copy the bounding
+	    // box into a FIXEDBBOX-type box.
+
+	    if (mode != FONTLIB) {
+		polyptr *newpoly;
+		pointlist newpoints;
+
+		NEW_POLY(newpoly, localdata);
+		(*newpoly)->passed = NULL;
+		(*newpoly)->cycle = NULL;
+		(*newpoly)->number = 4;
+		(*newpoly)->width = 1.0;
+		(*newpoly)->style = FIXEDBBOX;
+		(*newpoly)->color = FIXEDBBOXCOLOR;
+       		(*newpoly)->points = (pointlist) malloc(4 * sizeof(XPoint));
+		newpoints = (*newpoly)->points;
+		newpoints->x = localdata->bbox.lowerleft.x;
+		newpoints->y = localdata->bbox.lowerleft.y;
+		newpoints++;
+		newpoints->x = localdata->bbox.lowerleft.x + localdata->bbox.width;
+		newpoints->y = localdata->bbox.lowerleft.y;
+		newpoints++;
+		newpoints->x = localdata->bbox.lowerleft.x + localdata->bbox.width;
+		newpoints->y = localdata->bbox.lowerleft.y + localdata->bbox.height;
+		newpoints++;
+		newpoints->x = localdata->bbox.lowerleft.x;
+		newpoints->y = localdata->bbox.lowerleft.y + localdata->bbox.height;
+		std_eparam((genericptr)(*newpoly), colorkey);
+	    }
          }
 
 	 /* read "hidden" attribute */
@@ -6508,7 +6539,6 @@ void printOneObject(FILE *ps, objectptr localdata, int ccolor)
 
    /* first, get a total count of all objects and give warning if large */
 
-
    if ((is_page(localdata) == -1) && (localdata->parts > 255)) {
       Wprintf("Warning: \"%s\" may exceed printer's PS limit for definitions",
 	    localdata->name);
@@ -6520,6 +6550,13 @@ void printOneObject(FILE *ps, objectptr localdata, int ccolor)
       /* Check if this color is parameterized */
       eparamptr epp;
       oparamptr ops;
+
+      /* FIXEDBBOX style is handled in the object header and	*/
+      /* the part should be skipped.				*/
+
+      if (ELEMENTTYPE(*savegen) == POLYGON)
+	 if (TOPOLY(savegen)->style & FIXEDBBOX)
+	    continue;
 
       for (epp = (*savegen)->passed; epp != NULL; epp = epp->next) {
 	 ops = match_param(localdata, epp->key);
@@ -6826,7 +6863,7 @@ void printOneObject(FILE *ps, objectptr localdata, int ccolor)
 void printobjects(FILE *ps, objectptr localdata, objectptr **wrotelist,
 	short *written, int ccolor)
 {
-   genericptr *gptr;
+   genericptr *gptr, *savegen;
    objectptr *optr;
    /* oparamptr ops; (jdk) */
    char *validname;
@@ -6866,7 +6903,29 @@ void printobjects(FILE *ps, objectptr localdata, objectptr **wrotelist,
    else
       fprintf(ps, "/%s {\n", validname);
 
-   /* No longer writes "bbox" record */
+   /* Write a "bbox" record if there is an element with style FIXEDBBOX	*/
+   /* This is the only time a "bbox" record is written for an object.	*/
+
+   for (savegen = localdata->plist; savegen < localdata->plist +
+		localdata->parts; savegen++) {
+      if (ELEMENTTYPE(*savegen) == POLYGON) {
+	 if (TOPOLY(savegen)->style & FIXEDBBOX) {
+	    pointlist polypoints;
+	    int width, height;
+	    polypoints = TOPOLY(savegen)->points + 2;
+	    width = polypoints->x;
+	    height = polypoints->y;
+	    polypoints = TOPOLY(savegen)->points;
+	    width -= polypoints->x;
+	    height -= polypoints->y;
+	    fprintf(ps, "%% %d %d %d %d bbox\n",
+			polypoints->x, polypoints->y,
+			width, height);
+	    break;
+	 }
+      }
+   }
+
    if (localdata->hidden == True) fprintf(ps, "%% hidden\n");
 
    /* For symbols with schematics, and "trivial" schematics */

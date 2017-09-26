@@ -2256,6 +2256,7 @@ XCWindowData* GUI_init(int argc, char *argv[])
 		appdata.infocolor = WinNamedColor("SeaGreen");
 		appdata.ratsnestcolor = WinNamedColor("Tan4");
 		appdata.bboxpix = WinNamedColor("greenyellow");
+		appdata.fixedbboxpix = WinNamedColor("Pink");
 		appdata.clipcolor = WinNamedColor("powderblue");
 		appdata.fg = WinNamedColor("Black");
 		appdata.bg = WinNamedColor("White");
