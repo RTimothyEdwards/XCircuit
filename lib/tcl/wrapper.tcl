@@ -290,6 +290,8 @@ proc xcircuit::new_window { name } {
 #----------------------------------------------------------------------
 
 proc xcircuit::closewindow {name} {
+   global XCOps
+
    set winlist [config windownames]
    if {[llength $winlist] > 1} {
       if {[lsearch $winlist $name] != -1} {
@@ -297,6 +299,7 @@ proc xcircuit::closewindow {name} {
 	 set newwin [lindex [config windownames] 0]
 	 destroy [winfo top $name]
 	 config focus $newwin
+	 set XCOps(focus) [winfo top $newwin]
       }
    } else {
       quit

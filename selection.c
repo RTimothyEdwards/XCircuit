@@ -696,7 +696,7 @@ void advancecycle(genericptr *pgen, short newvalue)
 	 *endptr = *pptr;
 	 *pptr = tmpcyc;
 	 pptr->flags &= ~LASTENTRY;
-	 pptr->number = -1;
+	 endptr->number = -1;
 	 endptr--;
 	 endptr->flags |= LASTENTRY;
       }

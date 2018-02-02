@@ -10,11 +10,11 @@
 proc xcircuit::automousehint {window} {
    
    set frame [winfo top $window]
-   set btext [bindkey $window -compat Button1]
+   set btext [$window bindkey -compat Button1]
    ${frame}.infobar.mousehints.left configure -text $btext
-   set btext [bindkey $window -compat Button2]
+   set btext [$window bindkey -compat Button2]
    ${frame}.infobar.mousehints.middle configure -text $btext
-   set btext [bindkey $window -compat Button3]
+   set btext [$window bindkey -compat Button3]
    ${frame}.infobar.mousehints.right configure -text $btext
 }
 
@@ -45,6 +45,8 @@ proc xcircuit::mousehint_create {name} {
   grid columnconfigure ${name}.infobar.mousehints 3 -weight 0
 
   mousehint_bindings ${name} ${name}.infobar.mousehints	
+
+  xcircuit::automousehint ${name}.mainframe.mainarea.drawing
 
   xcircuit::mousehint_show ${name}
 }
@@ -79,24 +81,24 @@ proc xcircuit::mousehint_hide { name } {
 #------------------------------------------------------------------------
 # Highlights buttons on the mouse_canvas when the user
 # presses the corresponding mouse buttons
-# Seems unnescesary, but without it who would guess that those
+# Seems unnecessary, but without it who would guess that those
 # rectangles are supposed to look like mouse buttons?
 #------------------------------------------------------------------------
 
 proc xcircuit::mousehint_bindings { name mouse_frame } {
 
-   bind all <Button-1> "${mouse_frame}.left configure -state active ; \
+   bind ${name} <Button-1> "${mouse_frame}.left configure -state active ; \
 	xcircuit::automousehint ${name}.mainframe.mainarea.drawing"
-   bind all <Button-2> "${mouse_frame}.middle configure -state active ; \
+   bind ${name} <Button-2> "${mouse_frame}.middle configure -state active ; \
 	xcircuit::automousehint ${name}.mainframe.mainarea.drawing"
-   bind all <Button-3> "${mouse_frame}.right configure -state active ; \
+   bind ${name} <Button-3> "${mouse_frame}.right configure -state active ; \
 	xcircuit::automousehint ${name}.mainframe.mainarea.drawing"
 
-   bind all <ButtonRelease-1> "${mouse_frame}.left configure -state normal"
-   bind all <ButtonRelease-2> "${mouse_frame}.middle configure -state normal"
-   bind all <ButtonRelease-3> "${mouse_frame}.right configure -state normal"
+   bind ${name} <ButtonRelease-1> "${mouse_frame}.left configure -state normal"
+   bind ${name} <ButtonRelease-2> "${mouse_frame}.middle configure -state normal"
+   bind ${name} <ButtonRelease-3> "${mouse_frame}.right configure -state normal"
 
-   bind all <KeyPress> "xcircuit::automousehint ${name}.mainframe.mainarea.drawing"
+   bind ${name} <KeyPress> "xcircuit::automousehint ${name}.mainframe.mainarea.drawing"
 
    bind ${mouse_frame}.title <ButtonPress-1> "::xcircuit::mousehint_hide ${name}"
 }

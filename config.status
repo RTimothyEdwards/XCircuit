@@ -431,7 +431,7 @@ Copyright (C) 2012 Free Software Foundation, Inc.
 This config.status script is free software; the Free Software Foundation
 gives unlimited permission to copy, distribute and modify it."
 
-ac_pwd='/home/tim/gitsrc/xcircuit-3.9'
+ac_pwd='/home/tim/gitsrc/xcircuit-3.10'
 srcdir='.'
 INSTALL='/bin/install -c'
 MKDIR_P='/bin/mkdir -p'
@@ -663,7 +663,7 @@ S["CPPFLAGS"]=" "
 S["LDFLAGS"]=" "
 S["CFLAGS"]="-g -Wno-pointer-sign -fPIC "
 S["CC"]="gcc"
-S["REVISION"]="63"
+S["REVISION"]="3"
 S["AM_BACKSLASH"]="\\"
 S["AM_DEFAULT_VERBOSITY"]="1"
 S["AM_DEFAULT_V"]="$(AM_DEFAULT_VERBOSITY)"
@@ -678,13 +678,13 @@ S["mkdir_p"]="$(MKDIR_P)"
 S["MKDIR_P"]="/bin/mkdir -p"
 S["INSTALL_STRIP_PROGRAM"]="$(install_sh) -c -s"
 S["STRIP"]=""
-S["install_sh"]="${SHELL} /home/tim/gitsrc/xcircuit-3.9/install-sh"
+S["install_sh"]="${SHELL} /home/tim/gitsrc/xcircuit-3.10/install-sh"
 S["MAKEINFO"]="makeinfo"
 S["AUTOHEADER"]="autoheader"
 S["AUTOMAKE"]="automake-1.14"
 S["AUTOCONF"]="autoconf"
 S["ACLOCAL"]="aclocal-1.14"
-S["VERSION"]="3.9"
+S["VERSION"]="3.10"
 S["PACKAGE"]="xcircuit"
 S["CYGPATH_W"]="echo"
 S["am__isrc"]=""
@@ -711,11 +711,11 @@ S["ECHO_T"]=""
 S["ECHO_N"]="-n"
 S["ECHO_C"]=""
 S["DEFS"]="-DPACKAGE_NAME=\\\"\\\" -DPACKAGE_TARNAME=\\\"\\\" -DPACKAGE_VERSION=\\\"\\\" -DPACKAGE_STRING=\\\"\\\" -DPACKAGE_BUGREPORT=\\\"\\\" -DPACKAGE_URL=\\\"\\\" -DPACKAGE=\\\"xcir"\
-"cuit\\\" -DVERSION=\\\"3.9\\\" -DHAVE_LIBM=1 -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H"\
-"=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DSIZEOF_VOID_P=8 -DSIZEOF_UNSIGNED_INT=4 -DSIZEOF_UNSIGNED_LONG=8 -DS"\
-"IZEOF_UNSIGNED_LONG_LONG=8 -DHAVE_LIBXT=1 -DSTDC_HEADERS=1 -DHAVE_SETENV=1 -DHAVE_PUTENV=1 -DHAVE_DIRENT_H=1 -DHAVE_LIBZ=1 -DHAVE_VA_COPY=1 -DHAVE__"\
-"_VA_COPY=1 -DHAVE_U_CHAR=1 -DHAVE_X11_XPM_H=1 -DHAVE_XPM=1 -DHAVE_CAIRO=1 -DLGF=1 -DINPUT_FOCUS=1 -DGS_EXEC=\\\"gs\\\" -DSPICE_EXEC=\\\"ngspice\\\" -DTCL_WR"\
-"APPER=1"
+"cuit\\\" -DVERSION=\\\"3.10\\\" -DHAVE_LIBM=1 -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_"\
+"H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DSIZEOF_VOID_P=8 -DSIZEOF_UNSIGNED_INT=4 -DSIZEOF_UNSIGNED_LONG=8 -D"\
+"SIZEOF_UNSIGNED_LONG_LONG=8 -DHAVE_LIBXT=1 -DSTDC_HEADERS=1 -DHAVE_SETENV=1 -DHAVE_PUTENV=1 -DHAVE_DIRENT_H=1 -DHAVE_LIBZ=1 -DHAVE_VA_COPY=1 -DHAVE_"\
+"__VA_COPY=1 -DHAVE_U_CHAR=1 -DHAVE_X11_XPM_H=1 -DHAVE_XPM=1 -DHAVE_CAIRO=1 -DLGF=1 -DINPUT_FOCUS=1 -DGS_EXEC=\\\"gs\\\" -DSPICE_EXEC=\\\"ngspice\\\" -DTCL_W"\
+"RAPPER=1"
 S["mandir"]="${datarootdir}/man"
 S["localedir"]="${datarootdir}/locale"
 S["libdir"]="${exec_prefix}/lib"
