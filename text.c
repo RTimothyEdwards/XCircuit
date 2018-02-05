@@ -289,6 +289,10 @@ stringpart *deletestring0(stringpart *dstr, stringpart **strtop, objinstptr this
 	       case XC_STRING:
 		  ops->parameter.string = dstr->nextpart;
 		  break;
+	       case XC_EXPR:
+                  /* Deleting an expression result can only result	*/
+		  /* in bad things happening.				*/
+		  return NULL;
 	       default:
 		  /* What to be done here? */
 		  break;

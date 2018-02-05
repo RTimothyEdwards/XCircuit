@@ -2392,6 +2392,10 @@ void unmakeparam(labelptr thislabel, objinstptr thisinst, stringpart *thispart)
    ops = (thisinst != NULL) ? match_instance_param(thisinst, key) :
 		match_param(topobject, key);
 
+   if (ops == NULL) ops = match_param(topobject, key);
+
+   if (ops == NULL) return;	/* Report error? */
+
    /* Copy the default parameter into the place we are unparameterizing */
    /* Promote first to a string type if necessary */
 
@@ -2473,6 +2477,9 @@ void unparameterize(int mode)
    else
       ptype = ALL_TYPES;
 
+   // NOTE:  Need a different method for interactive edit;  remove only the
+   // parameter under the cursor.
+
    if ((areawin->selects == 1) && (mode == P_SUBSTRING) && areawin->textend > 0
 		&& areawin->textend < areawin->textpos) {
       if (SELECTTYPE(areawin->selectlist) != LABEL) return;	 /* Not a label */
@@ -2500,11 +2507,24 @@ void unparameterize(int mode)
       for (fselect = areawin->selectlist; fselect < areawin->selectlist +
             areawin->selects; fselect++) {
          if ((mode == P_SUBSTRING) && SELECTTYPE(fselect) == LABEL) {
+	    u_char found;
+
             settext = SELTOLABEL(fselect);
-            strptr = settext->string;
-            while (strptr != NULL && strptr->type != PARAM_START)
-	       strptr = strptr->nextpart;
-	    if (strptr != NULL) unmakeparam(settext, areawin->topinstance, strptr);
+
+	    // Remove all parameters from the string.  
+	    found = 1;
+	    while (found == (u_char)1) {
+	       found = (u_char)0;
+               strptr = settext->string;
+	       while (strptr != NULL) {
+	          if (strptr->type == PARAM_START) {
+		     unmakeparam(settext, areawin->topinstance, strptr);
+		     found = (u_char)1;
+		     break;
+		  }
+	          strptr = strptr->nextpart;
+	       }
+	    }
 	 }
 	 else if (mode == P_POSITION) {
 	    removenumericalp(topobject->plist + (*fselect), P_POSITION_X);
