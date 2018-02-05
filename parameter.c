@@ -2480,7 +2480,33 @@ void unparameterize(int mode)
    // NOTE:  Need a different method for interactive edit;  remove only the
    // parameter under the cursor.
 
-   if ((areawin->selects == 1) && (mode == P_SUBSTRING) && areawin->textend > 0
+   if (eventmode == ETEXT_MODE) {
+      /* ETEXT_MODE implies there is only one selected label */
+      settext = SELTOLABEL(areawin->selectlist);
+      strptr = findstringpart(areawin->textpos, &locpos, settext->string,
+		areawin->topinstance);
+
+      /* Assume the cursor is inside a parameter and find the end */
+      while (strptr != NULL && strptr->type != PARAM_START && strptr->type != PARAM_END)
+	 strptr = strptr->nextpart;
+
+      if (strptr && (strptr->type == PARAM_END)) {
+	 strptr = strptr->nextpart;
+         tmpptr = settext->string;
+         while (tmpptr != NULL) {
+	    if (tmpptr->type == PARAM_START) {
+	       if (tmpptr->nextpart == strptr) {
+		  /* tmpptr now points to the parameter to be removed */
+		  unmakeparam(settext, areawin->topinstance, tmpptr);
+		  break;
+	       }
+	    }
+	    tmpptr = tmpptr->nextpart;
+	 }
+      }
+      lastptr = NULL;
+   }
+   else if ((areawin->selects == 1) && (mode == P_SUBSTRING) && areawin->textend > 0
 		&& areawin->textend < areawin->textpos) {
       if (SELECTTYPE(areawin->selectlist) != LABEL) return;	 /* Not a label */
       settext = SELTOLABEL(areawin->selectlist);
