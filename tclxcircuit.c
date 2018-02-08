@@ -10051,6 +10051,9 @@ int xctcl_start(ClientData clientData, Tcl_Interp *interp,
    /* to the way ".wishrc" is processed, all arguments are	*/
    /* glommed into one Tcl (list) object, objv[1].		*/
 
+   filearg = (char *)malloc(sizeof(char));
+   *filearg = '\0';
+
    if (objc == 2) {
       char **argv;
       int argc;
@@ -10063,13 +10066,16 @@ int xctcl_start(ClientData clientData, Tcl_Interp *interp,
 	       if (--argc > 0) {
 		  argv++;
 	          result = Tcl_EvalFile(interp, *argv);
-	          if (result != TCL_OK)
+	          if (result != TCL_OK) {
+		     free(filearg);
 		     return result;
+		  }
 	          else
 		     rcoverride = True;
 	       }
 	       else {
 	          Tcl_SetResult(interp, "No filename given to exec argument.", NULL);
+		  free(filearg);
 	          return TCL_ERROR;
 	       }
 	    }
@@ -10078,7 +10084,12 @@ int xctcl_start(ClientData clientData, Tcl_Interp *interp,
 	       pressmode = 1;
 	    }
 	 }
-	 else filearg = *argv;
+	 else if (strcmp(*argv, ".xcircuit")) {
+	    filearg = (char *)realloc(filearg, sizeof(char) *
+			(strlen(filearg) + strlen(*argv) + 2));
+	    strcat(filearg, ",");
+	    strcat(filearg, *argv);
+	 }
 	 argv++;
 	 argc--;
       }
@@ -10095,13 +10106,16 @@ int xctcl_start(ClientData clientData, Tcl_Interp *interp,
 	       if (++argc < objc) {
 		  argv = Tcl_GetString(objv[argc]);
 	          result = Tcl_EvalFile(interp, argv);
-	          if (result != TCL_OK)
+	          if (result != TCL_OK) {
+		     free(filearg);
 		     return result;
+		  }
 	          else
 		     rcoverride = True;
 	       }
 	       else {
 	          Tcl_SetResult(interp, "No filename given to exec argument.", NULL);
+		  free(filearg);
 	          return TCL_ERROR;
 	       }
 	    }
@@ -10110,7 +10124,12 @@ int xctcl_start(ClientData clientData, Tcl_Interp *interp,
 	       pressmode = 1;
 	    }
 	 }
-	 else filearg = argv;
+	 else if (strcmp(argv, ".xcircuit")) {
+	    filearg = (char *)realloc(filearg, sizeof(char) *
+			(strlen(filearg) + strlen(argv) + 2));
+	    strcat(filearg, ",");
+	    strcat(filearg, argv);
+	 }
       }
    }
 
@@ -10119,7 +10138,7 @@ int xctcl_start(ClientData clientData, Tcl_Interp *interp,
 
    composelib(PAGELIB);	/* make sure we have a valid page list */
    composelib(LIBLIB);	/* and library directory */
-   if ((objc >= 2) && (filearg != NULL)) {
+   if ((objc >= 2) && (*filearg != '\0')) {
       char *libname;
       int target = -1;
 
@@ -10148,6 +10167,7 @@ int xctcl_start(ClientData clientData, Tcl_Interp *interp,
    drawarea(areawin->area, NULL, NULL);
 
    /* Return back to the interpreter; Tk is handling the GUI */
+   free(filearg);
    return (result == TCL_OK) ? XcTagCallback(interp, 1, &cmdname) : result;
 }
 
