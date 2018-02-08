@@ -274,7 +274,7 @@ PKG_CONFIG_LIBDIR =
 PKG_CONFIG_PATH = 
 PYTHON = 
 RANLIB = ranlib
-REVISION = 3
+REVISION = 6
 SET_MAKE = 
 SHDLIB_EXT = .so
 SHELL = /bin/sh
@@ -359,7 +359,7 @@ AM_CFLAGS = $(cairo_CFLAGS) $(fontconfig_CFLAGS) ${GS_CFLAGS}
 
 # Additional files to distribute
 EXTRA_DIST = COPYRIGHT README README.ISOLatin2 README.notes
-FULL_VERSION = 3.10.3
+FULL_VERSION = 3.10.6
 
 # Menudep program generates menudep.h needed by some of the
 # source files for Xcircuit
@@ -851,6 +851,12 @@ xcircexec$(EXEEXT): xcircexec.o
 		xcircexec.c -o xcircexec$(EXEEXT) ${LIB_SPECS} \
 		${LD_RUN_PATH} ${LDFLAGS} ${LIBS} ${EXTRA_LIB_SPECS}
 
+xcircdnull$(EXEEXT): xcircdnull.o
+	$(RM) ./xcircdnull$(EXEEXT)
+	$(CC) ${CFLAGS} ${CPPFLAGS} ${DEFS} $(PATHNAMES) $(INCLUDES) \
+		xcircdnull.c -o xcircdnull$(EXEEXT) ${LIB_SPECS} \
+		${LD_RUN_PATH} ${LDFLAGS} ${LIBS} ${EXTRA_LIB_SPECS}
+
 tcl:
 	@echo Making tcl library object
 	list='$(SUBDIRS)'; for subdir in $$list; do \
@@ -861,6 +867,7 @@ tcl:
 	$(MAKE) lib/$(INTERP_PATH)/$(WRAPPER_SH)
 	$(MAKE) lib/$(INTERP_PATH)/$(WRAPPER_INIT)
 	$(MAKE) xcircexec$(EXEEXT)
+	$(MAKE) xcircdnull$(EXEEXT)
 
 lib/$(INTERP_PATH)/$(WRAPPER_SH): lib/$(INTERP_PATH)/$(WRAPPER_SH).in
 	sed -e '/XCLIBDIR/s#XCLIBDIR#$(librarydir)#' \
@@ -925,7 +932,7 @@ install-data-local: lib/xcircuit.1
 # Note that MacOS/Fink uses SHDLIB_EXT = .dylib but Tcl expects .so anyway.
 # So we make a symbolic link if SHDLIB_EXT != .so
 
-install-tcl: xcircexec$(EXEEXT) lib/$(INTERP_PATH)/$(WRAPPER_OBJ) lib/$(INTERP_PATH)/$(WRAPPER_SH) lib/$(INTERP_PATH)/$(WRAPPER_INIT)
+install-tcl: xcircexec$(EXEEXT) xcircdnull$(EXEEXT) lib/$(INTERP_PATH)/$(WRAPPER_OBJ) lib/$(INTERP_PATH)/$(WRAPPER_SH) lib/$(INTERP_PATH)/$(WRAPPER_INIT)
 	@echo "Installing standard XCircuit library files"
 	$(MAKE) $(AM_MAKEFLAGS) install-data-local
 	@echo "Installing Tcl files"
@@ -935,10 +942,12 @@ install-tcl: xcircexec$(EXEEXT) lib/$(INTERP_PATH)/$(WRAPPER_OBJ) lib/$(INTERP_P
 		$(INSTALL_DATA) $$i $(DESTDIR)$(scriptsdir); \
 		done )
 	$(INSTALL_DATA) xcircexec$(EXEEXT) $(DESTDIR)$(librarydir)
+	$(INSTALL_DATA) xcircdnull$(EXEEXT) $(DESTDIR)$(librarydir)
 	chmod 0755 $(DESTDIR)$(librarydir)/$(CONSOLE)
 	chmod 0755 $(DESTDIR)$(librarydir)/$(CONSOLE_SCRIPT)
 	chmod 0755 $(DESTDIR)$(librarydir)/$(WRAPPER_OBJ)
 	chmod 0755 $(DESTDIR)$(librarydir)/xcircexec$(EXEEXT)
+	chmod 0755 $(DESTDIR)$(librarydir)/xcircdnull$(EXEEXT)
 
 	if test "${SHDLIB_EXT}" != ".so"; then \
 	  ( cd $(DESTDIR)$(librarydir); \
@@ -962,7 +971,8 @@ clean:
 	(cd ./spiceparser; $(MAKE) clean)
 	$(RM) lib/$(INTERP_PATH)/$(WRAPPER_OBJ) lib/$(INTERP_PATH)/$(WRAPPER_SH)
 	$(RM) lib/$(INTERP_PATH)/$(WRAPPER_INIT)
-	$(RM) xcircuit *.o *.bak lib/xcircuit.1 core xcircexec$(EXEEXT)
+	$(RM) xcircuit *.o *.bak lib/xcircuit.1 core
+	$(RM) xcircexec$(EXEEXT) xcircdnull$(EXEEXT)
 	$(RM) menudep$(EXEEXT) menudep.h
 	$(RM) config.cache config.log
 
@@ -972,7 +982,8 @@ distclean:
 	(cd ./spiceparser; $(MAKE) clean ; $(RM) Makefile)
 	$(RM) xcircuit *.o *.bak core
 	$(RM) lib/$(INTERP_PATH)/$(WRAPPER_OBJ) lib/$(INTERP_PATH)/$(WRAPPER_SH)
-	$(RM) menudep$(EXEEXT) menudep.h lib/xcircuit.1 xcircexec$(EXEEXT)
+	$(RM) menudep$(EXEEXT) menudep.h lib/xcircuit.1
+	$(RM) xcircexec$(EXEEXT) xcircdnull$(EXEEXT)
 	$(RM) Makefile config.cache config.log config.status
 	$(RM) xcircuit-$(FULL_VERSION) xcircuit.spec xcircuit-$(FULL_VERSION).tgz
 
@@ -992,7 +1003,8 @@ quiteclean:
 	(cd ./spiceparser; $(MAKE) clean ; $(RM) Makefile.in Makefile)
 	$(RM) xcircuit *.o *.bak core
 	$(RM) lib/$(INTERP_PATH)/$(WRAPPER_OBJ) lib/$(INTERP_PATH)/$(WRAPPER_SH)
-	$(RM) menudep$(EXEEXT) menudep.h lib/xcircuit.1 xcircexec$(EXEEXT)
+	$(RM) menudep$(EXEEXT) menudep.h lib/xcircuit.1
+	$(RM) xcircexec$(EXEEXT) xcircdnull$(EXEEXT)
 	$(RM) install-sh missing mkinstalldirs Makefile.in Makefile
 	$(RM) config.* aclocal.m4
 

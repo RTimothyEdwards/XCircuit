@@ -856,10 +856,16 @@ int rgb_alloccolor(int red, int green, int blue)
       newcolor.green = green;
       newcolor.blue = blue;
       newcolor.flags = DoRed | DoGreen | DoBlue;
-      if (XAllocColor(dpy, cmap, &newcolor) == 0)
-         pixval = findnearcolor(&newcolor);
-      else
-	 pixval = newcolor.pixel;
+      if (areawin->area) {
+         if (XAllocColor(dpy, cmap, &newcolor) == 0)
+            pixval = findnearcolor(&newcolor);
+         else
+	    pixval = newcolor.pixel;
+      }
+      else {
+	 // No graphics mode:  Force pixel to be 24 bit RGB
+	 pixval = (red & 0xff) | ((blue & 0xff) << 8) | ((green & 0xff) << 16);
+      }
 
       // Add this to the colormap
       tableidx = addnewcolorentry(pixval);
@@ -879,9 +885,11 @@ int rgb_alloccolor(int red, int green, int blue)
 int query_named_color(char *cname)
 {
    XColor cvcolor, cvexact;
-   int tableidx, result;
+   int tableidx, result = 0;
 
-   result = XLookupColor(dpy, cmap, cname, &cvexact, &cvcolor);
+   if (areawin->area)
+      result = XLookupColor(dpy, cmap, cname, &cvexact, &cvcolor);
+     
    if (result == 0) return BADCOLOR;
 
    tableidx = rgb_querycolor(cvcolor.red, cvcolor.green, cvcolor.blue, NULL);
@@ -899,6 +907,8 @@ void makecursors()
 #ifdef TCL_WRAPPER
    Tk_Uid fg_uid, bg_uid;
 #endif
+
+   if (areawin->area == NULL) return;
 
    bgcolor.pixel = colorlist[BACKGROUND].color.pixel;
    fgcolor.pixel = colorlist[FOREGROUND].color.pixel;
@@ -1486,8 +1496,10 @@ void post_initialize()
 
    /* Set up fundamentally necessary colors black and white */
 
-   addnewcolorentry(xc_alloccolor("Black"));
-   addnewcolorentry(xc_alloccolor("White"));
+   if (areawin->area != NULL) {
+      addnewcolorentry(xc_alloccolor("Black"));
+      addnewcolorentry(xc_alloccolor("White"));
+   }
 
 #ifdef TCL_WRAPPER
 
@@ -1500,7 +1512,9 @@ void post_initialize()
    /* Set the cursor as a crosshair for the area widget.  */
    /*-----------------------------------------------------*/
 
-   XDefineCursor (dpy, areawin->window, DEFAULTCURSOR);
+   if (areawin->area != NULL) {
+      XDefineCursor (dpy, areawin->window, DEFAULTCURSOR);
+   }
 
    /*---------------------------------------------------*/
    /* Set up a timeout for automatic save to a tempfile */

@@ -296,7 +296,9 @@ int loadfontfile(char *fname)
 	    fonts[fontcount].scale = fontscale;
 #ifdef HAVE_CAIRO
 	    fonts[fontcount].utf8encoding = utf8enc;
-	    xc_cairo_set_fontinfo(fontcount);
+	    if (areawin->area) {
+	       xc_cairo_set_fontinfo(fontcount);
+	    }
 #endif /* HAVE_CAIRO */
             fontcount++;
 	 }
@@ -416,7 +418,9 @@ int loadfontfile(char *fname)
          fonts[fontcount].scale = fontscale;
 #ifdef HAVE_CAIRO
 	 fonts[fontcount].utf8encoding = utf8enc;
-	 xc_cairo_set_fontinfo(fontcount);
+         if (areawin->area) {
+	    xc_cairo_set_fontinfo(fontcount);
+	 }
 #endif /* HAVE_CAIRO */
          fontcount++;
 

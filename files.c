@@ -4910,7 +4910,7 @@ void setfile(char *filename, int mode)
 {
    if ((filename == NULL) || (xobjs.pagelist[areawin->page]->filename == NULL)) {
       Wprintf("Error: No filename for schematic.");
-      if (beeper) XBell(dpy, 100);
+      if (areawin->area && beeper) XBell(dpy, 100);
       return;
    }
 
@@ -4924,11 +4924,11 @@ void setfile(char *filename, int mode)
 
    if (strstr(xobjs.pagelist[areawin->page]->filename, "Page ") != NULL) {
       Wprintf("Warning: Enter a new name.");
-      if (beeper) XBell(dpy, 100);
+      if (areawin->area && beeper) XBell(dpy, 100);
    }
    else {
       savefile(mode); 
-      if (beeper) XBell(dpy, 100);
+      if (areawin->area && beeper) XBell(dpy, 100);
    }
 }
 
@@ -4949,7 +4949,7 @@ void setfile(xcWidget button, xcWidget fnamewidget, caddr_t clientdata)
    }
    if (strstr(xobjs.pagelist[areawin->page]->filename, "Page ") != NULL) {
       Wprintf("Warning: Enter a new name.");
-      if (beeper) XBell(dpy, 100);
+      if (areawin->area && beeper) XBell(dpy, 100);
    }
    else {
 
@@ -4964,7 +4964,7 @@ void setfile(xcWidget button, xcWidget fnamewidget, caddr_t clientdata)
       db = XtNameToWidget(di, "Close");
       XtSetArg(wargs[0], XtNlabel, "  Done  ");
       XtSetValues(db, wargs, 1);
-      if (beeper) XBell(dpy, 100);
+      if (areawin->area && beeper) XBell(dpy, 100);
    }
 }
 

@@ -108,7 +108,7 @@ if {[lsearch [interp aliases] tkcon] != -1} {
 
 # Rename conflicting Tcl/Tk commands before pushing xcircuit's namespace
 
-if {[lsearch [info commands] tcl_label] < 0} { rename label tcl_label }
+if {[lsearch [info commands] tcl_label] < 0} {catch {rename label tcl_label}}
 
 # Allow commands in the xcircuit namespace to be called from the toplevel namespace
 
@@ -185,7 +185,7 @@ proc netgen { args } {
 
 # Source the default resources file
 
-source ${tcllibdir}/resource.tcl
+catch {source ${tcllibdir}/resource.tcl}
 
 # Sourcing of individual resource overrides
 
@@ -235,7 +235,7 @@ if {[string length $argv] == 0} {
       # Source the GUI-generating script
       source ${tcllibdir}/wrapper.tcl
       set argafter [linsert $argafter 1 .xcircuit]
-   } else {
+   } elseif {[info commands wm] != ""} {
       simple .xcdummy -exitproc "quitnocheck"
       set XCOps(window) .xcdummy
    }
@@ -252,10 +252,11 @@ catch {$XCOps(focus).mainframe.toolbar.bw invoke}
 
 # Xcircuit start function drops back to interpreter after initialization & setup
 
-if {[string range [wm title .] 0 3] == "wish"} {
-   wm withdraw .
-}
-
-if {[string range [wm title .] 0 8] == "xcircexec"} {
-   wm withdraw .
+if {[info commands wm] != ""} {
+   if {[string range [wm title .] 0 3] == "wish"} {
+      wm withdraw .
+   }
+   if {[string range [wm title .] 0 8] == "xcircexec"} {
+      wm withdraw .
+   }
 }

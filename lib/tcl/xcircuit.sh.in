@@ -17,9 +17,13 @@ if [ ${TERM:=""} = "cygwin" ]; then
 fi
 
 TKCON=true
+DNULL=
 for i in $@ ; do
    case $i in
       -noc*)
+	   TKCON=;;
+      -now*)
+	   DNULL=true
 	   TKCON=;;
       --help)
 	   echo "Standard usage:"
@@ -53,6 +57,9 @@ else
 # *only* needed when running without the console; the console itself is
 # capable of sourcing the startup script.
 #
-   exec ${loclibdir}/xcircexec -- $@
-
+   if [ $DNULL ]; then
+      exec ${loclibdir}/xcircdnull -- $@
+   else
+      exec ${loclibdir}/xcircexec -- $@
+   fi
 fi

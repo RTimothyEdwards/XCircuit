@@ -6671,6 +6671,7 @@ void drawwindow(xcWidget w, caddr_t clientdata, caddr_t calldata)
    xcDrawType redrawtype = xcDRAW_EDIT;
    UNUSED(w); UNUSED(clientdata); UNUSED(calldata);
 
+   if (areawin->area == NULL) return;
    if (!xcIsRealized(areawin->area)) return;
    if (xobjs.suspend >= 0) return;
 

@@ -1121,7 +1121,9 @@ void UPopCTM()
    areawin->MatStack = lastmatrix;
 
 #ifdef HAVE_CAIRO
-   xc_cairo_set_matrix(lastmatrix);
+   if (areawin->area) {
+      xc_cairo_set_matrix(lastmatrix);
+   }
 #endif /* HAVE_CAIRO */
 }
 

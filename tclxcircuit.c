@@ -10039,9 +10039,14 @@ int xctcl_start(ClientData clientData, Tcl_Interp *interp,
    pre_initialize();
    areawin = GUI_init(--objc, ++objv);
    if (areawin == NULL) {
+      /* Create new window data structure */
+      areawin = create_new_window();
+      areawin->area = NULL;
+      areawin->scrollbarv = NULL;
+      areawin->scrollbarh = NULL;
+
       Tcl_SetResult(interp, "Invalid or missing top-level windowname"
-		" given to start command.\n", NULL);
-      return TCL_ERROR;
+		" given to start command, assuming batch mode.\n", NULL);
    }
    post_initialize();
 
@@ -10163,7 +10168,7 @@ int xctcl_start(ClientData clientData, Tcl_Interp *interp,
    if (areawin->scrollbarv)
       drawvbar(areawin->scrollbarv, NULL, NULL);
    if (areawin->scrollbarh)
-   drawhbar(areawin->scrollbarh, NULL, NULL);
+      drawhbar(areawin->scrollbarh, NULL, NULL);
    drawarea(areawin->area, NULL, NULL);
 
    /* Return back to the interpreter; Tk is handling the GUI */
