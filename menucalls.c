@@ -598,8 +598,6 @@ void setcolorscheme(Boolean boolvalue)
 {
    int i;
 
-   // if (areawin->area == NULL) return;
-
    if (boolvalue) {
       colorlist[PARAMCOLOR].color.pixel = appdata.parampix;
       colorlist[AUXCOLOR].color.pixel = appdata.auxpix;

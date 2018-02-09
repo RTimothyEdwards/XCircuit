@@ -186,6 +186,8 @@ void handle_client(ClientData clientData, XEvent *eventPtr)
 void ghostinit()
 {
 #ifndef HAVE_CAIRO
+   if (areawin->area == NULL) return;
+
    gv = XInternAtom(dpy, "GHOSTVIEW", False);
    gvc = XInternAtom(dpy, "GHOSTVIEW_COLORS", False);
    gvpage = XInternAtom(dpy, "PAGE", False);

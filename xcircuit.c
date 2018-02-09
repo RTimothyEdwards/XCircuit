@@ -1614,7 +1614,7 @@ void post_initialize()
    /* middle of the viewing window.					 */
 
 #if !defined(HAVE_CAIRO)
-   if (dbuf == (Pixmap)NULL)
+   if ((dbuf == (Pixmap)NULL) && areawin->area)
       dbuf = XCreatePixmap(dpy, areawin->window, areawin->width,
 		areawin->height, DefaultDepthOfScreen(xcScreen(areawin->area)));
 #endif

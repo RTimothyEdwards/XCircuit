@@ -9784,7 +9784,6 @@ XCWindowData *GUI_init(int objc, Tcl_Obj *CONST objv[])
    if (tktop == (Tk_Window)NULL) {
       Fprintf(stderr, "No Top-Level Tk window available. . .\n");
 
-#ifdef HAVE_CAIRO
       /* No top level window, assuming batch mode.  To get	*/
       /* access to font information requires that cairo be set	*/
       /* up with a surface, even if it is not an xlib target.	*/
@@ -9795,17 +9794,17 @@ XCWindowData *GUI_init(int objc, Tcl_Obj *CONST objv[])
       newwin->scrollbarh = NULL;
       newwin->width = 100;
       newwin->height = 100;
+
+#ifdef HAVE_CAIRO
       newwin->surface = cairo_image_surface_create(CAIRO_FORMAT_RGB24,
 		newwin->width, newwin->height);
       newwin->cr = cairo_create(newwin->surface);
+#endif /* !HAVE_CAIRO */
 
       number_colors = NUMBER_OF_COLORS; 
       colorlist = (colorindex *)malloc(NUMBER_OF_COLORS * sizeof(colorindex));
 
       return newwin;
-#else /* !HAVE_CAIRO */
-      return NULL;
-#endif /* !HAVE_CAIRO */
    }
 
    /* Check if any parameter is a Tk window name */
