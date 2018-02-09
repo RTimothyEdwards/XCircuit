@@ -396,7 +396,10 @@ int quitcheck(xcWidget w, caddr_t clientdata, caddr_t calldata)
    else {
       free(promptstr);
       quit(w, NULL);				// preparation for quit
-      Tcl_Eval(xcinterp, "quitnocheck");	// actual quit
+      if (calldata != (caddr_t)NULL)
+         Tcl_Eval(xcinterp, "quitnocheck intr");
+      else
+         Tcl_Eval(xcinterp, "quitnocheck");	// actual quit
       return 1;					// not reached
    }
 }
@@ -409,7 +412,7 @@ int quitcheck(xcWidget w, caddr_t clientdata, caddr_t calldata)
 
 void dointr(int signum)
 {
-   quitcheck(NULL, NULL, NULL);
+   quitcheck(NULL, NULL, (caddr_t)1);
 }
 
 /*--------------*/

@@ -7066,17 +7066,26 @@ int xctcl_promptsavepage(ClientData clientData, Tcl_Interp *interp,
 int xctcl_quit(ClientData clientData, Tcl_Interp *interp,
 	int objc, Tcl_Obj *CONST objv[])
 {
+   Boolean is_intr = False;
+
    /* quit, without checks */
    if (objc != 1) {
-      Tcl_WrongNumArgs(interp, 1, objv, "(no arguments)");
-      return TCL_ERROR;
+      if (strncasecmp(Tcl_GetString(objv[0]), "intr", 4))
+         is_intr = True;
+      else {
+         Tcl_WrongNumArgs(interp, 1, objv, "(no arguments)");
+         return TCL_ERROR;
+      }
    }
    quit(areawin->area, NULL);
 
    if (consoleinterp == interp)
       Tcl_Exit(XcTagCallback(interp, objc, objv));
-   else
+   else {
+      /* Ham-fisted, but prevents hanging on Ctrl-C kill */
+      if (is_intr) exit(1);
       Tcl_Eval(interp, "catch {tkcon eval exit}\n");
+   }
 
    return TCL_OK;	/* Not reached */
 }
