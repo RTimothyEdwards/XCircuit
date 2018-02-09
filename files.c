@@ -55,8 +55,6 @@ extern int ReadSpice(FILE *);
 
 #define S_OBLIQUE   13	/* position of Symbol-Oblique in font array */
 
-#define VEPS	    1e-3
-
 /*------------------------------------------------------------------------*/
 /* External Variable definitions                                          */
 /*------------------------------------------------------------------------*/
@@ -84,12 +82,35 @@ extern colorindex *colorlist;
 /*------------------------------------------------------*/
 
 Boolean load_in_progress = False;
-float version;
+char version[20];
 
 /* Structure for remembering what names refer to the same object */
 
 aliasptr aliastop;
    
+/*------------------------------------------------------*/
+/* Utility routine---compare version numbers		*/
+/* Given version strings v1 and v2, return -1 if	*/
+/* version v1 < v2, +1 if version v1 > v2, and 0 if	*/
+/* they are equal.					*/
+/*------------------------------------------------------*/
+
+int compare_version(char *v1, char *v2)
+{
+   int vers1, subvers1, vers2, subvers2;
+
+   sscanf(v1, "%d.%d", &vers1, &subvers1);
+   sscanf(v2, "%d.%d", &vers2, &subvers2);
+
+   if (vers1 < vers2) return -1;
+   else if (vers1 > vers2) return 1;
+   else {
+      if (subvers1 < subvers2) return -1;
+      if (subvers1 > subvers2) return 1;
+      else return 0;
+   }
+}
+
 /*------------------------------------------------------*/
 /* Simple utility---get rid of newline character	*/
 /*------------------------------------------------------*/
@@ -1350,7 +1371,7 @@ void importfromlibrary(short mode, char *libname, char *objname)
    char inname[150], *tptr;
    objectptr *newobject;
    objlistptr redef;
-   float saveversion;
+   char saveversion[20];
    Boolean dependencies = False;
    TechPtr nsptr = NULL;
    
@@ -1360,7 +1381,7 @@ void importfromlibrary(short mode, char *libname, char *objname)
       return;
    }
 
-   version = 2.0;   /* Assume version is 2.0 unless found in header */
+   strcpy(version, "2.0"); /* Assume version is 2.0 unless found in header */
 
    for(;;) {
       if (fgets(temp, 149, ps) == NULL) {
@@ -1378,9 +1399,9 @@ void importfromlibrary(short mode, char *libname, char *objname)
 	 char *tptr = temp + 1;
 	 while (isspace(*tptr)) tptr++;
 	 if (!strncmp(tptr, "Version:", 8)) {
-	    float tmpv;
 	    tptr += 9;
-	    if (sscanf(tptr, "%f", &tmpv) > 0) version = tmpv;
+	    sscanf(tptr, "%20s", version);
+	    ridnewline(version);
 	 }
 	 else if (!strncmp(tptr, "Library", 7)) {
 	    char *techname = strstr(tptr, ":");
@@ -1418,16 +1439,16 @@ void importfromlibrary(short mode, char *libname, char *objname)
 	          if (sscanf(tptr, "%s", keyword) != 1) break;
 	          if (keyword[0] == '\n' || keyword[0] == '\0') break;
 	          /* Recursive import */
-	          saveversion = version;
+		  strcpy(saveversion, version);
 	          importfromlibrary(mode, libname, keyword);
-	          version = saveversion;
+		  strcpy(version, saveversion);
 	       }
 	    }
 	 }
       }
    }
 
-   if ((version < 3.2) && (!dependencies)) {
+   if ((compare_version(version, "3.2") < 0) && (!dependencies)) {
       Fprintf(stderr, "Library does not have dependency list and cannot "
 		"be trusted.\nLoad and rewrite library to update.\n");
       goto endload;
@@ -1473,7 +1494,7 @@ void importfromlibrary(short mode, char *libname, char *objname)
 
 endload:
    fclose(ps);
-   version = PROG_VERSION;
+   strcpy(version, PROG_VERSION);
    load_in_progress = False;
 }
 
@@ -1734,7 +1755,7 @@ Boolean loadlibrary(short mode)
    /* version 2.0 require "Version" in the header.  So unnumbered	  */
    /* libraries may be assumed to be version 1.9 or earlier.		  */
 
-   version = 1.9;
+   strcpy(version, "1.9");
    for(;;) {
       if (fgets(temp, 149, ps) == NULL) {
          Wprintf("Error in library.");
@@ -1788,8 +1809,8 @@ Boolean loadlibrary(short mode)
 
          /* This comment gives the Xcircuit version number */
 	 else if (!strcmp(keyword, "Version:")) {
-	    float tmpv;
-	    if (sscanf(temp, "%*c %*s %f", &tmpv) > 0) version = tmpv;
+	    char tmpv[20];
+	    if (sscanf(temp, "%*c %*s %s", tmpv) > 0) strcpy(version, tmpv);
 	 }
 
          /* This PostScript comment marks the end of the file header */
@@ -1824,7 +1845,7 @@ Boolean loadlibrary(short mode)
    else
         Wprintf("Loaded font file %s", inname);
 
-   version = PROG_VERSION;
+   strcpy(version, PROG_VERSION);
    fclose(ps);
 
    /* Check if the library is read-only by opening for append */
@@ -2104,7 +2125,7 @@ Boolean loadfile(short mode, int libnum)
       return False;
    }
 
-   version = 1.0;
+   strcpy(version, "1.0");
    multipage = 1;
    pagesize.x = 612;
    pagesize.y = 792;
@@ -2120,14 +2141,14 @@ Boolean loadfile(short mode, int libnum)
 	 if (!strcmp(pdchar, "XCircuit")) break;
 	 if (!strcmp(pdchar, "XCircuitLib")) {
 	    /* version control in libraries is post version 1.9 */
-	    if (version == 1.0) version = 1.9;
+	    if (compare_version(version, "1.0") == 0) strcpy(version, "1.9");
 	    break;
 	 }
 	 if (!strcmp(pdchar, "%Page:")) break;
 	 if (strstr(pdchar, "PS-Adobe") != NULL)
 	    temppmode = (strstr(temp, "EPSF") != NULL) ? 0 : 1;
          else if (!strcmp(pdchar, "Version:"))
-	    sscanf(temp, "%*c%*s %f", &version);
+	    sscanf(temp, "%*c%*s %20s", version);
 	 else if (!strcmp(pdchar, "%Pages:")) {
 	    pdchar = advancetoken(temp);
 	    multipage = atoi(pdchar);
@@ -2467,12 +2488,12 @@ Boolean loadfile(short mode, int libnum)
    centerview(xobjs.libtop[loclibnum]);
    composelib(PAGELIB);
 
-   if (version > PROG_VERSION + VEPS) {
-      Wprintf("WARNING: file %s is version %2.1f vs. executable version %2.1f",
+   if (compare_version(version, PROG_VERSION) == 1) {
+      Wprintf("WARNING: file %s is version %s vs. executable version %s",
 		inname, version, PROG_VERSION);
    }
 
-   version = PROG_VERSION;
+   strcpy(version, PROG_VERSION);
    fclose(ps);
    return True;
 }
@@ -2564,7 +2585,7 @@ void cleanuplabel(stringpart **strhead)
 	 case FONT_SCALE:
 	    /* Old style font scale is always written absolute, not relative.	*/
 	    /* Changes in scale were not allowed, so just get rid of them.	*/
-	    if (version < 2.25)
+	    if (compare_version(version, "2.3") < 0)
 	       curpart = deletestring(curpart, strhead, areawin->topinstance);
 	    break;
 
@@ -4130,7 +4151,7 @@ Boolean objectread(FILE *ps, objectptr localdata, short offx, short offy,
 	    (*newarc)->cycle = NULL;
 
 	    /* backward compatibility */
-	    if (version < 1.5) {
+	    if (compare_version(version, "1.5") < 0) {
 	       sscanf(buffer, "%hd %hd %hd %f %f %f %hd", &(*newarc)->position.x,
 	          &(*newarc)->position.y, &(*newarc)->radius, &(*newarc)->angle1,
 	          &(*newarc)->angle2, &(*newarc)->width, &(*newarc)->style);
@@ -4212,7 +4233,7 @@ Boolean objectread(FILE *ps, objectptr localdata, short offx, short offy,
 	    }
 	    else {
 	       /* backward compatibility */
-	       if (version < 1.5) {
+	       if (compare_version(version, "1.5") < 0) {
 	          for (--keyptr; *keyptr == ' '; keyptr--);
 	          for (; *keyptr != ' '; keyptr--);
 	          sscanf(keyptr, "%hd", &(*newpoly)->style);
@@ -4242,7 +4263,7 @@ Boolean objectread(FILE *ps, objectptr localdata, short offx, short offy,
 	       }
 	       sscanf(keyptr, "%hd", &(*newpoly)->number);
 
-	       if (version >= 1.5) {
+	       if (compare_version(version, "1.5") >= 0) {
 	          lineptr = varscan(localdata, lineptr, &(*newpoly)->style,
 				(genericptr)*newpoly, P_STYLE);
 	          lineptr = varfscan(localdata, lineptr, &(*newpoly)->width,
@@ -4281,7 +4302,7 @@ Boolean objectread(FILE *ps, objectptr localdata, short offx, short offy,
 	    (*newspline)->cycle = NULL;
 
 	    /* backward compatibility */
-	    if (version < 1.5) {
+	    if (compare_version(version, "1.5") < 0) {
                sscanf(buffer, "%f %hd %hd %hd %hd %hd %hd %hd %hd %hd", 
 	          &(*newspline)->width, &(*newspline)->ctrl[1].x,
 	          &(*newspline)->ctrl[1].y, &(*newspline)->ctrl[2].x,
@@ -4437,20 +4458,20 @@ Boolean objectread(FILE *ps, objectptr localdata, short offx, short offy,
 
 	    /* scan backwards to get the number of substrings */
 	    lineptr = keyptr - 1;
-	    for (i = 0; i < ((version < 2.25) ? 5 : 6); i++) {
+	    for (i = 0; i < ((compare_version(version, "2.3") < 0) ? 5 : 6); i++) {
 	       for (; *lineptr == ' '; lineptr--);
 	       for (; *lineptr != ' '; lineptr--);
 	    }
-	    if ((strchr(lineptr, '.') != NULL) && (version < 2.25)) {
-	       Fprintf(stderr, "Error:  File version claims to be %2.1f,"
-			" but has version %2.1f labels\n", version, PROG_VERSION);
+	    if ((strchr(lineptr, '.') != NULL) && (compare_version(version, "2.3") < 0)) {
+	       Fprintf(stderr, "Error:  File version claims to be %s,"
+			" but has version %s labels\n", version, PROG_VERSION);
 	       Fprintf(stderr, "Attempting to resolve problem by updating version.\n");
-	       version = PROG_VERSION;
+	       strcpy(version, PROG_VERSION);
 	       for (; *lineptr == ' '; lineptr--);
 	       for (; *lineptr != ' '; lineptr--);
 	    }
 	    /* no. segments is ignored---may be a derived quantity, anyway */
-	    if (version < 2.25) {
+	    if (compare_version(version, "2.3") < 0) {
 	       sscanf(lineptr, "%*s %hd %hf %hd %hd", &(*newlabel)->anchor,
 		   &(*newlabel)->rotation, &(*newlabel)->position.x,
 		   &(*newlabel)->position.y);
@@ -4471,7 +4492,7 @@ Boolean objectread(FILE *ps, objectptr localdata, short offx, short offy,
 	       lineptr = varpscan(localdata, lineptr, &(*newlabel)->position.y,
 				(genericptr)*newlabel, 0, offy, P_POSITION_Y);
 	    }
-	    if (version < 2.4)
+	    if (compare_version(version, "2.4") < 0)
 	       (*newlabel)->rotation = -(*newlabel)->rotation;
 	    while ((*newlabel)->rotation < 0.0) (*newlabel)->rotation += 360.0;
 
@@ -4499,7 +4520,7 @@ Boolean objectread(FILE *ps, objectptr localdata, short offx, short offy,
 	    readlabel(localdata, lineptr, &(*newlabel)->string);
 	    CheckMarginStop(*newlabel, areawin->topinstance, FALSE);
 
-	    if (version < 2.25) {
+	    if (compare_version(version, "2.3") < 0) {
 	       /* Switch 1st scale designator to overall font scale */
 
 	       firstscale = (*newlabel)->string->nextpart;
@@ -4824,7 +4845,7 @@ Boolean objectread(FILE *ps, objectptr localdata, short offx, short offy,
 		     }
 
 		     if (!matchtech && ((*libobj)->name != objnamestart))
-			if (version > 3.7) 
+			if (compare_version(version, "3.7") > 0) 
 			   continue;	// no prefix in file must match
 					// null prefix in library object.
 
@@ -4848,7 +4869,7 @@ Boolean objectread(FILE *ps, objectptr localdata, short offx, short offy,
 		     /* invariant so as not to overuse the scale-variance	*/
 		     /* flag in the output file.				*/
 
-		     if ((version < 3.7) && ((*newinst)->scale != 1.0))
+		     if ((compare_version(version, "3.7") < 0) && ((*newinst)->scale != 1.0))
 		        (*newinst)->style = NORMAL;
 		     else
 		        (*newinst)->style = LINE_INVARIANT;
@@ -4863,7 +4884,7 @@ Boolean objectread(FILE *ps, objectptr localdata, short offx, short offy,
 		     /* Negative rotations = flip in x in version 2.3.6 and    */
 		     /* earlier.  Later versions don't allow negative rotation */
 
-	    	     if (version < 2.4) {
+	    	     if (compare_version(version, "2.4") < 0) {
                         if ((*newinst)->rotation < 0.0) {
 			   (*newinst)->scale = -((*newinst)->scale);
 			   (*newinst)->rotation += 1.0;
@@ -5210,7 +5231,7 @@ void savetechnology(char *technology, char *outname)
    }
 
    fprintf(ps, "%%! PostScript set of library objects for XCircuit\n");
-   fprintf(ps, "%%  Version: %2.1f\n", version);
+   fprintf(ps, "%%  Version: %s\n", version);
    fprintf(ps, "%%  Library name is: %s\n",
 		(technology == NULL) ? "(user)" : technology);
 #ifdef _MSC_VER

@@ -1960,7 +1960,7 @@ void init_interpreter()
    PyRun_SimpleString("keydict = {}\n");	/* initialize key/function pairs */
    PyRun_SimpleString("buttondict = {}\n");  /* initialize button/function pairs */
    PyRun_SimpleString("tooldict = {}\n");  /* initialize tool/function pairs */
-   sprintf(_STR, "xc_version = %2.1f\n", PROG_VERSION);
+   sprintf(_STR, "xc_version = %s\n", PROG_VERSION);
    PyRun_SimpleString(_STR);
 }
 

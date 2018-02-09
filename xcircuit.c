@@ -120,7 +120,7 @@ short	 popups;      /* total number of popup widgets on the screen */
 /*----------------------------------------------------------------------*/
 
 extern aliasptr aliastop;
-extern float version;
+extern char version[];
 
 #ifdef TCL_WRAPPER
 extern Tcl_Interp *xcinterp;
@@ -156,7 +156,13 @@ void addtocolorlist(xcWidget button, int cvalue)
 
    /* Get and store the RGB values of the new color */
    
-   XQueryColors(dpy, cmap, &(colorlist[number_colors - 1].color), 1);
+   if (areawin->area == NULL) {
+      colorlist[number_colors - 1].color.red = 256 * (cvalue & 0xff);
+      colorlist[number_colors - 1].color.green = 256 * ((cvalue >> 8) & 0xff);
+      colorlist[number_colors - 1].color.blue = 256 * ((cvalue >> 16) & 0xff);
+   }
+   else
+      XQueryColors(dpy, cmap, &(colorlist[number_colors - 1].color), 1);
 }
 
 /*----------------------------------------------------------------------*/
@@ -715,7 +721,13 @@ void xc_get_color_rgb(unsigned long cidx, unsigned short *red,
          .pixel = cidx,
          .flags = DoRed | DoGreen | DoBlue
    };
-   XQueryColors(dpy, cmap, &loccolor, 1);
+   if (areawin->area == NULL) {
+      loccolor.red = cidx & 0xff;
+      loccolor.green = (cidx >> 8) & 0xff;
+      loccolor.blue = (cidx >> 16) & 0xff;
+   }
+   else
+      XQueryColors(dpy, cmap, &loccolor, 1);
    *red = loccolor.red;
    *green = loccolor.green;
    *blue = loccolor.blue;
@@ -784,8 +796,121 @@ int xc_alloccolor(char *name)
    fromC.size = strlen(name);
    fromC.addr = name;
 
-   CvtStringToPixel(NULL, &zval, &fromC, &toC);
-   pixval = (int)(*((u_long *)toC.addr));
+   if (areawin->area) {
+      CvtStringToPixel(NULL, &zval, &fromC, &toC);
+      pixval = (int)(*((u_long *)toC.addr));
+   }
+   else {
+      int r, g, b;
+
+      /* Graphics-free batch mode.  Handle basic colors plus RGB */
+      if (name[0] == '#' && (strlen(name) == 7)) {
+         sscanf(&name[1], "%2x", &r);
+         sscanf(&name[3], "%2x", &g);
+         sscanf(&name[5], "%2x", &b);
+         pixval = r + g * 256 + b * 65536;
+      }
+      else if (name[0] == '#' && (strlen(name) == 13)) {
+         sscanf(&name[1], "%4x", &r);
+         sscanf(&name[5], "%4x", &g);
+         sscanf(&name[9], "%4x", &b);
+         pixval = (r >> 8) + (g >> 8) * 256 + (b >> 8) * 65536;
+      }
+      else if (sscanf(name, "%d", &pixval) != 1) {
+	 if (!strcasecmp(name, "red")) {
+	    r = 255;
+	    g = 0;
+	    b = 0;
+	 }
+	 else if (!strcasecmp(name, "green")) {
+	    r = 0;
+	    g = 255;
+	    b = 0;
+	 }
+	 else if (!strcasecmp(name, "blue")) {
+	    r = 0;
+	    g = 0;
+	    b = 255;
+	 }
+	 else if (!strcasecmp(name, "white")) {
+	    r = 255;
+	    g = 255;
+	    b = 255;
+	 }
+	 else if (!strcasecmp(name, "gray")) {
+	    r = 128;
+	    g = 128;
+	    b = 128;
+	 }
+	 else if (!strcasecmp(name, "yellow")) {
+	    r = 255;
+	    g = 255;
+	    b = 0;
+	 }
+	 else if (!strcasecmp(name, "gray40")) {
+	    r = 102;
+	    g = 102;
+	    b = 102;
+	 }
+	 else if (!strcasecmp(name, "gray60")) {
+	    r = 153;
+	    g = 153;
+	    b = 153;
+	 }
+	 else if (!strcasecmp(name, "gray80")) {
+	    r = 204;
+	    g = 204;
+	    b = 204;
+	 }
+	 else if (!strcasecmp(name, "gray90")) {
+	    r = 229;
+	    g = 229;
+	    b = 229;
+	 }
+	 else if (!strcasecmp(name, "green2")) {
+	    r = 0;
+	    g = 238;
+	    b = 0;
+	 }
+	 else if (!strcasecmp(name, "purple")) {
+	    r = 160;
+	    g = 32;
+	    b = 240;
+	 }
+	 else if (!strcasecmp(name, "steelblue2")) {
+	    r = 92;
+	    g = 172;
+	    b = 238;
+	 }
+	 else if (!strcasecmp(name, "red3")) {
+	    r = 205;
+	    g = 0;
+	    b = 0;
+	 }
+	 else if (!strcasecmp(name, "tan")) {
+	    r = 210;
+	    g = 180;
+	    b = 140;
+	 }
+	 else if (!strcasecmp(name, "brown")) {
+	    r = 165;
+	    g = 42;
+	    b = 42;
+	 }
+	 else if (!strcasecmp(name, "pink")) {
+	    r = 255;
+	    g = 192;
+	    b = 203;
+	 }
+         else {
+	    // Default to black
+	    r = 0;
+	    g = 0;
+	    b = 0;
+	 }
+         pixval = r + g * 256 + b * 65536;
+      }
+   }
 
    return pixval;
 }
@@ -1157,7 +1282,7 @@ void pre_initialize()
    /* initialize user variables */
    /*---------------------------*/
 
-   version = PROG_VERSION;
+   strcpy(version, PROG_VERSION);
    aliastop = NULL;
    xobjs.pagelist = (Pagedata **) malloc(PAGES * sizeof(Pagedata *));
    for (page = 0; page < PAGES; page++) {
@@ -1496,10 +1621,8 @@ void post_initialize()
 
    /* Set up fundamentally necessary colors black and white */
 
-   if (areawin->area != NULL) {
-      addnewcolorentry(xc_alloccolor("Black"));
-      addnewcolorentry(xc_alloccolor("White"));
-   }
+   addnewcolorentry(xc_alloccolor("Black"));
+   addnewcolorentry(xc_alloccolor("White"));
 
 #ifdef TCL_WRAPPER
 

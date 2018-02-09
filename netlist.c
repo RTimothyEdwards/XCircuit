@@ -5496,7 +5496,7 @@ void writenet(objectptr thisobject, char *mode, char *suffix)
 	 cschem = thisobject->symschem;
 
       is_spice = TRUE;
-      fprintf(fp, "*SPICE %scircuit <%s> from XCircuit v%g rev %d\n\n",
+      fprintf(fp, "*SPICE %scircuit <%s> from XCircuit v%s rev %s\n\n",
 		(thisobject->schemtype == SYMBOL) ? "sub" : "",
 		cschem->name, PROG_VERSION, PROG_REVISION);
 
@@ -5506,7 +5506,7 @@ void writenet(objectptr thisobject, char *mode, char *suffix)
    }
    else if (!strcmp(mode, "flatspice")) {
       is_spice = TRUE;
-      fprintf(fp, "*SPICE (flattened) circuit \"%s\" from XCircuit v%g rev %d\n\n",
+      fprintf(fp, "*SPICE (flattened) circuit \"%s\" from XCircuit v%s rev %s\n\n",
 		cschem->name, PROG_VERSION, PROG_REVISION);
       if (stsave != NULL) {
 	 fputs(stsave, fp);
@@ -5516,7 +5516,7 @@ void writenet(objectptr thisobject, char *mode, char *suffix)
    }
    else if (!strcmp(mode, "pseuspice")) {
       is_spice = TRUE;
-      fprintf(fp, "*SPICE subcircuit \"%s\" from XCircuit v%g rev %d\n\n",
+      fprintf(fp, "*SPICE subcircuit \"%s\" from XCircuit v%s rev %s\n\n",
 		cschem->name, PROG_VERSION, PROG_REVISION);
       if (stsave != NULL) {
 	 fputs(stsave, fp);
@@ -5526,7 +5526,7 @@ void writenet(objectptr thisobject, char *mode, char *suffix)
       freeflatindex();
    }
    else if (!strcmp(mode, "flatsim") || !strcmp(mode, "pseusim")) {
-      fprintf(fp, "| sim circuit \"%s\" from XCircuit v%3.2f rev %d\n",
+      fprintf(fp, "| sim circuit \"%s\" from XCircuit v%s rev %s\n",
 		cschem->name, PROG_VERSION, PROG_REVISION);
       if (stsave != NULL) {
 	 fputs(stsave, fp);

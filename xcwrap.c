@@ -208,10 +208,10 @@ Xcircuit_Init(Tcl_Interp *interp)
 
    /* Set $XCIRCUIT_VERSION and $XCIRCUIT_REVISION as Tcl variables */
 
-   sprintf(version_string, "%d", PROG_REVISION);
+   sprintf(version_string, "%s", PROG_REVISION);
    Tcl_SetVar(interp, "XCIRCUIT_REVISION", version_string, TCL_GLOBAL_ONLY);
 
-   sprintf(version_string, "%g", PROG_VERSION);
+   sprintf(version_string, "%s", PROG_VERSION);
    Tcl_SetVar(interp, "XCIRCUIT_VERSION", version_string, TCL_GLOBAL_ONLY);
 
 #ifdef ASG

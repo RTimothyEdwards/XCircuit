@@ -1704,7 +1704,7 @@ XCWindowData *GUI_init(int argc, char *argv[])
    XtnSetArg(XtNxAddWidth, True);
    XtnSetArg(XtNxAttachRight, True);
    XtnSetArg(XtNheight, ROWHEIGHT);
-   sprintf(_STR, "   Welcome to Xcircuit Version %2.1f", PROG_VERSION);
+   sprintf(_STR, "   Welcome to Xcircuit Version %s", PROG_VERSION);
    XtnSetArg(XtNstring, _STR);
    XtnSetArg(XtNxResizable, True);
    XtnSetArg(XtNgravity, WestGravity);

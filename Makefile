@@ -374,8 +374,8 @@ tmpdir = /tmp
 # Directories for app-defaults file and manual page
 appdefaultsdir = $(libdir)/$(PACKAGE)-$(VERSION)/app-defaults
 appmandir = $(libdir)/$(PACKAGE)-$(VERSION)/man
-PATHNAMES = -DPROG_VERSION=$(VERSION) \
-	-DPROG_REVISION=$(REVISION) \
+PATHNAMES = -DPROG_VERSION=\"$(VERSION)\" \
+	-DPROG_REVISION=\"$(REVISION)\" \
 	-DCAD_DIR=\"$(libdir)\" \
 	-DTEMP_DIR=\"$(tmpdir)\" \
 	-DRESOURCES_DIR=\"$(appdefaultsdir)\" \

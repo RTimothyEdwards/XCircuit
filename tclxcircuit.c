@@ -9231,7 +9231,7 @@ int loadrcfile()
    char *userdir = getenv((const char *)"HOME");
    FILE *fd;
    short i;
-   int result, result1 = TCL_OK;
+   int result = TCL_OK, result1 = TCL_OK;
 
    /* Initialize flags */
 
@@ -9246,12 +9246,12 @@ int loadrcfile()
 
    /* (names USER_RC_FILE and PROG_VERSION imported from Makefile) */
 
-   sprintf(_STR2, "%s-%g", USER_RC_FILE, PROG_VERSION);
+   sprintf(_STR2, "%s-%s", USER_RC_FILE, PROG_VERSION);
    xc_tilde_expand(_STR2, 249);
    if ((fd = fopen(_STR2, "r")) == NULL) {
       /* Not found; check for the same in $HOME directory */
       if (userdir != NULL) {
-         sprintf(_STR2, "%s/%s-%g", userdir, USER_RC_FILE, PROG_VERSION);
+         sprintf(_STR2, "%s/%s-%s", userdir, USER_RC_FILE, PROG_VERSION);
          if ((fd = fopen(_STR2, "r")) == NULL) {
 	    /* Not found again; check for rc file w/o version # in CWD */
             sprintf(_STR2, "%s", USER_RC_FILE);
@@ -9783,7 +9783,29 @@ XCWindowData *GUI_init(int objc, Tcl_Obj *CONST objv[])
    tktop = Tk_MainWindow(xcinterp);
    if (tktop == (Tk_Window)NULL) {
       Fprintf(stderr, "No Top-Level Tk window available. . .\n");
+
+#ifdef HAVE_CAIRO
+      /* No top level window, assuming batch mode.  To get	*/
+      /* access to font information requires that cairo be set	*/
+      /* up with a surface, even if it is not an xlib target.	*/
+
+      newwin = create_new_window();
+      newwin->area = NULL;
+      newwin->scrollbarv = NULL;
+      newwin->scrollbarh = NULL;
+      newwin->width = 100;
+      newwin->height = 100;
+      newwin->surface = cairo_image_surface_create(CAIRO_FORMAT_RGB24,
+		newwin->width, newwin->height);
+      newwin->cr = cairo_create(newwin->surface);
+
+      number_colors = NUMBER_OF_COLORS; 
+      colorlist = (colorindex *)malloc(NUMBER_OF_COLORS * sizeof(colorindex));
+
+      return newwin;
+#else /* !HAVE_CAIRO */
       return NULL;
+#endif /* !HAVE_CAIRO */
    }
 
    /* Check if any parameter is a Tk window name */

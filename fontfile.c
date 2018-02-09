@@ -48,7 +48,7 @@ extern XCWindowData *areawin;
 extern const char *utf8encodings[][256];
 #endif
 
-extern float version;
+extern char version[];
 
 #ifdef TCL_WRAPPER
 extern Tcl_Interp *xcinterp;
@@ -162,11 +162,13 @@ int loadfontfile(char *fname)
    float fontscale = 1.0;
    objectptr *j, *eptr;
    objectptr *encoding = NULL;
-   float saveversion = version;
+   char saveversion[20];
    char *fontname = strdup(fname);
 #ifdef HAVE_CAIRO
    const char **utf8enc = NULL;
 #endif /* HAVE_CAIRO */
+
+   strcpy(saveversion, version);
 
    /* check to see if font name is in list of fonts */
 
@@ -212,10 +214,10 @@ int loadfontfile(char *fname)
 	 /* since we can be in the middle of a file load, protect the	*/
 	 /* current version number for the file load.			*/
 
-	 version = PROG_VERSION;
+         strcpy(version, PROG_VERSION);
 	 if (loadlibrary(FONTLIB) == FALSE) {
 	 };
-	 version = saveversion;
+         strcpy(version, saveversion);
       }
 
       else if (!strcmp(cmdptr, "family:")){
@@ -296,9 +298,7 @@ int loadfontfile(char *fname)
 	    fonts[fontcount].scale = fontscale;
 #ifdef HAVE_CAIRO
 	    fonts[fontcount].utf8encoding = utf8enc;
-	    if (areawin->area) {
-	       xc_cairo_set_fontinfo(fontcount);
-	    }
+	    xc_cairo_set_fontinfo(fontcount);
 #endif /* HAVE_CAIRO */
             fontcount++;
 	 }
@@ -418,9 +418,7 @@ int loadfontfile(char *fname)
          fonts[fontcount].scale = fontscale;
 #ifdef HAVE_CAIRO
 	 fonts[fontcount].utf8encoding = utf8enc;
-         if (areawin->area) {
-	    xc_cairo_set_fontinfo(fontcount);
-	 }
+	 xc_cairo_set_fontinfo(fontcount);
 #endif /* HAVE_CAIRO */
          fontcount++;
 

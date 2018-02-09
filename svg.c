@@ -1081,7 +1081,7 @@ OutputSVG(char *filename, Boolean fullscale)
 		pinst->bbox.height + PMARGIN);
 
    fprintf(svgf, "<desc>\n");
-   fprintf(svgf, "XCircuit Version %2.1f\n", PROG_VERSION);
+   fprintf(svgf, "XCircuit Version %s\n", PROG_VERSION);
    fprintf(svgf, "File \"%s\" Page %d\n", xobjs.pagelist[areawin->page]->filename,
 		areawin->page + 1); 
    fprintf(svgf, "</desc>\n");

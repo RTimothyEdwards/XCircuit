@@ -598,7 +598,7 @@ void setcolorscheme(Boolean boolvalue)
 {
    int i;
 
-   if (areawin->area == NULL) return;
+   // if (areawin->area == NULL) return;
 
    if (boolvalue) {
       colorlist[PARAMCOLOR].color.pixel = appdata.parampix;
@@ -842,8 +842,8 @@ void renamepage(short pagenumber)
    if ((pagenumber >= 0) && (pagenumber < xobjs.pages - 1) &&
 	    (thisinst != NULL)) {
       plabel = thisinst->thisobject->name;
-      pname = (char *)malloc(28 + strlen(plabel));
-      sprintf(pname, "xcircuit::renamepage %d {%s}", pagenumber + 1, plabel);
+      pname = (char *)malloc(36 + strlen(plabel));
+      sprintf(pname, "catch {xcircuit::renamepage %d {%s}}", pagenumber + 1, plabel);
       Tcl_Eval(xcinterp, pname);
       free(pname);
    }
