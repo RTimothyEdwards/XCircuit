@@ -5033,7 +5033,8 @@ void incr_changes(objectptr thisobj)
 
    /* Generate a new timeout */
 
-   xobjs.timeout_id = xcAddTimeOut(app, 60000 * xobjs.save_interval,
+   if (areawin->area)
+	xobjs.timeout_id = xcAddTimeOut(app, 60000 * xobjs.save_interval,
  		savetemp, NULL);
 }
 
@@ -5052,6 +5053,9 @@ void savetemp(XtPointer clientdata, xcIntervalId *id)
 {
 
 #endif
+   /* If areawin->area is NULL then xcircuit is running in	*/
+   /* batch mode and should not make backups.			*/
+   if (areawin->area == NULL) return;
 
    /* Remove the timeout ID.  If this routine is called from	*/
    /* incr_changes() instead of from the timeout interrupt	*/

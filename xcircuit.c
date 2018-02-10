@@ -1636,19 +1636,21 @@ void post_initialize()
 
    /*-----------------------------------------------------*/
    /* Set the cursor as a crosshair for the area widget.  */
+   /* If areawin->area is NULL, then xcircuit is running  */
+   /* in batch mode, and no automatic save will be done.  */
    /*-----------------------------------------------------*/
 
    if (areawin->area != NULL) {
       XDefineCursor (dpy, areawin->window, DEFAULTCURSOR);
+
+      /*---------------------------------------------------*/
+      /* Set up a timeout for automatic save to a tempfile */
+      /*---------------------------------------------------*/
+
+      xobjs.save_interval = appdata.timeout;
+      xobjs.timeout_id = xcAddTimeOut(app, 60000 * xobjs.save_interval,
+		savetemp, NULL);
    }
-
-   /*---------------------------------------------------*/
-   /* Set up a timeout for automatic save to a tempfile */
-   /*---------------------------------------------------*/
-
-   xobjs.save_interval = appdata.timeout;
-   xobjs.timeout_id = xcAddTimeOut(app, 60000 * xobjs.save_interval,
-	savetemp, NULL);
 }
 
 /*----------------------------------------------------------------------*/
