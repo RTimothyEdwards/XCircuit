@@ -741,6 +741,11 @@ XPoint UGetCursor()
    u_int   nullui;
    XPoint newpos;
  
+   if (areawin->area == NULL) {
+      newpos.x = newpos.y = 0;
+      return newpos;
+   }
+
 #ifdef TCL_WRAPPER
    /* Don't use areawin->window;  if called from inside an object	*/
    /* (e.g., "here" in a Tcl expression), areawin->window will be	*/
@@ -771,7 +776,11 @@ XPoint UGetCursorPos()
 {
    XPoint winpos, userpos;
  
-   winpos = UGetCursor();
+   if (areawin->area == NULL) {
+      winpos.x = winpos.y = 0;
+   }
+   else
+      winpos = UGetCursor();
 
    window_to_user(winpos.x, winpos.y, &userpos);  
 
