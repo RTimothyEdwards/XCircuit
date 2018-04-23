@@ -7057,6 +7057,7 @@ if test "x$xc_with_tcl" != "x" ; then
   if test "x${xc_with_tcl_libraries}" != "x" ; then
     TCL_LIB_SPEC=""
     for libname in \
+     "${xc_with_tcl_libraries}/${TCL_LIB_FILE}" \
      "${xc_with_tcl_libraries}/lib${TCL_LIB_NAME}${SHDLIB_EXT}"
     do
       if test -r "$libname" ; then
@@ -7097,6 +7098,7 @@ if test "x$xc_with_tcl" != "x" ; then
   if test "x${xc_with_tk_libraries}" != "x" ; then
     TK_LIB_SPEC=""
     for libname in \
+     "${xc_with_tk_libraries}/${TK_LIB_FILE}" \
      "${xc_with_tk_libraries}/lib${TK_LIB_NAME}${SHDLIB_EXT}"
     do
       if test -r "$libname" ; then
