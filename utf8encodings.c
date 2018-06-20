@@ -6,6 +6,8 @@
 /* written (ie. converted the tables) by Erik van der Wal, May 2014  	   */
 /*-------------------------------------------------------------------------*/
 
+#include <stdio.h>
+
 /*-------------------------------------------------------------------------*/
 /* The data in this file is based on a number of files from unicode.org    */
 /* The specific source of the translation is referenced in the heading     */
@@ -586,3 +588,37 @@ const char *utf8encodings[][256] = {
 {(char*) 0}
 
 };
+
+/*----------------------------------------------------------------------*/
+/* Routine to search for a UTF-8 code in the tables and return the	*/
+/* associated 8-bit code (reverse lookup).				*/
+/*									*/
+/* Note that this routine does not check whether or not the encoding	*/
+/* scheme containing the UTF-8 character code is the encoding		*/
+/* currently in effect in a text string.				*/
+/*----------------------------------------------------------------------*/
+
+int utf8_reverse_lookup(char *utf8string)
+{
+    int i, j;
+    char *s1, *s2;
+
+    for (i = 0; ; i++) {
+	if (utf8encodings[i][0] == NULL) break;
+	for (j = 0; j < 256; j++) {
+	    s1 = (char *)utf8encodings[i][j];
+	    s2 = utf8string;
+	    while (*s1 == *s2) {
+		if (*s1 == '\0')
+		    return j;
+		s1++;
+		s2++;
+	    }
+	    /* NOTE: Xutf8LookupString() results in strings longer than	*/
+	    /* expected for the UTF-8 code.  Not sure what they are, 	*/
+	    /* but the initial part matches the expected code.		*/
+	    if ((*s1 == '\0') && (s2 > (utf8string + 1))) return j;
+	}
+    }
+    return -1;
+}

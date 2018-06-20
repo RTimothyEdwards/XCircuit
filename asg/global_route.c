@@ -2700,7 +2700,11 @@ expnlist *check_for_termination(t)
     
     asg_arc *a;
 
-    if (t->tr == NULL) {
+    if (t == NULL) {
+	error("check_for_termination:  trail is NULL", "");
+	return NULL;
+    }
+    else if (t->tr == NULL) {
         error("check_for_termination:  trail component tr is NULL", "");
 	return NULL;
     }
@@ -2839,7 +2843,7 @@ int make_next_best_move(ex, trailsCompleted)
 		    ex->n->name, ex->t->name, ex->t->mod->name);
 	    /* Treat this as an error condition and abort */
 	    /* (previously, routine continued, but is in infinite loop at this point) */
-	    /* return -1; */
+	    return -1;
 	}
     }
 
