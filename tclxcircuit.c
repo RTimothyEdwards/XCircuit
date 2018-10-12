@@ -9367,7 +9367,7 @@ int xctcl_standardaction(ClientData clientData,
       kevent.type = KeyPress;
 
    switch (knum) {
-      case 1:
+     case 1:
 	 kevent.state |= Button1Mask;
 	 break;
      case 2:

@@ -2405,22 +2405,25 @@ int getkeysignature(XKeyEvent *event)
    if (keywstate >= 256 && keywstate < 5120)
       keywstate = XKeysymToKeycode(dpy, (KeySym)keywstate);
 
-   /* Get keyboard input method */
-   if (xim == NULL) {
-	xim = XOpenIM(dpy, 0, 0, 0);
-	xic = XCreateIC(xim,
-		XNInputStyle,   XIMPreeditNothing | XIMStatusNothing,
-		XNClientWindow, areawin->window,
-		XNFocusWindow,  areawin->window,
-		NULL);
-	XSetICFocus(xic);
-   }
+   if (event->keycode != 0) {		/* Only for actual key events */
 
-   /* Do a UTF-8 code lookup */
-   Xutf8LookupString(xic, event, buffer, 16, &keysym, &status);
-   /* Convert a UTF-8 code to a known encoding */
-   utf8enc = utf8_reverse_lookup(buffer);
-   if ((utf8enc != -1) && (utf8enc != (keywstate & 0xff))) keywstate = utf8enc;
+	/* Get keyboard input method */
+	if (xim == NULL) {
+	    xim = XOpenIM(dpy, 0, 0, 0);
+	    xic = XCreateIC(xim,
+			XNInputStyle,   XIMPreeditNothing | XIMStatusNothing,
+			XNClientWindow, areawin->window,
+			XNFocusWindow,  areawin->window,
+			NULL);
+	    XSetICFocus(xic);
+	}
+
+	/* Do a UTF-8 code lookup */
+	Xutf8LookupString(xic, event, buffer, 15, &keysym, &status);
+	/* Convert a UTF-8 code to a known encoding */
+	utf8enc = utf8_reverse_lookup(buffer);
+	if ((utf8enc != -1) && (utf8enc != (keywstate & 0xff))) keywstate = utf8enc;
+   }
 
    /* ASCII values already come upper/lowercase; we only want to register  */
    /* a Shift key if it's a non-ASCII key or another modifier is in effect */
