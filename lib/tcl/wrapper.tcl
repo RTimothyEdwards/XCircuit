@@ -2530,6 +2530,9 @@ proc xcircuit::makemenus {window} {
    if {![catch {set XCOps(module,edif)}]} {
       $m2 add command -label "Read EDIF file" -command {xcircuit::promptreadedif}
    }
+   if {![catch {set XCOps(module,synopsys)}]} {
+      $m2 add command -label "Read Synopsys library" -command {xcircuit::promptreadsynopsys}
+   }
    if {![catch {set XCOps(module,matgen)}]} {
       $m2 add command -label "Import Matlab PS" -command {xcircuit::promptimportmatlab}
    }
@@ -3183,6 +3186,10 @@ catch {source $XCIRCUIT_SRC_DIR/xchelp.tcl}
 # EDIF file parser
 
 catch {source $XCIRCUIT_SRC_DIR/edif.tcl}
+
+# Synopsys symbol library file parser
+
+catch {source $XCIRCUIT_SRC_DIR/synopsys.tcl}
 
 # System Clipboard paste into labels
 
