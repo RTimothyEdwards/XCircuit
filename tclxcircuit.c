@@ -42,6 +42,7 @@ extern Pixmap   STIPPLE[STIPPLES];  /* Polygon fill-style stipple patterns */
 extern char _STR[150], _STR2[250];
 extern XCWindowData *areawin;
 extern Globaldata xobjs;
+extern int screenDPI;
 extern int number_colors;
 extern colorindex *colorlist;
 extern Cursor appcursors[NUM_CURSORS];
@@ -9966,6 +9967,12 @@ XCWindowData *GUI_init(int objc, Tcl_Obj *CONST objv[])
       // (The following may be required on some systems where
       // Tk will not report a valid colormap after Tk_MapWindow())
       // cmap = DefaultColormap(dpy, DefaultScreen(dpy));
+
+      /*------------------------------------------------------*/
+      /* Handle different screen resolutions in a sane manner */
+      /*------------------------------------------------------*/
+
+      screenDPI = getscreenDPI();
 
       /*-------------------------*/
       /* Create stipple patterns */

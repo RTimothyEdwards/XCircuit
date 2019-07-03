@@ -431,7 +431,7 @@ Copyright (C) 2012 Free Software Foundation, Inc.
 This config.status script is free software; the Free Software Foundation
 gives unlimited permission to copy, distribute and modify it."
 
-ac_pwd='/home/tim/gitsrc/xcircuit-3.10'
+ac_pwd='/home/tim/gitsrc/xcircuit'
 srcdir='.'
 INSTALL='/bin/install -c'
 MKDIR_P='/bin/mkdir -p'
@@ -663,7 +663,7 @@ S["CPPFLAGS"]=" "
 S["LDFLAGS"]=" "
 S["CFLAGS"]="-g -Wno-pointer-sign -fPIC "
 S["CC"]="gcc"
-S["REVISION"]="8"
+S["REVISION"]="11"
 S["AM_BACKSLASH"]="\\"
 S["AM_DEFAULT_VERBOSITY"]="1"
 S["AM_DEFAULT_V"]="$(AM_DEFAULT_VERBOSITY)"
@@ -678,7 +678,7 @@ S["mkdir_p"]="$(MKDIR_P)"
 S["MKDIR_P"]="/bin/mkdir -p"
 S["INSTALL_STRIP_PROGRAM"]="$(install_sh) -c -s"
 S["STRIP"]=""
-S["install_sh"]="${SHELL} /home/tim/gitsrc/xcircuit-3.10/install-sh"
+S["install_sh"]="${SHELL} /home/tim/gitsrc/xcircuit/install-sh"
 S["MAKEINFO"]="makeinfo"
 S["AUTOHEADER"]="autoheader"
 S["AUTOMAKE"]="automake-1.14"

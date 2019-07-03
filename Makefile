@@ -274,7 +274,7 @@ PKG_CONFIG_LIBDIR =
 PKG_CONFIG_PATH = 
 PYTHON = 
 RANLIB = ranlib
-REVISION = 8
+REVISION = 11
 SET_MAKE = 
 SHDLIB_EXT = .so
 SHELL = /bin/sh
@@ -296,10 +296,10 @@ X_CFLAGS =
 X_EXTRA_LIBS = 
 X_LIBS = 
 X_PRE_LIBS =  -lSM -lICE
-abs_builddir = /home/tim/gitsrc/xcircuit-3.10
-abs_srcdir = /home/tim/gitsrc/xcircuit-3.10
-abs_top_builddir = /home/tim/gitsrc/xcircuit-3.10
-abs_top_srcdir = /home/tim/gitsrc/xcircuit-3.10
+abs_builddir = /home/tim/gitsrc/xcircuit
+abs_srcdir = /home/tim/gitsrc/xcircuit
+abs_top_builddir = /home/tim/gitsrc/xcircuit
+abs_top_srcdir = /home/tim/gitsrc/xcircuit
 ac_ct_CC = gcc
 am__include = include
 am__leading_dot = .
@@ -330,7 +330,7 @@ host_vendor = unknown
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/tim/gitsrc/xcircuit-3.10/install-sh
+install_sh = ${SHELL} /home/tim/gitsrc/xcircuit/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -359,7 +359,7 @@ AM_CFLAGS = $(cairo_CFLAGS) $(fontconfig_CFLAGS) ${GS_CFLAGS}
 
 # Additional files to distribute
 EXTRA_DIST = COPYRIGHT README README.ISOLatin2 README.notes
-FULL_VERSION = 3.10.8
+FULL_VERSION = 3.10.11
 
 # Menudep program generates menudep.h needed by some of the
 # source files for Xcircuit

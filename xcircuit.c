@@ -40,6 +40,7 @@
 #ifndef XC_WIN32
 #include <unistd.h>   /* for unlink() */
 
+#include <X11/Xresource.h>
 #include <X11/Intrinsic.h>
 #include <X11/StringDefs.h>
 #include <X11/Shell.h>
@@ -112,6 +113,7 @@ short menusize;
 xcIntervalId printtime_id;
 short beeper;
 short fontcount;
+int screenDPI;
 fontinfo *fonts;
 short	 popups;      /* total number of popup widgets on the screen */
 
@@ -492,13 +494,56 @@ void popupprompt(xcWidget button, char *request, char *current, void (*function)
     Tk_MapWindow(popup);
 }
 
-/*-------------------------------------------------------------------------*/
-/* Create a popup window for property changes				   */
-/*-------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------*/
+/* Create a popup window for property changes				*/
+/*----------------------------------------------------------------------*/
 
 void outputpopup(xcWidget button, caddr_t clientdata, caddr_t calldata)
 {
     Tcl_Eval(xcinterp, "wm deiconify .output");
+}
+
+/*----------------------------------------------------------------------*/
+/* Get the display resolution.  This is needed especially for retinal	*/
+/* displays with 4x the DPI of typical displays.  Keeping the DPI value	*/
+/* around is useful for determing a sane size for fonts, buttons,	*/
+/* scrollbar widths, etc.						*/
+/*									*/
+/* Note that this routine does not go so far as to handle non-square	*/
+/* pixels.								*/
+/*									*/
+/* The first check is to look for Xft.dpi in the X resource database.	*/
+/* If it is not found, then fall back on the DisplayWidth as reported	*/
+/* by Xlib (to do:  Override both of these with an environment variable	*/
+/* such as XCIRCUIT_DPI).						*/
+/*----------------------------------------------------------------------*/
+
+int getscreenDPI()
+{
+    int x, xmm, dpi;
+
+    XrmDatabase  db;
+    XrmValue	val;
+    char *resource_manager;
+    char *type, *var;
+
+    XrmInitialize();
+    resource_manager = XResourceManagerString(dpy);
+
+    if (resource_manager != NULL) {
+	db = XrmGetStringDatabase(resource_manager);
+	if (db != NULL) {
+	    XrmGetResource(db, "Xft.dpi", "String", &type, &val);
+	    if (val.addr != NULL && !strncmp("String", type, 64))
+		if (sscanf(val.addr, "%d", &dpi) == 1)
+		    return dpi;
+	}
+    }
+
+    x = DisplayWidth(dpy, DefaultScreen(dpy));
+    xmm = DisplayWidthMM(dpy, DefaultScreen(dpy));
+    dpi = (int)(((float)x + 0.5) / (float)(xmm / 25.4));
+    return dpi;
 }
 
 /*-------------------------------------------------*/
