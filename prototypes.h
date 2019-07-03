@@ -1013,6 +1013,7 @@ extern int query_named_color(char *);
 extern caddr_t CvtStringToPixel(XrmValuePtr, int *, XrmValuePtr, XrmValuePtr);
 extern void outputpopup(xcWidget, caddr_t, caddr_t);
 extern void docommand(void);
+extern int getscreenDPI(void);
 extern int  installowncmap(void);  /* sometimes from xtgui.c */
 extern void destroypopup(xcWidget, popupstruct *, caddr_t);
 extern int xc_alloccolor(char *);
