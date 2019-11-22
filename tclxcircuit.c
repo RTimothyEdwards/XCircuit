@@ -9155,6 +9155,37 @@ char *evaluate_expr(objectptr thisobj, oparamptr ops, objinstptr pinst)
       }
    }
 
+   /* If a TCL expression contains a three digit octal value \ooo  */
+   /* then the string returned by TclEval() can contain a          */
+   /* multi-byte UTF-8 character.                                  */
+   /*                                                              */
+   /* This multi-byte character needs to be converted back to a    */
+   /* character that can be displayed.                             */
+   /*                                                              */
+   /* The following fix assumes that at most two bytes will        */
+   /* represent any converted character.  In this case, the most   */
+   /* significant digit (octal) of the first byte will be 3, and   */
+   /* the most significant digit of the second byte will be 2.     */
+   /*                                                              */
+   /* See: https://en.wikipedia.org/wiki/UTF-8                     */
+
+   if ((rexpr != NULL) && ((status == TCL_RETURN) || (status == TCL_OK))) {
+      u_char *strptr1 = rexpr;
+      u_char *strptr2 = rexpr;
+      while (*strptr1 != '\0') {
+         if (*strptr1 >= 0300 && *(strptr1 + 1) >= 0200) {
+            *strptr2 = ((*strptr1 & ~0300) << 6) | (*(strptr1 + 1) & 0077);
+            strptr1 += 2;
+         } else {
+            *strptr2 = *strptr1;
+            strptr1++;
+         }
+         strptr2++;
+      }
+      if (*strptr1 == '\0')
+         *strptr2 = *strptr1;
+   }
+
    /* If an instance redefines an expression, don't preserve	*/
    /* the result.  It is necessary in this case that the	*/
    /* expression does not reference objects during redisplay,	*/
