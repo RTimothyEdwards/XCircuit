@@ -1567,6 +1567,10 @@ void findconstrained(polyptr lastpoly)
 
 	 lflags = nflags = NONE;
 
+	 /* Avoid attempting to manipulate degenerate points. */
+	 if (lpt != NULL && lpt->x == savept->x && lpt->y == savept->y) return;
+	 if (npt != NULL && npt->x == savept->x && npt->y == savept->y) return;
+
          /* two-point polygons (lines) are a degenerate case in RHOMBOID edit mode */
 
          if (areawin->boxedit != MANHATTAN && lastpoly->number <= 2) return;
