@@ -230,6 +230,7 @@ CYGPATH_W = echo
 # Main compiler arguments
 DEFS = -DPACKAGE_NAME=\"\" -DPACKAGE_TARNAME=\"\" -DPACKAGE_VERSION=\"\" -DPACKAGE_STRING=\"\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\" -DPACKAGE=\"xcircuit\" -DVERSION=\"3.10\" -DHAVE_LIBM=1 -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DSIZEOF_VOID_P=8 -DSIZEOF_UNSIGNED_INT=4 -DSIZEOF_UNSIGNED_LONG=8 -DSIZEOF_UNSIGNED_LONG_LONG=8 -DHAVE_LIBXT=1 -DSTDC_HEADERS=1 -DHAVE_SETENV=1 -DHAVE_PUTENV=1 -DHAVE_DIRENT_H=1 -DHAVE_LIBZ=1 -DHAVE_VA_COPY=1 -DHAVE___VA_COPY=1 -DHAVE_U_CHAR=1 -DHAVE_X11_XPM_H=1 -DHAVE_XPM=1 -DHAVE_CAIRO=1 -DLGF=1 -DINPUT_FOCUS=1 -DGS_EXEC=\"gs\" -DSPICE_EXEC=\"ngspice\" -DTCL_WRAPPER=1 $(PATHNAMES)
 DEPDIR = .deps
+DIST_DIR = ${exec_prefix}
 ECHO_C = 
 ECHO_N = -n
 ECHO_T = 
@@ -374,6 +375,9 @@ tmpdir = /tmp
 # Directories for app-defaults file and manual page
 appdefaultsdir = $(libdir)/$(PACKAGE)-$(VERSION)/app-defaults
 appmandir = $(libdir)/$(PACKAGE)-$(VERSION)/man
+install_appdefaultsdir = ${exec_prefix}/lib/$(PACKAGE)-$(VERSION)/app-defaults
+install_appmandir = ${exec_prefix}/lib/$(PACKAGE)-$(VERSION)/man
+install_bindir = ${exec_prefix}/bin
 PATHNAMES = -DPROG_VERSION=\"$(VERSION)\" \
 	-DPROG_REVISION=\"$(REVISION)\" \
 	-DCAD_DIR=\"$(libdir)\" \
@@ -411,6 +415,8 @@ INCLUDES = -IXw ${INC_SPECS}
 # Library directory and files
 librarydir = $(libdir)/$(PACKAGE)-$(VERSION)
 scriptsdir = $(libdir)/$(PACKAGE)-$(VERSION)
+install_librarydir = ${exec_prefix}/lib/$(PACKAGE)-$(VERSION)
+install_scriptsdir = ${exec_prefix}/lib/$(PACKAGE)-$(VERSION)
 USER_RC_FILE = .xcircuitrc
 PROLOGUE_FILE = xcircps2.pro
 CYRILLIC_ENC_FILE = cyrillic.enc
@@ -899,33 +905,33 @@ lib/xcircuit.1: lib/xcircuit.1.in
 
 install-data-local: lib/xcircuit.1
 	@echo "Installing app-defaults file"
-	$(mkinstalldirs) $(DESTDIR)$(appdefaultsdir)
-	$(mkinstalldirs) $(DESTDIR)$(appmandir)
-	$(INSTALL_DATA) lib/XCircuit.ad $(DESTDIR)$(appdefaultsdir)/XCircuit
-	$(INSTALL_DATA) lib/xcircuit.1 $(DESTDIR)$(appmandir)/xcircuit.1
+	$(mkinstalldirs) $(DESTDIR)$(install_appdefaultsdir)
+	$(mkinstalldirs) $(DESTDIR)$(install_appmandir)
+	$(INSTALL_DATA) lib/XCircuit.ad $(DESTDIR)$(install_appdefaultsdir)/XCircuit
+	$(INSTALL_DATA) lib/xcircuit.1 $(DESTDIR)$(install_appmandir)/xcircuit.1
 	@echo "Installing library and netlist files"
-	$(mkinstalldirs) $(DESTDIR)$(librarydir)
+	$(mkinstalldirs) $(DESTDIR)$(install_librarydir)
 	( cd lib ; for i in $(PROLOGUE_FILE) $(ENCODING_FILES) *.lps *.cir; do \
-		$(INSTALL_DATA) $$i $(DESTDIR)$(librarydir); \
+		$(INSTALL_DATA) $$i $(DESTDIR)$(install_librarydir); \
 	done )
 	( cd lib/$(INTERP_PATH) ; for i in $(STARTUP_FILE); do \
-		$(INSTALL_DATA) $$i $(DESTDIR)$(librarydir); \
+		$(INSTALL_DATA) $$i $(DESTDIR)$(install_librarydir); \
 	done )
 	@echo "Installing .lps font files"
-	$(mkinstalldirs) $(DESTDIR)$(librarydir)/fonts
+	$(mkinstalldirs) $(DESTDIR)$(install_librarydir)/fonts
 	for i in $(FONTS_LPS); do \
-		$(INSTALL_DATA) lib/fonts/$$i.lps $(DESTDIR)$(librarydir)/fonts; \
+		$(INSTALL_DATA) lib/fonts/$$i.lps $(DESTDIR)$(install_librarydir)/fonts; \
 	done
 	@echo "Installing .xfe font files"
 	for i in $(FONTS_XFE); do \
-		$(INSTALL_DATA) lib/fonts/$$i.xfe $(DESTDIR)$(librarydir)/fonts; \
+		$(INSTALL_DATA) lib/fonts/$$i.xfe $(DESTDIR)$(install_librarydir)/fonts; \
 	done
 	@echo "Installing scripts (if option enabled)"
 	if test "$(PYTHON)" != ""; then \
-		$(mkinstalldirs) $(DESTDIR)$(scriptsdir)/python; \
+		$(mkinstalldirs) $(DESTDIR)$(install_scriptsdir)/python; \
 		for i in $(SCRIPTS_PY); do \
 			$(INSTALL_DATA) lib/python/$$i.py \
-				$(DESTDIR)$(scriptsdir)/python; \
+				$(DESTDIR)$(install_scriptsdir)/python; \
 		done; \
 	fi
 
@@ -936,34 +942,34 @@ install-tcl: xcircexec$(EXEEXT) xcircdnull$(EXEEXT) lib/$(INTERP_PATH)/$(WRAPPER
 	@echo "Installing standard XCircuit library files"
 	$(MAKE) $(AM_MAKEFLAGS) install-data-local
 	@echo "Installing Tcl files"
-	$(mkinstalldirs) $(DESTDIR)$(librarydir)
-	$(mkinstalldirs) $(DESTDIR)$(scriptsdir)
+	$(mkinstalldirs) $(DESTDIR)$(install_librarydir)
+	$(mkinstalldirs) $(DESTDIR)$(install_scriptsdir)
 	( cd lib/$(INTERP_PATH) ; for i in $(WRAPPER_OBJ) *.tcl ; do \
-		$(INSTALL_DATA) $$i $(DESTDIR)$(scriptsdir); \
+		$(INSTALL_DATA) $$i $(DESTDIR)$(install_scriptsdir); \
 		done )
-	$(INSTALL_DATA) xcircexec$(EXEEXT) $(DESTDIR)$(librarydir)
-	$(INSTALL_DATA) xcircdnull$(EXEEXT) $(DESTDIR)$(librarydir)
-	chmod 0755 $(DESTDIR)$(librarydir)/$(CONSOLE)
-	chmod 0755 $(DESTDIR)$(librarydir)/$(CONSOLE_SCRIPT)
-	chmod 0755 $(DESTDIR)$(librarydir)/$(WRAPPER_OBJ)
-	chmod 0755 $(DESTDIR)$(librarydir)/xcircexec$(EXEEXT)
-	chmod 0755 $(DESTDIR)$(librarydir)/xcircdnull$(EXEEXT)
+	$(INSTALL_DATA) xcircexec$(EXEEXT) $(DESTDIR)$(install_librarydir)
+	$(INSTALL_DATA) xcircdnull$(EXEEXT) $(DESTDIR)$(install_librarydir)
+	chmod 0755 $(DESTDIR)$(install_librarydir)/$(CONSOLE)
+	chmod 0755 $(DESTDIR)$(install_librarydir)/$(CONSOLE_SCRIPT)
+	chmod 0755 $(DESTDIR)$(install_librarydir)/$(WRAPPER_OBJ)
+	chmod 0755 $(DESTDIR)$(install_librarydir)/xcircexec$(EXEEXT)
+	chmod 0755 $(DESTDIR)$(install_librarydir)/xcircdnull$(EXEEXT)
 
 	if test "${SHDLIB_EXT}" != ".so"; then \
-	  ( cd $(DESTDIR)$(librarydir); \
+	  ( cd $(DESTDIR)$(install_librarydir); \
 	    $(RM) $(WRAPPER_SO) ; \
 	    ln -s $(WRAPPER_OBJ) $(WRAPPER_SO) ) ; \
 	fi
 
 	@echo "Installing GIF images"
-	$(mkinstalldirs) $(DESTDIR)$(librarydir)/pixmaps
+	$(mkinstalldirs) $(DESTDIR)$(install_librarydir)/pixmaps
 	( cd lib/pixmaps ; for i in `ls *.gif *.xbm *.ico` ; do \
-		$(INSTALL_DATA) $$i $(DESTDIR)$(librarydir)/pixmaps; \
+		$(INSTALL_DATA) $$i $(DESTDIR)$(install_librarydir)/pixmaps; \
 	done )
 	@echo "Installing shell script as xcircuit executable"
-	$(mkinstalldirs) $(DESTDIR)$(bindir)
-	$(INSTALL_DATA) lib/$(INTERP_PATH)/$(WRAPPER_SH) $(DESTDIR)$(bindir)/xcircuit
-	chmod 0755 $(DESTDIR)$(bindir)/xcircuit
+	$(mkinstalldirs) $(DESTDIR)$(install_bindir)
+	$(INSTALL_DATA) lib/$(INTERP_PATH)/$(WRAPPER_SH) $(DESTDIR)$(install_bindir)/xcircuit
+	chmod 0755 $(DESTDIR)$(install_bindir)/xcircuit
 
 clean:
 	(cd ./Xw; $(RM) *.o *.a *.bak core)
