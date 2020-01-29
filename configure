@@ -640,6 +640,7 @@ SUBDIRS
 PYTHON
 SPICE_EXEC
 GS_EXEC
+DIST_DIR
 WISH_EXE
 TCL_LIB_DIR
 LIB_SPECS
@@ -772,6 +773,7 @@ enable_optimize
 with_xpm
 with_gnu_ld
 with_cairo
+with_distdir
 with_tcl
 with_tk
 with_tclincls
@@ -1444,6 +1446,7 @@ Optional Packages:
   --with-xpm=DIR          use Xpm include/library files in DIR
   --with-gnu-ld           assume the C compiler uses GNU ld [default=no]
   --with-cairo            Use cairo graphics library [default=yes]
+  --with-distdir=DIR       install into location DIR for distribution
   --with-tcl=DIR          Find tclConfig.sh in DIR
   --with-tk=DIR           Find tkConfig.sh in DIR
   --with-tclincls=DIR     Find tcl.h in DIR
@@ -6709,6 +6712,24 @@ done
 
 fi
 
+# For distributed installs, where the run-time files are installed in a
+# place that is a temporary staging area, like DESTDIR, but unlike DESTDIR,
+# the prefix is replaced by the destination directory, rather than appended
+# to it.
+DIST_DIR="\${exec_prefix}"
+
+# Check whether --with-distdir was given.
+if test "${with_distdir+set}" = set; then :
+  withval=$with_distdir;
+  if test "$withval" = "no" -o "$withval" = "NO" ; then
+     DIST_DIR="\${exec_prefix}"
+  else
+     DIST_DIR=${withval}
+  fi
+
+fi
+
+
 
 
 # Check whether --with-tcl was given.
@@ -7349,6 +7370,7 @@ fi
   if test "${xc_with_gnu_ld}" = "yes" ; then
     LDDL_FLAGS="${LDDL_FLAGS} -Wl,--version-script=symbol.map"
   fi
+
 
 
 

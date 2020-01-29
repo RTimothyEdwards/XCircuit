@@ -307,6 +307,20 @@ if test "x$xc_with_cairo" != "x" ; then
   )
 fi
 
+# For distributed installs, where the run-time files are installed in a
+# place that is a temporary staging area, like DESTDIR, but unlike DESTDIR,
+# the prefix is replaced by the destination directory, rather than appended
+# to it.
+DIST_DIR="\${exec_prefix}"
+AC_ARG_WITH(distdir,
+[  --with-distdir=DIR       install into location DIR for distribution], [
+  if test "$withval" = "no" -o "$withval" = "NO" ; then
+     DIST_DIR="\${exec_prefix}"
+  else
+     DIST_DIR=${withval}
+  fi
+], )
+
 dnl -----------------------------------------------------------------------
 dnl --- Tcl/Tk support
 dnl -----------------------------------------------------------------------
@@ -928,6 +942,7 @@ if test "x$xc_with_tcl" != "x" ; then
   AC_SUBST(LIB_SPECS)
   AC_SUBST(TCL_LIB_DIR)
   AC_SUBST(WISH_EXE)
+  AC_SUBST(DIST_DIR)
 
 fi
 
