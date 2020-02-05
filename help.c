@@ -330,9 +330,6 @@ void starthelp(xcWidget button, caddr_t clientdata, caddr_t calldata)
    XtTranslateCoords(areawin->area, (Position) (areawidth + 10), -50,
 	&xpos, &ypos);
 
-   /*  Always direct the call to the main menu button. */
-   button = OptionsHelpButton;
-
    savebutton = getgeneric(button, starthelp, NULL);
 
    /* Generate the pixmap and write the help text to it */
