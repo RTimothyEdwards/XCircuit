@@ -23,4 +23,3 @@ asg/Makefile
 spiceparser/*.o
 spiceparser/*.so
 spiceparser/Makefile
-UPDATE_ME
