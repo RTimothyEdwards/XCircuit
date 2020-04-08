@@ -241,7 +241,7 @@ GREP = /bin/grep
 GS_EXEC = gs
 GS_LIBS = 
 HAVE_LGF = LGF
-INC_SPECS =  -I/usr/include -I/usr/include
+INC_SPECS =  -I/usr/local/include -I/usr/include
 INSTALL = /bin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
@@ -251,12 +251,12 @@ INSTALL_TARGET = install-recursive
 INTERPRETER = TCL
 INTERP_PATH = tcl
 LD = /bin/ld
-LDDL_FLAGS = -Wl,-z,relro  -Wl,--export-dynamic  -Wl,--version-script=symbol.map
+LDDL_FLAGS =  -Wl,--export-dynamic  -Wl,--version-script=symbol.map
 LDFLAGS =  
-LD_RUN_PATH = -Wl,-rpath,/usr/lib64 
+LD_RUN_PATH = -Wl,-rpath,/usr/local/lib 
 LIBOBJS = 
-LIBS = -ldl -lz  -lpthread -lieee -lm -lz -lXt  -lSM -lICE -lm  -lX11 -lXpm $(cairo_LIBS) $(fontconfig_LIBS) ${GS_LIBS}
-LIB_SPECS =  -L/usr/lib64 -ltcl8.6 -L/usr/lib64 -ltk8.6
+LIBS = -ldl -lz  -lpthread -lm -lz -lXt  -lSM -lICE -lm  -lX11 -lXpm $(cairo_LIBS) $(fontconfig_LIBS) ${GS_LIBS}
+LIB_SPECS =  -L/usr/local/lib -ltcl8.6 -L/usr/lib64 -ltk8.6
 LTLIBOBJS = 
 M4 = /bin/m4
 MAKEINFO = makeinfo
@@ -275,11 +275,11 @@ PKG_CONFIG_LIBDIR =
 PKG_CONFIG_PATH = 
 PYTHON = 
 RANLIB = ranlib
-REVISION = 11
+REVISION = 19
 SET_MAKE = 
 SHDLIB_EXT = .so
 SHELL = /bin/sh
-SHLIB_LD = ${CC} -shared ${CFLAGS} ${LDFLAGS} -fPIC -Wl,-soname,${@}
+SHLIB_LD = ${CC} ${CFLAGS} ${LDFLAGS} -shared
 SHLIB_LIB_SPECS = 
 SPICE_EXEC = ngspice
 STARTUP_FILE = xcstartup.tcl
@@ -287,7 +287,7 @@ STDLIBS =
 STRIP = 
 SUBDIRS = 
 SUBLIB = 
-TCL_LIB_DIR = /usr/lib64 
+TCL_LIB_DIR = /usr/local/lib 
 VERSION = 3.10
 WISH_EXE = /usr/bin/wish
 WRAPPER_SCRIPT = wrapper.tcl
@@ -360,7 +360,7 @@ AM_CFLAGS = $(cairo_CFLAGS) $(fontconfig_CFLAGS) ${GS_CFLAGS}
 
 # Additional files to distribute
 EXTRA_DIST = COPYRIGHT README README.ISOLatin2 README.notes
-FULL_VERSION = 3.10.11
+FULL_VERSION = 3.10.19
 
 # Menudep program generates menudep.h needed by some of the
 # source files for Xcircuit

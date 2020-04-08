@@ -2417,12 +2417,13 @@ int getkeysignature(XKeyEvent *event)
 			NULL);
 	    XSetICFocus(xic);
 	}
-
-	/* Do a UTF-8 code lookup */
-	Xutf8LookupString(xic, event, buffer, 15, &keysym, &status);
-	/* Convert a UTF-8 code to a known encoding */
-	utf8enc = utf8_reverse_lookup(buffer);
-	if ((utf8enc != -1) && (utf8enc != (keywstate & 0xff))) keywstate = utf8enc;
+	if (xic) {
+	    /* Do a UTF-8 code lookup */
+	    Xutf8LookupString(xic, event, buffer, 15, &keysym, &status);
+	    /* Convert a UTF-8 code to a known encoding */
+	    utf8enc = utf8_reverse_lookup(buffer);
+	    if ((utf8enc != -1) && (utf8enc != (keywstate & 0xff))) keywstate = utf8enc;
+	}
    }
 
    /* ASCII values already come upper/lowercase; we only want to register  */
