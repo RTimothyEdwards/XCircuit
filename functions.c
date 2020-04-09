@@ -22,7 +22,7 @@
 /* Local includes							   */
 /*-------------------------------------------------------------------------*/
 
-#ifdef TCL_WRAPPER 
+#ifdef TCL_WRAPPER
 #include <tk.h>
 #endif
 
@@ -172,11 +172,11 @@ void decomposearc(pathptr thepath)
 		cos(lambda1) / (double)thearc->radius);
       nu2 = atan2(sin(lambda2) / (double)thearc->yaxis,
 		cos(lambda2) / (double)thearc->radius);
-      E1.x = (float)thearc->position.x + 
+      E1.x = (float)thearc->position.x +
 		(float)thearc->radius * (float)cos(nu1);
       E1.y = (float)thearc->position.y +
 		(float)thearc->yaxis * (float)sin(nu1);
-      E2.x = (float)thearc->position.x + 
+      E2.x = (float)thearc->position.x +
 		(float)thearc->radius * (float)cos(nu2);
       E2.y = (float)thearc->position.y +
 		(float)thearc->yaxis * (float)sin(nu2);
@@ -229,12 +229,12 @@ void calcarc(arcptr thearc)
    sarc = (int)(thearc->angle2 - thearc->angle1) * RSTEPS;
    thearc->number = (sarc / 360) + 1;
    if (sarc % 360 != 0) thearc->number++;
-	   
+
    delta = RADFAC * ((float)(thearc->angle2 - thearc->angle1) / (thearc->number - 1));
    theta = thearc->angle1 * RADFAC;
 
    for (idx = 0; idx < thearc->number - 1; idx++) {
-      thearc->points[idx].x = (float)thearc->position.x + 
+      thearc->points[idx].x = (float)thearc->position.x +
 	   fabs((float)thearc->radius) * cos(theta);
       thearc->points[idx].y = (float)thearc->position.y +
 	   (float)thearc->yaxis * sin(theta);
@@ -244,7 +244,7 @@ void calcarc(arcptr thearc)
    /* place last point exactly to avoid roundoff error */
 
    theta = thearc->angle2 * RADFAC;
-   thearc->points[thearc->number - 1].x = (float)thearc->position.x + 
+   thearc->points[thearc->number - 1].x = (float)thearc->position.x +
 	   fabs((float)thearc->radius) * cos(theta);
    thearc->points[thearc->number - 1].y = (float)thearc->position.y +
 	   (float)thearc->yaxis * sin(theta);
@@ -287,7 +287,7 @@ void computecoeffs(splineptr thespline, float *ax, float *bx, float *cx,
 
    *cy = 3.0 * (float)(thespline->ctrl[1].y - thespline->ctrl[0].y);
    *by = 3.0 * (float)(thespline->ctrl[2].y - thespline->ctrl[1].y) - *cy;
-   *ay = (float)(thespline->ctrl[3].y - thespline->ctrl[0].y) - *cy - *by;   
+   *ay = (float)(thespline->ctrl[3].y - thespline->ctrl[0].y) - *cy - *by;
 }
 
 /*------------------------------------------------------------------------*/
@@ -512,7 +512,7 @@ void converttocurve()
 short closepointdistance(polyptr curpoly, XPoint *cursloc, short *mindist)
 {
    short curdist;
-   XPoint *curpt, *savept; 
+   XPoint *curpt, *savept;
 
    curpt = savept = curpoly->points;
    *mindist = wirelength(curpt, cursloc);
@@ -555,7 +555,7 @@ short closedistance(polyptr curpoly, XPoint *cursloc)
 /*  Check screen bounds:  minimum, maximum scale and translation is determined	*/
 /*  by values which fit in an X11 type XPoint (short int).  If the window	*/
 /*  extremes exceed type short when mapped to user space, or if the page 	*/
-/*  bounds exceed type short when mapped to X11 window space, return error.	*/ 
+/*  bounds exceed type short when mapped to X11 window space, return error.	*/
 /*------------------------------------------------------------------------------*/
 
 short checkbounds()
@@ -577,14 +577,14 @@ short checkbounds()
 	areawin->vscale);
    if (lval != (long)((short)lval)) return -1;
    lval = (long)areawin->height - (long)((float)(topobject->bbox.lowerleft.y -
-	areawin->pcorner.y) * areawin->vscale); 
+	areawin->pcorner.y) * areawin->vscale);
    if (lval != (long)((short)lval)) return -1;
 
    lval = (long)((float)(topobject->bbox.lowerleft.x + topobject->bbox.width -
 	areawin->pcorner.x) * areawin->vscale);
    if (lval != (long)((short)lval)) return -1;
    lval = (long)areawin->height - (long)((float)(topobject->bbox.lowerleft.y +
-	topobject->bbox.height - areawin->pcorner.y) * areawin->vscale); 
+	topobject->bbox.height - areawin->pcorner.y) * areawin->vscale);
    if (lval != (long)((short)lval)) return -1;
 
    return 0;
@@ -599,7 +599,7 @@ void window_to_user(short xw, short yw, XPoint *upt)
   float tmpx, tmpy;
 
   tmpx = (float)xw / areawin->vscale + (float)areawin->pcorner.x;
-  tmpy = (float)(areawin->height - yw) / areawin->vscale + 
+  tmpy = (float)(areawin->height - yw) / areawin->vscale +
 	(float)areawin->pcorner.y;
 
   tmpx += (tmpx > 0) ? 0.5 : -0.5;
@@ -619,7 +619,7 @@ void user_to_window(XPoint upt, XPoint *wpt)
 
   tmpx = (float)(upt.x - areawin->pcorner.x) * areawin->vscale;
   tmpy = (float)areawin->height - (float)(upt.y - areawin->pcorner.y)
-	* areawin->vscale; 
+	* areawin->vscale;
 
   tmpx += (tmpx > 0) ? 0.5 : -0.5;
   tmpy += (tmpy > 0) ? 0.5 : -0.5;
@@ -740,7 +740,7 @@ XPoint UGetCursor()
    int    nullint, xpos, ypos;
    u_int   nullui;
    XPoint newpos;
- 
+
    if (areawin->area == NULL) {
       newpos.x = newpos.y = 0;
       return newpos;
@@ -775,14 +775,14 @@ XPoint UGetCursor()
 XPoint UGetCursorPos()
 {
    XPoint winpos, userpos;
- 
+
    if (areawin->area == NULL) {
       winpos.x = winpos.y = 0;
    }
    else
       winpos = UGetCursor();
 
-   window_to_user(winpos.x, winpos.y, &userpos);  
+   window_to_user(winpos.x, winpos.y, &userpos);
 
    return userpos;
 }
@@ -826,7 +826,7 @@ void u2u_snap(XPoint *uvalue)
 
 void snap(short valuex, short valuey, XPoint *returnpt)
 {
-   window_to_user(valuex, valuey, returnpt);  
+   window_to_user(valuex, valuey, returnpt);
    u2u_snap(returnpt);
 }
 
@@ -905,7 +905,7 @@ void UMakeWCTM(Matrix *ctm)
    ctm->b *= areawin->vscale;
    ctm->c = (ctm->c - (float)areawin->pcorner.x) * areawin->vscale
 	 + areawin->panx;
-   
+
    ctm->d *= -areawin->vscale;
    ctm->e *= -areawin->vscale;
    ctm->f = (float)areawin->height + ((float)areawin->pcorner.y - ctm->f) *
@@ -925,8 +925,8 @@ void UMultCTM(Matrix *ctm, XPoint position, float scale, float rotate)
    float mata, matb, matc;
    double drot = (double)rotate * RADFAC;
 
-   yscale = abs(scale);  /* -scale implies flip in x direction only */ 
-   
+   yscale = abs(scale);  /* -scale implies flip in x direction only */
+
    tmpa =  scale * cos(drot);
    tmpb = yscale * sin(drot);
    tmpd = -scale * sin(drot);
@@ -938,7 +938,7 @@ void UMultCTM(Matrix *ctm, XPoint position, float scale, float rotate)
 
    ctm->d = ctm->d * tmpe + ctm->a * tmpd;
    ctm->e = ctm->e * tmpe + ctm->b * tmpd;
-   ctm->f = ctm->f * tmpe + ctm->c * tmpd + position.y; 
+   ctm->f = ctm->f * tmpe + ctm->c * tmpd + position.y;
 
    ctm->a = mata;
    ctm->b = matb;
@@ -1012,13 +1012,13 @@ short flipadjust(short anchor)
             tmpanchor ^= (RIGHT | NOTLEFT);
 
 	 /* NOTE:  Justification does not change under flip invariance.	*/
-      }   
+      }
       if ((DCTM)->e > EPS) {
-         if ((tmpanchor & (TOP | NOTBOTTOM)) != NOTBOTTOM) 
+         if ((tmpanchor & (TOP | NOTBOTTOM)) != NOTBOTTOM)
             tmpanchor ^= (TOP | NOTBOTTOM);
       }
       UPreScaleCTM(DCTM);
-   }      
+   }
    return tmpanchor;
 }
 
@@ -1031,12 +1031,12 @@ void UPreMultCTM(Matrix *ctm, XPoint position, float scale, float rotate)
    double drot = (double)rotate * RADFAC;
 
    yscale = abs(scale);		/* negative scale value implies flip in x only */
-   
+
    tmpa =  scale * cos(drot);
    tmpb = yscale * sin(drot);
    tmpd = -scale * sin(drot);
    tmpe = yscale * cos(drot);
-   
+
    ctm->c += ctm->a * position.x + ctm->b * position.y;
    ctm->f += ctm->d * position.x + ctm->e * position.y;
 
@@ -1090,12 +1090,12 @@ void UTransformbyCTM(Matrix *ctm, XPoint *ipoints, XPoint *points, short number)
    for (current = ipoints; current < ipoints + number; current++, ptptr++) {
       fx = ctm->a * (float)current->x + ctm->b * (float)current->y + ctm->c;
       fy = ctm->d * (float)current->x + ctm->e * (float)current->y + ctm->f;
-	
+
       ptptr->x = (fx >= 0) ? (short)(fx + 0.5) : (short)(fx - 0.5);
       ptptr->y = (fy >= 0) ? (short)(fy + 0.5) : (short)(fy - 0.5);
    }
 }
-  
+
 /*------------------------------------------------------------------------*/
 /* (same as above routine but using type (float) for point values;  this  */
 /* is for calculation of Bezier curve internal points.			  */
@@ -1146,7 +1146,7 @@ void UPushCTM()
    if (areawin->MatStack == NULL)
       UResetCTM(nmatrix);
    else
-      UCopyCTM(areawin->MatStack, nmatrix); 
+      UCopyCTM(areawin->MatStack, nmatrix);
    nmatrix->nextmatrix = areawin->MatStack;
    areawin->MatStack = nmatrix;
 }
@@ -1157,7 +1157,7 @@ void UTransformPoints(XPoint *points, XPoint *newpoints, short number,
 	XPoint atpt, float scale, float rotate)
 {
    Matrix LCTM;
- 
+
    UResetCTM(&LCTM);
    UMultCTM(&LCTM, atpt, scale, rotate);
    UTransformbyCTM(&LCTM, points, newpoints, number);
@@ -1171,7 +1171,7 @@ void InvTransformPoints(XPoint *points, XPoint *newpoints, short number,
 	XPoint atpt, float scale, float rotate)
 {
    Matrix LCTM;
- 
+
    UResetCTM(&LCTM);
    UPreMultCTM(&LCTM, atpt, scale, rotate);
    InvertCTM(&LCTM);
@@ -1209,7 +1209,7 @@ void manhattanize(XPoint *pospt, polyptr newpoly, short cycle, Boolean strict)
 	 bbpt = newpoly->points + newpoly->number - 3;
       else
 	 bbpt = NULL;
-   } 
+   }
    else if (cycle == 0) {
       curpt = newpoly->points;
       fpt = newpoly->points + 1;
@@ -1284,7 +1284,7 @@ void bboxcalc(short testval, short *lowerval, short *upperval)
 /* Bounding box calculation for elements which can be part of a path	*/
 /*----------------------------------------------------------------------*/
 
-void calcextents(genericptr *bboxgen, short *llx, short *lly, 
+void calcextents(genericptr *bboxgen, short *llx, short *lly,
 	short *urx, short *ury)
 {
    switch (ELEMENTTYPE(*bboxgen)) {
@@ -1303,7 +1303,7 @@ void calcextents(genericptr *bboxgen, short *llx, short *lly,
          bboxcalc(TOSPLINE(bboxgen)->ctrl[0].y, lly, ury);
          bboxcalc(TOSPLINE(bboxgen)->ctrl[3].x, llx, urx);
          bboxcalc(TOSPLINE(bboxgen)->ctrl[3].y, lly, ury);
-         for (bboxpts = TOSPLINE(bboxgen)->points; bboxpts < 
+         for (bboxpts = TOSPLINE(bboxgen)->points; bboxpts <
 		 TOSPLINE(bboxgen)->points + INTSEGS; bboxpts++) {
 	    bboxcalc((short)(bboxpts->x), llx, urx);
 	    bboxcalc((short)(bboxpts->y), lly, ury);
@@ -1337,7 +1337,7 @@ void objinstbbox(objinstptr obbox, XPoint *npoints, int extend)
    points[0].y = points[3].y = obbox->bbox.lowerleft.y - extend;
 
    UTransformPoints(points, npoints, 4, obbox->position,
-		 obbox->scale, obbox->rotation); 
+		 obbox->scale, obbox->rotation);
 }
 
 /*----------------------------------------------------------------------*/
@@ -1351,7 +1351,7 @@ void labelbbox(labelptr labox, XPoint *npoints, objinstptr callinst)
    short j;
 
    tmpext = ULength(labox, callinst, NULL);
-   points[0].x = points[1].x = (labox->anchor & NOTLEFT ? 
+   points[0].x = points[1].x = (labox->anchor & NOTLEFT ?
 	       (labox->anchor & RIGHT ? -tmpext.maxwidth :
 		-tmpext.maxwidth / 2) : 0);
    points[2].x = points[3].x = points[0].x + tmpext.maxwidth;
@@ -1368,7 +1368,7 @@ void labelbbox(labelptr labox, XPoint *npoints, objinstptr callinst)
 	 pinadjust(labox->anchor, &points[j].x, &points[j].y, 1);
 
    UTransformPoints(points, npoints, 4, labox->position,
-		labox->scale, labox->rotation); 
+		labox->scale, labox->rotation);
 }
 
 /*----------------------------------------------------------------------*/
@@ -1388,7 +1388,7 @@ void graphicbbox(graphicptr gp, XPoint *npoints)
    points[2].y = points[3].y = hh;
 
    UTransformPoints(points, npoints, 4, gp->position,
-		gp->scale, gp->rotation); 
+		gp->scale, gp->rotation);
 }
 
 /*--------------------------------------------------------------*/
@@ -1408,7 +1408,7 @@ void calcinstbbox(genericptr *bboxgen, short *llx, short *lly, short *urx,
 /* Bounding box calculation for a single generic element		*/
 /*----------------------------------------------------------------------*/
 
-void calcbboxsingle(genericptr *bboxgen, objinstptr thisinst, 
+void calcbboxsingle(genericptr *bboxgen, objinstptr thisinst,
 		short *llx, short *lly, short *urx, short *ury)
 {
    XPoint npoints[4];
@@ -1702,7 +1702,7 @@ void calcbboxselect()
    for (bsel = areawin->selectlist; bsel < areawin->selectlist +
 		areawin->selects; bsel++)
       calcbboxvalues(areawin->topinstance, topobject->plist + *bsel);
-  
+
    updatepagebounds(topobject);
 }
 
@@ -1887,8 +1887,8 @@ void UDrawSimpleLine(XPoint *pt1, XPoint *pt2)
    UTransformbyCTM(DCTM, pt2, &newpt2, 1);
 
    DrawLine(dpy, areawin->window, areawin->gc,
-		newpt1.x, newpt1.y, newpt2.x, newpt2.y); 
-} 
+		newpt1.x, newpt1.y, newpt2.x, newpt2.y);
+}
 #endif /* !HAVE_CAIRO */
 
 /*-------------------------------------------------------------------------*/
@@ -1904,8 +1904,8 @@ void UDrawLine(XPoint *pt1, XPoint *pt2)
    }
 
    SetLineAttributes(dpy, areawin->gc, tmpwidth, LineSolid, CapRound, JoinBevel);
-   UDrawSimpleLine(pt1, pt2); 
-} 
+   UDrawSimpleLine(pt1, pt2);
+}
 #endif /* !HAVE_CAIRO */
 
 /*----------------------------------------------------------------------*/
@@ -2104,7 +2104,7 @@ void UDrawTextLine(labelptr curlabel, short tpos)
    int     maxwidth;
    TextExtents tmpext;
    TextLinesInfo tlinfo;
-   
+
    if (!areawin->redraw_ongoing) {
       areawin->redraw_needed = True;
       return;
@@ -2375,7 +2375,7 @@ void UDrawRescaleBox(XPoint *corner)
 
    SetForeground(dpy, areawin->gc, AUXCOLOR);
    SetThinLineAttributes(dpy, areawin->gc, 0, LineSolid, CapRound, JoinBevel);
-   
+
    UTransformbyCTM(DCTM, newpoints, origpoints, 4);
    strokepath(origpoints, 4, 0, 1);
 }
@@ -2436,7 +2436,7 @@ void strokepath(XPoint *pathlist, short number, short style, float width)
          if ((style & FILLSOLID) == FILLSOLID)
             SetFillStyle(dpy, areawin->gc, FillSolid);
          else if (!(style & FILLED)) {
-            SetFillStyle(dpy, areawin->gc, FillOpaqueStippled); 
+            SetFillStyle(dpy, areawin->gc, FillOpaqueStippled);
 	    SetStipple(dpy, areawin->gc, 7);
          }
          else {
@@ -2603,7 +2603,7 @@ void UDrawPath(pathptr thepath, float passwidth)
    splineptr	thespline;
    int		pathsegs = 0, curseg = 0;
    float	scaledwidth;
-   
+
    if (!areawin->redraw_ongoing) {
       areawin->redraw_needed = True;
       return;
@@ -2627,7 +2627,7 @@ void UDrawPath(pathptr thepath, float passwidth)
 	    curseg = pathsegs;
 	    break;
       }
-   } 
+   }
    scaledwidth = thepath->width * passwidth;
 
    strokepath(tmppoints, pathsegs, thepath->style, scaledwidth);
@@ -2700,22 +2700,22 @@ void UDrawObject(objinstptr theinstance, short level, int passcolor,
    bboxin[0].x = theobject->bbox.lowerleft.x;
    bboxin[0].y = theobject->bbox.lowerleft.y;
    bboxin[1].x = theobject->bbox.lowerleft.x + theobject->bbox.width;
-   bboxin[1].y = theobject->bbox.lowerleft.y + theobject->bbox.height; 
+   bboxin[1].y = theobject->bbox.lowerleft.y + theobject->bbox.height;
    if (level == 0)
       extendschembbox(theinstance, &(bboxin[0]), &(bboxin[1]));
    UTransformbyCTM(DCTM, bboxin, bboxout, 2);
 
-   xm = (bboxout[0].x < bboxout[1].x) ? 0 : 1;  
-   ym = (bboxout[0].y < bboxout[1].y) ? 0 : 1;  
+   xm = (bboxout[0].x < bboxout[1].x) ? 0 : 1;
+   ym = (bboxout[0].y < bboxout[1].y) ? 0 : 1;
 
    if (bboxout[xm].x < areawin->width && bboxout[ym].y < areawin->height &&
-       bboxout[1 - xm].x > 0 && bboxout[1 - ym].y > 0) {       
+       bboxout[1 - xm].x > 0 && bboxout[1 - ym].y > 0) {
 
      /* make parameter substitutions */
      psubstitute(theinstance);
 
      /* draw all of the elements */
-   
+
      tmpwidth = UTopTransScale(passwidth);
      SetLineAttributes(dpy, areawin->gc, tmpwidth, LineSolid, CapRound,
 		JoinBevel);
@@ -2752,11 +2752,11 @@ void UDrawObject(objinstptr theinstance, short level, int passcolor,
 	     if (level == 0 || !((TOPOLY(areagen))->style & BBOX))
                 UDrawPolygon(TOPOLY(areagen), passwidth);
 	     break;
-   
+
 	  case(SPLINE):
              UDrawSpline(TOSPLINE(areagen), passwidth);
 	     break;
-   
+
 	  case(ARC):
              UDrawArc(TOARC(areagen), passwidth);
 	     break;
@@ -2768,7 +2768,7 @@ void UDrawObject(objinstptr theinstance, short level, int passcolor,
 	  case(GRAPHIC):
 	     UDrawGraphic(TOGRAPHIC(areagen));
 	     break;
-   
+
           case(OBJINST):
 	     if (areawin->editinplace && stack && (TOOBJINST(areagen)
 			== areawin->topinstance)) {
@@ -2786,8 +2786,8 @@ void UDrawObject(objinstptr theinstance, short level, int passcolor,
              UDrawObject(TOOBJINST(areagen), level + 1, curcolor, passwidth, stack);
 	     if (areawin->clipped > 0) areawin->clipped -= 2;
 	     break;
-   
-  	  case(LABEL): 
+
+  	  case(LABEL):
 	     if (level == 0 || TOLABEL(areagen)->pin == False)
                 UDrawString(TOLABEL(areagen), curcolor, theinstance);
 	     else if ((TOLABEL(areagen)->anchor & PINVISIBLE) && areawin->pinpointon)
@@ -2881,7 +2881,7 @@ void UDoLatex(objinstptr theinstance, short level, FILE *f,
    psubstitute(theinstance);
 
    /* find all of the elements */
-   
+
    for (areagen = theobject->plist; areagen < theobject->plist +
            theobject->parts; areagen++) {
 
@@ -2889,8 +2889,8 @@ void UDoLatex(objinstptr theinstance, short level, FILE *f,
          case(OBJINST):
             UDoLatex(TOOBJINST(areagen), level + 1, f, scale, scale2, tx, ty, checkonly);
 	    break;
-   
-	 case(LABEL): 
+
+	 case(LABEL):
 	    thislabel = TOLABEL(areagen);
 	    if (level == 0 || thislabel->pin == False ||
 			(thislabel->anchor & PINVISIBLE))
@@ -2956,7 +2956,7 @@ void TopDoLatex()
    polyptr framebox;
    XPoint origin;
    Boolean checklatex = FALSE;
-   char filename[100], extend[10], *dotptr;
+   char filename[100], extension[10], *dotptr;
 
    UDoLatex(areawin->topinstance, 0, NULL, 1.0, 1.0, 0, 0, &checklatex);
 
@@ -2965,25 +2965,31 @@ void TopDoLatex()
    /* Handle cases where the file might have a ".eps" extension.	*/
    /* Thanks to Graham Sheward for pointing this out.			*/
 
-   if (xobjs.pagelist[areawin->page]->filename)
-      sprintf(filename, "%s", xobjs.pagelist[areawin->page]->filename);
-   else
-      sprintf(filename, "%s",
-		xobjs.pagelist[areawin->page]->pageinst->thisobject->name);
+   /* Modified file path routines:                                      */
+   /* Solved problems with incomplete paths, NULL file pointers,        */
+   /* added tilde and variable expansion by Agustín Campeny, April 2020 */
 
-   if ((dotptr = strchr(filename + strlen(filename) - 4, '.')) == NULL) {
-       dotptr = filename + strlen(filename);
-       sprintf(dotptr, ".ps");
-   }
-   strcpy(extend, dotptr);
-   strcpy(dotptr, ".tex");
+   sprintf(filename, "%s", xobjs.pagelist[areawin->page]->filename);
+
+   xc_tilde_expand(filename, 100);
+   while(xc_variable_expand(filename, 100));
+
+   dotptr = strrchr(filename, '.');
+   sprintf(extension, "%s", dotptr);
+   filename[dotptr - filename] = '\0';
+   sprintf(filename, "%s.tex", filename);
 
    f = fopen(filename, "w");
+
+   if (!f) {
+     Wprintf("Couldn't save .tex file. Check file path");
+     return;
+   }
 
    *dotptr = '\0';
 
    fprintf(f, "%% XCircuit output \"%s.tex\" for LaTeX input from %s%s\n",
-		filename, filename, extend);
+		filename, filename, extension);
    fprintf(f, "\\def\\putbox#1#2#3#4{\\makebox[0in][l]{\\makebox[#1][l]{}"
 		"\\raisebox{\\baselineskip}[0in][0in]"
 		"{\\raisebox{#2}[0in][0in]{\\scalebox{#3}{#4}}}}}\n");
