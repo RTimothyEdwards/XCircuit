@@ -3033,8 +3033,8 @@ void TopDoLatex()
    fprintf(f, "   \\scalebox{%g}{\n", outscale);
    fprintf(f, "   \\normalsize\n");
    fprintf(f, "   \\parbox{%gin}{\n", (((float)width * psscale) / 72.0) / outscale);
-   fprintf(f, "   \\includegraphics[scale=%g]{%s}\\\\\n", 1.0 / outscale,
-    			filename);
+   fprintf(f, "   \\includegraphics[scale=%g]{%s%s}\\\\\n", 1.0 / outscale,
+    			filename, extension);
    fprintf(f, "   %% translate x=%d y=%d scale %3.2f\n", tx, ty, psscale);
 
    UPushCTM();		/* Save current state */
