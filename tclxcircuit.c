@@ -210,14 +210,14 @@ void tcl_vprintf(FILE *f, const char *fmt, va_list args_in)
     if (bigstr != NULL) Tcl_Free(bigstr);
     if (finalstr != NULL) Tcl_Free(finalstr);
 }
-    
+
 /*------------------------------------------------------*/
 /* Console output flushing which goes along with the	*/
 /* routine tcl_vprintf() above.				*/
 /*------------------------------------------------------*/
 
 void tcl_stdflush(FILE *f)
-{   
+{
    Tcl_SavedResult state;
    static char stdstr[] = "::flush stdxxx";
    char *stdptr = stdstr + 11;
@@ -453,7 +453,7 @@ int XcTagCallback(Tcl_Interp *interp, int objc, Tcl_Obj *CONST objv[])
 /* evaluating the command itself.  The command and arguments	*/
 /* are passed as a variable number or char * arguments, since	*/
 /* usually this routine will called with constant arguments	*/
-/* (e.g., XcInternalTagCall(interp, 2, "set", "color");)		*/ 
+/* (e.g., XcInternalTagCall(interp, 2, "set", "color");)		*/
 /*								*/
 /* objv declared static because this routine is used a lot	*/
 /* (e.g., during select/unselect operations).			*/
@@ -465,7 +465,7 @@ int XcInternalTagCall(Tcl_Interp *interp, int argc, ...)
    static Tcl_Obj **objv = NULL;
    char *aptr;
    va_list ap;
-   
+
 
    if (objv == (Tcl_Obj **)NULL)
       objv = (Tcl_Obj **)malloc(argc * sizeof(Tcl_Obj *));
@@ -652,7 +652,7 @@ Tcl_Obj *TclGetStringParts(stringpart *thisstring)
    Tcl_Obj *lstr, *sdict, *stup;
    int i;
    stringpart *strptr;
-   
+
    lstr = Tcl_NewListObj(0, NULL);
    for (strptr = thisstring, i = 0; strptr != NULL;
       strptr = strptr->nextpart, i++) {
@@ -711,7 +711,7 @@ Tcl_Obj *TclGetStringParts(stringpart *thisstring)
 	       sdict = Tcl_NewListObj(0, NULL);
 	       Tcl_ListObjAppendElement(xcinterp, sdict,
 			Tcl_NewStringObj("Color", 5));
-	       Tcl_ListObjAppendElement(xcinterp, sdict, stup); 
+	       Tcl_ListObjAppendElement(xcinterp, sdict, stup);
 	       Tcl_ListObjAppendElement(xcinterp, lstr, sdict);
 	    }
 	    break;
@@ -861,7 +861,7 @@ int GetXCStringFromList(Tcl_Interp *interp, Tcl_Obj *list, stringpart **rstring)
       newpart = makesegment(rstring, NULL);
       newpart->nextpart = NULL;
       newpart->type = ptype;
-      
+
       switch(ptype) {
 	 case TEXT_STRING:
 	 case PARAM_START:
@@ -1074,7 +1074,7 @@ int ParseElementArguments(Tcl_Interp *interp, int objc,
 	       return result;
 	    }
 	    if (areawin->hierstack != NULL)
-	       i = GetPartNumber((genericptr)ehandle, 
+	       i = GetPartNumber((genericptr)ehandle,
 			areawin->hierstack->thisinst->thisobject, mask);
 	    else
                i = GetPartNumber((genericptr)ehandle, topobject, mask);
@@ -1292,7 +1292,7 @@ int xctcl_symschem(ClientData clientData, Tcl_Interp *interp,
    /* The order of these must match the definitions in xcircuit.h */
    static char *schemTypes[] = {
      "primary", "secondary", "trivial", "symbol", "fundamental",
-     "nonetwork", NULL /* (jdk) */ 
+     "nonetwork", NULL /* (jdk) */
    };
 
    if (objc == 1 || objc > 4) {
@@ -1469,7 +1469,7 @@ int xctcl_netlist(ClientData clientData, Tcl_Interp *interp,
       if (!strncmp(option + 1, "quiet", 5))
 	 quiet = TRUE;
    }
-	 
+
    /* Make sure a valid netlist exists for the current schematic */
    /* for those commands which require a valid netlist (non-ASG	 */
    /* functions).  Some functions (e.g., "parse") require that	 */
@@ -1483,11 +1483,11 @@ int xctcl_netlist(ClientData clientData, Tcl_Interp *interp,
 	 if ((topobject->labels != NULL) || (topobject->polygons != NULL))
 	    valid = True;
 	 break;
-   }   
+   }
 
    if (!valid) {
       objinstptr tinst;
- 
+
       /* Ignore libraries */
       if (is_library(topobject) >= 0 || (eventmode == CATALOG_MODE))
 	 return TCL_ERROR;
@@ -1573,7 +1573,7 @@ int xctcl_netlist(ClientData clientData, Tcl_Interp *interp,
 	    while (sstack->next != NULL) sstack = sstack->next;
 	    schemtopinst = sstack->thisinst;
 	 }
-	
+
 	 stack = NULL;
 	 push_stack(&stack, schemtopinst, NULL);
 	 valid = TRUE;
@@ -1646,7 +1646,7 @@ int xctcl_netlist(ClientData clientData, Tcl_Interp *interp,
 	    objc--;
 	    option = Tcl_GetString(objv[objc - 1]);
 	 }
-	 
+
 	 refinstance = (areawin->hierstack) ?  areawin->hierstack->thisinst
 		: areawin->topinstance;
 
@@ -1890,7 +1890,7 @@ int xctcl_netlist(ClientData clientData, Tcl_Interp *interp,
 	    snew = parseinfo(NULL, master, &loccalls, NULL, mode, FALSE, TRUE);
 	 }
 	 Tcl_SetResult(interp, snew, TCL_DYNAMIC);
-	
+
 	 } break;
 
       case UnConnectIdx:	/* disassociate the page with another one */
@@ -2722,7 +2722,7 @@ int xctcl_flip(ClientData clientData, Tcl_Interp *interp,
    else {
       Tcl_WrongNumArgs(interp, 1, objv, "horizontal|vertical [<center>]");
       return TCL_ERROR;
-   }  
+   }
 
    teststr = Tcl_GetString(objv[nidx]);
 
@@ -2850,7 +2850,7 @@ Tcl_Obj *GetParameterValue(objectptr refobj, oparamptr ops, Boolean verbatim,
 
    if (verbatim && (refinst != NULL) &&
 		((refkey = find_indirect_param(refinst, ops->key)) != NULL)) {
-      robj = Tcl_NewStringObj(refkey, strlen(refkey)); 
+      robj = Tcl_NewStringObj(refkey, strlen(refkey));
       return robj;
    }
 
@@ -3038,7 +3038,7 @@ int xctcl_param(ClientData clientData, Tcl_Interp *interp,
       else if (!strncmp(dash_opt + 1, "ind", 3)) {
 	 indirection = TRUE;
       }
-      
+
       objc--;
       if (objc == 0) {
 	 Tcl_SetResult(interp, "Must have a valid option", NULL);
@@ -3053,7 +3053,7 @@ int xctcl_param(ClientData clientData, Tcl_Interp *interp,
 	 for (i = 0; i < (sizeof(param_types) / sizeof(char *)); i++)
 	    if ((thiselem == NULL) || (param_select[i] & thiselem->type))
 	       Tcl_AppendElement(interp, param_types[i]);
-	    
+
          break;
 
       case GetIdx:
@@ -3335,7 +3335,7 @@ keycheck:
 	       }
 	       if (indirection) {
 	          char *refkey = Tcl_GetString(objv[nidx + 2]);
-	       
+
 	          if (refinst != areawin->topinstance)
 		     searchinst = areawin->topinstance;
 	          else if (areawin->stack) {
@@ -3382,7 +3382,7 @@ next_param:
 	 }
          break;
 
-      case MakeIdx: 
+      case MakeIdx:
 	 if (objc >= (nidx + 2) && objc <= (nidx + 4)) {
             if ((result = Tcl_GetIndexFromObj(interp, objv[nidx + 1],
 			(CONST84 char **)param_types, "parameter type",
@@ -3405,7 +3405,7 @@ next_param:
 	    }
 	    else if (value == P_SUBSTRING) {
 	       /* Get parameter value from selection */
-	       startparam((Tk_Window)clientData, (pointertype)value, 
+	       startparam((Tk_Window)clientData, (pointertype)value,
 			(caddr_t)Tcl_GetString(objv[nidx + 2]));
 	    }
 	    else if ((value == P_EXPRESSION) && (objc == (nidx + 4))) {
@@ -3441,7 +3441,7 @@ next_param:
 	       }
 	       else {
 		  char *newkey;
-	
+
 		  /* This may be an expression.   Do a quick check to	*/
 		  /* see if the	string can be evaluated as a Tcl	*/
 		  /* expression.  If it returns a valid numeric result,	*/
@@ -3458,7 +3458,7 @@ next_param:
 		  }
 		  result = Tcl_GetDoubleFromObj(interp, exprres, &tmpdbl);
 		  if (result != TCL_ERROR) {
-		     if ((newkey = makeexprparam(refobj, (value == P_NUMERIC) ?	
+		     if ((newkey = makeexprparam(refobj, (value == P_NUMERIC) ?
 				Tcl_GetString(objv[nidx + i - 1]) : NULL,
 				temps.parameter.expr, value)) == NULL)
 			return TCL_ERROR;
@@ -3528,7 +3528,7 @@ next_param:
 	 }
          break;
 
-      case ReplaceIdx: 
+      case ReplaceIdx:
 	 /* Calls unparameterize---replaces text with the instance value, */
 	 /* or replaces a numeric parameter with the instance values by   */
 	 /* unparameterizing the element.  Don't use with parameter keys. */
@@ -3546,8 +3546,8 @@ next_param:
 	 }
          break;
 
-      case DeleteIdx: 
-      case ForgetIdx: 
+      case DeleteIdx:
+      case ForgetIdx:
 
 	 if (objc == nidx + 2) {
 	    /* Check against keys */
@@ -4358,7 +4358,7 @@ int xctcl_label(ClientData clientData, Tcl_Interp *interp,
 			"insertions", 0, &idx2) != TCL_OK) {
 	    return TCL_ERROR;
 	 }
-	 if ((idx2 > TEXT_STRING) && (idx2 < FONT_NAME) && (objc - nidx == 2)) { 
+	 if ((idx2 > TEXT_STRING) && (idx2 < FONT_NAME) && (objc - nidx == 2)) {
 	    labeltext(idx2, (char *)1);
 	 }
 	 else if (idx2 == MARGINSTOP) {
@@ -4369,7 +4369,7 @@ int xctcl_label(ClientData clientData, Tcl_Interp *interp,
 	    else value = 1;
 	    labeltext(idx2, (char *)&value);
 	 }
-	 else if ((idx2 == PARAM_START) && (objc - nidx == 3)) { 
+	 else if ((idx2 == PARAM_START) && (objc - nidx == 3)) {
 	    labeltext(idx2, Tcl_GetString(objv[nidx + 2]));
 	 }
 	 else if ((idx2 == FONT_COLOR) && (objc - nidx == 3)) {
@@ -4441,6 +4441,9 @@ int xctcl_label(ClientData clientData, Tcl_Interp *interp,
 	 Tcl_SetObjResult(interp, objPtr);
 	 break;
 
+   /* Fixed issue where LaTeX mode wasn't assigned to labels */
+   /* by Agustín Campeny, April 2020                         */
+
       case VisibleIdx:	/* Change visibility of pin */
 	 if (objc == nidx + 1)
 	    jval = getanchoring(interp, PINVISIBLE);
@@ -4448,8 +4451,7 @@ int xctcl_label(ClientData clientData, Tcl_Interp *interp,
 	    if ((result = Tcl_GetBooleanFromObj(interp, objv[nidx + 1],
 			&value)) != TCL_OK)
 	       return result;
-	    if (jval != value)
-   	       setanchoring(PINVISIBLE, (value) ? PINVISIBLE : NORMAL);
+   	  setanchoring(PINVISIBLE, (value) ? PINVISIBLE : NORMAL);
 	 }
 	 break;
 
@@ -4460,8 +4462,7 @@ int xctcl_label(ClientData clientData, Tcl_Interp *interp,
 	    if ((result = Tcl_GetBooleanFromObj(interp, objv[nidx + 1],
 			&value)) != TCL_OK)
 	       return result;
-	    if (jval != value)
-   	       setanchoring(FLIPINV, (value) ? FLIPINV : NORMAL);
+   	  setanchoring(FLIPINV, (value) ? FLIPINV : NORMAL);
 	 }
 	 break;
 
@@ -4472,8 +4473,7 @@ int xctcl_label(ClientData clientData, Tcl_Interp *interp,
 	    if ((result = Tcl_GetBooleanFromObj(interp, objv[nidx + 1],
 			&value)) != TCL_OK)
 	       return result;
-	    if (jval != value)
-   	       setanchoring(LATEXLABEL, (value) ? LATEXLABEL : NORMAL);
+   	  setanchoring(LATEXLABEL, (value) ? LATEXLABEL : NORMAL);
 	 }
 	 break;
 
@@ -4493,11 +4493,8 @@ int xctcl_label(ClientData clientData, Tcl_Interp *interp,
 	       case 2: value = JUSTIFYRIGHT; break;
 	       case 3: value = JUSTIFYBOTH; break;
 	    }
-	    jval = getanchoring(interp, JUSTIFYRIGHT | JUSTIFYBOTH | TEXTCENTERED);
-	    if (jval != value) {
-		setanchoring(JUSTIFYRIGHT | JUSTIFYBOTH | TEXTCENTERED, value);
-		refresh(NULL, NULL, NULL);
-	    }
+		  setanchoring(JUSTIFYRIGHT | JUSTIFYBOTH | TEXTCENTERED, value);
+		  refresh(NULL, NULL, NULL);
 	 }
 	 break;
 
@@ -4522,18 +4519,12 @@ int xctcl_label(ClientData clientData, Tcl_Interp *interp,
 	    }
 	    switch (idx2) {
 	       case 0: case 1: case 2:
-		  jval = getanchoring(interp, RIGHT | NOTLEFT);
-		  if (jval != value) {
-		     setanchoring(RIGHT | NOTLEFT, value);
-		     refresh(NULL, NULL, NULL);
-		  }
+		  setanchoring(RIGHT | NOTLEFT, value);
+		  refresh(NULL, NULL, NULL);
 	          break;
 	       case 3: case 4: case 5:
-		  jval2 = getanchoring(interp, TOP | NOTBOTTOM);
-		  if (jval2 != value) {
-		     setanchoring(TOP | NOTBOTTOM, value);
-		     refresh(NULL, NULL, NULL);
-		  }
+		  setanchoring(TOP | NOTBOTTOM, value);
+		  refresh(NULL, NULL, NULL);
 	          break;
 	    }
 	 }
@@ -4551,7 +4542,7 @@ int xctcl_label(ClientData clientData, Tcl_Interp *interp,
 	       if (SELECTTYPE(areawin->selectlist + i) != LABEL) continue;
 	       tlab = SELTOLABEL(areawin->selectlist + i);
 	       tstr = textprint(tlab->string, areawin->topinstance);
-	       Tcl_ListObjAppendElement(interp, objPtr, 
+	       Tcl_ListObjAppendElement(interp, objPtr,
 			Tcl_NewStringObj(tstr, strlen(tstr)));
 	       free(tstr);
 	    }
@@ -4713,7 +4704,7 @@ int xctcl_dofill(ClientData clientData, Tcl_Interp *interp,
                Tcl_SetResult(interp, "Fill value should be 0 to 100", NULL);
                return TCL_ERROR;
             }
-            rval = setelementstyle((Tk_Window)clientData, (pointertype)value, 
+            rval = setelementstyle((Tk_Window)clientData, (pointertype)value,
 		FILLED | FILLSOLID);
 	 }
       }
@@ -4771,19 +4762,19 @@ int xctcl_doborder(ClientData clientData, Tcl_Interp *interp,
       wvalue = (double)areawin->linewidth;
       switch (value & (DASHED | DOTTED | NOBORDER | SQUARECAP)) {
 	 case NORMAL:
-	    Tcl_ListObjAppendElement(interp, listPtr, 
+	    Tcl_ListObjAppendElement(interp, listPtr,
 			Tcl_NewStringObj("solid", 5)); break;
 	 case DASHED:
-	    Tcl_ListObjAppendElement(interp, listPtr, 
+	    Tcl_ListObjAppendElement(interp, listPtr,
 			Tcl_NewStringObj("dashed", 6)); break;
 	 case DOTTED:
-	    Tcl_ListObjAppendElement(interp, listPtr, 
+	    Tcl_ListObjAppendElement(interp, listPtr,
 			Tcl_NewStringObj("dotted", 6)); break;
 	 case NOBORDER:
-	    Tcl_ListObjAppendElement(interp, listPtr, 
+	    Tcl_ListObjAppendElement(interp, listPtr,
 			Tcl_NewStringObj("unbordered", 10)); break;
 	 case SQUARECAP:
-	    Tcl_ListObjAppendElement(interp, listPtr, 
+	    Tcl_ListObjAppendElement(interp, listPtr,
 			Tcl_NewStringObj("square-endcaps", 10)); break;
       }
       if (value & UNCLOSED)
@@ -4791,11 +4782,11 @@ int xctcl_doborder(ClientData clientData, Tcl_Interp *interp,
       else
          Tcl_ListObjAppendElement(interp, listPtr, Tcl_NewStringObj("closed", 6));
 
-      if (value & BBOX) 
+      if (value & BBOX)
          Tcl_ListObjAppendElement(interp, listPtr,
 		Tcl_NewStringObj("bounding box", 12));
 
-      if (value & CLIPMASK) 
+      if (value & CLIPMASK)
          Tcl_ListObjAppendElement(interp, listPtr,
 		Tcl_NewStringObj("clipmask", 8));
 
@@ -6117,7 +6108,7 @@ int xctcl_element(ClientData clientData, Tcl_Interp *interp,
       Tcl_SetObjResult(interp, listPtr);
       return XcTagCallback(interp, objc, objv);
    }
-   
+
    if (Tcl_GetIndexFromObj(interp, objv[nidx],
 		(CONST84 char **)subCmds,
 		"option", 0, &idx) == TCL_OK) {
@@ -6573,7 +6564,7 @@ int xctcl_config(ClientData clientData, Tcl_Interp *interp,
 		     transferselects();
 		     drawarea(areawin->area, NULL, NULL);
 		  }
-		  else 
+		  else
 		     areawin = winptr;
 		  break;
 	       }
@@ -7025,7 +7016,7 @@ int xctcl_promptsavepage(ClientData clientData, Tcl_Interp *interp,
       result = Tcl_GetIntFromObj(interp, objv[1], &page);
       if (result != TCL_OK) return result;
    }
-   else page = areawin->page; 
+   else page = areawin->page;
 
    curpage = xobjs.pagelist[page];
    if (curpage->pageinst == NULL) {
@@ -7315,7 +7306,7 @@ int xctcl_page(ClientData clientData, Tcl_Interp *interp,
 	 idx = MakeIdx;
 	 nidx = 0;
 	 pageno = areawin->page;	/* so we don't get a segfault */
-      } 
+      }
       else
 	 return result;
    }
@@ -7338,7 +7329,7 @@ int xctcl_page(ClientData clientData, Tcl_Interp *interp,
 	 Tcl_SetResult(interp, "Cannot do function on non-initialized page.", NULL);
 	 return TCL_ERROR;
       }
-   } 
+   }
 
    switch (idx) {
       case HandleIdx:
@@ -7346,7 +7337,7 @@ int xctcl_page(ClientData clientData, Tcl_Interp *interp,
 	 objPtr = Tcl_NewHandleObj(curpage->pageinst);
 	 Tcl_SetObjResult(interp, objPtr);
 	 break;
-	 
+
       case ResetIdx:
 	 /* clear page */
 	 resetbutton(NULL, (pointertype)(pageno + 1), NULL);
@@ -7395,7 +7386,7 @@ int xctcl_page(ClientData clientData, Tcl_Interp *interp,
 	       strcat(_STR2, argv);
 	    }
 	 }
-	 
+
 	 if (savepage != pageno) newpage(pageno);
 	 startloadfile((target >= 0) ? target + LIBRARY : -1);
 	 if (savepage != pageno) newpage(savepage);
@@ -7488,7 +7479,7 @@ int xctcl_page(ClientData clientData, Tcl_Interp *interp,
 		     Tcl_SetResult(interp, "Error loading library.\n", NULL);
 		     return TCL_ERROR;
 		  }
-		  
+
 	       }
 
 	       sprintf(_STR2, Tcl_GetString(objv[3 + nidx]));
@@ -7870,7 +7861,7 @@ int xctcl_page(ClientData clientData, Tcl_Interp *interp,
 	 /* rescale after rotation if "auto-scale" is set */
 	 if (curpage->pmode & 2) autoscale(pageno);
 	 break;
-	 
+
       case EPSIdx:
 	 if ((objc - nidx) != 2 && (objc - nidx) != 3) {
 	    Tcl_WrongNumArgs(interp, 1, objv, "encapsulation");
@@ -7974,7 +7965,7 @@ int xctcl_page(ClientData clientData, Tcl_Interp *interp,
 
 	 /* All existing filenames which match the old string should	*/
 	 /* also be changed unless the filename has been set to the	*/
-	 /* null string, which unlinks the page.			*/ 
+	 /* null string, which unlinks the page.			*/
 
 	 if ((strlen(curpage->filename) > 0) && (multi > 1)) {
 	    for (cpage = 0; cpage < xobjs.pages; cpage++) {
@@ -8208,7 +8199,7 @@ int xctcl_tech(ClientData clientData, Tcl_Interp *interp,
 		  libobj = NameToObject(Tcl_GetString(tobj), NULL, FALSE);
 		  if (libobj == NULL) {
 		     Tcl_SetResult(interp, "No such object name", NULL);
-		     return TCL_ERROR;	
+		     return TCL_ERROR;
 		  }
 	       }
 	    }
@@ -8217,7 +8208,7 @@ int xctcl_tech(ClientData clientData, Tcl_Interp *interp,
 		  libobj = NameToObject(Tcl_GetString(objv[3 + j]), NULL, FALSE);
 		  if (libobj == NULL) {
 		     Tcl_SetResult(interp, "No such object name", NULL);
-		     return TCL_ERROR;	
+		     return TCL_ERROR;
 		  }
 	       }
 	    }
@@ -8229,7 +8220,7 @@ int xctcl_tech(ClientData clientData, Tcl_Interp *interp,
 
 	    nsptr = LookupTechnology(technology);
 	    technamelen = (usertech) ? 0 : strlen(technology);
-	
+
 
 	    /* Change the technology prefix of all the objects listed */
 
@@ -8385,7 +8376,7 @@ int xctcl_tech(ClientData clientData, Tcl_Interp *interp,
 	    if (chklib == NULL)
 	       nsptr->flags |= TECH_READONLY;
 	    else
-	       fclose(chklib); 
+	       fclose(chklib);
 	 }
 	 else if (objc == 4) {
 	    filename = Tcl_GetString(objv[3]);
@@ -8434,7 +8425,7 @@ int xctcl_library(ClientData clientData, Tcl_Interp *interp,
 
       /* return index if name given; return name if index given. */
       /* return index if neither is given (current library)	 */
-      
+
       if (objc > 1) {
 	 int lnum;	/* unused; only checks if argument is integer */
 	 char *lname;
@@ -8485,7 +8476,7 @@ int xctcl_library(ClientData clientData, Tcl_Interp *interp,
 
 	 /* if loading of default libraries is not overridden, load them first */
 
-	 if (!(flags & (LIBOVERRIDE | LIBLOADED))) {                          
+	 if (!(flags & (LIBOVERRIDE | LIBLOADED))) {
 	    result = defaultscript();
 	    flags |= LIBLOADED;
 	 }
@@ -8541,7 +8532,7 @@ int xctcl_library(ClientData clientData, Tcl_Interp *interp,
 
 	 /* if loading of default libraries is not overridden, load them first */
 
-	 if (!(flags & (LIBOVERRIDE | LIBLOADED))) {                          
+	 if (!(flags & (LIBOVERRIDE | LIBLOADED))) {
 	    defaultscript();
 	    flags |= LIBLOADED;
 	 }
@@ -8664,7 +8655,7 @@ int xctcl_library(ClientData clientData, Tcl_Interp *interp,
 	 if (++libnum >= xobjs.numlibs) libnum = 0;	/* fall through */
 
       case GoToIdx:
-	 /* library go */ 
+	 /* library go */
 	 startcatalog(NULL, LIBRARY + libnum, NULL);
 	 break;
       case OverrideIdx:
@@ -8842,7 +8833,7 @@ int xctcl_font(ClientData clientData, Tcl_Interp *interp,
       return TCL_ERROR;
    }
    fontname = Tcl_GetString(objv[1]);
-   
+
    /* Allow overrides of the default font loading mechanism */
    if (!strcmp(fontname, "override")) {
       flags |= FONTOVERRIDE;
@@ -8878,7 +8869,7 @@ int xctcl_font(ClientData clientData, Tcl_Interp *interp,
 /* Set the X11 cursor to one of those defined in the XCircuit cursor	*/
 /* set (cursors.h)							*/
 /*----------------------------------------------------------------------*/
- 
+
 int xctcl_cursor(ClientData clientData, Tcl_Interp *interp,
 	int objc, Tcl_Obj *CONST objv[])
 {
@@ -8973,7 +8964,7 @@ int defaultscript()
 void execscript()
 {
    FILE *fd;
-   
+
    flags = 0;
 
    xc_tilde_expand(_STR2, 249);
@@ -9139,7 +9130,7 @@ char *evaluate_expr(objectptr thisobj, oparamptr ops, objinstptr pinst)
    oparamptr ips = (pinst == NULL) ? NULL : match_instance_param(pinst, ops->key);
 
    robj = evaluate_raw(thisobj, ops, pinst, &status);
-   if (robj != NULL) { 
+   if (robj != NULL) {
       rexpr = strdup(Tcl_GetString(robj));
       Tcl_DecrRefCount(robj);
    }
@@ -9316,7 +9307,7 @@ int loadrcfile()
    }
 
    /* Add the default font if not loaded already */
-   
+
    if (!(flags & FONTOVERRIDE)) {
       loadfontfile("Helvetica");
       if (areawin->psfont == -1)
@@ -9354,8 +9345,8 @@ int loadrcfile()
       addnewcolorentry(xc_alloccolor("Brown"));
       addnewcolorentry(xc_alloccolor("#d20adc"));
       addnewcolorentry(xc_alloccolor("Pink"));
-   }  
-     
+   }
+
    if ((result != TCL_OK) || !(flags & KEYOVERRIDE)) {
       default_keybindings();
    }
@@ -9673,7 +9664,7 @@ void xctk_draglscroll(ClientData clientData, XEvent *eventPtr)
    popupstruct *listp = (popupstruct *)clientData;
    XMotionEvent *mevent = (XMotionEvent *)eventPtr;
    u_int state = mevent->state;
-   
+
    if (state & (Button1Mask | Button2Mask))
       draglscroll(listp->scroll, listp, (XButtonEvent *)eventPtr);
 }
@@ -9814,7 +9805,7 @@ XCWindowData *GUI_init(int objc, Tcl_Obj *CONST objv[])
    Tk_Window 	tkwind, tktop, tkdraw, tksb;
    Tk_Window	wsymb, wschema,	corner;
    int 		i, locobjc, done = 1;
-   XGCValues	values;   
+   XGCValues	values;
    Window	win;
    popupstruct	*fileliststruct;
    char *xctopwin, *xcdrawwin;
@@ -9842,7 +9833,7 @@ XCWindowData *GUI_init(int objc, Tcl_Obj *CONST objv[])
       newwin->cr = cairo_create(newwin->surface);
 #endif /* !HAVE_CAIRO */
 
-      number_colors = NUMBER_OF_COLORS; 
+      number_colors = NUMBER_OF_COLORS;
       colorlist = (colorindex *)malloc(NUMBER_OF_COLORS * sizeof(colorindex));
 
       return newwin;
@@ -9932,24 +9923,24 @@ XCWindowData *GUI_init(int objc, Tcl_Obj *CONST objv[])
       sprintf(winpath, "%s.infobar.schem", xctopwin);
       wschema = Tk_NameToWindow(xcinterp, winpath, tktop);
 
-      Tk_CreateEventHandler(newwin->scrollbarh, ButtonMotionMask, 
+      Tk_CreateEventHandler(newwin->scrollbarh, ButtonMotionMask,
 		(Tk_EventProc *)xctk_panhbar, NULL);
-      Tk_CreateEventHandler(newwin->scrollbarv, ButtonMotionMask, 
+      Tk_CreateEventHandler(newwin->scrollbarv, ButtonMotionMask,
 		(Tk_EventProc *)xctk_panvbar, NULL);
       Tk_CreateEventHandler(newwin->scrollbarh, StructureNotifyMask | ExposureMask,
 		(Tk_EventProc *)xctk_drawhbar, NULL);
       Tk_CreateEventHandler(newwin->scrollbarv, StructureNotifyMask | ExposureMask,
 		(Tk_EventProc *)xctk_drawvbar, NULL);
-      Tk_CreateEventHandler(newwin->scrollbarh, ButtonReleaseMask, 
+      Tk_CreateEventHandler(newwin->scrollbarh, ButtonReleaseMask,
 		(Tk_EventProc *)xctk_endhbar, NULL);
-      Tk_CreateEventHandler(newwin->scrollbarv, ButtonReleaseMask, 
+      Tk_CreateEventHandler(newwin->scrollbarv, ButtonReleaseMask,
 		(Tk_EventProc *)xctk_endvbar, NULL);
 
-      Tk_CreateEventHandler(corner, ButtonPressMask, 
+      Tk_CreateEventHandler(corner, ButtonPressMask,
 		(Tk_EventProc *)xctk_zoomview, Number(1));
-      Tk_CreateEventHandler(wsymb, ButtonPressMask, 
+      Tk_CreateEventHandler(wsymb, ButtonPressMask,
 		(Tk_EventProc *)xctk_swapschem, Number(0));
-      Tk_CreateEventHandler(wschema, ButtonPressMask, 
+      Tk_CreateEventHandler(wschema, ButtonPressMask,
 		(Tk_EventProc *)xctk_swapschem, Number(0));
 
       /* Setup event handlers for the drawing area and scrollbars		*/
@@ -9957,9 +9948,9 @@ XCWindowData *GUI_init(int objc, Tcl_Obj *CONST objv[])
       /* defined as type "simple" to keep down the cruft, as I will define my	*/
       /* own event handlers.							*/
 
-      Tk_CreateEventHandler(newwin->area, StructureNotifyMask, 
+      Tk_CreateEventHandler(newwin->area, StructureNotifyMask,
 		(Tk_EventProc *)xctk_resizearea, NULL);
-      Tk_CreateEventHandler(newwin->area, ExposureMask, 
+      Tk_CreateEventHandler(newwin->area, ExposureMask,
 		(Tk_EventProc *)xctk_drawarea, NULL);
    }
 
@@ -10015,8 +10006,8 @@ XCWindowData *GUI_init(int objc, Tcl_Obj *CONST objv[])
       /*----------------------------------------*/
       /* Allocate space for the basic color map */
       /*----------------------------------------*/
-   
-      number_colors = NUMBER_OF_COLORS; 
+
+      number_colors = NUMBER_OF_COLORS;
       colorlist = (colorindex *)malloc(NUMBER_OF_COLORS * sizeof(colorindex));
       areawin = newwin;
       build_app_database(tkwind);
@@ -10037,19 +10028,19 @@ XCWindowData *GUI_init(int objc, Tcl_Obj *CONST objv[])
       fileliststruct->filter = NULL;
 
       if (tksb != NULL) {
-         Tk_CreateEventHandler(tksb, ButtonMotionMask, 
+         Tk_CreateEventHandler(tksb, ButtonMotionMask,
 		(Tk_EventProc *)xctk_draglscroll, (ClientData)fileliststruct);
-         Tk_CreateEventHandler(tksb, ExposureMask, 
+         Tk_CreateEventHandler(tksb, ExposureMask,
 		(Tk_EventProc *)xctk_showlscroll, (ClientData)tksb);
       }
       if (tkdraw != NULL) {
-         Tk_CreateEventHandler(tkdraw, ButtonPressMask, 
+         Tk_CreateEventHandler(tkdraw, ButtonPressMask,
 		(Tk_EventProc *)xctk_fileselect, (ClientData)fileliststruct);
          Tk_CreateEventHandler(tkdraw, ExposureMask,
 		(Tk_EventProc *)xctk_listfiles, (ClientData)fileliststruct);
-         Tk_CreateEventHandler(tkdraw, EnterWindowMask, 
+         Tk_CreateEventHandler(tkdraw, EnterWindowMask,
 		(Tk_EventProc *)xctk_startfiletrack, (ClientData)tkdraw);
-         Tk_CreateEventHandler(tkdraw, LeaveWindowMask, 
+         Tk_CreateEventHandler(tkdraw, LeaveWindowMask,
 		(Tk_EventProc *)xctk_endfiletrack, (ClientData)tkdraw);
       }
    }
@@ -10063,7 +10054,7 @@ XCWindowData *GUI_init(int objc, Tcl_Obj *CONST objv[])
    /*-------------------------------------------------------------------*/
 
    values.foreground = BlackPixel(dpy, DefaultScreen(dpy));
-   values.background = WhitePixel(dpy, DefaultScreen(dpy)); 
+   values.background = WhitePixel(dpy, DefaultScreen(dpy));
    values.graphics_exposures = False;
    newwin->gc = XCreateGC(dpy, win, GCForeground | GCBackground
 		| GCGraphicsExposures, &values);
@@ -10082,7 +10073,7 @@ XCWindowData *GUI_init(int objc, Tcl_Obj *CONST objv[])
 		| GCBackground, &values);
 #endif /* HAVE_CAIRO */
 
-   XDefineCursor (dpy, win, *newwin->defaultcursor);  
+   XDefineCursor (dpy, win, *newwin->defaultcursor);
    return newwin;
 }
 
