@@ -512,7 +512,7 @@ static Boolean initialized = FALSE;
 static XContext asciiSinkContext;
 
 /*--------------------------------------------------------------------------+*/
-AsciiSinkInitialize()
+void AsciiSinkInitialize()
 /*--------------------------------------------------------------------------+*/
 {
     if (initialized)
