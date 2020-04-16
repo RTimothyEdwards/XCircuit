@@ -604,6 +604,7 @@ void UDrawPath(pathptr thepath, float passwidth)
    genericptr	*genpath;
    polyptr	thepoly;
    splineptr	thespline;
+   XPoint *xp;
    
    if (!areawin->redraw_ongoing) {
       areawin->redraw_needed = True;
@@ -618,11 +619,13 @@ void UDrawPath(pathptr thepath, float passwidth)
 	    thepoly = TOPOLY(genpath);
 	    cairo_move_to(areawin->cr, thepoly->points[0].x,
 		  thepoly->points[0].y);
+	    xp = &thepoly->points[0];
 	    break;
 	 case SPLINE:
 	    thespline = TOSPLINE(genpath);
 	    cairo_move_to(areawin->cr, thespline->ctrl[0].x,
 		  thespline->ctrl[0].y);
+	    xp = &thespline->ctrl[0];
 	    break;
       }
    }
@@ -630,19 +633,31 @@ void UDrawPath(pathptr thepath, float passwidth)
    for (genpath = thepath->plist; genpath < thepath->plist + thepath->parts;
 	  genpath++) {
       int i;
+
       switch(ELEMENTTYPE(*genpath)) {
 	 case POLYGON:
 	    thepoly = TOPOLY(genpath);
 	    for (i = 1; i < thepoly->number; i++)
 	       cairo_line_to(areawin->cr, thepoly->points[i].x,
 		     thepoly->points[i].y);
+	    xp = &thepoly->points[thepoly->number - 1];
 	    break;
 	 case SPLINE:
 	    thespline = TOSPLINE(genpath);
+
+	    /* If the curve 1st point is not the same as the last point
+	     * drawn, then first draw a line to the first curve point.
+	     */
+
+	    if ((thespline->ctrl[0].x != xp->x) || (thespline->ctrl[0].y != xp->y))
+	       cairo_line_to(areawin->cr, thespline->ctrl[0].x,
+			thespline->ctrl[0].y);
+
 	    cairo_curve_to(areawin->cr, thespline->ctrl[1].x,
 		  thespline->ctrl[1].y, thespline->ctrl[2].x,
 		  thespline->ctrl[2].y, thespline->ctrl[3].x,
 		  thespline->ctrl[3].y);
+	    xp = &thespline->ctrl[3];
 	    break;
       }
    }

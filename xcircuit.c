@@ -158,7 +158,7 @@ void addtocolorlist(xcWidget button, int cvalue)
 
    /* Get and store the RGB values of the new color */
    
-   if (areawin->area == NULL) {
+   if (areawin && (areawin->area == NULL)) {
       colorlist[number_colors - 1].color.red = 256 * (cvalue & 0xff);
       colorlist[number_colors - 1].color.green = 256 * ((cvalue >> 8) & 0xff);
       colorlist[number_colors - 1].color.blue = 256 * ((cvalue >> 16) & 0xff);
@@ -844,7 +844,7 @@ int xc_alloccolor(char *name)
    fromC.size = strlen(name);
    fromC.addr = name;
 
-   if (areawin->area) {
+   if (areawin && (areawin->area)) {
       CvtStringToPixel(NULL, &zval, &fromC, &toC);
       pixval = (int)(*((u_long *)toC.addr));
    }
