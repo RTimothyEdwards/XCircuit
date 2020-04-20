@@ -122,6 +122,12 @@ char *GetCanonicalName(char *fullname)
 /* the first object with the name "objname".  If there are multiple	*/
 /* objects of the same name in different technologies, then the one	*/
 /* returned may not be the one expected!				*/
+/*									*/
+/* UPDATE (4/17/2020):  The "technology prefer" option can be used to	*/
+/* set a precedence of one library over another in case of a naming	*/
+/* conflict.  This should be used appropriately, as ambiguous object	*/
+/* names in two technologies both marked "preferred" cannot be		*/
+/* disambiguated.							*/
 /*----------------------------------------------------------------------*/
 
 objectptr NameToObject(char *objname, objinstptr *ret_inst, Boolean dopages)
@@ -129,7 +135,10 @@ objectptr NameToObject(char *objname, objinstptr *ret_inst, Boolean dopages)
    int i;
    liblistptr spec;
    Boolean notech = FALSE;
+   Boolean preferred = FALSE;
    char *techptr;
+   objectptr retobj = NULL;
+   TechPtr nsp;
 
    if (strstr(objname, "::") == NULL) notech = TRUE;
 
@@ -139,11 +148,17 @@ objectptr NameToObject(char *objname, objinstptr *ret_inst, Boolean dopages)
 	 if (notech)
 	    techptr = GetCanonicalName(spec->thisinst->thisobject->name);
          if (!strcmp(objname, techptr)) {
-	    if (ret_inst) *ret_inst = spec->thisinst;
-	    return spec->thisinst->thisobject;
+	    if ((retobj == NULL) || ((retobj != NULL) && (preferred == FALSE))) {
+		if (ret_inst) *ret_inst = spec->thisinst;
+		retobj = spec->thisinst->thisobject;
+		nsp = GetObjectTechnology(retobj);
+		preferred = (nsp && (nsp->flags & TECH_PREFER)) ? TRUE : FALSE;
+	    }
 	 }
       }
    }
+
+   if (retobj != NULL) return retobj;
 
    if (dopages)
       return NameToPageObject(objname, ret_inst, NULL);

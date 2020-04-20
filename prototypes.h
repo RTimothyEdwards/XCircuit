@@ -363,7 +363,7 @@ extern float fsqwirelen(XfPoint *, XfPoint *);
 extern int wirelength(XPoint *, XPoint *);
 extern long finddist(XPoint *,XPoint *, XPoint *);
 extern void calcarc(arcptr);
-extern void decomposearc(pathptr);
+extern void decomposearc(pathptr, XPoint *);
 extern void initsplines(void);
 extern void computecoeffs(splineptr, float *, float *, float *, float *,
                           float *, float *);

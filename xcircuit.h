@@ -1532,6 +1532,7 @@ typedef struct _Technology {
 #define TECH_REPLACE		0x08	/* Replace instances when reading */
 #define TECH_REPLACE_TEMP	0x10	/* Temporary store */
 #define TECH_USED		0x20	/* Temporary marker flag */
+#define TECH_PREFER		0x40	/* Prefer technology on name conflict */
 
 /*----------------------------------------------------------------------*/
 /* A convenient structure for holding all the object lists		*/

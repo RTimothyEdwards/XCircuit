@@ -1,0 +1,88 @@
+%! PostScript set of library objects for XCircuit
+%  Version: 3.10
+%  Library name is: sue
+%  Author:  <tim@stravinsky>
+%
+
+
+% XCircuitLib library objects
+/sue::pmos {
+<</@subs (avdd) /p_yps2 48 /p_xps2 16 /p_yps1 -8 /p_xps1 16 /p_yps 16 /p_xps 16 /p_rot 
+0 /@M (1) /@class (M) /@W (1u) /@L (0.18u) /@model (pfet) /@index 
+(?) /p_jst 28 >> begingate
+1 1.000 -44 -28 -44 28 2 polygon
+1 1.000 -60 0 -64 0 2 polygon
+1 1.000 0 -64 0 -28 -32 -28 -32 28 0 28 0 64 6 polygon
+1 1.000 -52 0 8 0.000 360.000 xcarc
+1.000 0.000 0.000 scb
+(S) {/Times-Roman cf} 2 9 0.000 1.000 0 64 pinlabel
+(D) {/Times-Roman cf} 2 13 0.000 1.000 0 -64 pinlabel
+(G) {/Times-Roman cf} 2 7 0.000 1.000 -96 0 pinlabel
+0.180 0.545 0.341 scb
+mark @M ( M=) @L ( L=) @W ( W=) @model ( ) @subs ( %pD %pG %pS ) 
+@index @class (spice:) {/Times-Roman cf} ctmk 4 0.000 1.000 -196 -139 infolabel
+mark ( %x %y) @W ( ) @L (sim:p %pG %pD %pS ) {/Times-Roman cf} ctmk 4 
+0.000 1.000 -196 -187 infolabel
+0.647 0.165 0.165 scb
+mark @M {hS} (=) {hS} (M) {CR} @L (=) {Tf} (L) {hS} {CR} @W (=) {Ts} 
+(W) {/Times-Roman cf} ctmk p_jst p_rot 0.700 p_xps1 p_yps1 label
+0.000 0.000 1.000 scb
+mark @index @class {/Times-Roman cf} ctmk 16 p_rot 0.700 p_xps2 p_yps2 label
+sce
+mark @model {/Times-RomanISO cf} ctmk 16 p_rot 0.700 p_xps p_yps label
+1 1.000 -96 0 -64 0 2 polygon
+endgate
+} def
+
+/sue::nmos {
+<</@subs (agnd) /p_yps2 -16 /p_xps2 16 /p_yps1 8 /p_xps1 16 /p_yps 40 /p_xps 16 /p_rot 
+0 /@M (1) /@class (M) /@W (1u) /@L (0.18u) /@model (nfet) /@index 
+(?) /p_jst 28 >> begingate
+1 1.000 0 -64 0 -28 -32 -28 -32 28 0 28 0 64 6 polygon
+1 1.000 -44 -28 -44 28 2 polygon
+1 1.000 -44 0 -64 0 2 polygon
+1.000 0.000 0.000 scb
+(G) {/Times-Roman cf} 2 7 0.000 1.000 -96 0 pinlabel
+(S) {/Times-Roman cf} 2 13 0.000 1.000 0 -64 pinlabel
+(D) {/Times-Roman cf} 2 9 0.000 1.000 0 64 pinlabel
+0.180 0.545 0.341 scb
+mark @M ( m=) @L ( l=) @W ( w=) @model ( ) @subs ( %pD %pG %pS ) 
+@index @class (spice:) {/Times-Roman cf} ctmk 4 0.000 1.000 -244 -139 infolabel
+mark ( %x %y) @W ( ) @L (sim:n %pG %pD %pS ) {/Times-Roman cf} ctmk 4 
+0.000 1.000 -244 -187 infolabel
+0.647 0.165 0.165 scb
+mark @M (=) {Tf} {Tf} (M) {CR} @L (=) {Tf} (L) {hS} {CR} @W (=) {Ts} 
+(W) {/Times-Roman cf} ctmk p_jst p_rot 0.700 p_xps2 p_yps2 label
+0.000 0.000 1.000 scb
+mark @index @class {/Times-Roman cf} ctmk 20 p_rot 0.700 p_xps p_yps label
+sce
+mark @model {/Times-RomanISO cf} ctmk 20 p_rot 0.700 p_xps1 p_yps1 label
+1 1.000 -96 0 -64 0 2 polygon
+endgate
+} def
+
+/sue::resistor {
+<</@class (R) /@resistance (1.0) /@units (k) /@index (?) /p_jst 20 /p_rot 0 /p_xps 
+32 /p_yps -16 /p_xps1 32 /p_yps1 16 >> begingate
+1 1.000 0 64 0 36 2 polygon
+1 1.000 0 -64 0 -36 2 polygon
+1 1.000 0 -36 14 -30 -14 -18 14 -6 -14 6 14 18 -14 30 0 36 8 polygon
+1.000 0.000 0.000 scb
+(1) {/Times-Roman cf} 2 9 0.000 1.000 0 64 pinlabel
+(2) {/Times-Roman cf} 2 13 0.000 1.000 0 -64 pinlabel
+0.180 0.545 0.341 scb
+mark @units @resistance ( %p1 %p2 ) @index @class (spice:) {/Times-Roman cf} 
+ctmk 4 0.000 1.000 -208 -160 infolabel
+mark @index @class (pcb:) {/Times-Roman cf} ctmk 20 0.000 1.000 -208 -256 
+infolabel
+(sim:r %p1 %p2) {/Times-Roman cf} 2 4 0.000 1.000 -208 -208 infolabel
+0.647 0.165 0.165 scb
+mark (W) {/Symbol cf} @units {hS} @resistance {/Times-Roman cf} ctmk p_jst 
+p_rot 0.700 p_xps p_yps label
+0.000 0.000 1.000 scb
+mark @index @class {/Times-Roman cf} ctmk p_jst p_rot 0.700 p_xps1 p_yps1 label
+endgate
+} def
+
+
+% EndLib
