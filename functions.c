@@ -115,15 +115,17 @@ long finddist(XPoint *linept1, XPoint *linept2, XPoint *userpt)
 /* encountered, we assume that the arc is the last element of the path.	*/
 /*----------------------------------------------------------------------*/
 
-void decomposearc(pathptr thepath)
+void decomposearc(pathptr thepath, XPoint *startpoint)
 {
    float fnc, ang1, ang2;
    short ncurves, i;
    arcptr thearc;
    genericptr *pgen;
    splineptr *newspline;
+   polyptr *newpoly;
    double nu1, nu2, lambda1, lambda2, alpha, tansq;
    XfPoint E1, E2, Ep1, Ep2;
+   XPoint P1;
    Boolean reverse = FALSE;
 
    pgen = thepath->plist + thepath->parts - 1;
@@ -185,9 +187,29 @@ void decomposearc(pathptr thepath)
       Ep2.x = -(float)thearc->radius * (float)sin(nu2);
       Ep2.y = (float)thearc->yaxis * (float)cos(nu2);
 
+      P1.x = (int)(roundf(E1.x));
+      P1.y = (int)(roundf(E1.y));
+
       tansq = tan((nu2 - nu1) / 2.0);
       tansq *= tansq;
       alpha = sin(nu2 - nu1) * 0.33333 * (sqrt(4 + (3 * tansq)) - 1);
+
+      /* If the arc 1st point is not the same as the previous path point,
+       * then add a straight line to the 1st arc point (mimics PostScript
+       * behavior).
+       */
+
+      if (startpoint && (i == 0)) {
+         if ((startpoint->x != P1.x) || (startpoint->y != P1.y)) {
+	    NEW_POLY(newpoly, thepath);
+	    polydefaults(*newpoly, 2, startpoint->x, startpoint->y);
+	    (*newpoly)->style = thearc->style;
+	    (*newpoly)->color = thearc->color;
+	    (*newpoly)->width = thearc->width;
+            (*newpoly)->points[1].x = P1.x;
+            (*newpoly)->points[1].y = P1.y;
+	 }
+      }
 
       NEW_SPLINE(newspline, thepath);
       splinedefaults(*newspline, 0, 0);
@@ -195,17 +217,17 @@ void decomposearc(pathptr thepath)
       (*newspline)->color = thearc->color;
       (*newspline)->width = thearc->width;
 
-      (*newspline)->ctrl[0].x = E1.x;
-      (*newspline)->ctrl[0].y = E1.y;
+      (*newspline)->ctrl[0].x = P1.x;
+      (*newspline)->ctrl[0].y = P1.y;
 
-      (*newspline)->ctrl[1].x = E1.x + alpha * Ep1.x;
-      (*newspline)->ctrl[1].y = E1.y + alpha * Ep1.y;
+      (*newspline)->ctrl[1].x = (int)(roundf(E1.x + alpha * Ep1.x));
+      (*newspline)->ctrl[1].y = (int)(roundf(E1.y + alpha * Ep1.y));
 
-      (*newspline)->ctrl[2].x = E2.x - alpha * Ep2.x;
-      (*newspline)->ctrl[2].y = E2.y - alpha * Ep2.y;
+      (*newspline)->ctrl[2].x = (int)(roundf(E2.x - alpha * Ep2.x));
+      (*newspline)->ctrl[2].y = (int)(roundf(E2.y - alpha * Ep2.y));
 
-      (*newspline)->ctrl[3].x = E2.x;
-      (*newspline)->ctrl[3].y = E2.y;
+      (*newspline)->ctrl[3].x = (int)(roundf(E2.x));
+      (*newspline)->ctrl[3].y = (int)(roundf(E2.y));
 
       calcspline(*newspline);
    }

@@ -4546,7 +4546,7 @@ char *checkvalidname(char *teststring, objectptr newobj)
 		  /* but the object name gets the prepended underscore.	*/
 
 		  if ((cptr = strstr(pptr, "::")) == NULL) {
-                     pptr = (char *)malloc(strlen((*libobj)->name) + 3);
+                     pptr = (char *)malloc(strlen((*libobj)->name) + 4);
 		     sprintf(pptr, "::_%s", (*libobj)->name);
 		  }
 		  else {
@@ -4614,6 +4614,7 @@ Boolean checkname(objectptr newobj)
    else {
       Wprintf("Changed name from %s to %s to avoid conflict with "
 			"existing object", newobj->name, pptr);
+      
       strncpy(newobj->name, pptr, 79);
       free(pptr);
    }
@@ -4905,9 +4906,11 @@ objinstptr domakeobject(int libnum, char *name, Boolean forceempty)
 	 for (sptr = TOLABEL(ssgen)->string; sptr != NULL; sptr = sptr->nextpart) {
 	    if (sptr->type == PARAM_START) {
 	       ops = match_param(topobject, sptr->data.string);
-	       newop = copyparameter(ops);
-	       newop->next = (*newobj)->params;
-	       (*newobj)->params = newop;
+	       if (ops) {
+	          newop = copyparameter(ops);
+	          newop->next = (*newobj)->params;
+	          (*newobj)->params = newop;
+	       }
 
 	       /* Generate an indirect parameter reference from child to parent */
 	       newepp = make_new_eparam(sptr->data.string);

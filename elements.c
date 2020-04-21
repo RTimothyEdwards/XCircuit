@@ -2187,7 +2187,7 @@ void join()
 
 	 /* decompose arcs into bezier curves */
 	 if (ELEMENTTYPE(*newelem) == ARC)
-	    decomposearc(*newpath);
+	    decomposearc(*newpath, NULL);
       }
 
       /* delete the old elements from the list */

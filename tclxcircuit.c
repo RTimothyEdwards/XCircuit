@@ -4210,7 +4210,7 @@ int xctcl_label(ClientData clientData, Tcl_Interp *interp,
 	    }
 	 }
 	 else if (objc >= 3) {
-	    result = Tcl_GetDoubleFromObj(interp, objv[2], &tmpdbl);
+	    result = Tcl_GetDoubleFromObj(interp, objv[nidx + 1], &tmpdbl);
 	    if (result != TCL_OK) return result;
 	    if (tmpdbl <= 0.0) {
 	       Tcl_SetResult(interp, "Illegal scale value", NULL);
@@ -5691,7 +5691,8 @@ int xctcl_instance(ClientData clientData, Tcl_Interp *interp,
 	    if (objc == 3) {
 	       pobj = NameToObject(Tcl_GetString(objv[2]), &pinst, False);
 	       if (pobj == NULL) {
-		  Tcl_SetResult(interp, "no such object", NULL);
+		  Tcl_SetResult(interp, "no such object ", NULL);
+		  Tcl_AppendResult(interp, Tcl_GetString(objv[2]), NULL);
 		  return TCL_ERROR;
 	       }
 	       newpos = UGetCursorPos();
@@ -5712,7 +5713,8 @@ int xctcl_instance(ClientData clientData, Tcl_Interp *interp,
 	    }
 	    pobj = NameToObject(Tcl_GetString(objv[2]), &pinst, False);
 	    if (pobj == NULL) {
-	       Tcl_SetResult(interp, "no such object", NULL);
+	       Tcl_SetResult(interp, "no such object ", NULL);
+	       Tcl_AppendResult(interp, Tcl_GetString(objv[2]), NULL);
 	       return TCL_ERROR;
 	    }
 	    result = GetPositionFromList(interp, objv[3], &newpos);
@@ -8067,12 +8069,12 @@ int xctcl_tech(ClientData clientData, Tcl_Interp *interp,
    FILE *chklib;
 
    char *subCmds[] = {
-      "save", "list", "objects", "filename", "changed", "used", "writable",
-      "writeable", NULL
+      "save", "list", "objects", "filename", "changed", "used", "prefer",
+      "writable", "writeable", NULL
    };
    enum SubIdx {
       SaveIdx, ListIdx, ObjectsIdx, FileNameIdx, ChangedIdx, UsedIdx,
-	WritableIdx, WriteableIdx
+	PreferIdx, WritableIdx, WriteableIdx
    };
 
    if (objc < 2) {
@@ -8098,10 +8100,11 @@ int xctcl_tech(ClientData clientData, Tcl_Interp *interp,
 	    if (idx != ObjectsIdx || objc <= 3) {
 
 	       /* If nsptr is NULL, then the technology should be	*/
-	       /* "none" or "user"					*/
+	       /* "none", "user", or "default".				*/
 
 	       if ((strstr(technology, "none") == NULL) &&
-			(strstr(technology, "user") == NULL)) {
+			(strstr(technology, "user") == NULL) &&
+			(strstr(technology, "default") == NULL)) {
 	          Tcl_SetResult(interp, "Error:  Unknown technology name!", NULL);
 	          return TCL_ERROR;
 	       }
@@ -8332,6 +8335,29 @@ int xctcl_tech(ClientData clientData, Tcl_Interp *interp,
 	     Tcl_SetObjResult(interp,
 			Tcl_NewBooleanObj(((nsptr->flags & TECH_CHANGED)
 			== 0) ? FALSE : TRUE));
+	 }
+	 break;
+
+      case PreferIdx:
+	 if (nsptr) {
+	    if (objc == 3) {
+	       Tcl_SetObjResult(interp,
+			Tcl_NewBooleanObj(((nsptr->flags & TECH_PREFER) == 0)
+			? TRUE : FALSE));
+	    }
+	    else if (objc == 4) {
+	       int bval;
+
+	       Tcl_GetBooleanFromObj(interp, objv[3], &bval);
+	       if (bval == 0)
+	          nsptr->flags |= TECH_PREFER;
+	       else
+	          nsptr->flags &= (~TECH_PREFER);
+	    }
+	 }
+	 else {
+	    Tcl_SetResult(interp, "Valid technology is required", NULL);
+	    return TCL_ERROR;
 	 }
 	 break;
 

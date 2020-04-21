@@ -3993,6 +3993,7 @@ Boolean objectread(FILE *ps, objectptr localdata, short offx, short offy,
 	 }
 
 	 else if (!strcmp(keyword, "arc") || !strcmp(keyword, "arcn")) {
+	    XPoint temppoint;
 	    arcptr *newarc;
 	    NEW_ARC(newarc, (*newpath));
 	    (*newarc)->width = 1.0;
@@ -4021,12 +4022,15 @@ Boolean objectread(FILE *ps, objectptr localdata, short offx, short offy,
 	    }
 		
 	    calcarc(*newarc);
+	    temppoint.x = startpoint.x;
+	    temppoint.y = startpoint.y;
 	    startpoint.x = (short)(*newarc)->points[(*newarc)->number - 1].x;
 	    startpoint.y = (short)(*newarc)->points[(*newarc)->number - 1].y;
-	    decomposearc(*newpath);
+	    decomposearc(*newpath, &temppoint);
 	 }
 
 	 else if (!strcmp(keyword, "pellip") || !strcmp(keyword, "nellip")) {
+	    XPoint temppoint;
 	    arcptr *newarc;
 	    NEW_ARC(newarc, (*newpath));
 	    (*newarc)->width = 1.0;
@@ -4056,9 +4060,11 @@ Boolean objectread(FILE *ps, objectptr localdata, short offx, short offy,
 		
 	    }
 	    calcarc(*newarc);
+	    temppoint.x = startpoint.x;
+	    temppoint.y = startpoint.y;
 	    startpoint.x = (short)(*newarc)->points[(*newarc)->number - 1].x;
 	    startpoint.y = (short)(*newarc)->points[(*newarc)->number - 1].y;
-	    decomposearc(*newpath);
+	    decomposearc(*newpath, &temppoint);
 	 }
 
 	 else if (!strcmp(keyword, "curveto")) {
