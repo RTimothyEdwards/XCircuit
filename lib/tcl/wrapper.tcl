@@ -2081,7 +2081,7 @@ proc xcircuit::allcolorbuttons {window} {
 
    set colorlist [color get -all]
    set frame [winfo top $window]
-   set idx 17		;# NUMBER_OF_COLORS in xcircuit.h
+   set idx 18		;# NUMBER_OF_COLORS in colordefs.h
    foreach colorrgb $colorlist {
       ${frame}.menubar.optionsbutton.optionsmenu.elementsmenu.colormenu \
 		add radio -image img_col$idx -activebackground $colorrgb \
