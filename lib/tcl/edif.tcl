@@ -864,6 +864,15 @@ proc parse_library {libname libdata} {
 }
 
 #------------------------------------------------------------------------
+# Remove C-style comments
+#------------------------------------------------------------------------
+
+proc remove_comments {text} {
+   regsub -all {[/][*].*?[*][/]} $text "" text
+   return $text 
+}
+
+#------------------------------------------------------------------------
 # Main file reader routine.  Read the file into a single string, and
 # replace parentheses so we turn the LISP phrasing into a nested TCL
 # list.
@@ -883,7 +892,7 @@ proc read_edif {filename} {
 
    # Convert the file into a nested list by converting () to {}.
 
-   set everything [read $fileIn]
+   set everything [remove_comments [read $fileIn]]
    set masterlist [lindex [string map {( \{ ) \} \n " "} $everything] 0]
    unset everything
    close $fileIn
