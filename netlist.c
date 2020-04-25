@@ -5886,10 +5886,12 @@ Boolean writepcb(struct Ptab **ptableptr, objectptr cschem, CalllistPtr cfrom,
          }
 
          /* Step 4C: Run routine recursively on the subcircuit */
+	 /* If it had a "pcb:" info label that was handled, then ignore */
 
 	 /* Fprintf(stdout, "Recursive call of writepcb() to %s\n",
 		calls->callobj->name); */
-         outputcall = writepcb(ptableptr, calls->callobj, calls, newprefix, mode);
+
+	 outputcall = writepcb(ptableptr, calls->callobj, calls, newprefix, mode);
 
          /* Step 4D: Pop the translation table */
 	 /* (Don't pop global nets (designated by negative net number)) */
@@ -5924,10 +5926,15 @@ Boolean writepcb(struct Ptab **ptableptr, objectptr cschem, CalllistPtr cfrom,
 	    hidx = *ptableptr;
 	    while (hidx != NULL) {
 	       if (hidx->nets != NULL) {
-		  for (i = 0; i < hidx->nets->numnets; i++)
-	             if (*(hidx->nets->netidx + i) == ports->netid)
-		        break;
-		  if (i < hidx->nets->numnets) break;
+		  /* Global nets were not translated, do not iterate through list */
+		  if (*(hidx->nets->netidx) >= 0) {
+		     for (i = 0; i < hidx->nets->numnets; i++)
+	                if (*(hidx->nets->netidx + i) == ports->netid)
+		           break;
+		     if (i < hidx->nets->numnets) break;
+		  } else {
+	             if (*(hidx->nets->netidx) == ports->netid) break;
+		  }
 	       }
 	       hidx = hidx->next;
 	    }
@@ -5955,7 +5962,7 @@ Boolean writepcb(struct Ptab **ptableptr, objectptr cschem, CalllistPtr cfrom,
 	       tmpstr->next = hidx->pins;
 	       hidx->pins = tmpstr;
 
-	       /* diagnositic information */
+	       /* diagnostic information */
 	       {
 		  struct Pnet *locnet = hidx->nets;
 		  int ctr = 0;
@@ -5965,7 +5972,7 @@ Boolean writepcb(struct Ptab **ptableptr, objectptr cschem, CalllistPtr cfrom,
 		  }
 	          /* Fprintf(stdout, "Logged level-%d net %d (local net %d) pin %s\n",
 			ctr, *(locnet->netidx), *(hidx->nets->netidx + i),
-			tmpstr->string);			*/
+			tmpstr->string); */
 	       }
             }
          }

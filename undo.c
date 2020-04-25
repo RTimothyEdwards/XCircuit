@@ -1660,7 +1660,7 @@ void free_undo_data(Undoptr thisrecord, u_char mode)
 	 }
 	 else { /* MODE_REDO */
 	    uobj = (objectptr)thisrecord->undodata;
-	    reset(uobj, DESTROY);
+	    if (uobj) reset(uobj, DESTROY);
 	 }
 	 break;
 
