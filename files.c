@@ -4887,6 +4887,12 @@ Boolean objectread(FILE *ps, objectptr localdata, short offx, short offy,
 	             lineptr = varpscan(localdata, lineptr, &(*newinst)->position.y,
 				(genericptr)*newinst, 0, offy, P_POSITION_Y);
 
+		     /* Look for the "not netlistable" flag */
+		     if (*lineptr == '/') {
+			if (!strncmp(lineptr, "/nn", 3))
+			   (*newinst)->style |= INST_NONETLIST;
+		     }
+
 		     /* Negative rotations = flip in x in version 2.3.6 and    */
 		     /* earlier.  Later versions don't allow negative rotation */
 
@@ -6796,6 +6802,7 @@ void printOneObject(FILE *ps, objectptr localdata, int ccolor)
 	    if (!(sobj->style & LINE_INVARIANT)) fprintf(ps, "/sv ");
 	    varfcheck(ps, sobj->rotation, localdata, &stcount, *savegen, P_ROTATION);
 	    xyvarcheck(sobj->position, 0, savegen);
+	    if (sobj->style & INST_NONETLIST) fprintf(ps, "/nn ");
 
 	    opsubstitute(sobj->thisobject, sobj);
 	    stcount = printparams(ps, sobj, stcount);

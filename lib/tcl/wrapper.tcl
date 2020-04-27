@@ -205,6 +205,7 @@ proc xcircuit::new_window { name } {
   set XCWinOps(${name},gridstyle) "internal units"
   set XCWinOps(${name},flipinvariant) true
   set XCWinOps(${name},pinvisible) false
+  set XCWinOps(${name},netlistable) true
   set XCWinOps(${name},showclipmasks) show
   set XCWinOps(${name},latexmode) false
   set XCWinOps(${name},colorscheme) normal
@@ -665,15 +666,15 @@ proc xcircuit::setsymschem {} {
 	    if {$symschem == {}} {
 		${window}.infobar.symb configure -background gray70 \
 			-foreground gray40
-		$m entryconfigure 5 -label "Make Matching Symbol" \
+		$m entryconfigure 6 -label "Make Matching Symbol" \
 			-command {xcircuit::promptmakesymbol [page label]}
-		$m entryconfigure 6 -label "Associate With Symbol" \
+		$m entryconfigure 7 -label "Associate With Symbol" \
 			-command {xcircuit::symbol associate}
 	    } else {
 		${window}.infobar.symb configure -background white -foreground black
-		$m entryconfigure 5 -label "Go To Symbol" \
+		$m entryconfigure 6 -label "Go To Symbol" \
 			-command {xcircuit::symbol go}
-		$m entryconfigure 6 -label "Disassociate Symbol" \
+		$m entryconfigure 7 -label "Disassociate Symbol" \
 			-command {xcircuit::symbol disassociate}
 	    }
 	 }
@@ -684,15 +685,15 @@ proc xcircuit::setsymschem {} {
 	    if {$symschem == {}} {
 		${window}.infobar.schem configure -background gray70 -foreground \
 			gray40
-		$m entryconfigure 5 -label "Make Matching Schematic" \
+		$m entryconfigure 6 -label "Make Matching Schematic" \
 			-command {xcircuit::schematic make}
-		$m entryconfigure 6 -label "Associate With Schematic" \
+		$m entryconfigure 7 -label "Associate With Schematic" \
 			-command {xcircuit::schematic associate}
 	    } else {
 		${window}.infobar.schem configure -background white -foreground black
-		$m entryconfigure 5 -label "Go To Schematic" \
+		$m entryconfigure 6 -label "Go To Schematic" \
 			-command {xcircuit::schematic go}
-		$m entryconfigure 6 -label "Disassociate Schematic" \
+		$m entryconfigure 7 -label "Disassociate Schematic" \
 			-command {xcircuit::schematic disassociate}
 	    }
 	 }
@@ -3028,6 +3029,10 @@ proc xcircuit::makemenus {window} {
    $m add check -label "Pin Visibility" -variable XCWinOps(${window},pinvisible) \
 	-onvalue true -offvalue false -command {xcircuit::label visible \
 	$XCWinOps($XCOps(focus),pinvisible)}
+   $m add check -label "Netlistable Instance" \
+	-variable XCWinOps(${window},netlistable) \
+	-onvalue true -offvalue false -command {xcircuit::instance netlist \
+	$XCWinOps($XCOps(focus),netlistable)}
    $m add command -label "Make Matching Symbol" -command \
 	{xcircuit::promptmakesymbol [page label]}
    $m add command -label "Associate With Symbol" -command \
