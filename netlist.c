@@ -1135,6 +1135,9 @@ void gencalls(objectptr thisobject)
          if (IS_OBJINST(*cgen)) {
 	    callinst = TOOBJINST(cgen);
 
+	    /* Ignore any instance that is specifically marked non-netlistable */
+	    if (callinst->style & INST_NONETLIST) continue;
+
 	    /* Determine where the hierarchy continues downward */
 
 	    if (callinst->thisobject->symschem != NULL)
@@ -1142,7 +1145,7 @@ void gencalls(objectptr thisobject)
 	    else
 	       callobj = callinst->thisobject;
 
-	    /* Ignore any object on its own schematic */
+	    /* Always ignore any object on its own schematic */
 
 	    if (callobj == pschem) continue;
 
@@ -1152,11 +1155,11 @@ void gencalls(objectptr thisobject)
 	    /* callsymb is the next visible object in the hierarchy, 	*/
 	    /* which may be either a schematic or a symbol.		*/
 
-	    /*-------------------------------------------------------------*/
-	    /* For object instances which are their own schematics (i.e.,  */
-	    /* have netlist elements), don't rely on any pin list but make */
-	    /* a survey of how polygons connect into the object.	   */
-	    /*-------------------------------------------------------------*/
+	    /*--------------------------------------------------------------*/
+	    /* For object instances which are their own schematics (i.e.,   */
+	    /* have netlist elements), don't rely on any pin list but make  */
+	    /* a survey of how polygons connect into the object.	    */
+	    /*--------------------------------------------------------------*/
 
 	    if (callsymb->symschem == NULL
 			&& callobj->schemtype != FUNDAMENTAL

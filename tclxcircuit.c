@@ -5668,9 +5668,9 @@ int xctcl_instance(ClientData clientData, Tcl_Interp *interp,
    Matrix hierCTM;
 
    static char *subCmds[] = {"make", "object", "scale", "center", "linewidth",
-			"bbox", NULL};
+			"bbox", "netlist", NULL};
    enum SubIdx {
-	MakeIdx, ObjectIdx, ScaleIdx, CenterIdx, LineWidthIdx, BBoxIdx
+	MakeIdx, ObjectIdx, ScaleIdx, CenterIdx, LineWidthIdx, BBoxIdx, NetListIdx
    };
 
    static char *lwsubCmds[] = {"scale_variant", "variant", "scale_invariant",
@@ -5954,11 +5954,56 @@ int xctcl_instance(ClientData clientData, Tcl_Interp *interp,
 			"value", 0, &subidx)) == TCL_OK) {
 	       for (i = 0; i < areawin->selects; i++) {
 	          if (SELECTTYPE(areawin->selectlist + i) == OBJINST) {
-	             pinst = SELTOOBJINST(areawin->selectlist);
+	             pinst = SELTOOBJINST(areawin->selectlist + i);
 		     if (subidx < 2)
 		        pinst->style &= ~LINE_INVARIANT;
 		     else
 		        pinst->style |= LINE_INVARIANT;
+		  }
+	       }
+	    }
+	 }
+	 break;
+
+      case NetListIdx:
+	 if ((objc - nidx) == 1) {
+	    Tcl_Obj *listPtr;
+	    numfound = 0;
+	    for (i = 0; i < areawin->selects; i++) {
+	       if (SELECTTYPE(areawin->selectlist + i) == OBJINST) {
+		  pinst = SELTOOBJINST(areawin->selectlist + i);
+		  objPtr = Tcl_NewBooleanObj((pinst->style & INST_NONETLIST) ?
+			    FALSE : TRUE);
+		  if (numfound > 0)
+		     Tcl_ListObjAppendElement(interp, listPtr, objPtr);
+		  if ((++numfound) == 1)
+		     listPtr = objPtr;
+	       }
+	    }
+	    switch (numfound) {
+	       case 0:
+		  Tcl_SetResult(interp, "Error: no object instances selected", NULL);
+		  return TCL_ERROR;
+		  break;
+	       case 1:
+	          Tcl_SetObjResult(interp, objPtr);
+		  break;
+	       default:
+	          Tcl_SetObjResult(interp, listPtr);
+		  break;
+	    }
+	 }
+	 else {
+	    int value;
+	    if ((result = Tcl_GetBooleanFromObj(interp, objv[nidx + 1], &value))
+			== TCL_OK) {
+	       for (i = 0; i < areawin->selects; i++) {
+	          if (SELECTTYPE(areawin->selectlist + i) == OBJINST) {
+	             pinst = SELTOOBJINST(areawin->selectlist + i);
+		     if (value)
+		        pinst->style &= ~INST_NONETLIST;
+		     else
+		        pinst->style |= INST_NONETLIST;
 		  }
 	       }
 	    }

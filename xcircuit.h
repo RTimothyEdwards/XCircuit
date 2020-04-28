@@ -476,7 +476,8 @@ enum loadmodes {IMPORT = 1, PSBKGROUND, SCRIPT, RECOVER,
 /* Object instance styles						*/
 /*----------------------------------------------------------------------*/
 
-#define LINE_INVARIANT 1	/* Linewidth is invariant w.r.t. scale */
+#define LINE_INVARIANT 1	/* Linewidth is invariant w.r.t. scale	*/
+#define INST_NONETLIST 2	/* Instance is not netlistable		*/
 
 /*----------------------------------------------------------------------*/
 /* Box styles								*/

@@ -103,10 +103,10 @@
 /begingate {dup type /dicttype ne {1 dict} if begin	% default params
 	dup type /dicttype ne {1 dict} if begin		% instanced params
 	/hlevel hlevel 1 add def /defColor currentcolor sce 3 array astore
-	def gsave sce translate 0 0 moveto neg rotate dup type /nametype
-	eq not { dup abs currentlinewidth exch div setlinewidth } { pop }
-	ifelse dup abs scale clipped 1 and 1 eq {/clipped clipped 1 add def}
-	if} bind def
+	def gsave sce dup type /nametype eq { pop } if translate 0 0 moveto
+	neg rotate dup type /nametype eq not { dup abs currentlinewidth exch
+	div setlinewidth } { pop } ifelse dup abs scale clipped 1 and 1 eq
+	{/clipped clipped 1 add def} if} bind def
 /endgate { /hlevel hlevel 1 sub def grestore defColor aload pop cRedef
 	scb end end endclip} bind def
 
