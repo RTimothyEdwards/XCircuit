@@ -504,7 +504,6 @@ void setosize(xcWidget w, objinstptr dataptr)
 	 }
       }
    }
-   /* unselect_all(); */
    if (waschanged) undo_finish_series();
    pwriteback(areawin->topinstance);
    drawarea(NULL, NULL, NULL);
@@ -1222,7 +1221,13 @@ void stringparam(xcWidget w, caddr_t clientdata, caddr_t calldata)
    if (eventmode == TEXT_MODE || eventmode == ETEXT_MODE) {
       settext = (genericptr *)EDITPART;
       makeparam(TOLABEL(settext), _STR2);
-      unselect_all();
+      if (eventmode == ETEXT_MODE)
+	 unselect_all();
+      else
+	 /* Move cursor position to account for the parameter	*/
+	 /* start and end markers that have been added to the	*/
+	 /* string.						*/
+	 areawin->textpos += 2;
       setparammarks(NULL);
    }
    else if (checkselect(LABEL)) parameterize(P_SUBSTRING, _STR2, -1);
