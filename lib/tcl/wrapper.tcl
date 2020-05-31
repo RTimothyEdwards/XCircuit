@@ -1852,7 +1852,7 @@ proc xcircuit::promptimportspice {} {
    .filelist.bbar.okay configure -command \
 	{xcircuit::page import spice \
 	[.filelist.textent.txt get]; wm withdraw .filelist}
-   .filelist.listwin.win configure -data "spice spc ckt sp"
+   .filelist.listwin.win configure -data "spice spc spi ckt sp"
    .filelist.textent.title.field configure -text "Select SPICE file to import:"
    .filelist.textent.txt delete 0 end
    xcircuit::popupfilelist
