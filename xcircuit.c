@@ -1608,10 +1608,19 @@ Tcl_GetHandleFromObj(interp, objPtr, handlePtr)
         }
     }
     l = objPtr->internalRep.longValue;
+
+#if SIZEOF_VOID_P == SIZEOF_UNSIGNED_INT
     if (((long)((int)l)) == l) {
         *handlePtr = (void *)objPtr->internalRep.longValue;
         return TCL_OK;
     }
+#else
+#if SIZEOF_VOID_P == SIZEOF_UNSIGNED_LONG
+    *handlePtr = (void *)objPtr->internalRep.longValue;
+    return TCL_OK;
+#endif
+#endif
+    
     if (interp != NULL) {
         Tcl_ResetResult(interp);
         Tcl_AppendToObj(Tcl_GetObjResult(interp),
