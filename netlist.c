@@ -5928,7 +5928,7 @@ Boolean writepcb(struct Ptab **ptableptr, objectptr cschem, CalllistPtr cfrom,
 	    ppin = nettopin(locnet, calls->callobj, NULL);
 	    hidx = *ptableptr;
 	    while (hidx != NULL) {
-	       if (hidx->nets != NULL) {
+	       if ((hidx->nets != NULL) && (hidx->nets->numnets > 0)) {
 		  /* Global nets were not translated, do not iterate through list */
 		  if (*(hidx->nets->netidx) >= 0) {
 		     for (i = 0; i < hidx->nets->numnets; i++)
