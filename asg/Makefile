@@ -261,7 +261,11 @@ PKG_CONFIG_LIBDIR =
 PKG_CONFIG_PATH = 
 PYTHON = 
 RANLIB = ranlib
+<<<<<<< HEAD
 REVISION = 21
+=======
+REVISION = 19
+>>>>>>> 97d13f3926dc2ac94c647c7b48bf1a2aff1627df
 SET_MAKE = 
 SHDLIB_EXT = .so
 SHELL = /bin/sh

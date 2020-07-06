@@ -360,7 +360,11 @@ AM_CFLAGS = $(cairo_CFLAGS) $(fontconfig_CFLAGS) ${GS_CFLAGS}
 
 # Additional files to distribute
 EXTRA_DIST = COPYRIGHT README README.ISOLatin2 README.notes
+<<<<<<< HEAD
 FULL_VERSION = 3.10.21
+=======
+FULL_VERSION = 3.10.19
+>>>>>>> 97d13f3926dc2ac94c647c7b48bf1a2aff1627df
 
 # Menudep program generates menudep.h needed by some of the
 # source files for Xcircuit
