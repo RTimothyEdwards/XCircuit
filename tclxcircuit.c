@@ -9856,6 +9856,11 @@ void build_app_database(Tk_Window tkwind)
       appdata.filefont = XLoadQueryFont(dpy, "-*-*-medium-r-normal--14-*");
       if (appdata.filefont == NULL)
 	 appdata.filefont = XLoadQueryFont(dpy, "-*-*-*-*-*--*-*");
+	 if (appdata.filefont == NULL)
+	    appdata.filefont = XLoadQueryFont(dpy, "*");
+	    if (appdata.filefont == NULL) {
+	       Fprintf(stderr, "Fatal error:  No X11 fonts found.\n");
+	    }
    }
 
    /* Other defaults */
