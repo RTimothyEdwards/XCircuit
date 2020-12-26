@@ -407,8 +407,6 @@ void listfiles(xcWidget w, popupstruct *okaystruct, caddr_t calldata)
 
       /* get list of files in the current directory (cwd) */
 
-      if (files == NULL) 
-         files = (fileliststruct *) malloc (INITDIRS * sizeof(fileliststruct));
       flfiles = 0;
       if (cwdname == NULL) {
 	 cwdname = (char *) malloc (sizeof(char));
@@ -431,6 +429,8 @@ void listfiles(xcWidget w, popupstruct *okaystruct, caddr_t calldata)
 	 return;
       }
       else {
+	 if (files == NULL) 
+	    files = (fileliststruct *) malloc (INITDIRS * sizeof(fileliststruct));
 
 	 /* write the contents of the current directory into the   */
 	 /* array "filenames[]" (except for current directory ".") */
