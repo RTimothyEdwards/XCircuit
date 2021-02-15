@@ -1407,6 +1407,9 @@ void copycat()
    int i, libnum;
    char *cptr;
 
+   /* Return if nothing is selected */
+   if (areawin->selects == 0) return;
+
    libnum = is_library(topobject);
    if (libnum < 0) libnum = USERLIB - LIBRARY;  /* default */
 
