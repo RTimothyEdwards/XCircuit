@@ -522,10 +522,19 @@ void drawhbar(xcWidget bar, caddr_t clientdata, caddr_t calldata)
    Window bwin;
    float frac;
    long rleft, rright, rmid;
+   int sbarsize;
+   char *scale;
    UNUSED(clientdata); UNUSED(calldata);
 
    if (!xcIsRealized(bar)) return;
    if (xobjs.suspend >= 0) return;
+
+#ifdef TCL_WRAPPER
+   scale = Tcl_GetVar2(xcinterp, "XCOps", "scale", TCL_GLOBAL_ONLY);
+   sbarsize = SBARSIZE * atoi(scale);
+#else
+   sbarsize = SBARSIZE;
+#endif
 
    bwin = xcWindow(bar);
 
@@ -547,13 +556,13 @@ void drawhbar(xcWidget bar, caddr_t clientdata, caddr_t calldata)
    XSetFunction(dpy, areawin->gc, GXcopy);
    XSetForeground(dpy, areawin->gc, colorlist[BARCOLOR].color.pixel);
    if (rmid > 0 && rleft > 0)
-      XClearArea(dpy, bwin, 0, 0, (int)rleft, SBARSIZE, FALSE);
+      XClearArea(dpy, bwin, 0, 0, (int)rleft, sbarsize, FALSE);
    XFillRectangle(dpy, bwin, areawin->gc, (int)rleft + 1, 1,
-	  (int)(rright - rleft), SBARSIZE - 1);
+	  (int)(rright - rleft), sbarsize - 1);
    if (rright > rmid)
       XClearArea(dpy, bwin, (int)rright + 1, 0, areawin->width
-	  - (int)rright, SBARSIZE, FALSE);
-   XClearArea(dpy, bwin, (int)rmid - 1, 1, 3, SBARSIZE, FALSE);
+	  - (int)rright, sbarsize, FALSE);
+   XClearArea(dpy, bwin, (int)rmid - 1, 1, 3, sbarsize, FALSE);
 
    XSetForeground(dpy, areawin->gc, colorlist[areawin->gccolor].color.pixel);
 }
@@ -566,8 +575,17 @@ void drawvbar(xcWidget bar, caddr_t clientdata, caddr_t calldata)
 {
    Window bwin = xcWindow(bar);
    float frac;
+   char *scale;
+   int sbarsize;
    long rtop, rbot, rmid;
    UNUSED(clientdata); UNUSED(calldata);
+
+#ifdef TCL_WRAPPER
+   scale = Tcl_GetVar2(xcinterp, "XCOps", "scale", TCL_GLOBAL_ONLY);
+   sbarsize = SBARSIZE * atoi(scale);
+#else
+   sbarsize = SBARSIZE;
+#endif
 
    if (!xcIsRealized(bar)) return;
    if (xobjs.suspend >= 0) return;
@@ -590,13 +608,13 @@ void drawvbar(xcWidget bar, caddr_t clientdata, caddr_t calldata)
    XSetFunction(dpy, areawin->gc, GXcopy);
    XSetForeground(dpy, areawin->gc, colorlist[BARCOLOR].color.pixel);
    if (rmid > 0 && rtop > 0)
-      XClearArea(dpy, bwin, 0, 0, SBARSIZE, (int)rtop, FALSE);
-   XFillRectangle(dpy, bwin, areawin->gc, 0, (int)rtop + 2, SBARSIZE,
+      XClearArea(dpy, bwin, 0, 0, sbarsize, (int)rtop, FALSE);
+   XFillRectangle(dpy, bwin, areawin->gc, 0, (int)rtop + 2, sbarsize,
 	     (int)(rbot - rtop));
    if (rbot > rmid)
-      XClearArea(dpy, bwin, 0, (int)rbot + 1, SBARSIZE, areawin->height
+      XClearArea(dpy, bwin, 0, (int)rbot + 1, sbarsize, areawin->height
 		- (int)rbot, FALSE);
-   XClearArea(dpy, bwin, 0, (int)rmid - 1, SBARSIZE, 3, FALSE);
+   XClearArea(dpy, bwin, 0, (int)rmid - 1, sbarsize, 3, FALSE);
 
    XSetForeground(dpy, areawin->gc, colorlist[areawin->gccolor].color.pixel);
 }

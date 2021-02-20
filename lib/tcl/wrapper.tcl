@@ -48,9 +48,13 @@ proc xcircuit::new_window { name } {
   set drawing ${name}.mainframe.mainarea.drawing
   simple $drawing -bg white -commandproc "focus $drawing ; set XCOps(focus) $name"
 
-  simple ${name}.mainframe.mainarea.sbleft -width 13
-  simple ${name}.mainframe.mainarea.sbbottom -height 13
-  simple ${name}.mainframe.mainarea.corner -width 13 -height 13
+  if [catch {set XCOps(scale)}] {
+     set XCOps(scale) [expr {int([font measure TkDefaultFont M] / 10)}]
+  }
+  set sbsize [expr {2 + 13 * $XCOps(scale)}]
+  simple ${name}.mainframe.mainarea.sbleft -width $sbsize
+  simple ${name}.mainframe.mainarea.sbbottom -height $sbsize
+  simple ${name}.mainframe.mainarea.corner -width $sbsize -height $sbsize
 
   # The drawing area and its scrollbars
 
@@ -2234,9 +2238,6 @@ proc xcircuit::maketoolimages {} {
     set XCOps(tools) [list pn w b a s t mv cp e d2 cw ccw fx fy r pu2 po2 mk pz \
 		uj co bd fi pm pa li yp pl z4 z5 i]
 
-    if [catch {set XCOps(scale)}] {
-    	set XCOps(scale) [expr {int([font measure TkDefaultFont M] / 10)}]
-    }
     puts stdout "XCOps(scale) set to $XCOps(scale)"
     set gsize [expr {int($XCOps(scale) * 20)}]
     set gscale [expr {int($XCOps(scale))}]
@@ -3280,6 +3281,7 @@ proc scrollboth { lists args } {
 #-----------------------------------------------------------------
 
 proc xcircuit::makehelpwindow {} {
+   global XCOps
    toplevel .help -bg beige
    wm group .help .
    wm withdraw .help
@@ -3296,9 +3298,9 @@ proc xcircuit::makehelpwindow {} {
    pack .help.title.dbut -side right -ipadx 10
 
    listbox .help.listwin.func -yscrollcommand ".help.listwin.sb set" \
-	-setgrid 1 -height 20
+	-setgrid 1 -height [expr {20 * $XCOps(scale)}]
    listbox .help.listwin.keys -yscrollcommand ".help.listwin.sb set" \
-	-setgrid 1 -height 20
+	-setgrid 1 -height [expr {20 * $XCOps(scale)}]
    scrollbar .help.listwin.sb -orient vertical -command \
 	[list scrollboth [list .help.listwin.func .help.listwin.keys]]
    message .help.listwin.win -width 200 -justify left -anchor n \

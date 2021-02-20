@@ -814,10 +814,19 @@ void genfilelist(xcWidget parent, popupstruct *okaystruct, Dimension width)
    xcWidget 	listarea, lscroll, entertext, dofilter;
    short 	n = 0;
    int		wwidth;
+   int		sbarsize;
+
+#ifdef TCL_WRAPPER
+   char *scale;
+   scale = Tcl_GetVar2(xcinterp, "XCOps", "scale", TCL_GLOBAL_ONLY);
+   sbarsize = SBARSIZE * atoi(scale);
+#else
+   sbarsize = SBARSIZE;
+#endif
 
    XtnSetArg(XtNx, 20);
    XtnSetArg(XtNy, FILECHARHEIGHT - 10);
-   XtnSetArg(XtNwidth, width - SBARSIZE - 40);
+   XtnSetArg(XtNwidth, width - sbarsize - 40);
    XtnSetArg(XtNheight, LISTHEIGHT - FILECHARHEIGHT);
    XtnSetArg(XtNfont, appdata.filefont);
 
@@ -836,9 +845,9 @@ void genfilelist(xcWidget parent, popupstruct *okaystruct, Dimension width)
    flstart = 0;
    okaystruct->filew = listarea;
 
-   XtnSetArg(XtNx, width - SBARSIZE - 20);
+   XtnSetArg(XtNx, width - sbarsize - 20);
    XtnSetArg(XtNy, FILECHARHEIGHT - 10);
-   XtnSetArg(XtNwidth, SBARSIZE);
+   XtnSetArg(XtNwidth, sbarsize);
    XtnSetArg(XtNheight, LISTHEIGHT - FILECHARHEIGHT);
    XtnSetArg(XtNfont, appdata.xcfont);
 
