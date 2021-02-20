@@ -1852,7 +1852,7 @@ proc xcircuit::promptimportspice {} {
    .filelist.bbar.okay configure -command \
 	{xcircuit::page import spice \
 	[.filelist.textent.txt get]; wm withdraw .filelist}
-   .filelist.listwin.win configure -data "spice spc spi ckt sp"
+   .filelist.listwin.win configure -data "spice spc spi ckt sp cir"
    .filelist.textent.title.field configure -text "Select SPICE file to import:"
    .filelist.textent.txt delete 0 end
    xcircuit::popupfilelist
@@ -2229,12 +2229,21 @@ proc xcircuit::promptmargin {} {
 
 #----------------------------------------------------------------------
 
-set XCOps(tools) [list pn w b a s t mv cp e d2 cw ccw fx fy r pu2 po2 mk pz \
-	uj co bd fi pm pa li yp pl z4 z5 i]
+proc xcircuit::maketoolimages {} {
+    global XCOps XCIRCUIT_LIB_DIR
+    set XCOps(tools) [list pn w b a s t mv cp e d2 cw ccw fx fy r pu2 po2 mk pz \
+		uj co bd fi pm pa li yp pl z4 z5 i]
 
-for {set i 0} {$i < [llength $XCOps(tools)]} {incr i 1} {
-   set bname [lindex $XCOps(tools) $i]
-   image create photo img_${bname} -file ${XCIRCUIT_LIB_DIR}/pixmaps/${bname}.gif
+    if [catch {set XCOps(scale)}] {set XCOps(scale) 1.0}
+    set gsize [expr {int($XCOps(scale) * 20)}]
+    set gscale [expr {int($XCOps(scale))}]
+
+    for {set i 0} {$i < [llength $XCOps(tools)]} {incr i 1} {
+	set bname [lindex $XCOps(tools) $i]
+	image create photo stdimage -file ${XCIRCUIT_LIB_DIR}/pixmaps/${bname}.gif
+	image create photo img_${bname} -width $gsize -height $gsize
+	img_${bname} copy stdimage -zoom $gscale
+    }
 }
 
 #----------------------------------------------------------------------
@@ -2356,6 +2365,9 @@ proc xcircuit::createtoolbar {window} {
 	{library directory} {page directory} \
 	{zoom 1.5; refresh} {zoom [expr {1 / 1.5}]; refresh} \
 	{xcircuit::helpwindow} ]
+
+   # Make the tool images if they have not yet been created.
+   if [catch {set XCOps(tools)}] {xcircuit::maketoolimages}
 
    for {set i 0} {$i < [llength $XCOps(tools)]} {incr i 1} {
       set bname [lindex $XCOps(tools) $i]
