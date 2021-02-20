@@ -2234,7 +2234,10 @@ proc xcircuit::maketoolimages {} {
     set XCOps(tools) [list pn w b a s t mv cp e d2 cw ccw fx fy r pu2 po2 mk pz \
 		uj co bd fi pm pa li yp pl z4 z5 i]
 
-    if [catch {set XCOps(scale)}] {set XCOps(scale) 1.0}
+    if [catch {set XCOps(scale)}] {
+    	set XCOps(scale) [expr {int([font measure TkDefaultFont M] / 10)}]
+    }
+    puts stdout "XCOps(scale) set to $XCOps(scale)"
     set gsize [expr {int($XCOps(scale) * 20)}]
     set gscale [expr {int($XCOps(scale))}]
 
