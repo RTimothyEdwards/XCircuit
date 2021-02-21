@@ -530,7 +530,7 @@ void drawhbar(xcWidget bar, caddr_t clientdata, caddr_t calldata)
    if (xobjs.suspend >= 0) return;
 
 #ifdef TCL_WRAPPER
-   scale = Tcl_GetVar2(xcinterp, "XCOps", "scale", TCL_GLOBAL_ONLY);
+   scale = (char *)Tcl_GetVar2(xcinterp, "XCOps", "scale", TCL_GLOBAL_ONLY);
    sbarsize = SBARSIZE * atoi(scale);
 #else
    sbarsize = SBARSIZE;
@@ -581,7 +581,7 @@ void drawvbar(xcWidget bar, caddr_t clientdata, caddr_t calldata)
    UNUSED(clientdata); UNUSED(calldata);
 
 #ifdef TCL_WRAPPER
-   scale = Tcl_GetVar2(xcinterp, "XCOps", "scale", TCL_GLOBAL_ONLY);
+   scale = (char *)Tcl_GetVar2(xcinterp, "XCOps", "scale", TCL_GLOBAL_ONLY);
    sbarsize = SBARSIZE * atoi(scale);
 #else
    sbarsize = SBARSIZE;
