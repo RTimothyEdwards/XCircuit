@@ -772,6 +772,12 @@ XPoint UGetCursor()
    /* Don't use areawin->window;  if called from inside an object	*/
    /* (e.g., "here" in a Tcl expression), areawin->window will be	*/
    /* an off-screen pixmap, and cause a crash.				*/
+
+   if (Tk_WindowId(areawin->area) == (Window)NULL) {
+      newpos.x = newpos.y = 0;
+      return newpos;
+   }
+
 #ifndef _MSC_VER
    XQueryPointer(dpy, Tk_WindowId(areawin->area), &nullwin, &nullwin,
 	&nullint, &nullint, &xpos, &ypos, &nullui);
