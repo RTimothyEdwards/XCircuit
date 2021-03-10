@@ -2399,9 +2399,6 @@ int getkeysignature(XKeyEvent *event)
    if (event->keycode == 0 && event->state == 0)
 	   return -1;
 #endif
-   /* XLookupString() will fail if the display is not valid */
-   if (dpy == NULL) return -1;
-
    XLookupString(event, _STR, 150, &keypressed, NULL);
 
    /* Ignore Shift, Control, Caps Lock, and Meta (Alt) keys 	*/

@@ -9880,7 +9880,7 @@ XCWindowData *GUI_init(int objc, Tcl_Obj *CONST objv[])
 {
    Tk_Window 	tkwind, tktop, tkdraw, tksb;
    Tk_Window	wsymb, wschema,	corner;
-   int 		i, locobjc, done = 1;
+   int 		i, locobjc, done = 1, first;
    XGCValues	values;
    Window	win;
    popupstruct	*fileliststruct;
@@ -10046,6 +10046,9 @@ XCWindowData *GUI_init(int objc, Tcl_Obj *CONST objv[])
    win = Tk_WindowId(tkwind);
    Tk_MapWindow(newwin->area);
 
+   first = (dpy == NULL) ? 1 : 0;
+   dpy = Tk_Display(tkwind);
+
    if (!done) {
       while (!done) Tcl_DoOneEvent(0);
       Tk_DeleteEventHandler(newwin->area,
@@ -10059,7 +10062,7 @@ XCWindowData *GUI_init(int objc, Tcl_Obj *CONST objv[])
 
    /* Things to set once only */
 
-   if (dpy == NULL) {
+   if (first == 1) {
       dpy = Tk_Display(tkwind);
       cmap = Tk_Colormap(tkwind);
       // (The following may be required on some systems where
