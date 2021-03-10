@@ -763,7 +763,8 @@ XPoint UGetCursor()
    u_int   nullui;
    XPoint newpos;
 
-   if (areawin->area == NULL) {
+   /* Apparently this routine can get called before the display is valid */
+   if ((areawin->area == NULL) || (dpy == NULL)) {
       newpos.x = newpos.y = 0;
       return newpos;
    }
