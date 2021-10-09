@@ -797,7 +797,7 @@ void default_keybindings()
       add_binding(ALL_WINDOWS, BUTTON2, XCF_Select);
       add_binding(ALL_WINDOWS, SHIFT | BUTTON1, XCF_Select);
       add_binding(ALL_WINDOWS, HOLD | BUTTON2, XCF_SelectBox);
-      add_binding(ALL_WINDOWS, SHIFT | HOLD | BUTTON1, XCF_Select);
+      add_binding(ALL_WINDOWS, SHIFT | HOLD | BUTTON1, XCF_SelectBox);
       add_binding(ALL_WINDOWS, BUTTON2, XCF_Finish_Element);
       add_binding(ALL_WINDOWS, SHIFT | BUTTON1, XCF_Finish_Element);
       add_binding(ALL_WINDOWS, BUTTON2, XCF_Finish_Copy);
