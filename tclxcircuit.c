@@ -3877,7 +3877,7 @@ int xctcl_object(ClientData clientData, Tcl_Interp *interp,
       case NameIdx:
 	 if (nidx == 1 || areawin->selects == 0) {
 	    if (objc == 3) {
-	       sprintf(thisinst->thisobject->name, Tcl_GetString(objv[nidx + 2]));
+	       sprintf(thisinst->thisobject->name, "%s", Tcl_GetString(objv[nidx + 2]));
 	       checkname(thisinst->thisobject);
 	    }
 	    Tcl_AppendElement(interp, thisinst->thisobject->name);
@@ -7404,7 +7404,7 @@ int xctcl_page(ClientData clientData, Tcl_Interp *interp,
 
       case LoadIdx:
 	 TechReplaceSave();
-	 sprintf(_STR2, Tcl_GetString(objv[2 + nidx]));
+	 sprintf(_STR2, "%s", Tcl_GetString(objv[2 + nidx]));
 	 for (i = 3 + nidx; i < objc; i++) {
 	    argv = Tcl_GetString(objv[i]);
 	    if ((*argv == '-') && !strncmp(argv, "-repl", 5)) {
@@ -7490,7 +7490,7 @@ int xctcl_page(ClientData clientData, Tcl_Interp *interp,
 
 	 switch (importtype) {
 	    case XCircuitIdx:
-	       sprintf(_STR2, Tcl_GetString(objv[3 + nidx]));
+	       sprintf(_STR2, "%s", Tcl_GetString(objv[3 + nidx]));
 	       for (i = 4; i < objc; i++) {
 		  strcat(_STR2, ",");
 		  strcat(_STR2, Tcl_GetString(objv[i + nidx]));
@@ -7507,7 +7507,7 @@ int xctcl_page(ClientData clientData, Tcl_Interp *interp,
 		  Tcl_SetObjResult(interp, objPtr);
 		  return XcTagCallback(interp, objc, objv);
 	       }
-	       sprintf(_STR2, Tcl_GetString(objv[3 + nidx]));
+	       sprintf(_STR2, "%s", Tcl_GetString(objv[3 + nidx]));
 	       if (savepage != pageno) newpage(pageno);
 	       loadbackground();
 	       if (savepage != pageno) newpage(savepage);
