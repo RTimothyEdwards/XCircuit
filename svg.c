@@ -1133,12 +1133,12 @@ int xctcl_svg(ClientData clientData, Tcl_Interp *interp,
 
    if (locobjc >= 2) {
       /* If there is a non-option argument, use it for the output filename */
-      sprintf(filename, Tcl_GetString(objv[1]));
+      sprintf(filename, "%s", Tcl_GetString(objv[1]));
    }
    else if (xobjs.pagelist[areawin->page]->pageinst->thisobject->name == NULL)
-      sprintf(filename, xobjs.pagelist[areawin->page]->filename);
+      sprintf(filename, "%s", xobjs.pagelist[areawin->page]->filename);
    else
-      sprintf(filename, xobjs.pagelist[areawin->page]->pageinst->thisobject->name);
+      sprintf(filename, "%s",  xobjs.pagelist[areawin->page]->pageinst->thisobject->name);
 
    pptr = strrchr(filename, '.');
    if (pptr != NULL)
