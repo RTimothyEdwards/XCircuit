@@ -431,6 +431,7 @@ extern void UDrawSimpleLine(XPoint *, XPoint *);
 extern void UDrawLine(XPoint *, XPoint *);
 extern void UDrawCircle(XPoint *, u_char);
 extern void UDrawX(labelptr);
+extern void UDrawXAt(XPoint *);
 extern void UDrawXDown(labelptr);
 extern int  toplevelwidth(objinstptr, short *);
 extern int  toplevelheight(objinstptr, short *);
