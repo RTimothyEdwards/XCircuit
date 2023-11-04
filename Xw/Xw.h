@@ -463,6 +463,18 @@ typedef struct _XwMenuMgrClassRec *XwMenuMgrWidgetClass;
 typedef struct _XwMenuMgrRec      *XwMenuMgrWidget;
 
 
+// TK: to satisfy gcc with std=c99 on MacOS:
+// avoid error: call to undeclared function 'XwRegisterConverters'; ISO C99 and later do not support implicit function declarations
+// function defined in Xw/ResConvert.c, used in Xw/Manager.c without declaration
+extern XwRegisterConverters();
+
+// this one is dirty: PopupMgr.c misses declaration of _XtPopup
+// copy&paste from /usr/X11/include/X11/TranslateI.h; file can't be included directly (internaly used file, many dependencies...)
+extern void _XtPopup(
+    Widget      /* widget */,
+    XtGrabKind  /* grab_kind */,
+    _XtBoolean  /* spring_loaded */
+);
 
 #endif
 /* DON'T ADD STUFF AFTER THIS #endif */
