@@ -2548,6 +2548,18 @@ u_char *find_delimiter(u_char *fstring)
    while (*++search != '\0') {
       if (*search == source && *(search - 1) != '\\') count++;
       else if (*search == target && *(search - 1) != '\\') count--;
+      else if (*search == target && *(search - 1) == '\\' && *(search - 2) == '\\') {
+	 /* An even number of backslashes indicates that the nearest backslash
+	  * is not an escape, but a backslash.
+	  */
+	 char *bsrch;
+	 int bscnt = 0;
+
+	 for (bsrch = search - 1; bsrch >= fstring && *bsrch == '\\'; bsrch++) {
+	    bscnt++;
+	 }
+	 if ((bscnt % 1) == 0) count--;
+      }
       if (count == 0) break;
    }
    return search;
