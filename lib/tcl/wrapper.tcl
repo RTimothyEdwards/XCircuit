@@ -1898,14 +1898,14 @@ proc xcircuit::convertgraphic {filename} {
       .jpg -
       .png -
       .pnm {
-	 exec convert $filename ${fileroot}.ppm
+	 exec magick $filename ${fileroot}.ppm
       }
       .ppm {
 	 set temp false
       }
       .ps -
       .pdf {
-	 exec convert -density 300x300 $filename ${fileroot}.ppm
+	 exec magick -density 300x300 $filename ${fileroot}.ppm
       }
    }
    xcircuit::graphic make ${fileroot}.ppm {0 0} 1;
