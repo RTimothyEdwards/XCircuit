@@ -4479,7 +4479,7 @@ short *xc_undelete(objinstptr thisinstance, objectptr delobj, short mode,
 
 void printname(objectptr curobject)
 {
-   char editstr[10], pagestr[10];
+   char editstr[10], pagestr[30];
    short ispage;
 
 #ifndef TCL_WRAPPER
