@@ -2552,7 +2552,7 @@ u_char *find_delimiter(u_char *fstring)
 	 /* An even number of backslashes indicates that the nearest backslash
 	  * is not an escape, but a backslash.
 	  */
-	 char *bsrch;
+	 u_char *bsrch;
 	 int bscnt = 0;
 
 	 for (bsrch = search - 1; bsrch >= fstring && *bsrch == '\\'; bsrch++) {
