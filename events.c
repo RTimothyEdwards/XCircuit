@@ -2195,8 +2195,9 @@ int functiondispatch(int function, short value, int x, int y)
 	 exchange();
 	 break;
       case XCF_Library_Move:
-	 /* Don't allow from library directory.  Then fall through to XCF_Move */
+	 /* Don't allow from library directory. */
 	 if (areawin->topinstance == xobjs.libtop[LIBLIB]) break;
+	 /* fall through */
       case XCF_Move:
 	 if (areawin->selects == 0) {
 	    was_preselected = FALSE;
