@@ -907,8 +907,7 @@ void InvertCTM(Matrix *ctm)
 
 /*------------------------------------------------------------------------*/
 
-void UCopyCTM(fctm, tctm)
-   Matrix *fctm, *tctm;
+void UCopyCTM(Matrix *fctm, Matrix *tctm)
 {
    tctm->a = fctm->a;
    tctm->b = fctm->b;

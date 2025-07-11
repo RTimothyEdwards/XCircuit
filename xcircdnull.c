@@ -18,8 +18,7 @@
 /*----------------------------------------------------------------------*/
 
 int
-xcircuit_AppInit(interp)
-    Tcl_Interp *interp;
+xcircuit_AppInit(Tcl_Interp *interp)
 {
     if (Tcl_Init(interp) == TCL_ERROR) {
 	return TCL_ERROR;
@@ -43,9 +42,7 @@ xcircuit_AppInit(interp)
 /*----------------------------------------------------------------------*/
 
 int
-main(argc, argv)
-   int argc;
-   char **argv;
+main(int argc, char **argv)
 {
     Tcl_Main(argc, argv, xcircuit_AppInit);
     return 0;
