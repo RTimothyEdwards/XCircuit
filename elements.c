@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 
 #ifndef XC_WIN32
 #include <X11/Intrinsic.h>
@@ -53,8 +54,6 @@ extern colorindex *colorlist;
 #if !defined(HAVE_CAIRO)
 extern Pixmap dbuf;
 #endif
-
-extern double atan2();
 
 /*------------------------------------------------------------------------*/
 /* Declarations of global variables                                       */
