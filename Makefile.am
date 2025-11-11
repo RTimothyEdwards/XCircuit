@@ -4,6 +4,7 @@ AUTOMAKE_OPTIONS = foreign no-dependencies no-dist
 
 AM_CFLAGS = $(cairo_CFLAGS) $(fontconfig_CFLAGS) ${GS_CFLAGS}
 LIBS += $(cairo_LIBS) $(fontconfig_LIBS) ${GS_LIBS}
+override CFLAGS += $(EXTRA_CFLAGS)
 
 # Additional files to distribute
 EXTRA_DIST = COPYRIGHT README README.ISOLatin2 README.notes
@@ -145,7 +146,6 @@ xcwrap.o: xcwrap.c menudep.h
 		xcwrap.c -c -o xcwrap.o
 
 lib/$(INTERP_PATH)/$(WRAPPER_OBJ): xcwrap.o ${xcircuit_OBJECTS} ${xcircuit_DEPEND}
-	export RPM_ARCH=`uname -m`
 	$(RM) lib/$(INTERP_PATH)/$(WRAPPER_OBJ)
 	$(SHLIB_LD) ${CFLAGS} -o $@ ${LDDL_FLAGS} xcwrap.o \
 		${xcircuit_OBJECTS} ${xcircuit_LDADD} ${SHLIB_LIB_SPECS} \

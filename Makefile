@@ -229,7 +229,7 @@ AUTOMAKE = automake-1.16
 AWK = gawk
 CC = gcc
 CCDEPMODE = depmode=none
-CFLAGS = -std=gnu99 -g -Wno-pointer-sign -fPIC 
+CFLAGS = -g -Wno-pointer-sign -fPIC 
 CPP = gcc -E
 CPPFLAGS =  
 CSCOPE = cscope
@@ -827,6 +827,7 @@ uninstall-man: uninstall-man1
 
 .PRECIOUS: Makefile
 
+override CFLAGS += $(EXTRA_CFLAGS)
 cairo.$(OBJEXT) : CFLAGS += -pedantic -Wall -Wextra
 elements.$(OBJEXT) : CFLAGS += -pedantic -Wall -Wextra
 events.$(OBJEXT) : CFLAGS += -pedantic -Wall -Wextra
@@ -857,7 +858,6 @@ xcwrap.o: xcwrap.c menudep.h
 		xcwrap.c -c -o xcwrap.o
 
 lib/$(INTERP_PATH)/$(WRAPPER_OBJ): xcwrap.o ${xcircuit_OBJECTS} ${xcircuit_DEPEND}
-	export RPM_ARCH=`uname -m`
 	$(RM) lib/$(INTERP_PATH)/$(WRAPPER_OBJ)
 	$(SHLIB_LD) ${CFLAGS} -o $@ ${LDDL_FLAGS} xcwrap.o \
 		${xcircuit_OBJECTS} ${xcircuit_LDADD} ${SHLIB_LIB_SPECS} \
