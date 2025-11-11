@@ -443,7 +443,8 @@ void listfiles(xcWidget w, popupstruct *okaystruct, caddr_t calldata)
 	
 	    sprintf(_STR2, "%s%s", cwdname, dp->d_name); 
 	    if (stat(_STR2, &statbuf)) continue;
-	    if ((statbuf.st_mode & S_IFDIR) != 0) /* is a directory */
+	    /* if ((statbuf.st_mode & S_IFDIR) != 0) */ // deprecated usage
+	    if (S_ISDIR(statbuf.st_mode))	/* is a directory */
 	       files[flfiles].filetype = DIRECTORY;
 	    else if (match_filter(dp->d_name, filter))
 	       files[flfiles].filetype = MATCH;

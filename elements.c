@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <sys/types.h>
 
 #ifndef XC_WIN32
 #include <X11/Intrinsic.h>
@@ -1297,13 +1298,20 @@ void arcbutton(int x, int y)
 /* Track an arc during mouse motion */
 /*----------------------------------*/
 
+#ifdef TCL_WRAPPER
+void trackarc(ClientData clientdata, XEvent *calldata)
+#else
 void trackarc(xcWidget w, caddr_t clientdata, caddr_t calldata)
+#endif
 {
    XPoint newpos;
    arcptr newarc;
    double adjrat;
    short  cycle;
-   UNUSED(w); UNUSED(clientdata); UNUSED(calldata);
+#ifndef TCL_WRAPPER
+   UNUSED(w);
+#endif
+   UNUSED(clientdata); UNUSED(calldata);
 
    newarc = TOARC(EDITPART);
 
@@ -1415,12 +1423,19 @@ void boxbutton(int x, int y)
 /* Track a box during mouse motion */
 /*---------------------------------*/
 
+#ifdef TCL_WRAPPER
+void trackbox(ClientData clientdata, XEvent *calldata)
+#else
 void trackbox(xcWidget w, caddr_t clientdata, caddr_t calldata)
+#endif
 {
    XPoint 	newpos;
    polyptr      newbox;
    pointlist	pointptr;
-   UNUSED(w); UNUSED(clientdata); UNUSED(calldata);
+#ifndef TCL_WRAPPER
+   UNUSED(w);
+#endif
+   UNUSED(clientdata); UNUSED(calldata);
 
    newbox = TOPOLY(EDITPART);
    newpos = UGetCursorPos();
@@ -1450,11 +1465,18 @@ void trackbox(xcWidget w, caddr_t clientdata, caddr_t calldata)
 /* wire redraw is correct.						*/
 /*----------------------------------------------------------------------*/
 
+#ifdef TCL_WRAPPER
+void trackwire(ClientData clientdata, XEvent *calldata)
+#else
 void trackwire(xcWidget w, caddr_t clientdata, caddr_t calldata)
+#endif
 {
    XPoint newpos, upos, *tpoint;
    polyptr	newwire;
-   UNUSED(w); UNUSED(clientdata); UNUSED(calldata);
+#ifndef TCL_WRAPPER
+   UNUSED(w);
+#endif
+   UNUSED(clientdata); UNUSED(calldata);
 
    newwire = TOPOLY(EDITPART);
 
@@ -1645,13 +1667,20 @@ void findconstrained(polyptr lastpoly)
 /* during edit mode					*/
 /*------------------------------------------------------*/
 
+#ifdef TCL_WRAPPER
+void trackelement(ClientData clientdata, XEvent *calldata)
+#else
 void trackelement(xcWidget w, caddr_t clientdata, caddr_t calldata)
+#endif
 {
    XPoint newpos, *curpt;
    short	*selobj;
    pointselect	*cptr;
    int		deltax, deltay;
-   UNUSED(w); UNUSED(clientdata); UNUSED(calldata);
+#ifndef TCL_WRAPPER
+   UNUSED(w);
+#endif
+   UNUSED(clientdata); UNUSED(calldata);
 
    newpos = UGetCursorPos();
    u2u_snap(&newpos);

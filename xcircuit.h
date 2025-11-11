@@ -13,6 +13,21 @@ typedef unsigned short		u_short;
 typedef unsigned int		u_int;
 typedef unsigned long		u_long;
 typedef unsigned long long	u_long_long;
+#else
+
+/* For c99 compatibility, __USE_MISC is not implied and the types above	*/
+/* should be manually defined.						*/
+#ifndef __USE_MISC
+typedef unsigned char		u_char;
+typedef unsigned short		u_short;
+typedef unsigned int		u_int;
+typedef unsigned long		u_long;
+typedef unsigned long long	u_long_long;
+
+/* In addition, caddr_t is deprecated but will just be recast here to	*/
+/* the recommended void *.						*/
+typedef void *			caddr_t;
+#endif
 #endif
 
 #ifdef XC_WIN32

@@ -377,7 +377,7 @@ void UDrawObject(objinstptr theinstance, short level, int passcolor,
 			theinstance->rotation);
 
    if (theinstance->style & LINE_INVARIANT)
-      passwidth /= fabs(theinstance->scale);
+      passwidth /= fabs((double)theinstance->scale);
 
    /* do a quick test for intersection with the display window */
 
@@ -584,14 +584,14 @@ void UDrawArc(arcptr thearc, float passwidth)
       double theta;
       double theta_start = thearc->angle1 * RADFAC;
       double theta_stop = thearc->angle2 * RADFAC;
-      cairo_move_to(areawin->cr, thearc->position.x + fabs(thearc->radius)
+      cairo_move_to(areawin->cr, thearc->position.x + fabs((double)thearc->radius)
 	    * cos(theta_start), thearc->position.y);
       for (theta = -M_PI; theta < theta_stop; theta += M_PI) {
          if (theta <= theta_start) continue;
          cairo_line_to(areawin->cr, thearc->position.x 
-	    + fabs(thearc->radius) * cos(theta), thearc->position.y);
+	    + fabs((double)thearc->radius) * cos(theta), thearc->position.y);
       }
-      cairo_line_to(areawin->cr, thearc->position.x + fabs(thearc->radius)
+      cairo_line_to(areawin->cr, thearc->position.x + fabs((double)thearc->radius)
 	    * cos(theta_stop), thearc->position.y);
    }
    xc_cairo_strokepath(thearc->style, thearc->width * passwidth);
@@ -849,7 +849,7 @@ void UDrawCharString(u_char *text, int start, int end, XfPoint *offset,
    UNUSED(passcolor);
 
    cairo_get_matrix(areawin->cr, &oldm);
-   cairo_scale(areawin->cr, tmpscale, fabs(tmpscale));
+   cairo_scale(areawin->cr, tmpscale, fabs((double)tmpscale));
 
    /* under- and overlines */
    if (styles & 8)
@@ -870,7 +870,7 @@ void UDrawCharString(u_char *text, int start, int end, XfPoint *offset,
       /* Add glyphs */
       glyphs[nglyphs].index = fonts[ffont].glyph_index[text[idx]];
       glyphs[nglyphs].x = offset->x / tmpscale;
-      glyphs[nglyphs].y = offset->y / fabs(tmpscale);
+      glyphs[nglyphs].y = offset->y / fabs((double)tmpscale);
       nglyphs++;
       /* Determine character width */
       offset->x += fonts[ffont].glyph_advance[text[idx]] * tmpscale;
@@ -921,7 +921,7 @@ static void xc_draw_glyph_object(objinstptr inst, float passwidth)
 	    cairo_save(areawin->cr);
 	    cairo_translate(areawin->cr, ptr->position.x, ptr->position.y);
 	    cairo_rotate(areawin->cr, -ptr->rotation * RADFAC);
-	    cairo_scale(areawin->cr, ptr->scale, fabs(ptr->scale));
+	    cairo_scale(areawin->cr, ptr->scale, fabs((double)ptr->scale));
 	    xc_draw_glyph_object(ptr, passwidth);
 	    cairo_restore(areawin->cr);
 	    break;

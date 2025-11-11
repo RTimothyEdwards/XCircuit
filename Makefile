@@ -229,7 +229,7 @@ AUTOMAKE = automake-1.16
 AWK = gawk
 CC = gcc
 CCDEPMODE = depmode=none
-CFLAGS = -g -Wno-pointer-sign -fPIC 
+CFLAGS = -std=gnu99 -g -Wno-pointer-sign -fPIC 
 CPP = gcc -E
 CPPFLAGS =  
 CSCOPE = cscope
