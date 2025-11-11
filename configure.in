@@ -904,7 +904,7 @@ if test "x$xc_with_tcl" != "x" ; then
 
     SHLIB_LD="${TCL_SHLIB_LD}"
     EXTRA_LIB_FLAGS=""
-    LDDL_FLAGS="${TCL_LD_FLAGS}"
+    # LDDL_FLAGS="${TCL_LD_FLAGS}"
     LD_RUN_PATH=""
 
     case $target in
