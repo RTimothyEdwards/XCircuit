@@ -76,11 +76,11 @@ short flags = -1;
 #define KEYOVERRIDE     16
 
 /*-----------------------*/
-/* Tcl 8.4 compatibility */
+/* Tcl 9.0 compatibility */
 /*-----------------------*/
 
-#ifndef CONST84
-#define CONST84
+#if TCL_MAJOR_VERSION < 9
+typedef int Tcl_Size;
 #endif
 
 /*----------------------------------------------------------------------*/
@@ -218,7 +218,7 @@ void tcl_vprintf(FILE *f, const char *fmt, va_list args_in)
 
 void tcl_stdflush(FILE *f)
 {
-   Tcl_SavedResult state;
+   Tcl_InterpState state;
    static char stdstr[] = "::flush stdxxx";
    char *stdptr = stdstr + 11;
 
@@ -226,10 +226,10 @@ void tcl_stdflush(FILE *f)
       fflush(f);
    }
    else {
-      Tcl_SaveResult(xcinterp, &state);
+      state = Tcl_SaveInterpState(xcinterp, TCL_OK);
       strcpy(stdptr, (f == stderr) ? "err" : "out");
       Tcl_Eval(xcinterp, stdstr);
-      Tcl_RestoreResult(xcinterp, &state);
+      Tcl_RestoreInterpState(xcinterp, state);
    }
 }
 
@@ -280,13 +280,13 @@ void make_new_event(XKeyEvent *event)
 /* Find any tags associated with a command and execute them.		*/
 /*----------------------------------------------------------------------*/
 
-int XcTagCallback(Tcl_Interp *interp, int objc, Tcl_Obj *CONST objv[])
+int XcTagCallback(Tcl_Interp *interp, int objc, Tcl_Obj *const objv[])
 {
     int objidx, result = TCL_OK;
     char *postcmd, *substcmd, *newcmd, *sptr, *sres;
     char *croot = Tcl_GetString(objv[0]);
     Tcl_HashEntry *entry;
-    Tcl_SavedResult state;
+    Tcl_InterpState state;
     int reset = FALSE;
     int i, llen;
 
@@ -434,12 +434,12 @@ int XcTagCallback(Tcl_Interp *interp, int objc, Tcl_Obj *CONST objv[])
 	/* Fprintf(stderr, "Substituted tag callback is \"%s\"\n", substcmd); */
 	/* Flush(stderr); */
 
-	Tcl_SaveResult(interp, &state);
+	state = Tcl_SaveInterpState(interp, TCL_OK);
 	result = Tcl_Eval(interp, substcmd);
 	if ((result == TCL_OK) && (reset == FALSE))
-	    Tcl_RestoreResult(interp, &state);
+	    Tcl_RestoreInterpState(interp, state);
 	else
-	    Tcl_DiscardResult(&state);
+	    Tcl_DiscardInterpState(state);
 
 	Tcl_Free(substcmd);
     }
@@ -492,7 +492,7 @@ int XcInternalTagCall(Tcl_Interp *interp, int argc, ...)
 /*--------------------------------------------------------------*/
 
 int xctcl_eventmode(ClientData clientData,
-        Tcl_Interp *interp, int objc, Tcl_Obj *CONST objv[])
+        Tcl_Interp *interp, int objc, Tcl_Obj *const objv[])
 {
    static char *modeNames[] = {
 	"normal", "undo", "move", "copy", "pan",
@@ -516,7 +516,7 @@ int xctcl_eventmode(ClientData clientData,
 /*--------------------------------------------------------------*/
 
 int xctcl_tag(ClientData clientData,
-        Tcl_Interp *interp, int objc, Tcl_Obj *CONST objv[])
+        Tcl_Interp *interp, int objc, Tcl_Obj *const objv[])
 {
     Tcl_HashEntry *entry;
     char *hstring;
@@ -575,7 +575,8 @@ Tcl_Obj *SelectToTclList(Tcl_Interp *interp, short *slist, int snum)
 
 int GetPositionFromList(Tcl_Interp *interp, Tcl_Obj *list, XPoint *rpoint)
 {
-   int result, numobjs;
+   int result;
+   Tcl_Size numobjs;
    Tcl_Obj *lobj, *tobj;
    int pos;
 
@@ -784,7 +785,8 @@ Tcl_Obj *TclGetStringParts(stringpart *thisstring)
 
 int GetXCStringFromList(Tcl_Interp *interp, Tcl_Obj *list, stringpart **rstring)
 {
-   int result, j, k, numobjs, idx, numparts, ptype, ival;
+   int result, j, k, idx, ptype, ival;
+   Tcl_Size numobjs, numparts;
    Tcl_Obj *lobj, *pobj, *tobj, *t2obj;
    stringpart *newpart;
    char *fname;
@@ -823,7 +825,7 @@ int GetXCStringFromList(Tcl_Interp *interp, Tcl_Obj *list, stringpart **rstring)
 
       if (pobj == NULL)
 	 return TCL_ERROR;
-      else if (Tcl_GetIndexFromObj(interp, pobj, (CONST84 char **)partTypes,
+      else if (Tcl_GetIndexFromObj(interp, pobj, (const char **)partTypes,
 		"string part types", TCL_EXACT, &idx) != TCL_OK) {
 	 Tcl_ResetResult(interp);
 	 idx = -1;
@@ -1007,11 +1009,12 @@ short GetPartNumber(genericptr egen, objectptr checkobject, int mask)
 /*----------------------------------------------------------------------*/
 
 int ParseElementArguments(Tcl_Interp *interp, int objc,
-		Tcl_Obj *CONST objv[], int *next, int mask) {
+		Tcl_Obj *const objv[], int *next, int mask) {
 
    short *newselect;
    char *argstr;
-   int i, j, result, numobjs;
+   int i, j, result;
+   Tcl_Size numobjs;
    pointertype ehandle;
    Tcl_Obj *lobj;
    int extra = 0, goodobjs = 0;
@@ -1151,7 +1154,7 @@ void MakeHierCTM(Matrix *hierCTM)
 /*----------------------------------------------------------------------*/
 
 int ParsePageArguments(Tcl_Interp *interp, int objc,
-		Tcl_Obj *CONST objv[], int *next, int *pageret) {
+		Tcl_Obj *const objv[], int *next, int *pageret) {
 
    char *pagename;
    int i, page, result;
@@ -1219,7 +1222,7 @@ int ParsePageArguments(Tcl_Interp *interp, int objc,
 /*----------------------------------------------------------------------*/
 
 int ParseLibArguments(Tcl_Interp *interp, int objc,
-		Tcl_Obj *CONST objv[], int *next, int *libret) {
+		Tcl_Obj *const objv[], int *next, int *libret) {
 
   char *libname;
   int library, result;
@@ -1276,7 +1279,7 @@ int ParseLibArguments(Tcl_Interp *interp, int objc,
 /*----------------------------------------------------------------------*/
 
 int xctcl_symschem(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
    int i, idx, result, stype;
    objectptr otherobj = NULL;
@@ -1300,7 +1303,7 @@ int xctcl_symschem(ClientData clientData, Tcl_Interp *interp,
       return TCL_ERROR;
    }
    else if ((result = Tcl_GetIndexFromObj(interp, objv[1],
-		(CONST84 char **)subCmds, "option", 0, &idx)) != TCL_OK) {
+		(const char **)subCmds, "option", 0, &idx)) != TCL_OK) {
       return result;
    }
 
@@ -1407,7 +1410,7 @@ int xctcl_symschem(ClientData clientData, Tcl_Interp *interp,
 	       return TCL_ERROR;
 	    }
 	    if ((result = Tcl_GetIndexFromObj(interp, objv[2],
-			(CONST84 char **)schemTypes, "schematic types",
+			(const char **)schemTypes, "schematic types",
 			0, &stype)) != TCL_OK)
 	       return result;
 	    if (stype == PRIMARY || stype == SECONDARY) {
@@ -1431,7 +1434,7 @@ int xctcl_symschem(ClientData clientData, Tcl_Interp *interp,
 /*----------------------------------------------------------------------*/
 
 int xctcl_netlist(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
    Tcl_Obj *rdict;
    int idx, result, mpage, spage, bvar, j;
@@ -1457,7 +1460,7 @@ int xctcl_netlist(ClientData clientData, Tcl_Interp *interp,
       return TCL_ERROR;
    }
    else if ((result = Tcl_GetIndexFromObj(interp, objv[1],
-		(CONST84 char **)subCmds, "option", 0, &idx)) != TCL_OK) {
+		(const char **)subCmds, "option", 0, &idx)) != TCL_OK) {
       return result;
    }
 
@@ -2179,7 +2182,7 @@ int xctcl_netlist(ClientData clientData, Tcl_Interp *interp,
 /*----------------------------------------------------------------------*/
 
 int xctcl_here(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
    Tcl_Obj *listPtr, *objPtr;
    XPoint newpos;
@@ -2208,7 +2211,7 @@ int xctcl_here(ClientData clientData, Tcl_Interp *interp,
 /*----------------------------------------------------------------------*/
 
 int xctcl_pan(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
    int result, idx;
    double frac = 0.0;
@@ -2226,7 +2229,7 @@ int xctcl_pan(ClientData clientData, Tcl_Interp *interp,
 
    /* Check against keywords */
 
-   if (Tcl_GetIndexFromObj(interp, objv[1], (CONST84 char **)directions,
+   if (Tcl_GetIndexFromObj(interp, objv[1], (const char **)directions,
 		"option", 0, &idx) != TCL_OK) {
       result = GetPositionFromList(interp, objv[1], &newpos);
       if (result != TCL_OK) return result;
@@ -2258,7 +2261,7 @@ int xctcl_pan(ClientData clientData, Tcl_Interp *interp,
 /*----------------------------------------------------------------------*/
 
 int xctcl_zoom(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
    int result, idx;
    float save;
@@ -2278,7 +2281,7 @@ int xctcl_zoom(ClientData clientData, Tcl_Interp *interp,
    else if ((result = Tcl_GetDoubleFromObj(interp, objv[1], &factor)) != TCL_OK)
    {
       Tcl_ResetResult(interp);
-      if (Tcl_GetIndexFromObj(interp, objv[1], (CONST84 char **)subCmds,
+      if (Tcl_GetIndexFromObj(interp, objv[1], (const char **)subCmds,
 		"option", 0, &idx) != TCL_OK) {
 	 Tcl_WrongNumArgs(interp, 1, objv, "option ?arg ...?");
 	 return TCL_ERROR;
@@ -2391,7 +2394,7 @@ int GetColorFromObj(Tcl_Interp *interp, Tcl_Obj *obj, int *cindex, Boolean appen
 /*----------------------------------------------------------------------*/
 
 int xctcl_color(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
    int result, nidx, cindex, ccol, idx, i;
    char *colorname, *option;
@@ -2405,7 +2408,7 @@ int xctcl_color(ClientData clientData, Tcl_Interp *interp,
    if (result != TCL_OK) return result;
 
    if ((result = Tcl_GetIndexFromObj(interp, objv[nidx],
-		(CONST84 char **)subCmds, "option", 0,
+		(const char **)subCmds, "option", 0,
 		&idx)) != TCL_OK)
       return result;
 
@@ -2519,7 +2522,7 @@ int xctcl_color(ClientData clientData, Tcl_Interp *interp,
 /*----------------------------------------------------------------------*/
 
 int xctcl_delete(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
    int result = ParseElementArguments(interp, objc, objv, NULL, ALL_TYPES);
 
@@ -2542,7 +2545,7 @@ int xctcl_delete(ClientData clientData, Tcl_Interp *interp,
 /*----------------------------------------------------------------------*/
 
 int xctcl_undo(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
    if ((objc == 3) && !strcmp(Tcl_GetString(objv[1]), "series")) {
 
@@ -2575,7 +2578,7 @@ int xctcl_undo(ClientData clientData, Tcl_Interp *interp,
 /*----------------------------------------------------------------------*/
 
 int xctcl_redo(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
    if (objc != 1) {
       Tcl_WrongNumArgs(interp, 1, objv, "(no arguments)");
@@ -2588,7 +2591,7 @@ int xctcl_redo(ClientData clientData, Tcl_Interp *interp,
 /*----------------------------------------------------------------------*/
 
 int xctcl_move(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
    XPoint position;
    int nidx = 3;
@@ -2642,7 +2645,7 @@ int xctcl_move(ClientData clientData, Tcl_Interp *interp,
 /*----------------------------------------------------------------------*/
 
 int xctcl_copy(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
    XPoint position;
    Tcl_Obj *listPtr;
@@ -2701,7 +2704,7 @@ int xctcl_copy(ClientData clientData, Tcl_Interp *interp,
 /*----------------------------------------------------------------------*/
 
 int xctcl_flip(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
    char *teststr;
    int nidx = 2;
@@ -2743,7 +2746,7 @@ int xctcl_flip(ClientData clientData, Tcl_Interp *interp,
 /*----------------------------------------------------------------------*/
 
 int xctcl_rotate(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
    int rval, nidx = 2;
    int result = ParseElementArguments(interp, objc, objv, &nidx, ALL_TYPES);
@@ -2817,7 +2820,7 @@ int xctcl_rotate(ClientData clientData, Tcl_Interp *interp,
 /*----------------------------------------------------------------------*/
 
 int xctcl_edit(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
    int result = ParseElementArguments(interp, objc, objv, NULL, ALL_TYPES);
 
@@ -2951,7 +2954,7 @@ translateparamtype(int type)
 /*----------------------------------------------------------------------*/
 
 int xctcl_param(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
    int i, j, value, idx, nidx = 4;
    int result = ParseElementArguments(interp, objc, objv, &nidx, ALL_TYPES);
@@ -2997,7 +3000,7 @@ int xctcl_param(ClientData clientData, Tcl_Interp *interp,
 	 idx = GetIdx;
       else {
 	if ((result = Tcl_GetIndexFromObj(interp, objv[nidx],
-		(CONST84 char **)subCmds, "option", 0, &idx)) != TCL_OK)
+		(const char **)subCmds, "option", 0, &idx)) != TCL_OK)
 	   return result;
       }
    }
@@ -3066,7 +3069,7 @@ int xctcl_param(ClientData clientData, Tcl_Interp *interp,
 	    if (ops == NULL) {
 	       /* Otherwise, the argument must be a parameter type. */
                if ((result = Tcl_GetIndexFromObj(interp, objv[nidx + 1],
-		   	(CONST84 char **)param_types, "parameter type",
+		   	(const char **)param_types, "parameter type",
 			0, &value)) != TCL_OK) {
 	          Tcl_SetResult(interp, "Must have a valid key or parameter type",
 			NULL);
@@ -3220,7 +3223,7 @@ int xctcl_param(ClientData clientData, Tcl_Interp *interp,
 	    ops = match_param(refobj, Tcl_GetString(objv[nidx + 1]));
 	    if (ops == NULL) {
                if ((result = Tcl_GetIndexFromObj(interp, objv[nidx + 1],
-			(CONST84 char **)param_types, "parameter type",
+			(const char **)param_types, "parameter type",
 			0, &value)) != TCL_OK) {
 	          Tcl_SetResult(interp, "Must have a valid key or parameter type",
 			NULL);
@@ -3385,7 +3388,7 @@ next_param:
       case MakeIdx:
 	 if (objc >= (nidx + 2) && objc <= (nidx + 4)) {
             if ((result = Tcl_GetIndexFromObj(interp, objv[nidx + 1],
-			(CONST84 char **)param_types, "parameter type",
+			(const char **)param_types, "parameter type",
 			0, &value)) != TCL_OK)
 	       return result;
 
@@ -3535,7 +3538,7 @@ next_param:
 
 	 if (objc == nidx + 2) {
             if ((result = Tcl_GetIndexFromObj(interp, objv[nidx + 1],
-			(CONST84 char **)param_types, "parameter type",
+			(const char **)param_types, "parameter type",
 			0, &value)) != TCL_OK)
 	       return result;
             unparameterize(value);
@@ -3574,7 +3577,7 @@ next_param:
 /*----------------------------------------------------------------------*/
 
 int xctcl_select(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
    char *argstr;
    short *newselect;
@@ -3626,9 +3629,10 @@ int xctcl_select(ClientData clientData, Tcl_Interp *interp,
 /*----------------------------------------------------------------------*/
 
 int xctcl_deselect(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
-   int i, j, k, result, numobjs;
+   int i, j, k, result;
+   Tcl_Size numobjs;
    pointertype ehandle;
    char *argstr;
    Tcl_Obj *lobj;
@@ -3687,7 +3691,7 @@ int xctcl_deselect(ClientData clientData, Tcl_Interp *interp,
 /*----------------------------------------------------------------------*/
 
 int xctcl_push(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
    int result = ParseElementArguments(interp, objc, objv, NULL, OBJINST);
 
@@ -3701,7 +3705,7 @@ int xctcl_push(ClientData clientData, Tcl_Interp *interp,
 /*----------------------------------------------------------------------*/
 
 int xctcl_pop(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
    if (objc != 1) {
       Tcl_WrongNumArgs(interp, 1, objv, "(no arguments)");
@@ -3717,7 +3721,7 @@ int xctcl_pop(ClientData clientData, Tcl_Interp *interp,
 /*----------------------------------------------------------------------*/
 
 int xctcl_object(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
   int i, j, idx, result, nidx, libno;
    genericptr egen;
@@ -3775,7 +3779,7 @@ int xctcl_object(ClientData clientData, Tcl_Interp *interp,
    thisinst = (objinstptr)egen;
 
    if ((result = Tcl_GetIndexFromObj(interp, objv[1 + nidx],
-		(CONST84 char **)subCmds, "option", 0, &idx)) != TCL_OK)
+		(const char **)subCmds, "option", 0, &idx)) != TCL_OK)
       return result;
 
    switch (idx) {
@@ -4050,7 +4054,7 @@ translatestyle(int psfont)
 /*----------------------------------------------------------------------*/
 
 int xctcl_label(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
    int i, idx, idx2, nidx, result, value, jval, jval2;
    double tmpdbl;
@@ -4124,7 +4128,7 @@ int xctcl_label(ClientData clientData, Tcl_Interp *interp,
    if (result != TCL_OK) return result;
 
    if ((result = Tcl_GetIndexFromObj(interp, objv[nidx],
-		(CONST84 char **)subCmds, "option", 0, &idx)) != TCL_OK)
+		(const char **)subCmds, "option", 0, &idx)) != TCL_OK)
       return result;
 
    /* If there are no selections at this point, check if the command is */
@@ -4135,7 +4139,7 @@ int xctcl_label(ClientData clientData, Tcl_Interp *interp,
 	 if ((areawin->selects == 0) && (nidx == 1)) {
 	    if (objc != 2) {
 	       result = Tcl_GetIndexFromObj(interp, objv[2],
-			(CONST84 char **)pinTypeNames, "pin type", 0, &idx2);
+			(const char **)pinTypeNames, "pin type", 0, &idx2);
 	       if (result != TCL_OK) {
 	          if (objc == 3) return result;
 	          else {
@@ -4280,7 +4284,7 @@ int xctcl_label(ClientData clientData, Tcl_Interp *interp,
 	 }
 	 else {
 	    if (Tcl_GetIndexFromObj(interp, objv[2],
-			(CONST84 char **)encValues, "encodings", 0,
+			(const char **)encValues, "encodings", 0,
 			&idx2) != TCL_OK) {
 	       return TCL_ERROR;
 	    }
@@ -4297,7 +4301,7 @@ int xctcl_label(ClientData clientData, Tcl_Interp *interp,
 	 }
 	 else {
 	    if (Tcl_GetIndexFromObj(interp, objv[2],
-			(CONST84 char **)styValues,
+			(const char **)styValues,
 			"styles", 0, &idx2) != TCL_OK) {
 	       return TCL_ERROR;
 	    }
@@ -4324,7 +4328,7 @@ int xctcl_label(ClientData clientData, Tcl_Interp *interp,
 	 }
 	 else {
 	    if (Tcl_GetIndexFromObj(interp, objv[nidx + 1],
-			(CONST84 char **)pinTypeNames,
+			(const char **)pinTypeNames,
 			"pin types", 0, &idx2) != TCL_OK) {
 	       return TCL_ERROR;
 	    }
@@ -4354,7 +4358,7 @@ int xctcl_label(ClientData clientData, Tcl_Interp *interp,
 	    return TCL_ERROR;
 	 }
 	 if (Tcl_GetIndexFromObj(interp, objv[nidx + 1],
-			(CONST84 char **)subsubCmds,
+			(const char **)subsubCmds,
 			"insertions", 0, &idx2) != TCL_OK) {
 	    return TCL_ERROR;
 	 }
@@ -4483,7 +4487,7 @@ int xctcl_label(ClientData clientData, Tcl_Interp *interp,
 	 }
 	 else {
 	    if (Tcl_GetIndexFromObj(interp, objv[nidx + 1],
-		(CONST84 char **)justifyValues,
+		(const char **)justifyValues,
 		"justification", 0, &idx2) != TCL_OK) {
 	       return TCL_ERROR;
 	    }
@@ -4505,7 +4509,7 @@ int xctcl_label(ClientData clientData, Tcl_Interp *interp,
 	 }
 	 else {
 	    if (Tcl_GetIndexFromObj(interp, objv[nidx + 1],
-		(CONST84 char **)anchorValues,
+		(const char **)anchorValues,
 		"anchoring", 0, &idx2) != TCL_OK) {
 	       return TCL_ERROR;
 	    }
@@ -4639,7 +4643,7 @@ int xctcl_label(ClientData clientData, Tcl_Interp *interp,
 /*----------------------------------------------------------------------*/
 
 int xctcl_dofill(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
    u_int value;
    int i, idx, result, rval = -1;
@@ -4682,7 +4686,7 @@ int xctcl_dofill(ClientData clientData, Tcl_Interp *interp,
 
    for (i = 1; i < objc; i++) {
       if (Tcl_GetIndexFromObj(interp, objv[i],
-			(CONST84 char **)Styles, "fill styles",
+			(const char **)Styles, "fill styles",
 			0, &idx) != TCL_OK) {
 	 Tcl_ResetResult(interp);
          result = Tcl_GetIntFromObj(interp, objv[i], &value);
@@ -4740,7 +4744,7 @@ int xctcl_dofill(ClientData clientData, Tcl_Interp *interp,
 /*----------------------------------------------------------------------*/
 
 int xctcl_doborder(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
    int result, i, idx, value, rval = -1;
    u_short mask;
@@ -4797,7 +4801,7 @@ int xctcl_doborder(ClientData clientData, Tcl_Interp *interp,
 
    for (i = 1; i < objc; i++) {
       result = Tcl_GetIndexFromObj(interp, objv[i],
-		 (CONST84 char **)borderStyles,
+		 (const char **)borderStyles,
 		"border style", 0, &idx);
       if (result != TCL_OK)
 	 return result;
@@ -4894,7 +4898,7 @@ int xctcl_doborder(ClientData clientData, Tcl_Interp *interp,
 /*----------------------------------------------------------------------*/
 
 int xctcl_polygon(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
    int idx, nidx, result, npoints, j;
    polyptr newpoly, ppoly;
@@ -4914,7 +4918,7 @@ int xctcl_polygon(ClientData clientData, Tcl_Interp *interp,
    if (result != TCL_OK) return result;
 
    if ((result = Tcl_GetIndexFromObj(interp, objv[nidx],
-		(CONST84 char **)subCmds,
+		(const char **)subCmds,
 		"option", 0, &idx)) != TCL_OK)
       return result;
 
@@ -5070,7 +5074,7 @@ int xctcl_polygon(ClientData clientData, Tcl_Interp *interp,
 /*----------------------------------------------------------------------*/
 
 int xctcl_spline(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
    int idx, nidx, result, j, npoints;
    splineptr newspline, pspline;
@@ -5088,7 +5092,7 @@ int xctcl_spline(ClientData clientData, Tcl_Interp *interp,
    if (result != TCL_OK) return result;
 
    if ((result = Tcl_GetIndexFromObj(interp, objv[nidx],
-		(CONST84 char **)subCmds,
+		(const char **)subCmds,
 		"option", 0, &idx)) != TCL_OK)
       return result;
 
@@ -5205,7 +5209,7 @@ int xctcl_spline(ClientData clientData, Tcl_Interp *interp,
 /*----------------------------------------------------------------------*/
 
 int xctcl_graphic(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
   int i, idx, nidx, result;
    double dvalue;
@@ -5224,7 +5228,7 @@ int xctcl_graphic(ClientData clientData, Tcl_Interp *interp,
    if (result != TCL_OK) return result;
 
    if ((result = Tcl_GetIndexFromObj(interp, objv[nidx],
-		(CONST84 char **)subCmds,
+		(const char **)subCmds,
 		"option", 0, &idx)) != TCL_OK)
       return result;
 
@@ -5362,7 +5366,7 @@ int xctcl_graphic(ClientData clientData, Tcl_Interp *interp,
 /*----------------------------------------------------------------------*/
 
 int xctcl_arc(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
   int idx, nidx, result, value;
    double angle;
@@ -5382,7 +5386,7 @@ int xctcl_arc(ClientData clientData, Tcl_Interp *interp,
    if (result != TCL_OK) return result;
 
    if ((result = Tcl_GetIndexFromObj(interp, objv[nidx],
-		(CONST84 char **)subCmds,
+		(const char **)subCmds,
 		"option", 0, &idx)) != TCL_OK)
       return result;
 
@@ -5524,7 +5528,7 @@ int xctcl_arc(ClientData clientData, Tcl_Interp *interp,
 /*----------------------------------------------------------------------*/
 
 int xctcl_path(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
    int idx, nidx, result, j, i;
    genericptr newgen, *eptr;
@@ -5544,7 +5548,7 @@ int xctcl_path(ClientData clientData, Tcl_Interp *interp,
    if (result != TCL_OK) return result;
 
    if ((result = Tcl_GetIndexFromObj(interp, objv[nidx],
-		(CONST84 char **)subCmds,
+		(const char **)subCmds,
 		"option", 0, &idx)) != TCL_OK)
       return result;
 
@@ -5657,7 +5661,7 @@ int xctcl_path(ClientData clientData, Tcl_Interp *interp,
 /*----------------------------------------------------------------------*/
 
 int xctcl_instance(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
   int i, numfound, idx, nidx, result;
    objectptr pobj;
@@ -5681,7 +5685,7 @@ int xctcl_instance(ClientData clientData, Tcl_Interp *interp,
    if (result != TCL_OK) return result;
 
    if ((result = Tcl_GetIndexFromObj(interp, objv[nidx],
-		(CONST84 char **)subCmds,
+		(const char **)subCmds,
 		"option", 0, &idx)) != TCL_OK)
       return result;
 
@@ -5765,7 +5769,7 @@ int xctcl_instance(ClientData clientData, Tcl_Interp *interp,
 	 }
 	 else {
 	    Tcl_Obj *listPtr;
-	    int listlen;
+	    Tcl_Size listlen;
 	    objectptr pobj;
 
 	    /* If the number of additional arguments matches the number	*/
@@ -5950,7 +5954,7 @@ int xctcl_instance(ClientData clientData, Tcl_Interp *interp,
 	 else {
 	    int subidx;
             if ((result = Tcl_GetIndexFromObj(interp, objv[nidx + 1],
-			(CONST84 char **)lwsubCmds,
+			(const char **)lwsubCmds,
 			"value", 0, &subidx)) == TCL_OK) {
 	       for (i = 0; i < areawin->selects; i++) {
 	          if (SELECTTYPE(areawin->selectlist + i) == OBJINST) {
@@ -6070,7 +6074,7 @@ int xctcl_instance(ClientData clientData, Tcl_Interp *interp,
 /*----------------------------------------------------------------------*/
 
 int xctcl_element(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
    int result, nidx, idx, i, flags;
    Tcl_Obj *listPtr;
@@ -6157,7 +6161,7 @@ int xctcl_element(ClientData clientData, Tcl_Interp *interp,
    }
 
    if (Tcl_GetIndexFromObj(interp, objv[nidx],
-		(CONST84 char **)subCmds,
+		(const char **)subCmds,
 		"option", 0, &idx) == TCL_OK) {
 
       newobjv = (Tcl_Obj **)(&objv[nidx]);
@@ -6373,7 +6377,7 @@ int xctcl_element(ClientData clientData, Tcl_Interp *interp,
 /*----------------------------------------------------------------------*/
 
 int xctcl_config(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
    int tmpint, i;
    int result, idx;
@@ -6411,7 +6415,7 @@ int xctcl_config(ClientData clientData, Tcl_Interp *interp,
       return TCL_ERROR;
    }
    if (Tcl_GetIndexFromObj(interp, objv[1],
-		(CONST84 char **)subCmds,
+		(const char **)subCmds,
 		"option", 0, &idx) != TCL_OK) {
       return TCL_ERROR;
    }
@@ -6706,7 +6710,7 @@ int xctcl_config(ClientData clientData, Tcl_Interp *interp,
 	 }
 	 else {
 	    if (Tcl_GetIndexFromObj(interp, objv[2],
-			(CONST84 char **)boxsubCmds,
+			(const char **)boxsubCmds,
 			"option", 0, &idx) != TCL_OK) {
 	       return TCL_ERROR;
 	    }
@@ -6736,7 +6740,7 @@ int xctcl_config(ClientData clientData, Tcl_Interp *interp,
 	 }
 	 else {
 	    if (Tcl_GetIndexFromObj(interp, objv[2],
-			(CONST84 char **)pathsubCmds,
+			(const char **)pathsubCmds,
 			"option", 0, &idx) != TCL_OK) {
 	       return TCL_ERROR;
 	    }
@@ -6882,7 +6886,7 @@ int xctcl_config(ClientData clientData, Tcl_Interp *interp,
 	 }
 	 else {
 	    if (Tcl_GetIndexFromObj(interp, objv[2],
-			(CONST84 char **)coordsubCmds,
+			(const char **)coordsubCmds,
 			"option", 0, &idx) != TCL_OK) {
 	       return TCL_ERROR;
 	    }
@@ -6973,7 +6977,7 @@ int xctcl_config(ClientData clientData, Tcl_Interp *interp,
 	 }
 	 else if (objc >= 3) {
 	    if (Tcl_GetIndexFromObj(interp, objv[2],
-			(CONST84 char **)filterTypes,
+			(const char **)filterTypes,
 			"filter_type", 0, &tmpint) != TCL_OK) {
 	       return TCL_ERROR;
 	    }
@@ -7023,7 +7027,7 @@ int xctcl_config(ClientData clientData, Tcl_Interp *interp,
 	    return TCL_ERROR;
 	 }
 	 if (Tcl_GetIndexFromObj(interp, objv[2],
-		(CONST84 char **)searchOpts, "options", 0, &idx) != TCL_OK) {
+		(const char **)searchOpts, "options", 0, &idx) != TCL_OK) {
 	    return TCL_ERROR;
 	 }
 	 sptr = (idx == 0) ? &xobjs.filesearchpath : &xobjs.libsearchpath;
@@ -7045,7 +7049,7 @@ int xctcl_config(ClientData clientData, Tcl_Interp *interp,
 /*----------------------------------------------------------------------*/
 
 int xctcl_promptsavepage(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
    int page = areawin->page;
    int result;
@@ -7103,7 +7107,7 @@ int xctcl_promptsavepage(ClientData clientData, Tcl_Interp *interp,
 /*----------------------------------------------------------------------*/
 
 int xctcl_quit(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
    Boolean is_intr = False;
 
@@ -7132,7 +7136,7 @@ int xctcl_quit(ClientData clientData, Tcl_Interp *interp,
 /*----------------------------------------------------------------------*/
 
 int xctcl_promptquit(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
    int result;
 
@@ -7157,7 +7161,7 @@ int xctcl_promptquit(ClientData clientData, Tcl_Interp *interp,
 /*----------------------------------------------------------------------*/
 
 int xctcl_refresh(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
    /* refresh */
    if (objc != 1) {
@@ -7288,7 +7292,7 @@ int loadlinkfile(objinstptr tinst, char *filename, int target, Boolean do_load)
 /*----------------------------------------------------------------------*/
 
 int xctcl_page(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
    int result, idx, nidx, aval, i, locidx;
    int cpage, multi, savepage, pageno = -1, linktype, importtype;
@@ -7361,7 +7365,7 @@ int xctcl_page(ClientData clientData, Tcl_Interp *interp,
       idx = GoToIdx;
    }
    else if (Tcl_GetIndexFromObj(interp, objv[1 + nidx],
-		(CONST84 char **)subCmds, "option", 0, &idx) != TCL_OK) {
+		(const char **)subCmds, "option", 0, &idx) != TCL_OK) {
       return result;
    }
 
@@ -7447,7 +7451,7 @@ int xctcl_page(ClientData clientData, Tcl_Interp *interp,
 	 }
 
 	 if (Tcl_GetIndexFromObj(interp, objv[2 + nidx],
-			(CONST84 char **)importTypes, "file type",
+			(const char **)importTypes, "file type",
 			0, &importtype) != TCL_OK)
 	    return TCL_ERROR;
 
@@ -7600,7 +7604,7 @@ int xctcl_page(ClientData clientData, Tcl_Interp *interp,
 	    linktype = TOTAL_PAGES;
 	 else {
 	    if (Tcl_GetIndexFromObj(interp, objv[2 + nidx],
-			(CONST84 char **)linkTypes,
+			(const char **)linkTypes,
 			"link type", 0, &linktype) != TCL_OK)
 	       return TCL_ERROR;
 	 }
@@ -7921,7 +7925,7 @@ int xctcl_page(ClientData clientData, Tcl_Interp *interp,
 	 }
 	 newstr = Tcl_GetString(objv[2 + nidx]);
 	 if (Tcl_GetIndexFromObj(interp, objv[2 + nidx],
-		(CONST84 char **)psTypes,
+		(const char **)psTypes,
 		"encapsulation", 0, &newmode) != TCL_OK) {
 	    return result;
 	 }
@@ -8102,7 +8106,7 @@ int xctcl_page(ClientData clientData, Tcl_Interp *interp,
 /*----------------------------------------------------------------------*/
 
 int xctcl_tech(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
    char *technology, *filename, *libobjname;
    short *pagelist;
@@ -8127,7 +8131,7 @@ int xctcl_tech(ClientData clientData, Tcl_Interp *interp,
       return TCL_ERROR;
    }
    if (Tcl_GetIndexFromObj(interp, objv[1],
-		(CONST84 char **)subCmds, "option", 0, &idx) != TCL_OK) {
+		(const char **)subCmds, "option", 0, &idx) != TCL_OK) {
       return TCL_ERROR;
    }
 
@@ -8467,7 +8471,7 @@ int xctcl_tech(ClientData clientData, Tcl_Interp *interp,
 /*----------------------------------------------------------------------*/
 
 int xctcl_library(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
   char *filename = NULL, *objname, *argv;
   int j = 0, libnum = -1;
@@ -8515,7 +8519,7 @@ int xctcl_library(ClientData clientData, Tcl_Interp *interp,
       idx = -1;
    }
    else if (Tcl_GetIndexFromObj(interp, objv[1 + nidx],
-		(CONST84 char **)subCmds, "option", 0, &idx) != TCL_OK) {
+		(const char **)subCmds, "option", 0, &idx) != TCL_OK) {
 
       /* Backwards compatibility: "library filename [number]" is */
       /* the same as "library [number] load filename"		 */
@@ -8745,7 +8749,7 @@ int xctcl_library(ClientData clientData, Tcl_Interp *interp,
 /*----------------------------------------------------------------------*/
 
 int xctcl_bind(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
    Tk_Window window = (Tk_Window)NULL;
    XCWindowDataPtr searchwin;
@@ -8893,7 +8897,7 @@ int xctcl_bind(ClientData clientData, Tcl_Interp *interp,
 /*----------------------------------------------------------------------*/
 
 int xctcl_font(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
    char *fontname;
    int result;
@@ -8942,7 +8946,7 @@ int xctcl_font(ClientData clientData, Tcl_Interp *interp,
 /*----------------------------------------------------------------------*/
 
 int xctcl_cursor(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
    int idx, result;
 
@@ -8959,7 +8963,7 @@ int xctcl_cursor(ClientData clientData, Tcl_Interp *interp,
       return TCL_ERROR;
    }
    if ((result = Tcl_GetIndexFromObj(interp, objv[1],
-	(CONST84 char **)cursNames,
+	(const char **)cursNames,
 	"cursor name", 0, &idx)) != TCL_OK)
       return result;
 
@@ -8971,7 +8975,7 @@ int xctcl_cursor(ClientData clientData, Tcl_Interp *interp,
 /*----------------------------------------------------------------------*/
 
 int xctcl_filerecover(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *CONST objv[])
+	int objc, Tcl_Obj *const objv[])
 {
    if (objc != 1) {
       Tcl_WrongNumArgs(interp, 1, objv, "(no arguments)");
@@ -9058,7 +9062,7 @@ void execscript()
 Tcl_Obj *evaluate_raw(objectptr thisobj, oparamptr ops, objinstptr pinst,
 		int *eval_status)
 {
-   Tcl_SavedResult state;
+   Tcl_InterpState state;
    Tcl_Obj *robj;
    int status;
    char *exprptr, *pptr, *pkey, *pnext;
@@ -9176,11 +9180,11 @@ Tcl_Obj *evaluate_raw(objectptr thisobj, oparamptr ops, objinstptr pinst,
 
    /* Evaluate the expression in TCL */
 
-   Tcl_SaveResult(xcinterp, &state);
+   state = Tcl_SaveInterpState(xcinterp, TCL_OK);
    status = Tcl_Eval(xcinterp, exprptr);
    robj = Tcl_GetObjResult(xcinterp);
    Tcl_IncrRefCount(robj);
-   Tcl_RestoreResult(xcinterp, &state);
+   Tcl_RestoreInterpState(xcinterp, state);
    if (eval_status) *eval_status = status;
    if (exprptr != ops->parameter.expr) free(exprptr);
    return robj;
@@ -9429,7 +9433,7 @@ int loadrcfile()
 /*----------------------------------------------------------------------*/
 
 int xctcl_standardaction(ClientData clientData,
-        Tcl_Interp *interp, int objc, Tcl_Obj *CONST objv[])
+        Tcl_Interp *interp, int objc, Tcl_Obj *const objv[])
 {
    int idx, result, knum, kstate;
    XKeyEvent kevent;
@@ -9441,7 +9445,7 @@ int xctcl_standardaction(ClientData clientData,
       goto badargs;
 
    if ((result = Tcl_GetIndexFromObj(interp, objv[2],
-		(CONST84 char **)updown, "direction", 0, &idx)) != TCL_OK)
+		(const char **)updown, "direction", 0, &idx)) != TCL_OK)
       goto badargs;
 
    if (objc == 4) {
@@ -9506,7 +9510,7 @@ badargs:
 /*----------------------------------------------------------------------*/
 
 int xctcl_action(ClientData clientData,
-        Tcl_Interp *interp, int objc, Tcl_Obj *CONST objv[])
+        Tcl_Interp *interp, int objc, Tcl_Obj *const objv[])
 {
    short value = 0;
    int function, result, ival;
@@ -9876,7 +9880,7 @@ void build_app_database(Tk_Window tkwind)
 /* This function should be called for each new window created.	*/
 /*--------------------------------------------------------------*/
 
-XCWindowData *GUI_init(int objc, Tcl_Obj *CONST objv[])
+XCWindowData *GUI_init(int objc, Tcl_Obj *const objv[])
 {
    Tk_Window 	tkwind, tktop, tkdraw, tksb;
    Tk_Window	wsymb, wschema,	corner;
@@ -10161,7 +10165,7 @@ XCWindowData *GUI_init(int objc, Tcl_Obj *CONST objv[])
 /*--------------------------------------*/
 
 int xctcl_start(ClientData clientData, Tcl_Interp *interp,
-		int objc, Tcl_Obj *CONST objv[])
+		int objc, Tcl_Obj *const objv[])
 {
    int result = TCL_OK;
    Boolean rcoverride = False;
@@ -10202,7 +10206,7 @@ int xctcl_start(ClientData clientData, Tcl_Interp *interp,
       int argc;
 
       Tcl_SplitList(interp, Tcl_GetString(objv[1]), &argc,
-		(CONST84 char ***)&argv);
+		(const char ***)&argv);
       while (argc) {
          if (**argv == '-') {
 	    if (!strncmp(*argv, "-exec", 5)) {
