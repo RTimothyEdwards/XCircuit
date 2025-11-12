@@ -154,7 +154,7 @@ Xcircuit_Init(Tcl_Interp *interp)
    /* Remember the interpreter */
    xcinterp = interp;
 
-   if (Tcl_InitStubs(interp, "8.1", 0) == NULL) return TCL_ERROR;
+   if (Tcl_InitStubs(interp, TCL_VERSION, 0) == NULL) return TCL_ERROR;
    
    tmp_s = getenv("XCIRCUIT_SRC_DIR");
    if (tmp_s == NULL) tmp_s = SCRIPTS_DIR;
