@@ -1886,7 +1886,7 @@ proc xcircuit::promptimportbackground {} {
 }
 
 #----------------------------------------------------------------------
-# Convert a graphic image using ImageMagick "convert" (if available)
+# Convert a graphic image using ImageMagick "magick" (if available)
 #----------------------------------------------------------------------
 
 proc xcircuit::convertgraphic {filename} {
@@ -1917,7 +1917,7 @@ proc xcircuit::convertgraphic {filename} {
 #----------------------------------------------------------------------
 
 proc xcircuit::promptimportgraphic {} {
-   if {![catch {exec convert -version}]} {
+   if {![catch {exec magick -version}]} {
       .filelist.bbar.okay configure -command \
 		{xcircuit::convertgraphic [.filelist.textent.txt get];
 	 	refresh; wm withdraw .filelist}
