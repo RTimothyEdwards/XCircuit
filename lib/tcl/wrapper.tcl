@@ -49,7 +49,7 @@ proc xcircuit::new_window { name } {
   simple $drawing -bg white -commandproc "focus $drawing ; set XCOps(focus) $name"
 
   if [catch {set XCOps(scale)}] {
-     set XCOps(scale) [expr {int([font measure TkDefaultFont M] / 10)}]
+     set XCOps(scale) [expr {max(1, int([font measure TkDefaultFont M] / 10))}]
   }
   set sbsize [expr {2 + 13 * $XCOps(scale)}]
   simple ${name}.mainframe.mainarea.sbleft -width $sbsize
