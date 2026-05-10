@@ -126,6 +126,7 @@ static XwSetValuePair *valuepairsets[NUMVALUESETS];
  *
  ************************************************************************/
 
+void
 XwRegisterConverters ()
 {
    static Boolean registered = False;

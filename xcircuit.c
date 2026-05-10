@@ -1426,8 +1426,9 @@ static Tcl_ObjType tclHandleType = {
 /*----------------------------------------------------------------------*/
 
 static void
-UpdateStringOfHandle(objPtr)
-    Tcl_Obj *objPtr;   /* Int object whose string rep to update. */
+UpdateStringOfHandle(
+    Tcl_Obj *objPtr	/* Int object whose string rep to update. */
+    )
 {
     char buffer[TCL_INTEGER_SPACE];
     int len;
@@ -1443,9 +1444,10 @@ UpdateStringOfHandle(objPtr)
 /*----------------------------------------------------------------------*/
 
 static int
-SetHandleFromAny(interp, objPtr)
-    Tcl_Interp *interp;         /* Used for error reporting if not NULL. */
-    Tcl_Obj *objPtr;   /* The object to convert. */
+SetHandleFromAny(
+    Tcl_Interp *interp,	/* Used for error reporting if not NULL. */
+    Tcl_Obj *objPtr	/* The object to convert. */
+    )
 {  
     Tcl_ObjType *oldTypePtr = (Tcl_ObjType *)objPtr->typePtr;
     char *string, *end;
@@ -1577,8 +1579,9 @@ nexthier:
 /*----------------------------------------------------------------------*/
 
 Tcl_Obj *
-Tcl_NewHandleObj(optr)
-    void *optr;      /* Int used to initialize the new object. */
+Tcl_NewHandleObj(
+    void *optr	/* Int used to initialize the new object. */
+    )
 {
     Tcl_Obj *objPtr;
 
@@ -1593,10 +1596,11 @@ Tcl_NewHandleObj(optr)
 /*----------------------------------------------------------------------*/
 
 int
-Tcl_GetHandleFromObj(interp, objPtr, handlePtr)
-    Tcl_Interp *interp;		/* Used for error reporting if not NULL. */
-    Tcl_Obj *objPtr;	/* The object from which to get a int. */
-    void **handlePtr;	/* Place to store resulting int. */
+Tcl_GetHandleFromObj(
+    Tcl_Interp *interp,	/* Used for error reporting if not NULL. */
+    Tcl_Obj *objPtr,	/* The object from which to get a int. */
+    void **handlePtr	/* Place to store resulting int. */
+    )
 {
     long l;
     int result;

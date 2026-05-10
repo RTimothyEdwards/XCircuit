@@ -522,10 +522,19 @@ void drawhbar(xcWidget bar, caddr_t clientdata, caddr_t calldata)
    Window bwin;
    float frac;
    long rleft, rright, rmid;
+   int sbarsize;
+   char *scale;
    UNUSED(clientdata); UNUSED(calldata);
 
    if (!xcIsRealized(bar)) return;
    if (xobjs.suspend >= 0) return;
+
+#ifdef TCL_WRAPPER
+   scale = (char *)Tcl_GetVar2(xcinterp, "XCOps", "scale", TCL_GLOBAL_ONLY);
+   sbarsize = SBARSIZE * atoi(scale);
+#else
+   sbarsize = SBARSIZE;
+#endif
 
    bwin = xcWindow(bar);
 
@@ -547,13 +556,13 @@ void drawhbar(xcWidget bar, caddr_t clientdata, caddr_t calldata)
    XSetFunction(dpy, areawin->gc, GXcopy);
    XSetForeground(dpy, areawin->gc, colorlist[BARCOLOR].color.pixel);
    if (rmid > 0 && rleft > 0)
-      XClearArea(dpy, bwin, 0, 0, (int)rleft, SBARSIZE, FALSE);
+      XClearArea(dpy, bwin, 0, 0, (int)rleft, sbarsize, FALSE);
    XFillRectangle(dpy, bwin, areawin->gc, (int)rleft + 1, 1,
-	  (int)(rright - rleft), SBARSIZE - 1);
+	  (int)(rright - rleft), sbarsize - 1);
    if (rright > rmid)
       XClearArea(dpy, bwin, (int)rright + 1, 0, areawin->width
-	  - (int)rright, SBARSIZE, FALSE);
-   XClearArea(dpy, bwin, (int)rmid - 1, 1, 3, SBARSIZE, FALSE);
+	  - (int)rright, sbarsize, FALSE);
+   XClearArea(dpy, bwin, (int)rmid - 1, 1, 3, sbarsize, FALSE);
 
    XSetForeground(dpy, areawin->gc, colorlist[areawin->gccolor].color.pixel);
 }
@@ -566,8 +575,17 @@ void drawvbar(xcWidget bar, caddr_t clientdata, caddr_t calldata)
 {
    Window bwin = xcWindow(bar);
    float frac;
+   char *scale;
+   int sbarsize;
    long rtop, rbot, rmid;
    UNUSED(clientdata); UNUSED(calldata);
+
+#ifdef TCL_WRAPPER
+   scale = (char *)Tcl_GetVar2(xcinterp, "XCOps", "scale", TCL_GLOBAL_ONLY);
+   sbarsize = SBARSIZE * atoi(scale);
+#else
+   sbarsize = SBARSIZE;
+#endif
 
    if (!xcIsRealized(bar)) return;
    if (xobjs.suspend >= 0) return;
@@ -590,13 +608,13 @@ void drawvbar(xcWidget bar, caddr_t clientdata, caddr_t calldata)
    XSetFunction(dpy, areawin->gc, GXcopy);
    XSetForeground(dpy, areawin->gc, colorlist[BARCOLOR].color.pixel);
    if (rmid > 0 && rtop > 0)
-      XClearArea(dpy, bwin, 0, 0, SBARSIZE, (int)rtop, FALSE);
-   XFillRectangle(dpy, bwin, areawin->gc, 0, (int)rtop + 2, SBARSIZE,
+      XClearArea(dpy, bwin, 0, 0, sbarsize, (int)rtop, FALSE);
+   XFillRectangle(dpy, bwin, areawin->gc, 0, (int)rtop + 2, sbarsize,
 	     (int)(rbot - rtop));
    if (rbot > rmid)
-      XClearArea(dpy, bwin, 0, (int)rbot + 1, SBARSIZE, areawin->height
+      XClearArea(dpy, bwin, 0, (int)rbot + 1, sbarsize, areawin->height
 		- (int)rbot, FALSE);
-   XClearArea(dpy, bwin, 0, (int)rmid - 1, SBARSIZE, 3, FALSE);
+   XClearArea(dpy, bwin, 0, (int)rmid - 1, sbarsize, 3, FALSE);
 
    XSetForeground(dpy, areawin->gc, colorlist[areawin->gccolor].color.pixel);
 }
@@ -2177,8 +2195,9 @@ int functiondispatch(int function, short value, int x, int y)
 	 exchange();
 	 break;
       case XCF_Library_Move:
-	 /* Don't allow from library directory.  Then fall through to XCF_Move */
+	 /* Don't allow from library directory. */
 	 if (areawin->topinstance == xobjs.libtop[LIBLIB]) break;
+	 /* fall through */
       case XCF_Move:
 	 if (areawin->selects == 0) {
 	    was_preselected = FALSE;
@@ -2417,12 +2436,14 @@ int getkeysignature(XKeyEvent *event)
 			NULL);
 	    XSetICFocus(xic);
 	}
-	if (xic) {
+	if (xic)
+	{
 	    /* Do a UTF-8 code lookup */
 	    Xutf8LookupString(xic, event, buffer, 15, &keysym, &status);
 	    /* Convert a UTF-8 code to a known encoding */
 	    utf8enc = utf8_reverse_lookup(buffer);
-	    if ((utf8enc != -1) && (utf8enc != (keywstate & 0xff))) keywstate = utf8enc;
+	    if ((utf8enc != -1) && (utf8enc != (keywstate & 0xff)))
+		keywstate = utf8enc;
 	}
    }
 
@@ -4462,7 +4483,7 @@ short *xc_undelete(objinstptr thisinstance, objectptr delobj, short mode,
 
 void printname(objectptr curobject)
 {
-   char editstr[10], pagestr[10];
+   char editstr[10], pagestr[30];
    short ispage;
 
 #ifndef TCL_WRAPPER

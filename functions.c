@@ -763,7 +763,8 @@ XPoint UGetCursor()
    u_int   nullui;
    XPoint newpos;
 
-   if (areawin->area == NULL) {
+   /* Apparently this routine can get called before the display is valid */
+   if ((areawin->area == NULL) || (dpy == NULL)) {
       newpos.x = newpos.y = 0;
       return newpos;
    }
@@ -772,6 +773,12 @@ XPoint UGetCursor()
    /* Don't use areawin->window;  if called from inside an object	*/
    /* (e.g., "here" in a Tcl expression), areawin->window will be	*/
    /* an off-screen pixmap, and cause a crash.				*/
+
+   if (Tk_WindowId(areawin->area) == (Window)NULL) {
+      newpos.x = newpos.y = 0;
+      return newpos;
+   }
+
 #ifndef _MSC_VER
    XQueryPointer(dpy, Tk_WindowId(areawin->area), &nullwin, &nullwin,
 	&nullint, &nullint, &xpos, &ypos, &nullui);
@@ -900,8 +907,7 @@ void InvertCTM(Matrix *ctm)
 
 /*------------------------------------------------------------------------*/
 
-void UCopyCTM(fctm, tctm)
-   Matrix *fctm, *tctm;
+void UCopyCTM(Matrix *fctm, Matrix *tctm)
 {
    tctm->a = fctm->a;
    tctm->b = fctm->b;

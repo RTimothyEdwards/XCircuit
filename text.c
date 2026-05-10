@@ -554,17 +554,6 @@ static char *nonprint[] = {
 	"Font", "Scale", "Color", "Margin_Stop", "Kern", 
         "Parameter", ">", "Net_Name", "Error", NULL}; /* (jdk) */
 
-/* Handling of certain text escapes (subscript, superscript, underline,	*/
-/* and overline) in TeX (added by Fabian Inostroza)			*/
-
-static char *nonprinttex[] = {
-	"", "_{", "^{", "}",
-	"\\underline{", "\\overline{", "}",
-	"Tab_Stop", "Tab_Forward", "Tab_Backward",
-	"Halfspace", "Quarterspace", "<Return>",
-	"Font", "Scale", "Color", "Margin_Stop", "Kern", 
-        "Parameter", ">", "Net_Name", "Error", NULL};
-
 /*----------------------------------------------------------------------*/
 /* charprint():  							*/
 /* Write a printable version of the character or command at the 	*/

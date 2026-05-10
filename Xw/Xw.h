@@ -463,6 +463,19 @@ typedef struct _XwMenuMgrClassRec *XwMenuMgrWidgetClass;
 typedef struct _XwMenuMgrRec      *XwMenuMgrWidget;
 
 
+// TK: to satisfy gcc with std=c99
+// function defined in Xw/ResConvert.c, used in Xw/Manager.c
+extern void XwRegisterConverters();
+
+// Unfortunate use of internal Xt routine, needs to be eliminated.
+// For now, copying the declaration from
+// /usr/X11/include/X11/TranslateI.h
+
+extern void _XtPopup(
+    Widget	/* widget */,
+    XtGrabKind	/* grab_kind */,
+    _XtBoolean	/* spring_loaded */
+);
 
 #endif
 /* DON'T ADD STUFF AFTER THIS #endif */

@@ -95,12 +95,19 @@ extern genericptr getsubpart(pathptr, int *);
 /* interactive manipulation of elements */
 extern void splinebutton(int, int);
 extern void updatepath(pathptr);
+#ifdef TCL_WRAPPER
+extern void trackelement(ClientData, XEvent *);
+extern void trackarc(ClientData, XEvent *);
+extern void trackbox(ClientData, XEvent *);
+extern void trackwire(ClientData, XEvent *);
+#else
 extern void trackelement(xcWidget, caddr_t, caddr_t);
-extern void arcbutton(int, int);
 extern void trackarc(xcWidget, caddr_t, caddr_t);
-extern void boxbutton(int, int);
 extern void trackbox(xcWidget, caddr_t, caddr_t);
 extern void trackwire(xcWidget, caddr_t, caddr_t);
+#endif
+extern void arcbutton(int, int);
+extern void boxbutton(int, int);
 extern void startwire(XPoint *);
 extern void setendpoint(short *, short, XPoint **, XPoint *);
 extern void wire_op(int, int ,int);
@@ -431,6 +438,7 @@ extern void UDrawSimpleLine(XPoint *, XPoint *);
 extern void UDrawLine(XPoint *, XPoint *);
 extern void UDrawCircle(XPoint *, u_char);
 extern void UDrawX(labelptr);
+extern void UDrawXAt(XPoint *);
 extern void UDrawXDown(labelptr);
 extern int  toplevelwidth(objinstptr, short *);
 extern int  toplevelheight(objinstptr, short *);

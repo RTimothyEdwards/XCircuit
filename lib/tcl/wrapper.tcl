@@ -48,9 +48,13 @@ proc xcircuit::new_window { name } {
   set drawing ${name}.mainframe.mainarea.drawing
   simple $drawing -bg white -commandproc "focus $drawing ; set XCOps(focus) $name"
 
-  simple ${name}.mainframe.mainarea.sbleft -width 13
-  simple ${name}.mainframe.mainarea.sbbottom -height 13
-  simple ${name}.mainframe.mainarea.corner -width 13 -height 13
+  if [catch {set XCOps(scale)}] {
+     set XCOps(scale) [expr {max(1, int([font measure TkDefaultFont M] / 10))}]
+  }
+  set sbsize [expr {2 + 13 * $XCOps(scale)}]
+  simple ${name}.mainframe.mainarea.sbleft -width $sbsize
+  simple ${name}.mainframe.mainarea.sbbottom -height $sbsize
+  simple ${name}.mainframe.mainarea.corner -width $sbsize -height $sbsize
 
   # The drawing area and its scrollbars
 
@@ -1852,7 +1856,7 @@ proc xcircuit::promptimportspice {} {
    .filelist.bbar.okay configure -command \
 	{xcircuit::page import spice \
 	[.filelist.textent.txt get]; wm withdraw .filelist}
-   .filelist.listwin.win configure -data "spice spc spi ckt sp"
+   .filelist.listwin.win configure -data "spice spc spi ckt sp cir"
    .filelist.textent.title.field configure -text "Select SPICE file to import:"
    .filelist.textent.txt delete 0 end
    xcircuit::popupfilelist
@@ -1882,7 +1886,7 @@ proc xcircuit::promptimportbackground {} {
 }
 
 #----------------------------------------------------------------------
-# Convert a graphic image using ImageMagick "convert" (if available)
+# Convert a graphic image using ImageMagick "magick" (if available)
 #----------------------------------------------------------------------
 
 proc xcircuit::convertgraphic {filename} {
@@ -1894,14 +1898,14 @@ proc xcircuit::convertgraphic {filename} {
       .jpg -
       .png -
       .pnm {
-	 exec convert $filename ${fileroot}.ppm
+	 exec magick $filename ${fileroot}.ppm
       }
       .ppm {
 	 set temp false
       }
       .ps -
       .pdf {
-	 exec convert -density 300x300 $filename ${fileroot}.ppm
+	 exec magick -density 300x300 $filename ${fileroot}.ppm
       }
    }
    xcircuit::graphic make ${fileroot}.ppm {0 0} 1;
@@ -1913,7 +1917,7 @@ proc xcircuit::convertgraphic {filename} {
 #----------------------------------------------------------------------
 
 proc xcircuit::promptimportgraphic {} {
-   if {![catch {exec convert -version}]} {
+   if {![catch {exec magick -version}]} {
       .filelist.bbar.okay configure -command \
 		{xcircuit::convertgraphic [.filelist.textent.txt get];
 	 	refresh; wm withdraw .filelist}
@@ -2229,12 +2233,21 @@ proc xcircuit::promptmargin {} {
 
 #----------------------------------------------------------------------
 
-set XCOps(tools) [list pn w b a s t mv cp e d2 cw ccw fx fy r pu2 po2 mk pz \
-	uj co bd fi pm pa li yp pl z4 z5 i]
+proc xcircuit::maketoolimages {} {
+    global XCOps XCIRCUIT_LIB_DIR
+    set XCOps(tools) [list pn w b a s t mv cp e d2 cw ccw fx fy r pu2 po2 mk pz \
+		uj co bd fi pm pa li yp pl z4 z5 i]
 
-for {set i 0} {$i < [llength $XCOps(tools)]} {incr i 1} {
-   set bname [lindex $XCOps(tools) $i]
-   image create photo img_${bname} -file ${XCIRCUIT_LIB_DIR}/pixmaps/${bname}.gif
+    puts stdout "XCOps(scale) set to $XCOps(scale)"
+    set gsize [expr {int($XCOps(scale) * 20)}]
+    set gscale [expr {int($XCOps(scale))}]
+
+    for {set i 0} {$i < [llength $XCOps(tools)]} {incr i 1} {
+	set bname [lindex $XCOps(tools) $i]
+	image create photo stdimage -file ${XCIRCUIT_LIB_DIR}/pixmaps/${bname}.gif
+	image create photo img_${bname} -width $gsize -height $gsize
+	img_${bname} copy stdimage -zoom $gscale
+    }
 }
 
 #----------------------------------------------------------------------
@@ -2356,6 +2369,9 @@ proc xcircuit::createtoolbar {window} {
 	{library directory} {page directory} \
 	{zoom 1.5; refresh} {zoom [expr {1 / 1.5}]; refresh} \
 	{xcircuit::helpwindow} ]
+
+   # Make the tool images if they have not yet been created.
+   if [catch {set XCOps(tools)}] {xcircuit::maketoolimages}
 
    for {set i 0} {$i < [llength $XCOps(tools)]} {incr i 1} {
       set bname [lindex $XCOps(tools) $i]
@@ -3265,6 +3281,7 @@ proc scrollboth { lists args } {
 #-----------------------------------------------------------------
 
 proc xcircuit::makehelpwindow {} {
+   global XCOps
    toplevel .help -bg beige
    wm group .help .
    wm withdraw .help
@@ -3281,9 +3298,9 @@ proc xcircuit::makehelpwindow {} {
    pack .help.title.dbut -side right -ipadx 10
 
    listbox .help.listwin.func -yscrollcommand ".help.listwin.sb set" \
-	-setgrid 1 -height 20
+	-setgrid 1 -height [expr {20 * $XCOps(scale)}]
    listbox .help.listwin.keys -yscrollcommand ".help.listwin.sb set" \
-	-setgrid 1 -height 20
+	-setgrid 1 -height [expr {20 * $XCOps(scale)}]
    scrollbar .help.listwin.sb -orient vertical -command \
 	[list scrollboth [list .help.listwin.func .help.listwin.keys]]
    message .help.listwin.win -width 200 -justify left -anchor n \

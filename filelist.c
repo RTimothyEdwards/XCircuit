@@ -407,8 +407,6 @@ void listfiles(xcWidget w, popupstruct *okaystruct, caddr_t calldata)
 
       /* get list of files in the current directory (cwd) */
 
-      if (files == NULL) 
-         files = (fileliststruct *) malloc (INITDIRS * sizeof(fileliststruct));
       flfiles = 0;
       if (cwdname == NULL) {
 	 cwdname = (char *) malloc (sizeof(char));
@@ -431,6 +429,8 @@ void listfiles(xcWidget w, popupstruct *okaystruct, caddr_t calldata)
 	 return;
       }
       else {
+	 if (files == NULL) 
+	    files = (fileliststruct *) malloc (INITDIRS * sizeof(fileliststruct));
 
 	 /* write the contents of the current directory into the   */
 	 /* array "filenames[]" (except for current directory ".") */
@@ -443,7 +443,8 @@ void listfiles(xcWidget w, popupstruct *okaystruct, caddr_t calldata)
 	
 	    sprintf(_STR2, "%s%s", cwdname, dp->d_name); 
 	    if (stat(_STR2, &statbuf)) continue;
-	    if ((statbuf.st_mode & S_IFDIR) != 0) /* is a directory */
+	    /* if ((statbuf.st_mode & S_IFDIR) != 0) */ // deprecated usage
+	    if (S_ISDIR(statbuf.st_mode))	/* is a directory */
 	       files[flfiles].filetype = DIRECTORY;
 	    else if (match_filter(dp->d_name, filter))
 	       files[flfiles].filetype = MATCH;
@@ -814,10 +815,19 @@ void genfilelist(xcWidget parent, popupstruct *okaystruct, Dimension width)
    xcWidget 	listarea, lscroll, entertext, dofilter;
    short 	n = 0;
    int		wwidth;
+   int		sbarsize;
+
+#ifdef TCL_WRAPPER
+   char *scale;
+   scale = Tcl_GetVar2(xcinterp, "XCOps", "scale", TCL_GLOBAL_ONLY);
+   sbarsize = SBARSIZE * atoi(scale);
+#else
+   sbarsize = SBARSIZE;
+#endif
 
    XtnSetArg(XtNx, 20);
    XtnSetArg(XtNy, FILECHARHEIGHT - 10);
-   XtnSetArg(XtNwidth, width - SBARSIZE - 40);
+   XtnSetArg(XtNwidth, width - sbarsize - 40);
    XtnSetArg(XtNheight, LISTHEIGHT - FILECHARHEIGHT);
    XtnSetArg(XtNfont, appdata.filefont);
 
@@ -836,9 +846,9 @@ void genfilelist(xcWidget parent, popupstruct *okaystruct, Dimension width)
    flstart = 0;
    okaystruct->filew = listarea;
 
-   XtnSetArg(XtNx, width - SBARSIZE - 20);
+   XtnSetArg(XtNx, width - sbarsize - 20);
    XtnSetArg(XtNy, FILECHARHEIGHT - 10);
-   XtnSetArg(XtNwidth, SBARSIZE);
+   XtnSetArg(XtNwidth, sbarsize);
    XtnSetArg(XtNheight, LISTHEIGHT - FILECHARHEIGHT);
    XtnSetArg(XtNfont, appdata.xcfont);
 

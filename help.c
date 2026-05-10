@@ -311,8 +311,17 @@ void starthelp(xcWidget button, caddr_t clientdata, caddr_t calldata)
    Dimension    areawidth, bwidth, pheight;
    Position	xpos, ypos;
    u_int	xmax, ymax;
+   char		*scale;
+   int		sbarsize;
 
    if (help_up) return;  /* no multiple help windows */
+
+#ifdef TCL_WRAPPER
+   scale = Tcl_GetVar2(xcinterp, "XCOps", "scale", TCL_GLOBAL_ONLY);
+   sbarsize = SBARSIZE * atoi(scale);
+#else
+   sbarsize = SBARSIZE;
+#endif
 
    /* for positioning the help window outside of the xcircuit    */
    /* window, get information about the display width and height */
@@ -338,7 +347,7 @@ void starthelp(xcWidget button, caddr_t clientdata, caddr_t calldata)
 
    /* Use the pixmap size to size the help window */
 
-   if (xpos + helpwidth + SBARSIZE > xmax)  xpos = xmax - helpwidth - SBARSIZE - 4;
+   if (xpos + helpwidth + sbarsize > xmax)  xpos = xmax - helpwidth - sbarsize - 4;
    if (ypos + helpheight > ymax) ypos = ymax - helpheight - 4;
    if (ypos < 4) ypos = 4;
 
@@ -371,7 +380,7 @@ void starthelp(xcWidget button, caddr_t clientdata, caddr_t calldata)
 	help2, wargs, n); n = 0;
 
    /* Create scrollbar */
-   XtnSetArg(XtNwidth, SBARSIZE);
+   XtnSetArg(XtNwidth, sbarsize);
    XtnSetArg(XtNxRefWidget, hspace);
    XtnSetArg(XtNxAddWidth, True);
    XtnSetArg(XtNyRefWidget, cancelbutton);
@@ -443,6 +452,15 @@ void showhsb(xcWidget hsb, caddr_t clientdata, caddr_t calldata)
    Dimension sheight;
    int pstart, pheight;
    short n = 0;
+   int sbarsize;
+
+#ifdef TCL_WRAPPER
+   char *scale;
+   scale = Tcl_GetVar2(xcinterp, "XCOps", "scale", TCL_GLOBAL_ONLY);
+   sbarsize = SBARSIZE * atoi(scale);
+#else
+   sbarsize = SBARSIZE;
+#endif
 
    if (helppix == (Pixmap)NULL) printhelppix();
    if (helpheight == 0) helpheight = 1;
@@ -452,12 +470,12 @@ void showhsb(xcWidget hsb, caddr_t clientdata, caddr_t calldata)
 
    if (pheight < 3) pheight = 3;
 
-   XClearArea(dpy, hwin, 0, 0, SBARSIZE, pstart, False);
-   XClearArea(dpy, hwin, 0, pstart + pheight, SBARSIZE,
+   XClearArea(dpy, hwin, 0, 0, sbarsize, pstart, False);
+   XClearArea(dpy, hwin, 0, pstart + pheight, sbarsize,
 		hheight - (pstart + pheight), False);
 
    XSetForeground(dpy, hgc, colorlist[BARCOLOR].color.pixel);
-   XFillRectangle(dpy, hwin, hgc, 0, pstart, SBARSIZE, pheight);
+   XFillRectangle(dpy, hwin, hgc, 0, pstart, sbarsize, pheight);
 }
 
 /*----------------------------------------------*/
