@@ -5494,7 +5494,22 @@ void output_graphic_data(FILE *ps, short *glist)
 #else
       flatebuf = filtbuf;
 #endif
-	    
+
+      /* The ASCII85 encoding below reads the input four bytes at a	*/
+      /* time.  When "ilen" is not a multiple of four, the final group	*/
+      /* reads a few bytes past the end of the valid data.  Per the	*/
+      /* ASCII85 specification those pad bytes must be zero;  otherwise,*/
+      /* because the encoding is base 85, the garbage low bytes carry	*/
+      /* into the high-order output characters and corrupt the last	*/
+      /* group.  For a FlateDecode stream those final bytes hold the	*/
+      /* zlib Adler-32 checksum, so leaving them uninitialized produces	*/
+      /* the intermittent "incorrect data check" error on read-back	*/
+      /* (the image data itself is unaffected).  The buffers above are	*/
+      /* allocated with enough headroom to zero these few bytes.	*/
+      /* (Code fix by Claude Opus 5)					*/
+
+      for (j = ilen; (j & 3) != 0; j++) flatebuf[j] = 0;
+
       ascbuf[5] = '\0';
       pixel.i = 0;
       for (j = 0; j < ilen; j += 4) {
