@@ -5,6 +5,7 @@ config.log
 menudep
 menudep.h
 xcircexec
+xcircdnull
 lib/tcl/xcircuit.sh
 lib/tcl/xcircuit.tcl
 lib/tcl/xcircuit.bat
@@ -23,3 +24,4 @@ asg/Makefile
 spiceparser/*.o
 spiceparser/*.so
 spiceparser/Makefile
+CLAUDE.md
