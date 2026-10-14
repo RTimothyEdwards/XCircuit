@@ -5659,7 +5659,7 @@ void savefile(short mode)
    else
       fprintf(ps, "\n");
    fprintf(ps, "%%%%Title: %s\n", fptr);
-   fprintf(ps, "%%%%Creator: XCircuit v%2.1f rev%d\n", PROG_VERSION, PROG_REVISION);
+   fprintf(ps, "%%%%Creator: XCircuit v%s rev %s\n", PROG_VERSION, PROG_REVISION);
    tdate = time(NULL);
    fprintf(ps, "%%%%CreationDate: %s", asctime(localtime(&tdate)));
    fprintf(ps, "%%%%Pages: %d\n", multipage);
