@@ -285,7 +285,7 @@ PKG_CONFIG_LIBDIR =
 PKG_CONFIG_PATH = 
 PYTHON = 
 RANLIB = ranlib
-REVISION = 42
+REVISION = 46
 SET_MAKE = 
 SHDLIB_EXT = .so
 SHELL = /bin/sh
@@ -371,7 +371,7 @@ AM_CFLAGS = $(cairo_CFLAGS) $(fontconfig_CFLAGS) ${GS_CFLAGS}
 
 # Additional files to distribute
 EXTRA_DIST = COPYRIGHT README README.ISOLatin2 README.notes
-FULL_VERSION = 3.10.42
+FULL_VERSION = 3.10.46
 
 # Menudep program generates menudep.h needed by some of the
 # source files for Xcircuit
